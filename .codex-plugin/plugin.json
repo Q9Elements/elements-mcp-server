@@ -1,0 +1,42 @@
+{
+  "name": "elements",
+  "version": "0.3.0",
+  "description": "Understand your Salesforce Org through Elements.cloud — spaces, metadata, access, org health, change history, and tech debt.",
+  "author": {
+    "name": "Elements.cloud",
+    "email": "success@elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "homepage": "https://developer.elements.cloud/",
+  "repository": "https://github.com/Q9Elements/elements-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": [
+    "elements-cloud",
+    "mcp",
+    "salesforce",
+    "metadata",
+    "org-health",
+    "tech-debt"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Elements.cloud",
+    "shortDescription": "Understand your Salesforce Org through Elements.cloud.",
+    "longDescription": "Skills for exploring Elements.cloud spaces and Salesforce metadata, auditing access, running org diagnostics, tracking recent changes, and finding tech debt to clean up — all from your AI assistant.",
+    "developerName": "Elements.cloud",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://elements.cloud/",
+    "privacyPolicyURL": "https://elements.cloud/privacy-gdpr/",
+    "termsOfServiceURL": "https://elements.cloud/app-terms-of-service/",
+    "defaultPrompt": [
+      "List my Elements.cloud spaces.",
+      "Run an org diagnostic on my Salesforce Org.",
+      "What changed in my Org this week?"
+    ],
+    "brandColor": "#168FCE"
+  }
+}

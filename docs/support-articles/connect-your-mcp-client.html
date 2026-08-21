@@ -1,0 +1,119 @@
+<p>You can connect your AI assistant to Elements in a few minutes. Once connected, your assistant can use the skills described in 'What you can do with Elements in your AI assistant' to answer questions about your Salesforce Org.</p>
+
+<h2>Prerequisites</h2>
+<ul>
+<li>The Elements MCP server is currently available in closed beta to customers who have been enabled for access.</li>
+<li>MCP access has been enabled by Elements for the Space you want to use.</li>
+<li>You have an MCP-capable AI assistant. Any client that supports remote MCP servers with the MCP standard's secure sign-in (OAuth 2.1 with PKCE) should work; Elements has been tested with Claude, Codex, and Cursor. Steps for the most common clients are below.</li>
+<li>You know your Elements sign-in credentials; you'll sign in with your existing Elements account, the same way you do in the browser.</li>
+</ul>
+
+<h2>Find your MCP endpoint</h2>
+<p>Elements runs in more than one location, so the address your assistant connects to depends on which one your Org uses. <strong>Match the URL shown in your browser when you're logged into Elements</strong>; never guess based on where you or your company are located.</p>
+
+<p>[[IMAGE: The Elements app URL highlighted in a browser address bar]]</p>
+
+<table style="border-collapse:collapse;width:100%;">
+<tr><th style="text-align:left;background:#F8F3FF;padding:8px 12px;border-bottom:2px solid #C7ADFF;">App URL (what you see in your browser)</th><th style="text-align:left;background:#F8F3FF;padding:8px 12px;border-bottom:2px solid #C7ADFF;">MCP endpoint</th></tr>
+<tr><td style="padding:8px 12px;border-bottom:1px solid #E8EAF0;vertical-align:top;">app.q9elements.com</td><td style="padding:8px 12px;border-bottom:1px solid #E8EAF0;vertical-align:top;">https://api.q9elements.com/api/v1/mcp</td></tr>
+<tr><td style="padding:8px 12px;border-bottom:1px solid #E8EAF0;vertical-align:top;">app.us.elements.cloud</td><td style="padding:8px 12px;border-bottom:1px solid #E8EAF0;vertical-align:top;">https://api.us.elements.cloud/api/v1/mcp</td></tr>
+<tr><td style="padding:8px 12px;border-bottom:1px solid #E8EAF0;vertical-align:top;">app.ja1.elements.cloud</td><td style="padding:8px 12px;border-bottom:1px solid #E8EAF0;vertical-align:top;">https://api.ja1.elements.cloud/api/v1/mcp</td></tr>
+<tr><td style="padding:8px 12px;border-bottom:1px solid #E8EAF0;vertical-align:top;">app.me1.elements.cloud</td><td style="padding:8px 12px;border-bottom:1px solid #E8EAF0;vertical-align:top;">https://api.me1.elements.cloud/api/v1/mcp</td></tr>
+</table>
+
+<p>In the steps below, replace <code>&lt;your-api-host&gt;</code> with the host from the right-hand column above, for example <code>api.q9elements.com</code>.</p>
+
+<h2>Connect your client</h2>
+
+<h3>Claude Code</h3>
+<p>The recommended route installs the Elements skills and the MCP server together as a plugin. Inside Claude Code, run:</p>
+<pre><code>/plugin marketplace add Q9Elements/elements-mcp-server
+/plugin install elements@elements</code></pre>
+<p>Then run <code>/mcp</code>, choose 'elements', and approve access in the browser tab that opens.</p>
+<p>If you only want the MCP server, without the skills:</p>
+<ol>
+<li>In your terminal, run:
+<pre><code>claude mcp add --transport http elements https://&lt;your-api-host&gt;/api/v1/mcp</code></pre>
+</li>
+<li>Inside Claude Code, run <code>/mcp</code> and choose 'elements' to sign in.</li>
+<li>Approve access in the browser tab that opens.</li>
+</ol>
+
+<h3>Claude Desktop and claude.ai</h3>
+<ol>
+<li>Open 'Settings' → 'Connectors' (in both claude.ai and Claude Desktop) and click 'Add custom connector'.</li>
+<li>Enter your MCP endpoint URL, for example <code>https://api.q9elements.com/api/v1/mcp</code>. You can leave the 'Advanced settings' OAuth fields blank; the MCP server registers your client automatically.</li>
+<li>Click 'Add', then follow the prompts to sign in and approve access.</li>
+</ol>
+<p>If you don't see 'Add custom connector', your Claude plan or organization settings may not allow custom connectors; check Anthropic's current documentation.</p>
+<p>On Claude Desktop, you can add the Elements skills as well with <code>npx skills add -g Q9Elements/elements-mcp-server</code>. On claude.ai the connector alone is enough; your assistant uses the tools directly.</p>
+
+<h3>Cursor</h3>
+<ol>
+<li>Open <code>~/.cursor/mcp.json</code> and add:
+<pre><code>{
+  "mcpServers": {
+    "elements": { "url": "https://&lt;your-api-host&gt;/api/v1/mcp" }
+  }
+}</code></pre>
+</li>
+<li>Restart Cursor, then approve the sign-in prompt that appears the first time you use an Elements tool.</li>
+</ol>
+<p>Add the Elements skills with <code>npx skills add Q9Elements/elements-mcp-server</code>.</p>
+
+<h3>VS Code</h3>
+<ol>
+<li>Open <code>.vscode/mcp.json</code> in your workspace (or use the Command Palette: 'MCP: Add Server') and add:
+<pre><code>{
+  "servers": {
+    "elements": {
+      "type": "http",
+      "url": "https://&lt;your-api-host&gt;/api/v1/mcp"
+    }
+  }
+}</code></pre>
+</li>
+<li>VS Code prompts you to sign in through your browser the first time you use an Elements tool. It handles the OAuth sign-in automatically; you provide only the URL.</li>
+</ol>
+
+<h3>Codex</h3>
+<p>Install the Elements skills as a plugin:</p>
+<pre><code>codex plugin marketplace add Q9Elements/elements-mcp-server</code></pre>
+<p>Then install 'elements' from the list.</p>
+<p>Add the MCP server separately, using the endpoint for your instance from the table above:</p>
+<ol>
+<li>In your terminal, run:
+<pre><code>codex mcp add elements --url https://&lt;your-api-host&gt;/api/v1/mcp</code></pre>
+</li>
+<li>Run <code>codex mcp login elements</code> and approve access in the browser tab that opens.</li>
+</ol>
+<p>The plugin deliberately doesn't bundle the MCP server: the Codex plugin format accepts only a fixed URL, and the right endpoint depends on which Elements instance your Org is on.</p>
+<h3>Microsoft Copilot Studio</h3>
+<p>Copilot Studio connects through a custom connector, and its setup differs from every other client in one way that matters: the sign-in credentials are registered when the maker creates the connector, but nobody actually signs in until someone creates a connection, which is a separate, later step. Follow Microsoft's guide, <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent">Connect your agent to an existing MCP server</a>, for the current screens, with these Elements specifics:</p>
+<ul>
+<li>Use the MCP endpoint for your instance from the table above as the server URL.</li>
+<li>Choose <strong>OAuth 2.0</strong> authentication and the <strong>Dynamic</strong> option, for servers that register themselves. Elements supports this, so there is no client ID or secret to create and nothing to set up on the Elements side. If the connector asks for authorization and token URLs explicitly, take them from <code>https://&lt;your-api-host&gt;/.well-known/oauth-authorization-server</code>.</li>
+<li>Elements accepts the Power Platform consent redirect (<code>https://global.consent.azure-apim.net/redirect/...</code>) automatically; you don't need to add it to an allowlist anywhere in Elements.</li>
+<li><strong>Create a connection and sign in within 24 hours of saving the connector.</strong> Do it yourself as soon as the connector is saved; don't leave the first sign-in for your users to do later.</li>
+</ul>
+<p><strong>Why the 24-hour deadline matters.</strong> A registration that has never completed a sign-in is discarded after 24 hours. Because Copilot Studio registers the connector's credentials up front, a connector that is built and then handed over days later fails with <code>invalid_client</code> (<em>"The client_id is not registered"</em>), which reads like a broken setup rather than something that simply expired. The fix is to recreate the connector and sign in straight away. Once anyone has signed in successfully the registration is permanent, and this never applies again.</p>
+<h2>Sign in and consent</h2>
+<p>The first time you connect, Elements opens a browser tab and asks you to sign in with your existing Elements account. After signing in, you choose which Space or Spaces the connection can use, then approve.</p>
+<p>If your account only has access to one Space, Elements selects it automatically. You can change which Spaces a connection can use at any time; see 'MCP security &amp; admin controls'.</p>
+
+<p>[[IMAGE: Elements sign-in screen shown inside the browser tab opened by your AI assistant]]</p>
+<p>[[IMAGE: Elements consent screen showing Space selection]]</p>
+
+<h2>Verify it's working</h2>
+<p>Ask your assistant something like <em>"What Elements Spaces can you see?"</em> or <em>"Search my org for a field called…"</em>. If you get a real answer back, you're connected.</p>
+
+<p>Then try a first real question:</p>
+<ul>
+<li><em>"Show me the metadata for the Account object, and what depends on it."</em></li>
+<li><em>"What changed in my org this week? Anything unusual?"</em></li>
+<li><em>"Run an org health diagnostic and tell me where to look first."</em></li>
+</ul>
+<p>Some of these depend on your Space's plan and licenses; see 'Supported tools in the Elements MCP server' for what each needs. The full menu of capabilities, with example prompts, is in 'What you can do with Elements in your AI assistant'.</p>
+
+<h2>Next steps</h2>
+<p>Next, read 'How the Elements MCP server works' to understand what it can access, and 'MCP security &amp; admin controls' to see how to manage or revoke a connection. If anything didn't work along the way, see 'MCP troubleshooting'.</p>

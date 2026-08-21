@@ -1,0 +1,41 @@
+# Elements MCP server
+
+> The Elements MCP server connects AI assistants to Elements.cloud, the Salesforce org-intelligence platform, and answers questions about the org from its synced metadata: resolved facts rather than name-based guesswork. An authorized assistant can search and explain Salesforce metadata, trace dependencies, audit access, run org-health diagnostics, and report change history, all inside the Space(s) the user approved. It is read-only against Salesforce: nothing an assistant does can change a Salesforce org.
+
+Facts an agent should know before connecting a user:
+
+- The server is hosted by Elements.cloud and is in closed beta; MCP access is a licensed feature that Elements enables per Space.
+- Setup is URL-only. There are no API keys or client secrets; sign-in is OAuth 2.1 with PKCE, completed by the user in their own browser.
+- Every connection receives the same fixed set of scopes. The only choice at consent is which Space(s) the connection can use, and a connection can never do more than the user's own Elements permissions allow.
+- The endpoint depends on the Elements instance. Match the URL the user sees in their browser when logged in to Elements:
+
+| App URL (in the user's browser) | MCP endpoint |
+|---|---|
+| app.q9elements.com | `https://api.q9elements.com/api/v1/mcp` |
+| app.us.elements.cloud | `https://api.us.elements.cloud/api/v1/mcp` |
+| app.ja1.elements.cloud | `https://api.ja1.elements.cloud/api/v1/mcp` |
+| app.me1.elements.cloud | `https://api.me1.elements.cloud/api/v1/mcp` |
+
+- Plan, license, and role gates can hide tools from the tool list; per-resource rights can make a visible tool call return a clear permission error.
+- The repository also packages Elements Skills (plain-markdown agent skills under `skills/`) that drive these tools; install them alongside the server for the best results.
+
+## Getting connected
+
+- [Getting started](docs/getting-started.md): per-client setup for Claude Code, Claude Desktop, claude.ai, Codex, Cursor, and VS Code, plus manual install
+- [Authentication](docs/authentication.md): the OAuth 2.1 flow, token lifetimes, and how tokens are protected
+- [Transport](docs/transport.md): Streamable HTTP details, the single POST endpoint, and protocol notes
+
+## What you can do
+
+- [Skills catalog](docs/skills.md): every packaged capability with example prompts, trigger phrases, and plan requirements
+- [Tools reference](docs/tools-reference.md): every tool with its purpose, scope, read/write classification, and plan or license gate
+
+## Security and trust
+
+- [Security overview](docs/security.md): the data boundary, consent model, tenant isolation, output safeguards, and audit posture
+- [Scopes](docs/scopes.md): the fixed scope families every connection holds and how they combine with Elements permissions
+- [Security policy](SECURITY.md): how to report a vulnerability privately
+
+## Troubleshooting
+
+- [Troubleshooting](docs/troubleshooting.md): symptom-first fixes for connection, consent, licensing, and rate-limit issues

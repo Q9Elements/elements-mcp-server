@@ -1,0 +1,14 @@
+{
+  "name": "elements",
+  "owner": {
+    "name": "Elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "plugins": [
+    {
+      "name": "elements",
+      "source": ".",
+      "description": "Understand your Salesforce Org through Elements.cloud — spaces, metadata, access, org health, change history, and tech debt — from your AI assistant."
+    }
+  ]
+}

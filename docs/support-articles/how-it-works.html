@@ -1,0 +1,24 @@
+<p>The Elements MCP server lets your AI assistant securely query your Elements and Salesforce architecture data, using the Elements permissions you already have. This article explains what happens behind the scenes when you connect.</p>
+
+<h2>Prerequisites</h2>
+<ul>
+<li>The Elements MCP server is currently available in closed beta to customers who have been enabled for access.</li>
+<li>You've connected an AI assistant to Elements; see 'Connect your AI assistant to Elements'.</li>
+</ul>
+
+<h2>One secure endpoint</h2>
+<p>Your assistant talks to a single Elements address over a secure, authenticated connection. The connection itself stores nothing beyond the sign-in authorization you approved: your password is never shared with your assistant, and no copy of your data is created. There's no separate app or plugin to install on the Elements side; the connection is built into your account.</p>
+
+<p>[[IMAGE: Diagram showing an AI assistant connecting through the Elements MCP server to a Space]]</p>
+
+<h2>Uses your existing Elements permissions</h2>
+<p>A connection never gives your assistant more access than you already have in Elements. Every request is checked against your Elements role, plan, and permissions at the moment it's made, so if your access changes, what your assistant can see changes with it.</p>
+
+<h2>Per-Space access</h2>
+<p>When you connect, you choose which <strong>Space</strong> or Spaces your assistant can use. It only works in the Spaces you've selected, and a Space must be enabled for the MCP server by Elements before it can be used at all.</p>
+
+<h2>What it can access</h2>
+<p>Today, your assistant can read your Salesforce metadata and architecture data through Elements: objects, fields, flows, dependencies, permissions, and org-health analytics such as automation, technical debt, compliance, and governance. It can also create and change a limited set of things <strong>inside Elements</strong>: a new Space, a saved metadata view, a process-map or imported diagram draft, draft user stories, a proposed metadata node (a placeholder marked <em>proposed</em> for people to review, not a change to your org), and MetaFields &mdash; your own custom fields on metadata, including their values. Everything else is read-only. Nothing it does ever reaches Salesforce: it never creates, updates, deletes, or deploys Salesforce metadata, and it never overwrites your synced copy. There is no delete tool. The one thing to know is that MetaFields <strong>overwrite</strong>: populating a classification replaces whatever value was there, and narrowing a MetaField's definition can permanently remove values already held in Elements. Publishing an approved diagram version is deliberately not possible here &mdash; it stays a password-confirmed step in the Elements web app.</p>
+
+<h2>Supported clients</h2>
+<p>The Elements MCP server works with any AI assistant whose MCP client supports remote MCP servers with the MCP standard's secure sign-in (OAuth 2.1 with PKCE). It has been tested with Claude, Codex, and Cursor; see 'Connect your AI assistant to Elements' for setup steps.</p>

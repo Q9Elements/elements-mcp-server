@@ -1,0 +1,151 @@
+<!doctype html>
+<!--
+  Agentic Opportunity Scan report: tabbed artifact skeleton.
+  Fill Tab 1 (Executive summary) + Tab 2 (Ranked table) from the scan; add one finalist tab per
+  deep-dived object (get_object_usage + dependencies + explain_metadata_item). Enable a finalist tab
+  (remove `disabled`) as you fill it. Self-contained: all CSS/JS inline (Artifact CSP forbids external
+  assets). Theme-aware. If the client wants body-only, drop the <!doctype>/<html>/<head>/<body> wrapper
+  and keep the <style>, .ao-report markup, and <script>.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agentic Opportunity Scan</title>
+<style>
+  :root {
+    --bg:#ffffff; --fg:#1a1d24; --muted:#5b6270; --line:#e3e6ec; --card:#f7f8fa;
+    --accent:#2f6bff; --crit:#d64545; --warn:#c77700; --info:#2f6bff; --ok:#1a8f5a; --bar:#2f6bff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14171c; --fg:#e7eaf0; --muted:#9aa2b1; --line:#2a2f38; --card:#1c2028;
+            --accent:#6a9bff; --crit:#ff6b6b; --warn:#e0a03a; --info:#6a9bff; --ok:#3ecf8e; --bar:#6a9bff; }
+  }
+  :root[data-theme="dark"] { --bg:#14171c; --fg:#e7eaf0; --muted:#9aa2b1; --line:#2a2f38; --card:#1c2028;
+            --accent:#6a9bff; --crit:#ff6b6b; --warn:#e0a03a; --info:#6a9bff; --ok:#3ecf8e; --bar:#6a9bff; }
+  :root[data-theme="light"] { --bg:#fff; --fg:#1a1d24; --muted:#5b6270; --line:#e3e6ec; --card:#f7f8fa;
+            --accent:#2f6bff; --crit:#d64545; --warn:#c77700; --info:#2f6bff; --ok:#1a8f5a; --bar:#2f6bff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .ao-report { max-width:960px; margin:0 auto; padding:24px 20px 64px; }
+  header.ao-head h1 { font-size:20px; margin:0 0 2px; }
+  header.ao-head .sub { color:var(--muted); font-size:13px; }
+  nav.tabs { display:flex; flex-wrap:wrap; gap:4px; border-bottom:1px solid var(--line); margin:20px 0 0; overflow-x:auto; }
+  nav.tabs button { appearance:none; background:none; border:0; border-bottom:2px solid transparent;
+             color:var(--muted); padding:10px 12px; font-size:13.5px; cursor:pointer; white-space:nowrap; }
+  nav.tabs button[aria-selected="true"] { color:var(--fg); border-bottom-color:var(--accent); font-weight:600; }
+  nav.tabs button:disabled { opacity:.4; cursor:default; }
+  .panel { display:none; padding:20px 2px; }
+  .panel[data-active="true"] { display:block; }
+  .panel h2 { font-size:16px; margin:0 0 10px; }
+  .empty { color:var(--muted); font-style:italic; padding:24px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:12px 0; }
+  .card h3 { margin:0 0 4px; font-size:14.5px; }
+  .card .csub { color:var(--muted); font-size:12.5px; margin-bottom:8px; }
+  .callout { border-left:3px solid var(--info); background:var(--card); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13px; }
+  .callout.warn { border-left-color:var(--warn); }
+  .badges { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px; }
+  .badge { font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+  .badge.crit{ color:var(--crit); border-color:var(--crit);} .badge.warn{ color:var(--warn); border-color:var(--warn);}
+  .badge.info{ color:var(--info); border-color:var(--info);} .badge.ok{ color:var(--ok); border-color:var(--ok);}
+  .badge.conv{ color:#fff; background:var(--accent); border-color:var(--accent);}
+  .badge.na{ opacity:.6; }
+  table { width:100%; border-collapse:collapse; font-size:13px; margin:8px 0; display:block; overflow-x:auto; }
+  th,td { text-align:left; padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; } td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .bar { display:inline-block; height:8px; background:var(--bar); border-radius:4px; vertical-align:middle; }
+  ul { margin:6px 0; padding-left:18px; } li { margin:2px 0; }
+  code { background:var(--card); padding:1px 5px; border-radius:4px; font-size:12.5px; }
+  .stat { display:inline-block; min-width:110px; margin:4px 16px 4px 0; }
+  .stat .n { font-size:20px; font-weight:700; } .stat .l { color:var(--muted); font-size:11.5px; display:block; }
+</style>
+</head>
+<body>
+<div class="ao-report">
+  <header class="ao-head">
+    <h1>Agentic Opportunity Scan: <span id="org-title">{{REFMODEL_NAME}}</span></h1>
+    <div class="sub">{{SCANNED_COUNT}} objects scanned · ranked by agentic-opportunity score · read-only (nothing written)</div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <!-- Enable finalist tabs (remove `disabled`) + set their label as you fill them. -->
+    <button role="tab" aria-selected="true"  data-tab="exec">Executive summary</button>
+    <button role="tab" aria-selected="false" data-tab="ranked">Ranked table</button>
+    <button role="tab" aria-selected="false" data-tab="f1" disabled>#1 {{F1_NAME}}</button>
+    <button role="tab" aria-selected="false" data-tab="f2" disabled>#2 {{F2_NAME}}</button>
+    <button role="tab" aria-selected="false" data-tab="f3" disabled>#3 {{F3_NAME}}</button>
+  </nav>
+
+  <!-- ============ Tab 1: Executive summary ============ -->
+  <section class="panel" data-tab="exec" data-active="true">
+    <h2>Where agents should exist</h2>
+    <p>{{EXEC_NARRATIVE}}</p>
+    <div>
+      <span class="stat"><span class="n">{{N_CANDIDATES}}</span><span class="l">candidates with signal</span></span>
+      <span class="stat"><span class="n">{{N_CONV}}</span><span class="l">conversational-agent</span></span>
+      <span class="stat"><span class="n">{{N_DET}}</span><span class="l">automation-gap</span></span>
+      <span class="stat"><span class="n">{{N_WELL}}</span><span class="l">well-automated</span></span>
+      <span class="stat"><span class="n">{{N_CLEANUP}}</span><span class="l">cleanup</span></span>
+    </div>
+    <!-- Telemetry-coverage statement (REQUIRED). State which signals are live vs. need a license here. -->
+    <div class="callout">
+      <strong>Telemetry coverage.</strong> {{COVERAGE_STATEMENT}}
+      <!-- e.g. Live: record volume, automation density, field-type schema, population, net record velocity.
+           Requires Event Monitoring sync (not enabled here): engagement (views/users). -->
+    </div>
+    <p>Top opportunities:</p>
+    <ol>
+      <!-- one <li> per finalist: <b>Name</b>: classification, one-line why with a real number. -->
+    </ol>
+  </section>
+
+  <!-- ============ Tab 2: Ranked table ============ -->
+  <section class="panel" data-tab="ranked">
+    <h2>All scanned objects</h2>
+    <table>
+      <thead><tr>
+        <th>#</th><th>Object</th><th>Type</th><th class="num">Score</th><th>Classification</th>
+        <th class="num">Records</th><th class="num">Unstr%</th><th class="num">Autom.</th><th>Why (top factors)</th>
+      </tr></thead>
+      <tbody><!-- one <tr> per scanned object (from the ndjson full corpus, or the top page). --></tbody>
+    </table>
+    <p class="sub">Unstr% = share of fields that are free-text. Autom. = existing automations on the object.</p>
+  </section>
+
+  <!-- ============ Tabs 3–5: one per finalist ============ -->
+  <!-- Duplicate this block for f2/f3. Fill from get_object_usage + full scoreFactors + dependencies. -->
+  <section class="panel" data-tab="f1">
+    <h2>{{F1_NAME}} <span class="badge conv">{{F1_CLASS}}</span></h2>
+    <div class="badges"><!-- objectType, managed-package flag, velocity trend, etc. --></div>
+    <p>{{F1_NARRATIVE}}</p>
+    <div class="card">
+      <h3>The receipts</h3>
+      <div>
+        <span class="stat"><span class="n">{{F1_RECORDS}}</span><span class="l">records</span></span>
+        <span class="stat"><span class="n">{{F1_UNSTR}}</span><span class="l">free-text fields</span></span>
+        <span class="stat"><span class="n">{{F1_VELOCITY}}</span><span class="l">net records / 30d</span></span>
+        <span class="stat"><span class="n">{{F1_AUTOM}}</span><span class="l">existing automations</span></span>
+      </div>
+      <!-- scoreFactors breakdown: one row per factor with a .bar sized to contribution. -->
+    </div>
+    <div class="card"><h3>Current automation landscape</h3>
+      <!-- from get_dependencies / explain_metadata_item: what an agent would coexist with. --></div>
+    <div class="card"><h3>Recommended agent shape &amp; expected impact</h3>
+      <!-- your judgment, grounded in the signals above. --></div>
+  </section>
+  <section class="panel" data-tab="f2"><h2>{{F2_NAME}}</h2><div class="empty">Not filled yet.</div></section>
+  <section class="panel" data-tab="f3"><h2>{{F3_NAME}}</h2><div class="empty">Not filled yet.</div></section>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('nav.tabs button');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach((btn) => btn.addEventListener('click', () => {
+    if (btn.disabled) return;
+    tabs.forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+    panels.forEach((p) => p.setAttribute('data-active', String(p.dataset.tab === btn.dataset.tab)));
+  }));
+</script>
+</body>
+</html>

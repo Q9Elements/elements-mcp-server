@@ -1,0 +1,88 @@
+<p>Elements connects to your AI assistant so you can ask questions about your Salesforce Org in plain language, right inside the tools you already use. Built-in skills turn a plain-language request into the right Elements action, so you get an answer instead of digging through screens.</p>
+
+<h2>Prerequisites</h2>
+<ul>
+<li>The Elements MCP server is currently available in closed beta to customers who have been enabled for access.</li>
+<li>You're using an AI assistant with MCP support; Elements has been tested with Claude, Codex, and Cursor.</li>
+<li>MCP access has been enabled by Elements for your Space.</li>
+<li>You've connected your assistant to Elements. See 'Connect your AI assistant to Elements'.</li>
+</ul>
+
+<p>[[IMAGE: Example conversation showing an AI assistant answering a question using an Elements skill]]</p>
+
+<h2>Understand your org</h2>
+<p>These thirteen skills are available today. Each one is built to recognize the kind of question you're asking and call the right Elements lookup automatically; you don't need to learn any special commands. But each capability <em>is</em> a named skill, and if your client has the Elements skills installed (the install steps in 'Connect your AI assistant to Elements' cover this for Claude Code, Codex, and Cursor), you can also invoke one directly by name: the slash form shown with each example. On claude.ai, just ask in plain language.</p>
+
+<h3>Work across your Spaces</h3>
+<p>Ask your assistant which Elements <strong>Space</strong> it's currently using, switch it to a different Space, or create a new one for a project.</p>
+<p><em>"What Space are you working in right now? Switch to the Acme Corp space."</em><br>
+or directly: <code>/elements-spaces switch to Acme Corp</code></p>
+
+<h3>Explore your Salesforce metadata</h3>
+<p>Ask about a specific object, field, flow, trigger, or Apex class: what it is, what it depends on, and what it does.</p>
+<p><em>"What does the LoyaltyPointsFlow do, and what does it depend on?"</em><br>
+or directly: <code>/elements-metadata LoyaltyPointsFlow</code></p>
+
+<h3>Audit who can access something</h3>
+<p>Ask which Profiles, Permission Sets, Permission Set Groups, or Groups can read or edit a field or object, and how many users each one reaches.</p>
+<p><em>"Who can edit the Credit Limit field on Account, and how many people does each permission reach?"</em><br>
+or directly: <code>/elements-access Credit Limit on Account</code></p>
+
+<h3>Build custom metadata lists</h3>
+<p>Ask for a filtered list of metadata that matches specific criteria, and save it as a named, reusable view.</p>
+<p><em>"List every screen flow still on an old API version, and save that as a view called 'Flows to upgrade.'"</em><br>
+or directly: <code>/elements-metadata-query screen flows on old API versions</code></p>
+
+<h3>Get an org health check</h3>
+<p>Ask for a full health check of your org (structure, automation, technical debt, compliance, and governance) in one pass, with a ranked summary of where to look first.</p>
+<p><em>"Run a health check on my org and tell me where to look first."</em><br>
+or directly: <code>/elements-org-diagnostic</code></p>
+
+<h3>See what changed recently</h3>
+<p>Ask what changed in your org over a given period, broken down by metadata type, with unusual spikes or deletion waves flagged.</p>
+<p><em>"What changed in my org this week, and was anything unusual?"</em><br>
+or directly: <code>/elements-change-briefing last 7 days</code></p>
+
+<h3>Find what to clean up first</h3>
+<p>Ask for a ranked list of what to fix or remove first, based on risk, how many other components depend on it, and how recently it changed.</p>
+<p><em>"What should I clean up first, and why?"</em><br>
+or directly: <code>/elements-tech-debt</code></p>
+
+<h3>Find where to use AI agents</h3>
+<p>Ask your assistant to scan your whole Org for agentic opportunities and rank them, with the evidence behind each, so you know where an Agentforce agent would pay off.</p>
+<p><em>"Scan my Org and tell me the top few places we should use an Agentforce agent."</em><br>
+or directly: <code>/elements-agent-opportunities</code></p>
+
+<h3>Plan a managed package removal</h3>
+<p>Ask what it would take to uninstall a managed package. Elements inventories the package's components (as completely as your Space's licensed tools allow), sweeps them for incoming dependencies, separates the real blockers from references that disappear on their own, and hands back a sequenced removal plan, from resolving blockers through a sandbox dry run to post-removal verification. It plans the removal; the uninstall itself stays in your hands.</p>
+<p><em>"What would it take to remove the Consensus package from our org?"</em><br>
+or directly: <code>/elements-package-uninstall Consensus</code></p>
+
+<h2>Model &amp; decide</h2>
+<p>Skills for structuring and classifying metadata, and evaluating how to make a change before you build it.</p>
+
+<h3>Define and populate MetaFields</h3>
+<p>Ask your assistant to set up the custom fields your Space uses to classify Salesforce metadata, connect dependent picklists, populate values in bulk, and verify the result. Definition changes stay in Elements, but narrowing applicability or removing options can purge existing MetaField values across synced Orgs.</p>
+<p><em>"Set up a retention-priority MetaField for our objects, classify them, and verify the result."</em><br>
+or directly: <code>/elements-metafields classify our objects by retention priority</code></p>
+
+<h3>See a Salesforce object's real lifecycle</h3>
+<p>Ask for the process behind a lifecycle object such as Opportunity, Case, or Lead. Your assistant builds it from the org's actual record types, lifecycle fields, and synced automations rather than a generic template, producing one diagram per record type.</p>
+<p><em>"Show me the Case process."</em><br>
+or directly: <code>/elements-org-to-process Case</code></p>
+
+<h2>Deliver the change</h2>
+<p>Skills for turning a decision into diagrams and artifacts.</p>
+
+<h3>Create and edit process maps</h3>
+<p>Ask your assistant to turn a description, transcript, or images into a UPN process map, or to read and edit an existing diagram. Edited diagrams are saved as a draft for you to review and release in Elements.</p>
+<p><em>"Turn this onboarding call transcript into a process map, then add an approval step before go-live."</em><br>
+or directly: <code>/elements-diagrams</code></p>
+
+<h3>Turn a process map into user stories</h3>
+<p>Ask your assistant to list the user stories in a Space, or to generate stories from the activities on a process diagram, each with a headline, description, and acceptance criteria.</p>
+<p><em>"Generate user stories from the activities on this onboarding diagram."</em><br>
+or directly: <code>/elements-stories</code></p>
+
+<h2>More is coming</h2>
+<p>Elements keeps extending the MCP server. New skills appear here as they ship.</p>

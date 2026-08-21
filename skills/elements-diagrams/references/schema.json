@@ -1,0 +1,591 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Elements diagram export format. Two document types: map.json (root metadata) and level files (1.json, 1.1.json, etc.). The importer picks fields by an explicit allowlist; unknown/extra fields are silently ignored.",
+
+  "$defs": {
+
+    "map": {
+      "title": "map.json: root metadata for the exported zip",
+      "type": "object",
+      "required": ["name", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60,
+          "description": "Display name shown in the Elements UI. Validated on import."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 5000,
+          "description": "Optional free-text description of the map's purpose."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["upn", "architecture"],
+          "description": "'upn' for process maps (UPN/swimlane). 'architecture' for interaction-flow / architecture diagrams. Must match the subtype family of the level files."
+        }
+      }
+    },
+
+    "level": {
+      "title": "Level file: one per diagram level (1.json, 1.1.json, …)",
+      "$comment": "The importer picks fields by an allowlist (see each element $def's $comment for its allowlist location). Fields not on the allowlist are preserved in the export but ignored on import.",
+      "type": "object",
+      "required": ["name", "levelNumber", "subtype", "topLevel", "activities", "flowlines"],
+      "properties": {
+
+        "name": {
+          "type": "string",
+          "description": "Display name of this diagram level. For child levels this should match the drilldown title on the parent activity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of this level's scope."
+        },
+        "levelNumber": {
+          "type": "string",
+          "pattern": "^\\d+(\\.\\d+)*$",
+          "description": "Hierarchical level identifier. Must exactly match the filename (e.g. '1.3' → file is '1.3.json'). Determines parent/child relationships: level '1.3' is the child of activity number=3 in level '1'."
+        },
+        "topLevel": {
+          "type": "boolean",
+          "description": "True only for the root level (levelNumber '1'). Exactly one level in the zip must have topLevel: true."
+        },
+        "subtype": {
+          "type": "string",
+          "enum": ["upn", "customerJourney", "agentInstruction", "whiteboard", "systemArchitecture", "capability", "dataModel", "interactionFlow", "agentInteraction"],
+          "description": "Diagram subtype. All levels in a zip should use the same subtype family. See references/diagram-types.md for what each subtype is for and the drilldown rules between them."
+        },
+        "state": {
+          "type": "string",
+          "description": "Workflow state at export time (e.g. 'draft'). Preserved verbatim; ignored by importer."
+        },
+        "theme": {
+          "type": "string",
+          "description": "MongoDB ObjectId of the team theme. Preserved verbatim; importer substitutes the target team's theme."
+        },
+
+        "activities": {
+          "type": "array",
+          "description": "Process steps / nodes on this diagram level.",
+          "items": { "$ref": "#/$defs/activity" }
+        },
+        "flowlines": {
+          "type": "array",
+          "description": "Directed connectors between activities or swimlines.",
+          "items": { "$ref": "#/$defs/flowline" }
+        },
+        "swimlines": {
+          "$ref": "#/$defs/swimlines_container",
+          "description": "Pool/swimlane structure. Present even when empty ({lines:[]})."
+        },
+        "notes": {
+          "type": "array",
+          "description": "Sticky note elements placed on the canvas.",
+          "items": { "$ref": "#/$defs/note" }
+        },
+        "texts": {
+          "type": "array",
+          "description": "Free-text label elements placed on the canvas.",
+          "items": { "$ref": "#/$defs/text_element" }
+        },
+        "images": {
+          "type": "array",
+          "description": "Diagram-level images placed on the canvas (not activity images).",
+          "items": { "$ref": "#/$defs/diagram_image" }
+        },
+        "interactions": {
+          "type": "array",
+          "description": "Message/interaction indicators anchored to flowlines.",
+          "items": { "$ref": "#/$defs/interaction" }
+        },
+        "headerData": {
+          "$ref": "#/$defs/header_data",
+          "description": "Optional diagram header / legend configuration."
+        }
+      }
+    },
+
+    "activity": {
+      "title": "Activity: a process step or node",
+      "$comment": "Importer field allowlist for activity: see references/editing-guide.md -> Importer Allowlist.",
+      "type": "object",
+      "required": ["mxKey", "number", "text", "position"],
+      "properties": {
+        "mxKey": {
+          "type": "integer",
+          "description": "Canvas element ID, 0-1000000. Unique across ALL element types within this level (activities, flowlines, swimlines, texts, notes, images share the same mxKey space). See references/editing-workflow.md → mxKey uniqueness."
+        },
+        "number": {
+          "type": "integer",
+          "description": "Activity sequence number within this level, 1-999. Also determines the child drilldown level: an activity with number=3 in level '1' drills down to level '1.3'. Must be unique within the level."
+        },
+        "text": {
+          "type": "string",
+          "description": "Activity label. May contain HTML (e.g. <br>, <div>, <b>). This is the canonical value; strippedText is derived from it."
+        },
+        "strippedText": {
+          "type": "string",
+          "description": "Plain-text version of 'text' with all HTML tags removed. Ignored by the importer but kept in sync for search indexing. Must equal strip_html(text)."
+        },
+        "position": {
+          "$ref": "#/$defs/element_position"
+        },
+        "customStyle": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, the 'style' object is applied. If false, the default theme style is used and 'style' is ignored by the importer."
+        },
+        "style": {
+          "$ref": "#/$defs/activity_style",
+          "description": "Full style override. Only applied by the importer when customStyle: true. Preserve verbatim when editing existing activities."
+        },
+        "container": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this activity acts as a container for other elements. Ignored by importer; preserved in export."
+        },
+        "locked": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the element is locked for editing in the UI. Ignored by importer."
+        },
+        "attributePadding": {
+          "type": "boolean",
+          "default": false,
+          "description": "UI layout hint. Ignored by importer."
+        },
+        "footerText": {
+          "type": "string",
+          "description": "Optional footer text shown below the activity box."
+        },
+        "resourcesPerRow": {
+          "type": "integer",
+          "description": "How many resource icons to show per row in the activity. Optional."
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Freeform key/value metadata displayed on the activity (e.g. Salesforce execution order).",
+          "items": {
+            "type": "object",
+            "required": ["mxKey", "text"],
+            "properties": {
+              "mxKey": {
+                "type": "integer",
+                "description": "Unique within this activity's attributes array (not the global mxKey space)."
+              },
+              "text": { "type": "string", "description": "Attribute label/value as displayed." },
+              "description": { "type": "string", "description": "Optional longer description." }
+            }
+          }
+        },
+        "resources": {
+          "type": "array",
+          "description": "People, systems, or objects linked to this activity.",
+          "items": { "$ref": "#/$defs/resource" }
+        },
+        "attachments": {
+          "type": "array",
+          "description": "URL, image, or text note attachments. Importer re-creates these; see attachment sub-types."
+        },
+        "drilldowns": {
+          "type": "array",
+          "description": "Non-empty array signals that this activity has a child level. Child level filename = parentLevelNumber + '.' + activity.number + '.json'. The importer only checks for non-empty; targetDbId and title are display metadata.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "targetDbId": {
+                "type": "string",
+                "description": "DB reference to child diagram. Remapped on import; any non-empty string is fine in a modified export."
+              },
+              "title": {
+                "type": "string",
+                "description": "Display name of the child level. Should match the child level's 'name' field."
+              }
+            }
+          }
+        },
+        "image": {
+          "type": "string",
+          "description": "UUID referencing an image file bundled in the zip at 'diagram/activity/{uuid}'. Omit if no activity image."
+        }
+      }
+    },
+
+    "flowline": {
+      "title": "Flowline: directed connector between two elements",
+      "$comment": "Importer field allowlist for flowline: see references/editing-guide.md -> Importer Allowlist.",
+      "type": "object",
+      "required": ["mxKey", "srcType", "srcId", "tgtType", "tgtId", "position"],
+      "properties": {
+        "mxKey": {
+          "type": "integer",
+          "description": "Canvas element ID. Must be unique across all element types in this level."
+        },
+        "text": {
+          "type": "string",
+          "description": "Label shown on the flowline. May contain HTML."
+        },
+        "strippedText": {
+          "type": "string",
+          "description": "Plain-text version of text. Ignored by importer but kept in sync."
+        },
+        "srcType": {
+          "type": "string",
+          "enum": ["activity", "swimline"],
+          "description": "Type of the source element."
+        },
+        "srcId": {
+          "type": "integer",
+          "description": "mxKey of the source element. Must reference an existing activity or swimline mxKey in this level."
+        },
+        "tgtType": {
+          "type": "string",
+          "enum": ["activity", "swimline"],
+          "description": "Type of the target element."
+        },
+        "tgtId": {
+          "type": "integer",
+          "description": "mxKey of the target element. Must reference an existing activity or swimline mxKey in this level."
+        },
+        "srcPosition": {
+          "type": ["object", "null"],
+          "description": "Override for the connection exit point on the source. Null uses the default anchor."
+        },
+        "tgtPosition": {
+          "type": ["object", "null"],
+          "description": "Override for the connection entry point on the target. Null uses the default anchor."
+        },
+        "position": {
+          "type": "object",
+          "description": "Routing and connection anchor configuration.",
+          "properties": {
+            "offset": {
+              "type": "object",
+              "properties": {
+                "x": { "type": "number", "description": "Label x offset from center." },
+                "y": { "type": "number", "description": "Label y offset from center." }
+              }
+            },
+            "x": { "type": "number", "description": "Label position x." },
+            "y": { "type": "number", "description": "Label position y." },
+            "connectionPoints": {
+              "type": "object",
+              "description": "Anchor fractions (0–1) on each endpoint.",
+              "properties": {
+                "exitX":  { "type": "number", "minimum": 0, "maximum": 1 },
+                "exitY":  { "type": "number", "minimum": 0, "maximum": 1 },
+                "entryX": { "type": "number", "minimum": 0, "maximum": 1 },
+                "entryY": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            }
+          }
+        },
+        "customStyle": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether a custom style object is applied."
+        },
+        "style": {
+          "type": "object",
+          "description": "Custom line style. Only used when customStyle: true."
+        },
+        "flForm": {
+          "type": "object",
+          "description": "Arrow/line form descriptor. Preserve verbatim when present.",
+          "properties": {
+            "shape": { "type": "string", "description": "e.g. 'Orthogonal', 'Curved', 'Straight'" },
+            "type":  { "type": "string", "description": "e.g. 'Solid', 'Dashed'" },
+            "start": { "type": "string", "description": "Start marker, e.g. 'None', 'Block Thin'" },
+            "end":   { "type": "string", "description": "End marker, e.g. 'Block Thin', 'Open'" }
+          }
+        },
+        "waypoints": {
+          "type": ["array", "null"],
+          "description": "Manual routing waypoints [{x, y}]. Null or [] for auto-routed."
+        },
+        "lineTexts": {
+          "type": "array",
+          "description": "Additional label segments on the flowline.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "flowlineMxKey": { "type": "integer" },
+              "key": { "type": "string" },
+              "text": { "type": "string" },
+              "position": { "type": "object" }
+            }
+          }
+        },
+        "connector": {
+          "type": "object",
+          "description": "Cross-level connector links. 'links' array is cleared on import; preserve for export fidelity.",
+          "properties": {
+            "links": { "type": "array" }
+          }
+        },
+        "terminator": {
+          "type": "object",
+          "description": "End-point terminator configuration. Preserve verbatim when present."
+        }
+      }
+    },
+
+    "swimlines_container": {
+      "title": "Swimlines: pool/lane container",
+      "type": "object",
+      "properties": {
+        "position": {
+          "type": "object",
+          "description": "Overall pool bounding box {x, y, w, h}.",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "w": { "type": "number" },
+            "h": { "type": "number" }
+          }
+        },
+        "horizontal": {
+          "type": "integer",
+          "description": "0 = lanes stacked top-to-bottom as horizontal bands (the usual UPN layout). 1 = lanes side-by-side as vertical columns. Native exports emit 0/1."
+        },
+        "style": {
+          "type": "object",
+          "description": "Pool-level style. Preserve verbatim."
+        },
+        "lines": {
+          "type": "array",
+          "description": "Individual swimlanes.",
+          "items": { "$ref": "#/$defs/swimline_line" }
+        }
+      }
+    },
+
+    "swimline_line": {
+      "title": "Swimline: a single lane within the pool",
+      "$comment": "Importer field allowlist for swimline: see references/editing-guide.md -> Importer Allowlist.",
+      "type": "object",
+      "required": ["mxKey", "text"],
+      "properties": {
+        "mxKey": {
+          "type": "integer",
+          "description": "Canvas element ID. Must be unique across all element types in this level. Flowlines can use this as srcId or tgtId with srcType/tgtType: 'swimline'."
+        },
+        "text": {
+          "type": "string",
+          "description": "Lane label shown in the header strip."
+        },
+        "size": {
+          "type": "object",
+          "description": "Lane dimensions.",
+          "properties": {
+            "w": { "type": "number", "description": "Lane width in canvas units." },
+            "h": { "type": "number", "description": "Lane height in canvas units." }
+          }
+        },
+        "style": {
+          "$ref": "#/$defs/swimline_style"
+        }
+      }
+    },
+
+    "note": {
+      "title": "Note: sticky note element",
+      "$comment": "Importer field allowlist for note: see references/editing-guide.md -> Importer Allowlist.",
+      "type": "object",
+      "required": ["mxKey", "text", "position"],
+      "properties": {
+        "mxKey": { "type": "integer", "description": "Canvas element ID, unique within the level." },
+        "text":  { "type": "string",  "description": "Note body text." },
+        "position": { "$ref": "#/$defs/element_position" },
+        "paperClass": { "type": "string", "description": "Visual colour/style class for the note." },
+        "locked": { "type": "boolean", "default": false }
+      }
+    },
+
+    "text_element": {
+      "title": "Text: free-text label on canvas",
+      "$comment": "Importer field allowlist for text element: see references/editing-guide.md -> Importer Allowlist.",
+      "type": "object",
+      "required": ["mxKey", "text", "position"],
+      "properties": {
+        "mxKey":   { "type": "integer", "description": "Canvas element ID, unique within the level." },
+        "number":  { "type": "integer", "description": "Sequence number within texts array." },
+        "text":    { "type": "string",  "description": "Label content. May contain HTML." },
+        "strippedText": { "type": "string", "description": "Plain-text version. Kept in sync; ignored by importer." },
+        "position": { "$ref": "#/$defs/element_position" },
+        "customStyle": { "type": "boolean", "default": false },
+        "style": { "type": "object", "description": "Custom text style. Used when customStyle: true." },
+        "locked": { "type": "boolean", "default": false },
+        "link":  { "type": "string",  "description": "Optional hyperlink URL." }
+      }
+    },
+
+    "diagram_image": {
+      "title": "Diagram image: an image placed on the canvas (not an activity image)",
+      "$comment": "Importer field allowlist for diagram image: see references/editing-guide.md -> Importer Allowlist.",
+      "type": "object",
+      "required": ["mxKey", "uuid", "position"],
+      "properties": {
+        "mxKey": { "type": "integer", "description": "Canvas element ID, unique within the level." },
+        "uuid":  { "type": "string",  "description": "References image file at 'diagram/{uuid}' inside the zip." },
+        "position": { "$ref": "#/$defs/element_position" },
+        "copyImage": { "type": "boolean", "description": "Whether the image is a copy vs original reference." },
+        "link": { "type": "string", "description": "Optional hyperlink for the image." },
+        "deleted": { "type": "boolean", "description": "Soft-delete flag. Ignored by importer but present in exports." }
+      }
+    },
+
+    "interaction": {
+      "title": "Interaction: message indicator anchored to a flowline",
+      "type": "object",
+      "properties": {
+        "flowlineMxKey": { "type": "integer", "description": "mxKey of the flowline this interaction is attached to." },
+        "offset":        { "type": "object",  "description": "Position offset along the flowline." },
+        "description":   { "type": "string",  "description": "Interaction label." }
+      }
+    },
+
+    "resource": {
+      "title": "Resource: person, system, or object linked to an activity",
+      "$comment": "Importer field allowlist for resource: see references/editing-guide.md -> Importer Allowlist. Matched to the team resource library by (name, type) case-insensitive.",
+      "type": "object",
+      "required": ["mxKey", "name", "type"],
+      "properties": {
+        "mxKey": {
+          "type": "integer",
+          "description": "Position index of this resource on the activity, 1-999. Unique within the activity's resources array (a separate space from the level's mxKey space)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name. Matched case-insensitively to the target team's resource library on import."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["Human", "System", "Object", "Facility", "Platform", "Industry", "Flow"],
+          "description": "Resource category. Used together with 'name' for library lookup."
+        },
+        "hidden": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the resource icon is hidden on the activity."
+        },
+        "main": {
+          "type": "boolean",
+          "description": "Whether this is the primary resource. Not in importer allowlist; preserved for export fidelity."
+        },
+        "position": {
+          "type": "object",
+          "description": "Position of the resource icon relative to the activity.",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" }
+          }
+        },
+        "rasci": {
+          "type": "object",
+          "description": "RASCI role flags for this resource on this activity.",
+          "properties": {
+            "responsible": { "type": "boolean" },
+            "accountable":  { "type": "boolean" },
+            "supporting":   { "type": "boolean" },
+            "consulted":    { "type": "boolean" },
+            "informed":     { "type": "boolean" }
+          }
+        },
+        "resourceDbId": {
+          "type": "string",
+          "description": "MongoDB ObjectId of the resource in the source team. Ignored by importer (resource matched by name+type). Safe to set to any non-empty string for new resources."
+        },
+        "system": {
+          "type": "boolean",
+          "description": "True for built-in system resources. Not in importer allowlist; preserved for export fidelity."
+        },
+        "iconKey": {
+          "type": ["string", "null"],
+          "description": "S3 icon key for custom resource icons. Null for resources without a custom icon."
+        }
+      }
+    },
+
+    "element_position": {
+      "title": "Position: bounding box for a canvas element",
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number", "description": "Canvas x coordinate. No enforced bounds; inspect neighbouring elements to avoid overlap." },
+        "y": { "type": "number", "description": "Canvas y coordinate. No enforced bounds; inspect neighbouring elements to avoid overlap." },
+        "w": { "type": "number", "description": "Element width. Typical activity: 180. Required for activities." },
+        "h": { "type": "number", "description": "Element height. Typical activity: 120–150. Required for activities." },
+        "rotation": { "type": "number", "description": "Rotation in degrees. Omit or 0 for no rotation." }
+      }
+    },
+
+    "activity_style": {
+      "title": "Activity style: full visual override (used when customStyle: true)",
+      "type": "object",
+      "properties": {
+        "arcSize":         { "type": "integer",  "description": "Corner rounding percentage (0–50)." },
+        "textAlign":       { "type": "string",   "description": "'left', 'center', or 'right'." },
+        "backgroundColor": { "type": "string",   "description": "Hex fill colour, e.g. '#FFFFFF'." },
+        "borderColor":     { "type": "string",   "description": "Hex border colour." },
+        "borderWidth":     { "type": "integer",  "description": "Border stroke width in px." },
+        "borderStyle":     { "type": "string",   "description": "'solid', 'dashed', etc." },
+        "font":            { "type": "string",   "description": "Font family name." },
+        "fontBold":        { "type": "boolean" },
+        "fontColor":       { "type": "string",   "description": "Hex font colour." },
+        "fontItalic":      { "type": "boolean" },
+        "fontSize":        { "type": "string",   "description": "CSS font size, e.g. '12px'." },
+        "fontUnderline":   { "type": "boolean" },
+        "shadow":          { "type": "boolean" },
+        "hideNumber":      { "type": "boolean",  "description": "Suppress the activity number badge." },
+        "iconColor":       { "type": "string",   "description": "Hex colour for resource icon tinting." },
+        "numberColor":     { "type": "string",   "description": "Hex colour for the number badge background." },
+        "numberIconColor": { "type": "string",   "description": "Hex colour for the number badge text." },
+        "underlineColor":  { "type": "string",   "description": "Hex colour for the bottom underline stripe." },
+        "resourcesStyle":  { "type": "object",   "description": "Per-resource-type style overrides. Preserve verbatim." }
+      }
+    },
+
+    "swimline_style": {
+      "title": "Swimline style",
+      "type": "object",
+      "properties": {
+        "horizontal":       { "type": "integer",  "description": "1 = header is at top, 0 = header is at left." },
+        "font":             { "type": "string" },
+        "fontBold":         { "type": "boolean" },
+        "fontItalic":       { "type": "boolean" },
+        "fontUnderline":    { "type": "boolean" },
+        "fontColor":        { "type": "string",  "description": "Hex font colour." },
+        "backgroundColor":  { "type": "string",  "description": "Hex fill colour." },
+        "borderColor":      { "type": "string",  "description": "Hex border colour." }
+      }
+    },
+
+    "header_data": {
+      "title": "Header / legend configuration for the diagram",
+      "type": "object",
+      "properties": {
+        "color":       { "type": "string",  "description": "Hex theme colour for the header bar." },
+        "logo":        { "type": "string",  "description": "Logo asset key." },
+        "legendItems": {
+          "type": "array",
+          "description": "Legend entries shown at the bottom of the diagram.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mxKey":    { "type": "integer" },
+              "itemType": { "type": "string",  "description": "Legend entry type, e.g. 'resource', 'text'." },
+              "text":     { "type": "string" },
+              "style":    { "type": "object" },
+              "image":    { "type": "string",  "description": "Optional image UUID." }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "elements",
+  "version": "0.3.0",
+  "description": "Understand your Salesforce Org through Elements.cloud — spaces, metadata, access, org health, change history, and tech debt — from your AI assistant.",
+  "author": {
+    "name": "Elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "license": "Apache-2.0",
+  "userConfig": {
+    "apiHost": {
+      "type": "string",
+      "title": "Elements API host",
+      "description": "Look at the URL in your browser when logged into Elements, and match it: app.q9elements.com → api.q9elements.com (most customers) · app.us.elements.cloud → api.us.elements.cloud · app.ja1.elements.cloud → api.ja1.elements.cloud · app.me1.elements.cloud → api.me1.elements.cloud",
+      "default": "api.q9elements.com"
+    }
+  },
+  "mcpServers": {
+    "elements": {
+      "type": "http",
+      "url": "https://${user_config.apiHost}/api/v1/mcp"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<p>If your AI assistant can't connect to Elements, or something isn't behaving as expected, start here.</p>
+
+<h2>Prerequisites</h2>
+<ul>
+<li>The Elements MCP server is currently available in closed beta to customers who have been enabled for access.</li>
+<li>You've followed the steps in 'Connect your AI assistant to Elements'.</li>
+</ul>
+
+<h2>Common issues</h2>
+
+<h3>I can't connect, or no Spaces appear</h3>
+<p>This usually means the Space you're trying to use hasn't been enabled for the MCP server yet. MCP access is a licensed feature that Elements turns on per Space. Once the Space you need is licensed, try connecting again and it will appear.</p>
+
+<h3>I'm stuck in a sign-in loop</h3>
+<p>Clear your assistant's saved Elements authorization and try connecting again. In most clients this is an option in the same menu where you added the connection; look for 'Disconnect' or 'Remove server' before reconnecting.</p>
+
+<h3>I get a 401 or 405 error when I open the URL</h3>
+<p>The Elements MCP endpoint only accepts signed-in <code>POST</code> requests, which your client's MCP library sends automatically. A plain browser visit sends a <code>GET</code> request instead, so you'll see an error: <code>401 Unauthorized</code> if you're not signed in, or <code>405 Method Not Allowed</code> if you are. Either way, this is expected and doesn't mean the service is down; connect through a supported client instead of opening the URL directly.</p>
+
+<h3>I get a 'too many requests' or 'server busy' message</h3>
+<p>To keep the service responsive for everyone, each connection is rate-limited and can run up to 20 requests at the same time; the server as a whole also has a limit and may reply 'server busy' under heavy load. Your assistant will report this as a rate limit (<code>rate_limited</code>), too many requests at once (<code>too_many_concurrent_requests</code>), or a busy server (<code>server_busy</code>), and each one says how many seconds to wait. Wait the full time before trying again; <strong>retrying sooner won't work, but it won't extend the pause either</strong>. Then ask your assistant to make fewer requests in parallel.</p>
+
+<h3>A large request times out</h3>
+<p>Large results aren't normally a problem: Elements returns long lists a page at a time, summarizes oversize results with a way to fetch the rest, and runs long analyses in the background while your assistant checks on progress. Each individual request still has an execution limit of about 30 seconds as a backstop, so if one very broad request does hit it, narrow the request (ask for fewer items, or a specific object or metadata type) and try again.</p>
+
+<h3>I have access to more than one Space</h3>
+<p>If your account belongs to more than one Space, Elements asks you to choose which one (or ones) the connection can use when you first sign in. You can change this selection later; see 'MCP security &amp; admin controls'. Ask your assistant to switch Spaces at any time, for example: <em>"Switch to the Acme Corp space."</em></p>
+
+<p>[[IMAGE: Space picker shown when more than one Space is available]]</p>
+
+<h3>I used the wrong instance host</h3>
+<p>Elements runs in more than one location, so an endpoint that works for one Org may not work for another. Always match the URL shown in your browser when you're logged into Elements to the endpoint in the table in 'Connect your AI assistant to Elements'; never guess based on location.</p>
+
+<h2>FAQs</h2>
+
+<p><strong>Is my data stored outside Elements?</strong> No. The MCP server reads from the same Elements data your account can already access; no additional copy of your data is created or stored by the connection itself.</p>
+
+<p><strong>Which AI assistants are supported?</strong> Any assistant whose MCP client supports remote MCP servers with the MCP standard's secure sign-in (OAuth 2.1 with PKCE). Elements has been tested with Claude, Codex, and Cursor.</p>
+
+<p><strong>My assistant says it doesn't have a tool, or can't do something these articles describe.</strong> Tool availability depends on each authorized Space's plan and licenses and your role there. A tool that none of those Spaces makes available is hidden from your assistant entirely, so it may simply say it can't help; and if your connection covers several Spaces, a tool available through one Space returns a clear not-authorized message when used in a Space that doesn't qualify. See 'Supported tools in the Elements MCP server' for what each capability needs. After a licensing change, start a new conversation so your assistant picks up the updated tool list.</p>
+
+<p><strong>How do I revoke access?</strong> Go to your Elements profile, select the 'Connected apps' tab, find the connection, and click 'Revoke'. Space administrators can also revoke connections into their Space. Revoking takes effect immediately.</p>
+

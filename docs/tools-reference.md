@@ -79,11 +79,6 @@ Columns:
 | `scan_agentic_opportunities` | Scans an entire reference model and returns one ranked signal vector per object (record volume, recency, structured-vs-free-text field mix, automation density, growth velocity, field population, and engagement), each with the score factors that justify its agentic-opportunity ranking. `objectTypes` selects `standard`, `custom`, `namespace` (managed-package objects) or `all` | Read | `mcp:metadata:read` | Pro Space | View access to that reference model |
 | `get_object_usage` | Returns the full usage and telemetry profile for a single object (record counts by type, a daily count series with net deltas, last created/modified dates, and event-log engagement) to deep-dive an opportunity surfaced by the scan. `fromDate`/`toDate` must be supplied together as parseable ISO dates, in order, spanning at most 366 days | Read | `mcp:metadata:read` | Pro Space | View access to that reference model |
 
-## Agent diagnostics
-
-| Tool | What it does | Read/Write | Required scope | Requires | Per-resource check |
-|---|---|---|---|---|---|
-
 ## Diagrams
 
 | Tool | What it does | Read/Write | Required scope | Requires | Per-resource check |

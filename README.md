@@ -1,12 +1,10 @@
 # Elements MCP server
 
-> **Closed beta.** The Elements MCP server is available to enabled Spaces during closed beta. Features, tools, and scopes may change.
-
 The Elements MCP server lets your AI assistant securely query your Elements Space and connected Salesforce Org (metadata, dependencies, access, automation, tech debt, and more) using your existing Elements permissions. Connect once with a browser sign-in; no API keys or secrets to manage.
 
 ## What you need
 
-- **Closed-beta access**: Elements enables MCP for your Space as part of beta onboarding.
+- **MCP enabled for your Space**: MCP access is a licensed feature that Elements enables per Space.
 - **An MCP client**: any client that supports remote MCP servers over Streamable HTTP with the MCP specification's OAuth 2.1 + PKCE authorization flow; tested with Claude, Codex, and Cursor.
 - **The right plan**: most metadata analysis needs a **Pro** Space; metadata queries and custom views need **Enterprise**; org-health analytics need an **Analytics Cloud** license; and some capabilities carry their own license (AI Analysis, Dependency Explorer, Org-to-Diagram, Change Tickets, story generation). See the Requires column in [`docs/tools-reference.md`](docs/tools-reference.md).
 

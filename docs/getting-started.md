@@ -4,7 +4,7 @@ Connect your AI assistant to the Elements MCP server so it can query your Space 
 
 ## Prerequisites
 
-- The Elements MCP server is currently available in closed beta to Spaces that have been enabled for access; Elements enables MCP per Space as part of beta onboarding.
+- MCP access is a licensed feature that Elements enables per Space.
 - An MCP client. Any client that supports remote MCP servers over Streamable HTTP with the MCP specification's OAuth 2.1 + PKCE authorization flow should work; Elements has been tested with Claude, Codex, and Cursor. Setup steps for common clients are below.
 - Your Space's plan determines what's available: most metadata analysis needs a **Pro** Space, metadata queries and custom views need **Enterprise**, and org-health analytics need an **Analytics Cloud** license; and some capabilities carry their own license (AI Analysis, Change Monitoring, Decision Engine, story generation). See the Requires column in [tools-reference](tools-reference.md), or the per-skill Requires lines in [skills.md](skills.md).
 

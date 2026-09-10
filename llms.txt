@@ -4,7 +4,7 @@
 
 Facts an agent should know before connecting a user:
 
-- The server is hosted by Elements.cloud and is in closed beta; MCP access is a licensed feature that Elements enables per Space.
+- The server is hosted by Elements.cloud; MCP access is a licensed feature that Elements enables per Space.
 - Setup is URL-only. There are no API keys or client secrets; sign-in is OAuth 2.1 with PKCE, completed by the user in their own browser.
 - Every connection receives the same fixed set of scopes. The only choice at consent is which Space(s) the connection can use, and a connection can never do more than the user's own Elements permissions allow.
 - The endpoint depends on the Elements instance. Match the URL the user sees in their browser when logged in to Elements:

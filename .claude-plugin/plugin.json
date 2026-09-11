@@ -1,6 +1,6 @@
 {
   "name": "elements",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Understand your Salesforce Org through Elements.cloud — spaces, metadata, access, org health, change history, and tech debt — from your AI assistant.",
   "author": {
     "name": "Elements.cloud",

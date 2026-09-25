@@ -1,0 +1,109 @@
+{
+  "engagement": {
+    "name": null,
+    "started": null,
+    "playbook_version": "1.0.0"
+  },
+  "slots": {
+    "space_id": null,
+    "model_id": null,
+    "elements_base_url": null,
+    "org_label": null
+  },
+  "current_state": "kickoff",
+  "current_step": "steps/00-kickoff.md",
+  "sync": {
+    "timestamp": null,
+    "status": null
+  },
+  "telemetryProbe": {
+    "hasEventMonitoring": null,
+    "daysAvailable": null,
+    "oldestLogDate": null,
+    "newestLogDate": null
+  },
+  "capacity": {
+    "allocation": null,
+    "displayedPercent": null,
+    "readAt": null,
+    "target": {
+      "wording": null,
+      "kind": null,
+      "value": null,
+      "requiredCharacters": null,
+      "alreadyAtTarget": null
+    },
+    "countedTotal": null,
+    "reconciled": null,
+    "residual": null,
+    "anomalies": []
+  },
+  "bundle": {
+    "computedAt": null,
+    "sha256": null,
+    "directory": null,
+    "summary": null,
+    "windowStart": null,
+    "windowEnd": null,
+    "interval": null,
+    "eventTypes": [],
+    "candidates": null,
+    "components": null,
+    "requestedDays": null,
+    "effectiveDays": null,
+    "typesAbsent": []
+  },
+  "reasoning": {
+    "fragmentSize": 50,
+    "completed": [],
+    "pending": [],
+    "couldNotAssess": [],
+    "mergedFile": null
+  },
+  "triage": {
+    "summaryFile": null,
+    "packagesFile": null,
+    "inventoryFile": null,
+    "deferredFile": null,
+    "selectedPackages": null,
+    "selectedCandidates": null,
+    "deferredCandidates": null,
+    "inUseCandidates": null,
+    "keptUseUnknownCandidates": null,
+    "unknownLengthCandidates": null,
+    "eligibleDeferred": null,
+    "confirmedCharacters": null,
+    "selectedCharacters": null,
+    "shortfall": null,
+    "stringSearch": null,
+    "outcome": null
+  },
+  "review": {
+    "reviewer": null,
+    "artifact": null,
+    "dispositionsFile": null,
+    "remove": null,
+    "annotate": null,
+    "keep": null,
+    "decideLater": null,
+    "completedOn": null,
+    "revision": 0
+  },
+  "plan": {
+    "tranches": null,
+    "storiesDir": null,
+    "capacityTotalsFile": null,
+    "validationFile": null,
+    "confirmedCharacters": null,
+    "outcome": null,
+    "reviewFindings": []
+  },
+  "open_items": [],
+  "decisions_log": [],
+  "blocked": {
+    "reason": null,
+    "owner": null,
+    "entered_from": null,
+    "evidence": null
+  }
+}

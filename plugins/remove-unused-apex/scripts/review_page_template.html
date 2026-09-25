@@ -1,0 +1,497 @@
+<meta charset="utf-8">
+<title>Apex Removal Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F4F6F8;--surface:#FFFFFF;--surface-2:#EDF0F3;--rail:#E9EDF1;--bar:#1F2A33;--bar-ink:#F2F5F7;--bar-muted:#A7B3BE;--ink:#1A1F26;--muted:#5C6673;--line:#D6DCE3;--accent:#0E6B68;--accent-ink:#FFFFFF;--accent-soft:#DDEFEE;
+--remove:#B23F2B;--remove-soft:#F6E3DF;--keep:#2E7A4D;--keep-soft:#DFF0E5;--later:#9A6B0B;--later-soft:#F7ECD2;--warn:#9A6B0B;--warn-soft:#FBF3DF;--focus:#0E6B68;--shadow:0 12px 32px rgba(20,30,40,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13171C;--surface:#1B2027;--surface-2:#232A33;--rail:#171C22;--bar:#0D1114;--bar-ink:#E6EAEE;--bar-muted:#8B97A3;--ink:#E6EAEE;--muted:#98A3AF;--line:#2E3640;--accent:#4FB7B1;--accent-ink:#0F1A19;--accent-soft:#1B3331;
+--remove:#E2735E;--remove-soft:#3A241F;--keep:#63B983;--keep-soft:#1E3327;--later:#D9A94A;--later-soft:#3A301A;--warn:#D9A94A;--warn-soft:#2A2519;--focus:#4FB7B1;--shadow:0 12px 32px rgba(0,0,0,.5)}}
+:root[data-theme="dark"]{--bg:#13171C;--surface:#1B2027;--surface-2:#232A33;--rail:#171C22;--bar:#0D1114;--bar-ink:#E6EAEE;--bar-muted:#8B97A3;--ink:#E6EAEE;--muted:#98A3AF;--line:#2E3640;--accent:#4FB7B1;--accent-ink:#0F1A19;--accent-soft:#1B3331;
+--remove:#E2735E;--remove-soft:#3A241F;--keep:#63B983;--keep-soft:#1E3327;--later:#D9A94A;--later-soft:#3A301A;--warn:#D9A94A;--warn-soft:#2A2519;--focus:#4FB7B1;--shadow:0 12px 32px rgba(0,0,0,.5)}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.45 "IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.num{font-variant-numeric:tabular-nums}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 12px}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:focus-visible,select:focus-visible,input:focus-visible,tr.row:focus-visible,.nav button:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+
+/* ---- toolbar: acts on the whole review ---- */
+.toolbar{position:sticky;top:0;z-index:5;background:var(--bar);color:var(--bar-ink);display:flex;align-items:center;gap:18px;padding:10px 22px;flex-wrap:wrap}
+.toolbar .title{display:flex;flex-direction:column;gap:0;min-width:240px}
+.toolbar .title .eyebrow{color:var(--bar-muted)}
+.toolbar h1{font-size:17px;font-weight:600;margin:0;letter-spacing:-.01em;line-height:1.25}
+.toolbar .sub{color:var(--bar-muted);font-size:12.5px}
+.toolbar .spacer{flex:1}
+.toolbar label{display:flex;align-items:center;gap:8px;color:var(--bar-muted);font-size:13px}
+.toolbar input[type=text]{border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:6px 10px;background:rgba(255,255,255,.08);color:var(--bar-ink);min-width:210px}
+.toolbar input[type=text]::placeholder{color:var(--bar-muted)}
+.toolbar .progress{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--bar-muted)}
+.toolbar .progress b{color:var(--bar-ink)}
+.toolbar .actions{display:flex;gap:8px}
+.toolbar button{background:transparent;color:var(--bar-ink);border-color:rgba(255,255,255,.22)}
+.toolbar button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.finished{border:1px solid var(--keep);color:var(--keep);padding:3px 10px;border-radius:999px;font-size:12.5px}
+
+/* ---- evidence panel (its own nav entry) ---- */
+.evidence[hidden],.tablewrap[hidden]{display:none}
+.evidence{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;max-width:1100px;padding-top:6px}
+.evidence h3{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:600}
+.evidence ul{margin:0;padding-left:18px}
+.evidence li{margin:5px 0;max-width:60ch}
+.evidence .cover{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap}
+.evidence .cover span{border:1px solid var(--line);border-radius:6px;padding:4px 10px;font-size:12.5px;background:var(--surface)}
+.evidence .cover span.partial{border-color:var(--warn);color:var(--warn)}
+.evidence .cover span.absent{border-style:dashed;color:var(--muted)}
+.nav button.meta .t{font-weight:400}
+/* ---- two columns: nav rail + work ---- */
+.main{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:calc(100vh - 60px)}
+.rail{background:var(--rail);border-right:1px solid var(--line);padding:16px 12px 40px}
+.rail .eyebrow{color:var(--muted);padding:0 10px 8px}
+.railnote{color:var(--muted);font-size:12px;padding:0 10px 10px;line-height:1.4}
+.nav{display:flex;flex-direction:column;gap:0}
+.nav button + button{border-top:1px solid var(--line)}
+.nav button{border-radius:0}
+.nav button{border:0;background:transparent;border-radius:6px;padding:8px 10px;text-align:left;display:grid;grid-template-columns:1fr auto;gap:2px 10px;color:var(--ink)}
+.nav button:hover{background:var(--surface)}
+.nav button[aria-selected=true]{background:var(--surface);box-shadow:inset 3px 0 0 var(--accent)}
+.nav .t{font-weight:500;grid-column:1/-1;line-height:1.3}
+.nav .m{color:var(--muted);font-size:12px}
+.nav .p{color:var(--muted);font-size:12px;text-align:right}
+.nav .bar{grid-column:1/-1;height:3px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:3px}
+.nav .bar i{display:block;height:100%;background:var(--accent);opacity:.75}
+.nav .ruled{grid-column:1/-1;color:var(--muted);font-size:12px;display:flex;gap:4px;align-items:center;margin-top:4px}
+.nav .ruled b{color:var(--ink)}
+.nav .ruled .pill{font-size:11px;line-height:1.5;padding:0 7px}
+.nav .all{margin-bottom:8px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.rail .legend{margin:18px 10px 0;color:var(--muted);font-size:12px;display:flex;flex-direction:column;gap:6px}
+.rail .legend .pill{justify-self:start}
+
+.work{padding:18px 26px 96px;min-width:0}
+.work header{margin-bottom:12px;max-width:80ch}
+.work h2{font-size:20px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;text-wrap:balance}
+.work .note{color:var(--muted);margin:0}
+.work .stat{color:var(--muted);font-size:13px;margin-top:6px}
+.work .stat b{color:var(--ink)}
+.grouprule{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.grouprule select{background:var(--surface)}
+
+/* ---- table ---- */
+.tablewrap{overflow-x:auto;border-top:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:860px}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-weight:600;white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.row{cursor:pointer}
+tr.row:hover td{background:var(--surface)}
+tr.row.open td{background:var(--accent-soft)}
+tr.comp td{background:var(--surface-2);color:var(--muted);font-size:12.5px;padding:5px 10px}
+tr.comp select{margin:0 6px}
+td.r{text-align:right}
+td.nw{white-space:nowrap}
+td .name{font-weight:500}
+td .kind{color:var(--muted);font-size:12px}
+select.rule{border:1px solid var(--line);border-radius:6px;padding:3px 6px;background:var(--surface)}
+select.rule.remove{border-color:var(--remove);color:var(--remove)}
+select.rule.keep{border-color:var(--keep);color:var(--keep)}
+select.rule.decide-later{border-color:var(--later);color:var(--later)}
+select.rule.annotate{border-color:var(--accent);color:var(--accent)}
+input.note{border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:var(--surface);width:100%;min-width:150px}
+.badges{display:flex;gap:4px;flex-wrap:wrap}
+.pill{display:inline-block;border-radius:999px;padding:0 8px;font-size:11.5px;font-weight:500;line-height:1.6;white-space:nowrap}
+.pill.rf{background:var(--warn-soft);color:var(--warn);border:1px solid var(--warn)}
+.pill.t{background:var(--accent-soft);color:var(--accent)}
+.pill.str{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.pill.remove{background:var(--remove-soft);color:var(--remove)}
+.pill.keep{background:var(--keep-soft);color:var(--keep)}
+.pill.decide-later{background:var(--later-soft);color:var(--later)}
+.pill.annotate{background:var(--accent-soft);color:var(--accent)}
+
+/* ---- drawer ---- */
+.scrim{position:fixed;inset:0;background:rgba(10,14,18,.35);display:none;z-index:20}
+.scrim.on{display:block}
+.drawer{position:fixed;top:0;right:0;height:100vh;width:min(620px,100vw);background:var(--surface);border-left:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(102%);transition:transform .22s ease;z-index:21;overflow-y:auto;padding:22px 26px 40px}
+.drawer.on{transform:none}
+@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
+.drawer h2{margin:0;font-size:20px;font-weight:600;letter-spacing:-.01em;word-break:break-all}
+.drawer .close{position:absolute;top:14px;right:16px}
+.drawer section{margin-top:20px}
+.drawer h3{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;font-weight:600}
+.drawer p{margin:6px 0;max-width:62ch}
+.drawer ul{margin:4px 0;padding-left:18px}
+.drawer li{margin:3px 0}
+.drawer .eyebrow{color:var(--muted)}
+.fact{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;font-size:14px}
+.fact dt{color:var(--muted)}
+.fact dd{margin:0}
+.callout{border:1px solid var(--line);border-left:4px solid var(--warn);background:var(--warn-soft);padding:10px 14px;border-radius:6px}
+.callout.ok{border-left-color:var(--accent);background:var(--accent-soft)}
+.dep{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.dep:last-child{border-bottom:0}
+.dep .ty{color:var(--muted);font-size:12.5px;white-space:nowrap}
+a.deep{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}
+.toast.on{opacity:1}
+@media (max-width:900px){.main{grid-template-columns:1fr}.rail{border-right:0;border-bottom:1px solid var(--line)}.nav{flex-direction:row;flex-wrap:wrap}.nav button{min-width:180px}.evidence{grid-template-columns:1fr}}
+</style>
+
+<div class="toolbar" id="toolbar">
+  <div class="title">
+    <span class="eyebrow">Unused Apex · removal review</span>
+    <h1 id="orgTitle"></h1>
+  </div>
+  <div class="spacer"></div>
+  <label>Reviewer <input type="text" id="reviewer" placeholder="Your name (a person, not a role)"></label>
+  <div class="progress" id="progress"></div>
+  <div class="actions">
+    <button id="btnExport" title="Download dispositions.csv: the record">Export comma-separated values (CSV)</button>
+    <button id="btnSave" class="primary" title="Save the rulings into this page">Save rulings</button>
+    <button id="btnFinish" title="Declare the review finished; unruled classes become decide-later">Review finished</button>
+  </div>
+</div>
+
+<div class="main">
+  <nav class="rail" aria-label="Groups">
+    <div class="eyebrow">Groups · by characters recovered</div>
+    <div class="railnote" id="railnote"></div>
+    <div class="nav" id="nav"></div>
+    <div class="eyebrow" style="margin-top:18px">About this list</div>
+    <div class="nav" id="navMeta"></div>
+    <div class="legend">
+      <span><span class="pill rf">review first</span> at least one reason for doubt; open the class</span>
+      <span><span class="pill t">test-only</span> reached only from test classes</span>
+      <span><span class="pill str">string hit</span> name appears as text elsewhere</span>
+    </div>
+  </nav>
+  <section class="work">
+    <header id="groupHeader"></header>
+    <div class="evidence" id="evidence" hidden></div>
+    <div class="tablewrap" id="tablewrap"><table id="table" aria-label="Candidates"><thead><tr>
+      <th>Class / trigger</th><th>Signals</th><th>Verdict</th><th class="r">Characters</th><th class="r" id="thPct">% of limit</th><th>Last modified</th><th>Ruling</th><th>Note</th>
+    </tr></thead><tbody id="tbody"></tbody></table></div>
+  </section>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Evidence"></aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script id="review-state" type="application/json">__STATE__</script>
+<script>
+(() => {
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => (n ?? 0).toLocaleString('en-US');
+const TEMPLATE = '<!doctype html>\n' + document.documentElement.outerHTML; // pristine document, captured before any interaction
+const S = JSON.parse($('#review-state').textContent);
+let activeTab = 'all', openRow = null, dirty = false;
+let artifactNS = null, downloadsNS = null, runtimeChecked = false;
+const L = S.ledger, B = S.blindSpots, cap = S.capacity;
+const stringSearch = S.triage?.stringSearch ?? 'not_run';
+const TOTAL = S.rows.reduce((a,r)=>a+(r.chars ?? 0),0);
+const unknownIn = rows => rows.filter(r => r.chars == null).length;
+const TOTAL_UNKNOWN = unknownIn(S.rows);
+const charsText = (known, unknown, size, unit) => !unknown ? `${fmt(known)} ${unit}`
+  : (unknown >= size && !known) ? `unknown ${unit}` : `${fmt(known)} ${unit} plus ${fmt(unknown)} of unknown length`;
+const allUnknown = (known, unknown, size) => unknown > 0 && unknown >= size && !known;
+const shareOf = chars => TOTAL ? chars / TOTAL * 100 : 0;
+const kindCount = rows => { const c = rows.filter(r => r.kind !== 'trigger').length, t = rows.length - c;
+  const parts = []; if (c) parts.push(`${c} class${c===1?'':'es'}`); if (t) parts.push(`${t} trigger${t===1?'':'s'}`); return parts.join(', '); };
+const ALLOC = cap.reconciled && cap.allocation ? cap.allocation : null;           // the org's Apex character limit (Setup)
+const pctLimit = chars => ALLOC ? (chars / ALLOC * 100) : null;
+const fmtPct = v => v == null ? '' : (v >= 1 ? v.toFixed(1) : v >= 0.1 ? v.toFixed(2) : v.toFixed(3)) + '%';
+const priorRuling = name => {
+  const ruling = S.review.rulings[name];
+  return ruling?.alreadyRuled ? ` <span class="pill ${esc(ruling.disposition)}">already ruled ${esc(ruling.disposition)} by ${esc(ruling.decidedBy)} on ${esc(ruling.decidedOn)}${ruling.note ? ': ' + esc(ruling.note) : ''}</span>` : '';
+};
+
+// ---------- toolbar ----------
+$('#orgTitle').textContent = S.meta.org;
+// ---------- evidence (own nav entry) ----------
+const partial = Object.entries(L.eventTypes).filter(([,v]) => v.missingDays > 0);
+const nonTraversed = Object.values(B.nonTraversedEdgeSources).reduce((a,b)=>a+b,0);
+function renderEvidence() {
+  $('#evidence').innerHTML = `
+    <div class="cover">${Object.entries(L.eventTypes).map(([k,v]) => `<span class="${v.missingDays?'partial':''}" title="${v.daysProcessed} of ${v.spanDays} days">${esc(k)}${v.missingDays?` · ${v.missingDays} days missing`:''}</span>`).join('')}${L.typesAbsent.map(t=>`<span class="absent">${esc(t)} · never published by this org</span>`).join('')}</div>
+    <div><h3>What was watched</h3><ul>
+      <li><b>${L.effectiveDays} days</b> of the ${L.requestedDays} requested (${L.windowStart} → ${L.windowEnd}). A job that runs less often than that would be invisible here.</li>
+      <li>${partial.length ? partial.map(([k,v]) => `${k} has no file on ${v.missingDays} of ${v.spanDays} days`).join('; ') + '. A lone missing type can mean no traffic; telemetry gap reasons use the shared missing-day bound.' : 'No event type has missing days.'}</li>
+      <li>${L.scheduledJobNames.names} scheduled-job names are known, so a silent scheduled class is recognised as scheduled. Selected-class string search: ${stringSearch === 'not_run' ? 'pending' : stringSearch}.</li>
+    </ul></div>
+    <div><h3>What cannot be seen</h3><ul>
+      <li><b>${fmt(B.managedOpaque)} managed-package classes</b> are opaque: a call from inside a package cannot be seen.</li>
+      <li>Rules not evaluated: ${B.rulesNotEvaluated.join(', ') || 'none'}; Type.forName-style construction is covered only by the string search.</li>
+      <li>${nonTraversed} referrers are not walked (${Object.entries(B.nonTraversedEdgeSources).map(([k,v]) => `${v} ${k}${v>1?'s':''}`).join(', ')}); whether those pages and flows themselves ran is shown per class, never assumed.</li>
+    </ul></div>`;
+}
+
+// ---------- rulings ----------
+const R = S.review;
+const effectiveRuling = row => R.rulings[row.qualifiedName]?.disposition || R.componentRulings[row.component]?.disposition || '';
+const today = () => new Date().toISOString().slice(0,10);
+const setRuling = (row, disposition, note) => {
+  const cur = R.rulings[row.qualifiedName] || {};
+  if (cur.alreadyRuled) return;
+  if (disposition === 'annotate' && !row.annotatable) return;
+  if (disposition === '' && (note ?? cur.note ?? '') === '') delete R.rulings[row.qualifiedName];
+  else R.rulings[row.qualifiedName] = {disposition, note: note ?? cur.note ?? '', decidedBy: R.reviewer, decidedOn: today()};
+  dirty = true; renderProgress(); renderNav();
+};
+const setComponentRuling = (component, disposition) => {
+  if (disposition === '') delete R.componentRulings[component];
+  else R.componentRulings[component] = {disposition, decidedBy: R.reviewer, decidedOn: today()};
+  for (const q of S.components[component] || []) {           // fills every member's own dropdown; a later row change overrides that row only
+    const cur = R.rulings[q] || {};
+    if (cur.alreadyRuled) continue;
+    if (disposition === '' && !cur.note) delete R.rulings[q];
+    else R.rulings[q] = {disposition, note: cur.note || '', decidedBy: R.reviewer, decidedOn: today(), viaComponent: disposition !== ''};
+  }
+  dirty = true; renderTable(); renderProgress(); renderNav();
+};
+$('#reviewer').value = R.reviewer || '';
+$('#reviewer').addEventListener('input', e => { R.reviewer = e.target.value; dirty = true; });
+
+function renderProgress() {
+  const counts = {remove:0, keep:0, 'decide-later':0, annotate:0, '':0};
+  S.rows.forEach(r => counts[effectiveRuling(r)]++);
+  $('#progress').innerHTML = `<b>${S.rows.length - counts['']}</b>/${S.rows.length} ruled <span class="pill remove">${counts.remove}</span><span class="pill annotate">${counts.annotate}</span><span class="pill keep">${counts.keep}</span><span class="pill decide-later">${counts['decide-later']}</span>` +
+    (R.finished ? ` <span class="finished">finished ${R.finished.slice(0,10)}</span>` : '') +
+    (R.savedAt ? ` <span>saved ${R.savedAt.slice(11,16)}Z</span>` : '');
+}
+
+// ---------- group navigation ----------
+function ruledIn(rows) { return rows.filter(r => effectiveRuling(r)).length; }
+const confirmedCharacters = () => {
+  const priorConfirmedCharacters = S.triage?.confirmedCharacters || 0;
+  const annotatedCharacters = S.rows.filter(r => effectiveRuling(r) === 'annotate').reduce((sum, r) => sum + r.chars, 0);
+  const deletionCharacters = (S.groups || []).filter(g => g.packageId).reduce((sum, g) => {
+    const packageRows = S.rows.filter(r => r.groupOrder === g.order);
+    return sum + (packageRows.length && packageRows.every(r => effectiveRuling(r) === 'remove') ? g.chars : 0);
+  }, 0);
+  return priorConfirmedCharacters + annotatedCharacters + deletionCharacters;
+};
+function renderNav() {
+  const all = {order:'all', label:'All groups', rows:S.rows.length, chars:TOTAL};
+  const entry = g => {
+    const members = g.order === 'all' ? S.rows : S.rows.filter(r => r.groupOrder === g.order);
+    const counts = {remove:0, keep:0, 'decide-later':0, annotate:0}; members.forEach(r => { const d = effectiveRuling(r); if (d) counts[d]++; });
+    const ruled = counts.remove + counts.annotate + counts.keep + counts['decide-later'];
+    const ruledRow = g.order === 'all' ? '' : `<span class="ruled num"><b>${ruled}</b>/${members.length} ruled <span class="pill remove">${counts.remove}</span><span class="pill annotate">${counts.annotate}</span><span class="pill keep">${counts.keep}</span><span class="pill decide-later">${counts['decide-later']}</span></span>`;
+    const unknown = unknownIn(members), noLength = allUnknown(g.chars, unknown, members.length);
+    return `<button role="tab" class="${g.order==='all'?'all':''}" data-tab="${g.order}" aria-selected="${String(g.order)===String(activeTab)}">
+      <span class="t">${esc(g.label)}</span>
+      <span class="m num">${kindCount(members)} · ${charsText(g.chars, unknown, members.length, 'chars')}</span>
+      <span class="p num">${ALLOC && !noLength ? (unknown ? 'at least ' : '') + fmtPct(pctLimit(g.chars)) + ' of limit' : ''}</span>
+      <span class="bar" title="${ALLOC && !noLength ? shareOf(g.chars).toFixed(1) + '% of the reclaim' : ''}"><i style="width:${Math.max(1.5, shareOf(g.chars))}%"></i></span>
+      ${ruledRow}
+    </button>`;
+  };
+  $('#nav').innerHTML = entry(all) + S.groups.map(entry).join('');
+  const totalText = charsText(TOTAL, TOTAL_UNKNOWN, S.rows.length, 'characters');
+  $('#railnote').innerHTML = ALLOC ? `Bars show each group's share of the ${totalText} that could be reclaimed; percentages are of the org's ${fmt(ALLOC)}-character Apex limit.` : `Bars show each group's share of the ${totalText} that could be reclaimed. Capacity was not reconciled, so no percentage of the Apex limit is shown.`;
+  $('#navMeta').innerHTML = `<button role="tab" class="meta" data-tab="evidence" aria-selected="${activeTab==='evidence'}"><span class="t">What the evidence can and cannot say</span><span class="m">${L.effectiveDays} of ${L.requestedDays} days · ${partial.length} partial type${partial.length===1?'':'s'} · ${fmt(B.managedOpaque)} opaque</span></button>`;
+  document.querySelectorAll('#nav button, #navMeta button').forEach(b => b.addEventListener('click', () => { activeTab = b.dataset.tab; renderNav(); renderHeader(); renderTable(); window.scrollTo({top: 0, left: 0, behavior: 'auto'}); }));
+}
+function renderHeader() {
+  const isEvidence = activeTab === 'evidence';
+  const showEvidence = isEvidence || activeTab === 'all';
+  $('#evidence').hidden = !showEvidence; $('#tablewrap').hidden = isEvidence;
+  if (showEvidence) renderEvidence();
+  if (isEvidence) { $('#groupHeader').innerHTML = `<h2>What the evidence can and cannot say</h2><p class="note">Read this once before ruling. Every class's verdict rests on the window and the blind spots below; the page never hides them.</p>`; return; }
+  const g = S.groups.find(x => String(x.order) === String(activeTab));
+  const members = g ? S.rows.filter(r => r.groupOrder === g.order) : S.rows;
+  const rf = members.filter(r => r.bucket === 'review-first').length;
+  const groupRule = `<div class="grouprule">Rule every class on this page: <select class="rule grp" id="groupRule"><option value="">Select a ruling</option>${S.dispositions.filter(d => d.disposition !== 'annotate').map(d => `<option value="${d.disposition}">${d.disposition}</option>`).join('')}</select> <span>(fills ${kindCount(members)}; change a class to override it)</span></div>`;
+  const confirmed = confirmedCharacters();
+  const confirmedFacts = (S.packages || []).length ? `<p class="note">Confirmed reclaim so far: ${fmt(confirmed)} of ${fmt(S.triage?.requiredCharacters || 0)} required characters.</p>` : '';
+  const packageFacts = g && g.packageId ? `<p class="note">Attached tests: ${g.tests.length ? g.tests.map(esc).join(', ') : 'none'}. Running reclaim: ${fmt(g.runningCharacters)} of ${fmt(g.requiredCharacters)} required characters.</p>` : '';
+  const unknown = unknownIn(members), known = g ? g.chars : TOTAL;
+  const atLeast = unknown ? 'at least ' : '', atMost = unknown ? 'at most ' : '';
+  const limitFacts = ALLOC && !allUnknown(known, unknown, members.length);
+  $('#groupHeader').innerHTML = (g
+    ? `<h2>${esc(g.label)}</h2><p class="note">${esc(g.note)}</p>${confirmedFacts}${packageFacts}<div class="stat num"><b>${kindCount(members)}</b> · <b>${charsText(g.chars, unknown, members.length, 'characters')}</b>${limitFacts ? ` · ${atLeast}<b>${fmtPct(pctLimit(g.chars))}</b> of the Apex limit · <b>${shareOf(g.chars).toFixed(1)}%</b> of the reclaim` : ''} · <b>${rf}</b> review first · <b>${ruledIn(members)}</b> ruled</div>`
+    : `<h2>All ${S.rows.length} candidates</h2><p class="note">In group order, largest reclaim first. Review-first classes come first inside each group; every class keeps its signals whatever group it sits in.</p>${confirmedFacts}<div class="stat num"><b>${charsText(TOTAL, unknown, members.length, 'characters')}</b> if all removed${limitFacts ? ` · ${atLeast}<b>${fmtPct(pctLimit(TOTAL))}</b> of the Apex limit; the org would go from <b>${cap.displayedPercent}%</b> to ${atMost}<b>${(cap.displayedPercent - pctLimit(TOTAL)).toFixed(2)}%</b> of its limit` : ''} · <b>${rf}</b> review first${g ? ` · <b>${ruledIn(members)}</b> ruled` : ''}</div>`) + groupRule;
+  $('#groupRule').addEventListener('change', e => {
+    const d = e.target.value; const day = today();
+    for (const r of members) { const cur = R.rulings[r.qualifiedName] || {}; if (cur.alreadyRuled) continue; if (d === '' && !cur.note) delete R.rulings[r.qualifiedName]; else R.rulings[r.qualifiedName] = {disposition: d, note: cur.note || '', decidedBy: R.reviewer, decidedOn: day, viaGroup: d !== ''}; }
+    R.groupRulings = R.groupRulings || {}; if (d === '') delete R.groupRulings[g ? g.label : 'all']; else R.groupRulings[g ? g.label : 'all'] = {disposition: d, decidedBy: R.reviewer, decidedOn: day};
+    dirty = true; renderTable(); renderProgress(); renderNav(); renderHeader();
+  });
+}
+
+// ---------- table ----------
+const rowSort = (a,b) => a.groupOrder - b.groupOrder || (a.bucket === b.bucket ? b.chars - a.chars : a.bucket === 'review-first' ? -1 : 1);
+function badges(r) {
+  const b = [];
+  if (r.bucket === 'review-first') b.push('<span class="pill rf" title="At least one reason for doubt; open the class">review first</span>');
+  if (r.set === 'T') b.push('<span class="pill t" title="Reached only from test classes">test-only</span>');
+  if (r.stringOutside) b.push('<span class="pill str" title="Its name appears as a string outside the candidate set">string hit</span>');
+  if (r.lastExecuted) b.push('<span class="pill str">stale</span>');
+  if (r.scheduledJobNames) b.push('<span class="pill str">scheduled</span>');
+  if (r.nonApexReferrers.length) b.push(`<span class="pill str" title="Referenced by ${r.nonApexReferrers.map(x=>x.type).filter((v,i,a)=>a.indexOf(v)===i).join(', ')}">${r.nonApexReferrers.length} non-Apex referrer${r.nonApexReferrers.length>1?'s':''}</span>`);
+  return `<div class="badges">${b.join('')}</div>`;
+}
+const verdictWords = {dormant_candidate: 'Dormant', test_only_reachable: 'Test-only', unknown: 'Unknown'};
+const verdictLong = {dormant_candidate: 'Dormant: nothing that ran in the window reaches it', test_only_reachable: 'Reached only by test classes', unknown: 'Unknown: the evidence could not establish a verdict'};
+function renderTable() {
+  if (activeTab === 'evidence') return;
+  const rows = S.rows.filter(r => activeTab === 'all' || String(r.groupOrder) === String(activeTab)).sort(rowSort);
+  const seenComp = new Set(); let html = '';
+  const opts = (sel, cls='rule', row=null) => `<select class="${cls} ${esc(sel)}"><option value="">Select a ruling</option>${S.dispositions.filter(d => d.disposition !== 'annotate' || row?.annotatable).map(d => `<option value="${d.disposition}" ${d.disposition===sel?'selected':''}>${d.disposition}</option>`).join('')}</select>`;
+  for (const r of rows) {
+    const members = S.components[r.component];
+    const pageIsComponent = rows.every(x => x.component === r.component);   // group == component: the page-level control already covers it
+    if (members && activeTab !== 'all' && !pageIsComponent && !seenComp.has(r.component)) {
+      seenComp.add(r.component);
+      const cr = R.componentRulings[r.component]?.disposition || '';
+      html += `<tr class="comp" data-comp="${esc(r.component)}"><td colspan="8">Component <span class="mono">${esc(r.component)}</span>: ${members.length} classes that only call each other. Rule the whole component: ${opts(cr, 'rule comp')} (fills every class below; change a class to override it)</td></tr>`;
+    }
+    const own = R.rulings[r.qualifiedName];
+    html += `<tr class="row ${openRow===r.qualifiedName?'open':''}" data-q="${esc(r.qualifiedName)}" tabindex="0">
+      <td><div class="name mono">${esc(r.qualifiedName)}</div><div class="kind">${esc(r.kind)}${r.triggerObject?' on '+esc(r.triggerObject):''}${members?' · in component':''}</div></td>
+      <td>${badges(r)}</td>
+      <td class="nw">${verdictWords[r.verdict] || esc(r.verdict)}</td>
+      <td class="r num mono nw">${r.chars == null ? 'unknown' : fmt(r.chars)}</td>
+      <td class="r num mono nw" title="${ALLOC && r.chars != null ? shareOf(r.chars).toFixed(1) + '% of the reclaim' : ''}">${ALLOC && r.chars != null ? fmtPct(pctLimit(r.chars)) : ''}</td>
+      <td class="num nw">${esc(r.lastModified)}</td>
+      <td>${own?.alreadyRuled ? `<span class="pill ${esc(own.disposition)}">already ruled ${esc(own.disposition)}</span>` : opts(own?.disposition || '', 'rule', r)}</td>
+      <td>${own?.alreadyRuled ? esc(own.note || '') : `<input class="note" placeholder="note" value="${esc(own?.note || '')}">`}</td></tr>`;
+  }
+  $('#tbody').innerHTML = html || '<tr><td colspan="8">No classes.</td></tr>';
+  $('#tbody').querySelectorAll('tr.row').forEach(tr => {
+    const r = S.rows.find(x => x.qualifiedName === tr.dataset.q);
+    tr.addEventListener('click', e => { if (e.target.closest('select,input')) return; openDrawer(r); });
+    tr.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.target.closest('select,input')) openDrawer(r); });
+    tr.querySelector('select.rule')?.addEventListener('change', e => { setRuling(r, e.target.value); renderTable(); renderHeader(); });
+    tr.querySelector('input.note')?.addEventListener('change', e => setRuling(r, R.rulings[r.qualifiedName]?.disposition || '', e.target.value));
+  });
+  $('#tbody').querySelectorAll('tr.comp select').forEach(sel => sel.addEventListener('change', e => { setComponentRuling(sel.closest('tr').dataset.comp, e.target.value); renderHeader(); }));
+}
+
+// ---------- drawer (evidence) ----------
+function telemetrySentence(r) {
+  if (!r.lastExecuted) return `<b>Never seen running</b>, directly or through anything that ran, in the ${L.effectiveDays} days watched (${L.windowStart} → ${L.windowEnd}) of the ${L.requestedDays} requested.`;
+  const how = r.lastExecutedDirect === 'true' ? 'directly' : `through <span class="mono">${esc(r.lastExecutedVia)}</span>`;
+  return `<b>Last ran ${esc(r.lastExecuted.slice(0,10))}</b>, ${how}; ${fmt(r.executionCount)} runs in the window, about ${r.executionRate} a day.`;
+}
+function reachSentence(r) {
+  if (r.reviewerText) return esc(r.reviewerText);
+  if (r.set === 'T') return `Its only callers are test classes (${r.incomingFromTest}). Removing it means removing or editing those tests too.`;
+  if (r.incomingReading === 'orphan') return `Nothing in the org references it: no class, page, component or flow. The strongest case for dead.`;
+  if (r.incomingReading === 'dead_cluster') return `${r.incomingTotal} inbound reference${r.incomingTotal===1?'':'s'}, none from anything that ran in the window: ${r.incomingFromCandidates} from other candidates, ${r.incomingFromTest} from tests, ${r.incomingFromOther} from non-Apex metadata.`;
+  if (r.incomingReading === 'alarming') return `<b>${r.incomingFromP} caller${r.incomingFromP===1?'':'s'} that did run</b> in the window reference it; either telemetry missed the call or the call site is unreachable code inside a live class.`;
+  return '';
+}
+function sizeSentence(r) {
+  if (r.chars == null) return 'Elements holds no length for this class, so the characters it counts toward the Apex limit are unknown.';
+  const share = ALLOC ? `; ${fmtPct(pctLimit(r.chars))} of the org's ${fmt(ALLOC)}-character Apex limit, ${shareOf(r.chars).toFixed(1)}% of what this review could reclaim` : '';
+  return `${fmt(r.chars)} characters counted toward the Apex limit${share}.`;
+}
+function openDrawer(r) {
+  openRow = r.qualifiedName; renderTable();
+  const deps = r.inbound; const nonApex = r.nonApexReferrers;
+  const depLine = d => `<div class="dep"><span class="mono">${esc(d.name)}</span><span class="ty">${esc(d.type)}${d.inCandidates?' · candidate':''}${d.used?' · <b>ran in window</b>':d.type==='Apex Class'?'':' · never rendered/ran in window'}</span></div>`;
+  const ld = S.looksDead.filter(x => (r.stringOutside && /string-reference|dynamic/i.test(x.check)) || (r.scheduledJobNames && /schedul/i.test(x.pattern)));
+  $('#drawer').innerHTML = `
+    <button class="close" id="btnClose" aria-label="Close">Close</button>
+    <div class="eyebrow">${esc(r.groupLabel)} · ${esc(r.kind)}${r.triggerObject?' on '+esc(r.triggerObject):''}</div>
+    <h2 class="mono">${esc(r.qualifiedName)}</h2>
+    <p style="color:var(--muted)">${verdictLong[r.verdict] || esc(r.verdict)} · <span class="pill ${r.bucket==='review-first'?'rf':'t'}">${r.bucket}</span></p>
+    <section><h3>What the telemetry says</h3><p>${telemetrySentence(r)}</p><p>${reachSentence(r)}</p></section>
+    ${r.reasons.length ? `<section><h3>Reasons to look before ruling</h3><div class="callout ${r.reasons.every(x=>x.weak)?'ok':''}"><ul>${r.reasons.map(x => `<li>${esc(x.text)} <span class="mono" style="color:var(--muted);font-size:12px">${esc(x.code)}${x.weak?' · weak':''}</span></li>`).join('')}</ul>${(r.quotes||[]).length ? `<p style="margin-top:8px"><span class="eyebrow">Relied on</span></p><ul>${r.quotes.map(q=>`<li><span class="mono" style="font-size:13px">${esc(q)}</span></li>`).join('')}</ul>` : ''}</div></section>` : `<section><div class="callout ok">No rescue signal fired: no string reference outside the set, no schedule, no live caller, not modified inside the window.</div></section>`}
+    <section><h3>What it is</h3>
+      <dl class="fact"><dt>Size</dt><dd>${sizeSentence(r)}</dd><dt>Last modified</dt><dd class="num">${esc(r.lastModified)}</dd><dt>Application Programming Interface (API) version</dt><dd>${esc(r.apiVersion)}</dd><dt>Component</dt><dd class="mono">${esc(r.component)}${S.components[r.component]?` (${S.components[r.component].length} classes)`:''}</dd></dl>
+      ${r.componentNote ? `<p style="color:var(--muted)"><span class="eyebrow">Reasoner's note</span><br>${esc(r.componentNote)}</p>` : ''}
+      ${r.description ? `<p style="white-space:pre-wrap">${esc(r.description)}</p>` : ''}
+      ${r.automationSummary && r.automationSummary !== r.description ? `<p style="white-space:pre-wrap;color:var(--muted)">${esc(r.automationSummary)}</p>` : ''}
+      ${r.intentTags ? `<p class="kind">${r.intentTags.split(';').map(t=>`<span class="pill str">${esc(t)}</span>`).join(' ')}</p>` : ''}
+    </section>
+    ${nonApex.length ? `<section><h3>Delete or edit these first</h3><p>These are not Apex and are not walked by the graph; Salesforce will refuse the delete while they reference the class.</p>${nonApex.map(depLine).join('')}</section>` : ''}
+    <section><h3>Everything that references it (${deps.length})</h3>${deps.length ? deps.map(depLine).join('') : '<p style="color:var(--muted)">Nothing.</p>'}</section>
+    <section><h3>What it calls inside the candidate set (${r.outbound.filter(o=>o.inCandidates).length})</h3>${r.outbound.filter(o=>o.inCandidates).map(o=>`<div class="dep"><span class="mono">${esc(o.name)}</span><span class="ty">${esc(o.type)}</span></div>`).join('') || '<p style="color:var(--muted)">Nothing; it calls no other candidate.</p>'}</section>
+    ${r.stringHits ? `<section><h3>String references (${r.stringHits})</h3><p>Its name appears as text in: <span class="mono">${esc(r.stringNodes.replace(/;/g,', '))}</span>${r.stringOutside ? '; at least one is outside the candidate set.' : '; all are inside the candidate set (its own tests or siblings).'}</p></section>` : ''}
+    ${ld.length ? `<section><h3>Looks dead but might not be</h3><ul>${ld.map(x=>`<li><b>${esc(x.pattern)}.</b> ${esc(x.why_it_looks_dead)}; check: ${esc(x.check)}.</li>`).join('')}</ul></section>` : ''}
+    <section><h3>In Elements</h3><p>${S.meta.elementsBaseUrl && S.meta.refModelId ? `<a class="deep" href="${esc(S.meta.elementsBaseUrl + '/sf-impact-assessment/' + encodeURIComponent(S.meta.refModelId) + '/' + encodeURIComponent(r.nodeId))}" target="_blank" rel="noopener" data-node="${esc(r.nodeId)}">Open ${esc(r.name)} in Elements</a> ` : ''}<span class="kind">· node <span class="mono">${esc(r.nodeId)}</span> · Salesforce id <span class="mono">${esc(r.sfId)}</span></span></p></section>`;
+  $('#drawer').classList.add('on'); $('#scrim').classList.add('on');
+  $('#btnClose').addEventListener('click', closeDrawer);
+}
+function closeDrawer() { $('#drawer').classList.remove('on'); $('#scrim').classList.remove('on'); openRow = null; renderTable(); }
+$('#scrim').addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+// ---------- save / export / finish ----------
+let toastTimer;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('on'), 2600); }
+function serialize() {
+  const json = JSON.stringify(S).replace(/<\//g, '<\\/');
+  return TEMPLATE.replace(/(<script id="review-state" type="application\/json">)[\s\S]*?(<\/script>)/, (_, a, b) => a + json + b);
+}
+function serializeWithSavedAt(savedAt) {
+  const json = JSON.stringify({...S, review: {...R, savedAt}}).replace(/<\//g, '<\\/');
+  return TEMPLATE.replace(/(<script id="review-state" type="application\/json">)[\s\S]*?(<\/script>)/, (_, a, b) => a + json + b);
+}
+function downloadBlob(name, text, type) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function dispositionsCsv() {
+  const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const lines = ['qualifiedName,disposition,decidedBy,decidedOn,note'];
+  for (const item of S.rows) {
+    const own = R.rulings[item.qualifiedName]; const comp = R.componentRulings[item.component];
+    const disp = own?.disposition || comp?.disposition || (R.finished ? 'decide-later' : '');
+    if (!disp) continue;
+    const src = own?.disposition ? own : comp || {decidedBy: R.reviewer, decidedOn: (R.finished||'').slice(0,10)};
+    lines.push([item.qualifiedName, disp, src.decidedBy || R.reviewer, src.decidedOn || '', own?.note || ''].map(q).join(','));
+  }
+  return lines.join('\n') + '\n';
+}
+async function runtime() {
+  if (runtimeChecked) return; runtimeChecked = true;
+  try { if (window.claude?.use) { [artifactNS, downloadsNS] = await Promise.all([claude.use('artifact'), claude.use('downloads')]); } } catch (e) { artifactNS = downloadsNS = null; }
+  $('#btnSave').textContent = artifactNS ? 'Save rulings' : 'Save rulings (download page)';
+}
+$('#btnSave').addEventListener('click', async () => {
+  await runtime();
+  const previous = R.savedAt;
+  if (artifactNS) {
+    const savedAt = new Date().toISOString();
+    const html = serializeWithSavedAt(savedAt);
+    try { await artifactNS.publish(html); R.savedAt = savedAt; dirty = false; toast('Saved. Every open view reloads to this version'); }
+    catch (e) { R.savedAt = previous; const code = e?.code || e?.message || 'error'; if (/conflict/i.test(code)) toast('Someone saved first; this page will reload to their version'); else if (/not_writer|not_granted/i.test(code)) toast('You can view but not save this page; use Export instead'); else toast('Save failed: ' + code); }
+  } else {
+    R.savedAt = new Date().toISOString();
+    const html = serialize();
+    downloadBlob('04-review-pack.html', html, 'text/html'); dirty = false; toast("Saved 04-review-pack.html to your browser's download folder (the browser may add a number to the name); send that file back");
+  }
+  renderProgress();
+});
+$('#btnExport').addEventListener('click', async () => {
+  await runtime();
+  const csv = dispositionsCsv();
+  if (downloadsNS) { try { await downloadsNS.save({filename: 'dispositions.csv', data: csv}); toast('Saved dispositions.csv'); } catch (e) { toast('Export declined or failed'); } }
+  else { downloadBlob('dispositions.csv', csv, 'text/csv'); toast("Saved dispositions.csv to your browser's download folder (the browser may add a number to the name)"); }
+});
+$('#btnFinish').addEventListener('click', () => {
+  if (!R.reviewer.trim()) { toast('Enter your name first; the record needs a person'); $('#reviewer').focus(); return; }
+  const effectiveByName = item => R.rulings[item.qualifiedName]?.disposition || R.componentRulings[item.component]?.disposition || '';
+  const unruled = S.rows.filter(item => !effectiveByName(item)).length;
+  if (!confirm(`Declare the review finished? ${unruled} unruled class${unruled===1?'':'es'} will be recorded as decide-later.`)) return;
+  const finishedAt = new Date().toISOString();
+  for (const item of S.rows) {
+    const own = R.rulings[item.qualifiedName];
+    if (own?.alreadyRuled) continue;
+    if (effectiveByName(item)) continue;
+    R.rulings[item.qualifiedName] = {disposition: 'decide-later', note: own?.note || '', decidedBy: R.reviewer, decidedOn: finishedAt.slice(0,10), viaFinish: true};
+  }
+  R.finished = finishedAt; R.finishedBy = R.reviewer; dirty = true;
+  renderTable(); renderHeader(); renderNav(); renderProgress(); toast('Review declared finished. Now Save or Export');
+});
+window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+renderNav(); renderHeader(); renderTable(); renderProgress(); runtime();
+})();
+</script>

@@ -1,0 +1,5 @@
+marker,meaning
+Type.forName,Dynamic class construction by name
+Type.newInstance,Dynamic class construction by name
+implements Callable,Method dispatch by string name
+Callable,Cast to Callable for dynamic dispatch

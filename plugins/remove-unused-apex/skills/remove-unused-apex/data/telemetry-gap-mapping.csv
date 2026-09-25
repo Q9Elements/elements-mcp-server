@@ -1,0 +1,18 @@
+source,eventTypes
+Apex Page,VisualforceRequest
+Visualforce Page,VisualforceRequest
+Apex Component,VisualforceRequest
+Aura Definition Bundle,ApexExecution
+Aura Component,ApexExecution
+Lightning Component,ApexExecution
+Lightning Component Bundle,ApexExecution
+Lightning Web Component,ApexExecution
+Flow,FlowExecution
+Process Builder Workflow,FlowExecution
+entry:REST,ApexExecution
+entry:SOAP,ApexExecution;ApexSoap
+entry:Invocable,ApexExecution;InvocableAction
+entry:Batchable,ApexExecution;QueuedExecution
+entry:Queueable,ApexExecution;QueuedExecution
+entry:Schedulable,ApexExecution;QueuedExecution
+entry:scheduled,ApexExecution;QueuedExecution

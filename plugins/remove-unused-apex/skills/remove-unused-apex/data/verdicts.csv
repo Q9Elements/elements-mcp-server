@@ -1,0 +1,7 @@
+order,verdict,rule,confidence,confidence_note,removal_candidate
+1,unknown,"work/bundle/blind-spots.json names it (dynamic dispatch, hidden body, unresolved edge endpoint); OR it has a declared schedule whose CronTrigger NextFireTime or PreviousFireTime falls on a date the ledger lists as missing; OR it is a schedulable and the snapshot span is shorter than the telemetry window",high,high confidence in the unknown verdict itself,false
+2,observed_used_direct,A production-context event row resolves to the class by ID class name or resolved entry point,high,high; medium when the join was a URI or the match was ambiguous,false
+3,observed_root_reachable,In P through an observed root; no direct event row,medium,medium,false
+4,live_root_unobserved,In P only through a declared root whose liveness test passed and which no event row observed,medium,medium,false
+5,test_only_reachable,In T: reachable from test roots only; no production event,medium,medium,true
+6,dormant_candidate,In U: no production event; no live root reaches it,medium,medium - never certain,true

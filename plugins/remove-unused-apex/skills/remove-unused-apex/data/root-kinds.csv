@@ -1,0 +1,17 @@
+kind,how_declared,body_marker,liveness_test,liveness_source,externally_callable
+trigger,Apex trigger on an object or platform event,trigger,Trigger status is Active,query_metadata on Apex Trigger status column,false
+invocable,@InvocableMethod annotation,@InvocableMethod,At least one active Flow or Process references the class (incoming dependency edge from an active Flow),get_dependencies incoming from Flow plus query_metadata Flow status,false
+aura,@AuraEnabled annotation,@AuraEnabled,At least one profile or permission set grants the class access AND an Aura or Lightning component bundle references it,get_access on the class node; get_dependencies incoming from Lightning Component Bundle or Aura Definition Bundle,false
+vf_controller,Named as controller or extension by a Visualforce page,(none - declared by the page),The page is placed on a layout or tab or referenced by a component that is,get_dependencies incoming on the Apex Page node,false
+remote_action,@RemoteAction annotation,@RemoteAction,Same as vf_controller for the page that calls it,get_dependencies incoming from Apex Page,false
+rest,@RestResource(urlMapping=...) annotation,@RestResource,Always live to callers outside the org; observed only through ApexRestApi or ApexExecution rows,telemetry only,true
+soap,webservice keyword on a method,webservice,Always live to callers outside the org; observed only through ApexSoap rows,telemetry only,true
+schedulable,implements Schedulable,Schedulable,A snapshot AsyncApexJob row with JobType ScheduledApex resolves to the class through a CronTrigger whose State is not DELETED OR an observed QUIDDITY C run resolves to it,the server writes work/bundle/schedule-liveness.csv from scheduledjobnames and the observed roots,false
+batchable,implements Database.Batchable,Batchable,Started by other code (a graph edge) or by an observed run; has no liveness of its own,closure plus observed-roots.csv,false
+queueable,implements Queueable,Queueable,Enqueued by other code (a graph edge) or by an observed run; has no liveness of its own,closure plus observed-roots.csv,false
+future,@future annotation,@future,Called by other code (a graph edge) or by an observed run; has no liveness of its own,closure plus observed-roots.csv,false
+inbound_email,implements Messaging.InboundEmailHandler,InboundEmailHandler,An Email Service function references the class,not visible in Elements or Tooling exports - unknown is treated as live,true
+global_api,global class or @NamespaceAccessible,global,Live if any installed package or external caller may reference it; unknowable from the org,treated as live; printed as a review-first reason,true
+callable,implements Callable,Callable,Invoked by name at run time; invisible to the graph,treated as live; also a blind-spot marker,true
+uninstall_handler,implements UninstallHandler,UninstallHandler,Runs when the owning package uninstalls,treated as live,false
+guest_access,Class access granted to a guest user profile,(none - permission surface),Any guest profile grants class access,get_access on the class node filtered to profiles,true

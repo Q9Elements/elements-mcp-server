@@ -1,0 +1,38 @@
+<p>An Elements Model Context Protocol (MCP) playbook is a separate plugin that guides one well-defined Salesforce process from start to finish using real evidence from your org in Elements. It works through stages you can pause and resume, includes points where a person makes decisions, and hands back analysis and deliverables such as stories. A playbook analyzes only; you make every change in Salesforce.</p>
+
+<p>A skill answers a question or does one task. A playbook guides a multi-stage engagement with decision points and saved progress.</p>
+
+<h2>What you need</h2>
+<ul>
+<li>Install and connect the core <code>elements</code> plugin to the Elements MCP server. A playbook adds no server or app of its own. See 'Connect your AI assistant to Elements' for setup steps.</li>
+<li>Python 3 must be available where the playbook runs scripts.</li>
+<li>Each playbook page lists its plan and license requirements.</li>
+</ul>
+
+<h2>Install a playbook</h2>
+
+<h3>Claude Code</h3>
+<p>Add the <code>Q9Elements/elements-mcp-server</code> marketplace if you have not already, then run:</p>
+<pre><code>/plugin install remove-unused-apex@elements</code></pre>
+
+<h3>Claude Desktop and claude.ai</h3>
+<p>Open 'Customize' &gt; 'Plugins', then install the playbook from the <code>Q9Elements/elements-mcp-server</code> marketplace under 'Yours' or 'Discover'.</p>
+
+<h3>Codex</h3>
+<p>Add the <code>Q9Elements/elements-mcp-server</code> marketplace if you have not already, then run:</p>
+<pre><code>codex plugin add remove-unused-apex@elements</code></pre>
+
+<h3>ChatGPT</h3>
+<ol>
+<li>Upload <a href="https://github.com/Q9Elements/elements-mcp-server/raw/main/dist/remove-unused-apex.zip"><code>remove-unused-apex.zip</code></a> from the repository's <code>dist</code> folder.</li>
+<li>The core plugin provides the Elements app; you do not need to add an app separately.</li>
+</ol>
+
+<h3>Cursor, VS Code, and other tools</h3>
+<p>Run this command, then select the playbook:</p>
+<pre><code>npx plugins add Q9Elements/elements-mcp-server --target &lt;tool&gt;</code></pre>
+
+<h2>Playbooks</h2>
+<ul>
+<li><strong>Remove Unused Apex</strong>: find the Apex your Salesforce org can safely remove. It is tested with Claude CLI and Cowork, ChatGPT (Work), and Codex CLI. See 'Remove Unused Apex'.</li>
+</ul>

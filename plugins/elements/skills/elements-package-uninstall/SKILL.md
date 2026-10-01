@@ -7,7 +7,7 @@ description: >-
   to deactivate first, audits the Profiles/Permission Sets granting access, and returns a sequenced
   removal plan. Use when the user wants to remove or retire a managed package, e.g. "uninstall this
   managed package", "remove the X package", "can we get rid of this package", "what would it take to
-  remove <package>", "package removal plan", "which packages are installed". Read-only: it plans the
+  remove this package", "package removal plan", "which packages are installed". Read-only: it plans the
   removal and evidences every blocker; it never executes an uninstall. Do NOT use to explain a single
   node (use elements-metadata), for org-wide tech-debt ranking (use elements-tech-debt), or for a 
   permission audit of one node (use elements-access).

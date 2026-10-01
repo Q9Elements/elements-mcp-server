@@ -1,18 +1,16 @@
 ---
 name: elements-package-uninstall
 description: >-
-  Plan the removal of an installed Salesforce managed package with the Elements
-  plan_package_uninstall tool: it inventories every component the package owns, sweeps the org for
-  incoming references, separates real uninstall blockers from package-internal edges that vanish
-  with the package, flags the active automations to deactivate first, audits the Profiles/Permission
-  Sets granting access, and returns a sequenced removal plan. Use when the user wants to remove or
-  retire a managed package, e.g. "uninstall this managed package", "remove the X package", "can we
-  get rid of this package", "what would it take to remove <package>", "package removal plan", "which
-  packages are installed". Read-only: it plans the removal and evidences every blocker; it never
-  executes an uninstall. Do NOT use to explore or explain a single node (use elements-metadata); do
-  NOT use for general "what should we clean up first" tech-debt ranking across the whole org (use
-  elements-tech-debt); do NOT use for a standalone permission/access audit of one node (use
-  elements-access).
+  Plan the removal of an installed Salesforce managed package with the Elements plan_package_uninstall
+  tool: it inventories the package's components, sweeps the org for incoming references, separates real
+  uninstall blockers from package-internal edges that vanish with the package, flags active automations
+  to deactivate first, audits the Profiles/Permission Sets granting access, and returns a sequenced
+  removal plan. Use when the user wants to remove or retire a managed package, e.g. "uninstall this
+  managed package", "remove the X package", "can we get rid of this package", "what would it take to
+  remove <package>", "package removal plan", "which packages are installed". Read-only: it plans the
+  removal and evidences every blocker; it never executes an uninstall. Do NOT use to explain a single
+  node (use elements-metadata), for org-wide tech-debt ranking (use elements-tech-debt), or for a 
+  permission audit of one node (use elements-access).
 ---
 
 # elements-package-uninstall

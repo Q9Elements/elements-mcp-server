@@ -1,0 +1,19 @@
+{
+  "name": "elements",
+  "owner": {
+    "name": "Elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "plugins": [
+    {
+      "name": "elements",
+      "source": "./plugins/elements",
+      "description": "Understand your Salesforce Org through Elements.cloud from your AI assistant: spaces, metadata, access, org health, change history, and tech debt."
+    },
+    {
+      "name": "remove-unused-apex",
+      "source": "./plugins/remove-unused-apex",
+      "description": "Find the Apex a Salesforce org can safely remove: select dependency-complete packages toward the customer's capacity target, collect package rulings, and hand back dependency-ordered removal and annotation stories. Analysis only; the customer executes every change."
+    }
+  ]
+}

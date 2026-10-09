@@ -1,0 +1,41 @@
+{
+  "name": "remove-unused-apex",
+  "version": "1.0.0",
+  "description": "Find the Apex a Salesforce org can safely remove: select dependency-complete packages toward the customer's capacity target, collect package rulings, and hand back dependency-ordered removal and annotation stories. Analysis only; the customer executes every change.",
+  "author": {
+    "name": "Elements.cloud",
+    "email": "success@elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "homepage": "https://developer.elements.cloud/",
+  "repository": "https://github.com/Q9Elements/elements-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": [
+    "elements-cloud",
+    "salesforce",
+    "apex",
+    "tech-debt",
+    "code-capacity"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Remove Unused Apex",
+    "shortDescription": "Find the Apex your Salesforce org can safely remove.",
+    "longDescription": "A guided playbook that uses Elements execution telemetry and the dependency graph to find Apex classes and triggers with no recorded use, selects dependency-complete packages toward your capacity target, records your remove, keep, annotate, or decide-later rulings, and hands back removal and annotation stories. Analysis only: you make every change. Needs the Elements.cloud plugin and its connection.",
+    "developerName": "Elements.cloud",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://elements.cloud/",
+    "privacyPolicyURL": "https://elements.cloud/privacy-gdpr/",
+    "termsOfServiceURL": "https://elements.cloud/app-terms-of-service/",
+    "defaultPrompt": [
+      "Find the Apex my org can safely remove.",
+      "We're near the Apex character limit. What can we reclaim?",
+      "Resume my unused-Apex review."
+    ],
+    "brandColor": "#168FCE"
+  }
+}

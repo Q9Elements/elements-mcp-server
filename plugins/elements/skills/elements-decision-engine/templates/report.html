@@ -1,0 +1,148 @@
+<!doctype html>
+<!--
+  Decision Engine report for automation or schema change planning.
+  Populate from typed top-level results using ../references/results.md.
+  Maintain one self-contained local file. Escape returned text before insertion.
+  Replace placeholders; keep stage status, evidence coverage and skipped reasons visible.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Decision Engine: Change Plan</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1d24; --muted: #5b6270; --line: #e3e6ec; --card: #f7f8fa;
+    --accent: #2f6bff; --crit: #d64545; --warn: #c77700; --info: #2f6bff; --ok: #1a8f5a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg:#14171c; --fg:#e7eaf0; --muted:#9aa2b1; --line:#2a2f38; --card:#1c2028;
+            --accent:#6a9bff; --crit:#ff6b6b; --warn:#e0a03a; --info:#6a9bff; --ok:#3ecf8e; }
+  }
+  :root[data-theme="dark"] { --bg:#14171c; --fg:#e7eaf0; --muted:#9aa2b1; --line:#2a2f38; --card:#1c2028;
+            --accent:#6a9bff; --crit:#ff6b6b; --warn:#e0a03a; --info:#6a9bff; --ok:#3ecf8e; }
+  :root[data-theme="light"] { --bg:#fff; --fg:#1a1d24; --muted:#5b6270; --line:#e3e6ec; --card:#f7f8fa;
+            --accent:#2f6bff; --crit:#d64545; --warn:#c77700; --info:#2f6bff; --ok:#1a8f5a; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .de-report { max-width: 920px; margin: 0 auto; padding: 24px 20px 64px; }
+  header.de-head h1 { font-size: 20px; margin: 0 0 2px; }
+  header.de-head .sub { color: var(--muted); font-size: 13px; }
+  nav.tabs { display:flex; flex-wrap:wrap; gap:4px; border-bottom:1px solid var(--line);
+             margin:20px 0 0; overflow-x:auto; }
+  nav.tabs button { appearance:none; background:none; border:0; border-bottom:2px solid transparent;
+             color:var(--muted); padding:10px 12px; font-size:13.5px; cursor:pointer; white-space:nowrap; }
+  nav.tabs button[aria-selected="true"] { color:var(--fg); border-bottom-color:var(--accent); font-weight:600; }
+  nav.tabs button:disabled { opacity:.4; cursor:default; }
+  .panel { display:none; padding:20px 2px; }
+  .panel[data-active="true"] { display:block; }
+  .panel h2 { font-size:16px; margin:0 0 10px; }
+  .empty { color:var(--muted); font-style:italic; padding:24px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 16px; margin:12px 0; }
+  .card h3 { margin:0 0 4px; font-size:14.5px; }
+  .card .csub { color:var(--muted); font-size:12.5px; margin-bottom:8px; }
+  .badges { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px; }
+  .badge { font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid var(--line);
+           color:var(--muted); }
+  .badge.crit{ color:var(--crit); border-color:var(--crit); }
+  .badge.warn{ color:var(--warn); border-color:var(--warn); }
+  .badge.info{ color:var(--info); border-color:var(--info); }
+  .badge.ok  { color:var(--ok);   border-color:var(--ok);   }
+  .badge.rec { color:#fff; background:var(--accent); border-color:var(--accent); }
+  table { width:100%; border-collapse:collapse; font-size:13px; margin:8px 0; display:block; overflow-x:auto; }
+  th,td { text-align:left; padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  ul { margin:6px 0; padding-left:18px; } li { margin:2px 0; }
+  code { background:var(--card); padding:1px 5px; border-radius:4px; font-size:12.5px; }
+  .pros li::marker{ color:var(--ok);} .cons li::marker{ color:var(--warn);}
+</style>
+</head>
+<body>
+<div class="de-report">
+  <header class="de-head">
+    <!-- Replace with the mission summary. -->
+    <h1>Change Plan: <span id="mission-title">{{CHANGE_TITLE}}</span></h1>
+    <div class="sub">Path: {{WORKFLOW}} · Reference model: {{REFMODEL_NAME}} · Requirements and stories are drafts; analysis artifacts are stored in Elements.</div>
+    <p id="source-context">{{SYNC_RECENCY}}</p>
+    <p id="coverage-context">{{COVERAGE_SUMMARY}}</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <!-- Enable tabs containing results or status explanations, including skipped and failed stages.
+         Select the entry stage for standalone requests; keep aria-selected and data-active aligned. -->
+    <button role="tab" aria-selected="true"  data-tab="inventory">Inventory</button>
+    <button role="tab" aria-selected="false" data-tab="recommendation" disabled>Recommendation</button>
+    <button role="tab" aria-selected="false" data-tab="dependencies"   disabled>Dependencies</button>
+    <button role="tab" aria-selected="false" data-tab="impact"         disabled>Change Impact</button>
+    <button role="tab" aria-selected="false" data-tab="what-fires"     disabled>What fires</button>
+    <button role="tab" aria-selected="false" data-tab="risk"           disabled>Architecture Risk</button>
+    <button role="tab" aria-selected="false" data-tab="backlog"        disabled>Backlog</button>
+  </nav>
+
+  <!-- ============ ONE PANEL PER STAGE. Fill from typed stage results. ============ -->
+  <!-- Example content (Inventory) shows the intended pattern: intro prose + a table/cards. -->
+  <section class="panel" data-tab="inventory" data-active="true">
+    <h2>{{INVENTORY_HEADING}}</h2>
+    <!-- Summary derived from inventory rows and coverage. -->
+    <p>{{INVENTORY_NARRATIVE}}</p>
+    <table>
+      <thead><tr><!-- Automation: name/type/triggerEvents/writeTargetEntities. Schema: name/type/parent/purpose. -->
+      <th>{{NAME_COLUMN}}</th><th>Type</th><th>{{CONTEXT_COLUMN}}</th><th>{{DETAIL_COLUMN}}</th></tr></thead>
+      <tbody><!-- one escaped row per automations[] or schemaNodes[] item --></tbody>
+    </table>
+  </section>
+
+  <section class="panel" data-tab="recommendation"><h2>Recommendation</h2>
+    <!-- one .card per options[]; badges: implementationMode (automation), accepted mode (schema), "Recommended".
+         Body: summary + Pros (ul.pros) + Cons (ul.cons) + Open questions. Mark the accepted option. -->
+    <div class="empty">Pending.</div>
+  </section>
+  <section class="panel" data-tab="dependencies"><h2>Dependency Scan</h2>
+    <div class="empty">Pending.</div></section>
+  <section class="panel" data-tab="impact"><h2>Change Impact</h2>
+    <div class="empty">Pending.</div></section>
+  <section class="panel" data-tab="what-fires"><h2>What fires</h2>
+    <div class="empty">Pending.</div></section>
+  <section class="panel" data-tab="risk"><h2>Architecture Risk</h2>
+    <!-- one .card per risks[]; badge class by severity (crit/warn/info); show evidence in <code>. -->
+    <div class="empty">Pending.</div></section>
+  <section class="panel" data-tab="backlog"><h2>Backlog (draft)</h2>
+    <!-- Render each story field (description, acceptanceCriteria, implementationDetails) as sanitized Markdown per ../references/results.md. -->
+    <div class="empty">Pending.</div></section>
+</div>
+
+<script>
+  // Tab switching and availability work for any number of stages.
+  const tabs = document.querySelectorAll('nav.tabs button');
+  const panels = document.querySelectorAll('.panel');
+
+  const panelHasContent = (panel) => Array.from(panel.children).some((child) => {
+    if (child.tagName === 'H2') return false;
+    if (child.classList.contains('empty') && child.textContent.trim() === 'Pending.') return false;
+    return child.textContent.trim().length > 0 || Boolean(child.querySelector('img, svg, tbody tr, .card'));
+  });
+
+  const enablePopulatedTabs = () => {
+    tabs.forEach((btn) => {
+      const panel = Array.from(panels).find((candidate) => candidate.dataset.tab === btn.dataset.tab);
+      if (panel && panelHasContent(panel)) btn.removeAttribute('disabled');
+    });
+  };
+
+  tabs.forEach((btn) => btn.addEventListener('click', () => {
+    if (btn.disabled) return;
+    tabs.forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+    panels.forEach((p) => p.setAttribute('data-active', String(p.dataset.tab === btn.dataset.tab)));
+  }));
+
+  enablePopulatedTabs();
+  new MutationObserver(enablePopulatedTabs).observe(document.querySelector('.de-report'), {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<p>This article explains how the Elements MCP server keeps your data safe and how you can govern and audit your connections. It's the article to share with your security team.</p>
+
+<h2>Prerequisites</h2>
+<ul>
+<li>MCP access is a licensed feature that Elements enables for your Space.</li>
+</ul>
+
+<h2>What the server can reach</h2>
+<p>Elements stores Salesforce <strong>metadata and configuration</strong>, along with usage telemetry used by some tools: record counts and Apex execution telemetry from Salesforce Event Monitoring logs. Metadata includes things like object and field definitions, flows, Apex classes, validation rules, and permission sets. It never stores Salesforce business records (accounts, contacts, opportunities, transactions), so nothing your AI assistant does through Elements can reach them either.</p>
+<p>The MCP server never connects to your Salesforce org, and nothing it does can change your Salesforce org: Elements reads Salesforce metadata, it never writes it. When your assistant creates or changes something, it writes only Elements artifacts: a Space, a metadata view, MetaFields and their values, a proposed metadata node, a diagram, or a user story.</p>
+
+<h2>Authentication</h2>
+<p>You sign in with your existing Elements account using OAuth 2.1, an open, secure sign-in standard used across the industry. The sign-in flow uses PKCE, an additional safeguard that prevents an intercepted request from being reused by anyone else. You never share an Elements password with your AI assistant; you sign in through your browser, directly with Elements.</p>
+
+<h2>You choose what a connection can do</h2>
+<p>When you approve a connection, you're shown the client (for example, Claude Code) and its requested scope families; clients are offered the same full set by default, though a client may request fewer, and you never pick scopes. The choice you make is which Space or Spaces it can use. Elements controls which Spaces are licensed for MCP access, and your Space administrator controls the Elements permissions you have, which determine what will actually work. A connection only ever reaches the Spaces you selected; new Spaces are never added to an existing connection automatically. To change which Spaces a connection can use, revoke it and reconnect.</p>
+
+<h2>Per-Space enablement</h2>
+<p>Elements turns on MCP access for each <strong>Space</strong> individually; it is a licensed feature. A Space that hasn't been enabled can't be selected when you connect, and Elements checks this again on every single request, so disabling a Space takes effect immediately, even for connections that were approved earlier.</p>
+
+<h2>Tenant isolation</h2>
+<p>A connection only ever works inside the Spaces you granted it; it can't be used to reach any other Space, tenant, or customer's data. When no Space is active, Elements uses your Elements default Space if it is among the Spaces you consented to. The <code>active_space_required</code> error appears only when none of your consented Spaces is your default. Elements never uses a Space outside the grant. Behind the scenes, each access token is cryptographically tied to the Elements MCP server, so even if a token were somehow exposed, it couldn't be replayed against any other Elements service.</p>
+
+<h2>Token handling</h2>
+<p>Access tokens are short-lived and refresh automatically in the background. Refresh tokens rotate on each use and last 30 days from the last refresh, so a connection used at least monthly stays signed in. Elements never stores a token in plain text; only a keyed hash (HMAC-SHA-256) is kept.</p>
+
+<h2>Managing and revoking connections</h2>
+<p>You can review and revoke your own connections at any time: open your Elements profile, select the 'Connected apps' tab, find the connection, and click 'Revoke'. Each connection shows the client, the Space(s) it can use, its scope, and when it last signed in. Space administrators can review the connections into their Space and remove their Space from them. Removal takes effect immediately.</p>
+
+<p>[[IMAGE: The 'Connected apps' tab of the Elements profile, showing an active MCP connection and its Revoke button]]</p>
+
+<h2>Audit logging</h2>
+<p>Every action your assistant takes through Elements is logged: who made the request, which Space it ran in, what it asked for, and whether it succeeded. Sign-ins, approvals, and revocations are logged too. These records are kept in secure, tamper-resistant storage operated by Elements and used for security monitoring and incident investigation. They aren't currently visible inside the Elements app; if you need a connection's activity investigated, contact Elements support. What you <em>can</em> see yourself, at any time, is every active connection, what it's allowed to do, and when it last signed in, on the 'Connected apps' tab of your profile.</p>
+
+<h2>Rate limits and safeguards</h2>
+<p>Each connection is limited to a safe rate of requests, and every request is checked against a strict, predefined set of allowed inputs before it runs, so it can't be used to send unexpected commands. Results are screened on the way back, too: hidden characters that could be used to smuggle instructions to an AI assistant are stripped from every response, and AI-generated explanations are checked and clearly marked so your assistant treats them as information to read, not instructions to follow.</p>
+<p>Actions that create or change something in Elements still require your own Elements permissions. Your assistant acts as you: it can never do more than your Space administrator has already allowed you to do yourself, and approving a connection never raises your own Elements permissions. And nothing your assistant does ever changes your Salesforce org itself. The most significant changes are saved as drafts for a person to review in Elements: a proposed metadata node is clearly marked as proposed in your reference model, and an imported diagram only updates the diagram's working draft; publishing an approved version is a separate, deliberate step.</p>
+
+<h2>AI features and your data</h2>
+<p>Some tools use a large language model to produce answers: <code>explain_metadata_item</code>; the Decision Engine tools <code>run_automation_inventory</code>, <code>run_automation_recommendation</code>, <code>run_schema_inventory</code>, <code>run_schema_recommendation</code>, <code>run_dependency_scan</code>, <code>run_change_impact_analysis</code>, <code>run_architecture_risk_analysis</code>, <code>run_backlog_draft</code>, and <code>get_analysis_result</code>; and <code>generate_process_map</code> and <code>generate_stories_from_diagram</code>. These run through the same licensed AI features Elements already offers in the web application; connecting an assistant doesn't add any new AI integration or send your data anywhere new. Only the metadata needed to answer the question is sent, never Salesforce business records, which Elements doesn't hold. AI-generated narrative is screened and marked as untrusted data. Decision Engine runs keep their analysis as internal Elements artifacts.</p>
+
+<h2>Security certifications</h2>
+<p>The MCP server runs on the same platform as the rest of Elements. Our platform-level security documentation (including SOC 2, ISO 27001:2022, and our Data Processing Agreement) is available at <a href="https://trust.elements.cloud/">trust.elements.cloud</a>.</p>
+
+<p>If a connection isn't behaving as expected, see 'MCP troubleshooting'.</p>

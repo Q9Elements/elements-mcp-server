@@ -1,0 +1,4 @@
+order,signal,evidence_source,rule,reason_written
+1,declared_schedule,the row's scheduledJobNames and scheduleLive columns and work/bundle/schedule-liveness.csv; a Flow referrer on the row (incomingOtherTypes) and in work/bundle/edges.csv,A CronTrigger or AsyncApexJob or scheduled flow reaches the class: move to review-first. Deterministic; a proven cadence fully explains silence,declared_schedule
+2,recent_modification,catalog lastModifiedDate,lastModifiedDate on or after windowStart and not inside a same-minute mass-deployment cluster (thresholds T-6): move to review-first. Never inverted - age is not evidence of death,recently_modified
+3,cadence_language,the candidate row's API name (qualifiedName) automationSummary intentTags and description (carried from the catalog; never fetched per class),Period words quoted verbatim from the text; no scores no summaries. Absent when automationContextAvailable is false and the report says so,cadence_language

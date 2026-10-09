@@ -1,0 +1,11 @@
+id,capability,provided_by,status,interim
+CAP-01,Candidate bundle: catalog + usage closure + candidate set with components blind spots ledger and capacity summary,get_unused_apex_candidates (Elements Model Context Protocol tool),shipped,none; card 01 blocks the engagement with MISSING_PRIMITIVE when the tool does not resolve
+CAP-02,Automation context and intent tags on every candidate row,get_unused_apex_candidates (part of the bundle),shipped,rows carry empty context and automationContextAvailable false; the cadence signal is reported unavailable - never fetched per class
+CAP-03,"String references for each selected class",code_search (Elements Model Context Protocol tool),shipped,bulk columns in the bundle stay empty
+CAP-04,Removal tranche planner,scripts/removal_plan.py wrapped by the removal-plan-generator agent,shipped,-
+CAP-05,Capacity figure and allocation,the Setup Apex Classes banner pasted at card 01 (no API exposes it),shipped,-
+CAP-06,Review artifact with rulings captured back,"scripts/review_page.py writes a self-contained HTML review page (published as an Artifact when the tool exists); rulings are saved into the page (artifact publish or local re-download) and exportable as dispositions.csv",shipped,rulings may still be taken in conversation and written by the orchestrator
+CAP-07,Stories delivered to the customer,Markdown files under stories/ (no Elements tool creates stories),shipped,-
+CAP-08,Dependency completeness receipt for the sync,list_reference_models sync status (weak),partial,a sync reported complete is trusted; undeclared residue is a known limit stated in method notes
+CAP-09,Apex telemetry preflight: does the org have daily Apex event logs,has_event_monitoring (Elements Model Context Protocol tool),shipped,none; card 01 blocks the engagement with MISSING_PRIMITIVE when the tool does not resolve
+CAP-10,Capacity-targeted dependency package selection,scripts/capacity_triage.py,shipped,none; complete inventories stay in work/triage while agents receive selected rows

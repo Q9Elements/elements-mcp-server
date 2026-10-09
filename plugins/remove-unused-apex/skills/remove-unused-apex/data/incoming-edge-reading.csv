@@ -1,0 +1,4 @@
+reading,condition,strength,routing
+orphan,incomingTotal = 0,strongest case for dead,confident bucket unless a rescue signal fires
+dead_cluster,incomingTotal > 0 AND incomingFromP = 0,strong; the component grouping exploits it,confident bucket unless a rescue signal fires
+alarming,incomingFromP > 0,either telemetry missed the caller running or the call site is unreachable code inside a live class,review-first bucket always; reason incoming_from_used

@@ -1,0 +1,6 @@
+kind,fill,border,colour,legend,evidence
+standard,#f3f3f5,#2e2e2e,Grey,Standard Salesforce object,"Financial Services Cloud exemplar data models in WG3: standard objects grey #f3f3f5, border #2e2e2e"
+custom,#f3e9f5,#79147e,Purple,Custom or industry object,"Financial Services Cloud exemplars: industry and custom objects purple #f3e9f5, border #79147e"
+external,#ffffff,#747474,White,Object in another system,Energy and Utilities exemplar: white cards with a grey #747474 border
+proposed,#fff4d6,#c98a00,Amber,Proposed object (does not exist yet),No exemplar; amber so it reads as not yet built
+,#ffffff,#747474,White,Object,Used when the model gives no kind

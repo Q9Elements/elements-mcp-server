@@ -1,0 +1,27 @@
+setting,value,unit,rule,evidence
+card_width,200,px,Width of every card manage_diagram creates on a data model; it cannot be changed there,Probe map 18 Oct 2026: every data model card is 200 px wide
+card_height_min,100,px,The server never makes a card shorter than this,Probe map: a card with no or one attribute and no footer is 100 px
+card_height_base,60,px,Card height is card_height_base plus attribute_row_height per attribute plus footer_height with a footer; at least card_height_min,Probe map: 2/3+footer/6+footer/8 attributes give 112/208/286/268 px
+attribute_row_height,26,px,Height the server adds for each attribute; it does not allow for text that wraps,Probe map
+footer_height,70,px,Height the server adds for a footer of any length,Probe map: footers of 14 and 42 characters both add 70 px
+editor_growth_allowance,30,px,Extra space kept below each row because the editor may grow a card whose title or attributes wrap; it never shrinks,As for interaction flows
+col_gap,80,px,Horizontal space between neighbouring cards in a row: room for two crow's feet and a short label,Exemplars: 60 px between 120 px cards; 200 px cards get a little more
+row_gap,130,px,Vertical space from the bottom of the tallest card in a row to the top of the next row; holds the bend of every line between the rows,Exemplars: 60 px between 80 px rows with no fields; cards with fields and labels need more
+tree_gap,160,px,Horizontal space between separate groups of related objects,Keeps groups that share no line visibly apart
+comb_gap,60,px,Horizontal space between a parent card and a column of child cards beside it; the lines' shared vertical runs in its middle,Mortgage exemplar: 60 px between Residential Loan Application and its stacked children
+comb_stack_gap,30,px,Vertical space between cards stacked in a column beside their parent,Mortgage exemplar: 20-60 px
+max_row_children,7,cards,Children of one card laid out in a row under it before the childless ones move into columns beside it,Seven 200 px cards and their gaps are about 1900 px: one screen at 100% zoom
+max_comb_children,8,cards,Childless children stacked in one column beside their parent before a second column starts on the other side,Keeps a column under about 1500 px with fields shown
+max_width,3400,px,Widest the groups of related objects may run side by side before the next group starts a new band below,About two screens at 100% zoom
+band_gap,200,px,Vertical space between bands of groups,row_gap plus room for lines between bands
+max_entities,30,cards,Objects on one data model before the plan warns it will be hard to read,Exemplars hold 8 to 31 objects
+max_fields,6,attributes,Most fields shown on one card; the rest are listed in the plan as not shown,Keeps a card under about 220 px tall; chosen with Xavery 18 Oct 2026
+field_max_chars,60,characters,Longest field title written; longer ones are cut with an ellipsis and the full text goes into the description,Two lines on a 200 px card
+label_max_chars,40,characters,Longest line label written,The server wraps labels at about 20 characters
+primary_marker,#,text,Written before the name of a field that identifies the record (key primary),Energy and Utilities exemplar marks identifying fields with #
+show_api_names,yes,yes/no,Write an entity's API name as its card footer when it differs from its name,Energy and Utilities exemplar shows the API name under each object name
+legend,yes,yes/no,Add a card titled Key left of the diagram listing the colours and line ends used,A data model's colours mean nothing without a key; a note is a fixed 150 x 150 px and too small
+legend_gap,80,px,Space between the legend note and the cards,
+canvas_blank_width,2000,px,Width of the canvas manage_diagram accepts positions in on a blank level (from x = 0),Probe maps 18 Oct 2026
+canvas_blank_height,1200,px,Height of the canvas on a blank level (from y = 0),Probe maps
+canvas_margin_factor,0.5,fraction,Once a level has content the canvas is the content's bounding box plus this fraction of its width and height on each side,"Probe map: content 2000 x 1200 at (0, 0) gives the canvas (-1000, -600) 4000 x 2400"

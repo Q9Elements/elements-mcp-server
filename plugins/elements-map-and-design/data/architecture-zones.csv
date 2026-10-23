@@ -1,0 +1,21 @@
+kind,flow,zone,why
+salesforce,source,bottom,A Salesforce app that feeds the hub sits with the other sources of customer data below it
+salesforce,target,top,Salesforce apps that use the hub's data (engagement) sit above it
+salesforce,two-way,top,As a target
+salesforce,none,top,As a target
+middleware,source,bottom,An ETL or integration tool loading the hub sits below it (Informatica in the Well-Architected examples)
+middleware,target,right,
+middleware,two-way,bottom,
+middleware,none,bottom,
+external-app,source,left,Data flows left to right: sources on the left
+external-app,target,right,Destinations on the right
+external-app,two-way,left,Systems of record exchanging data both ways sit with the sources
+external-app,none,right,
+data-store,source,left,Data lakes and warehouses feeding the hub sit on the left
+data-store,target,right,
+data-store,two-way,left,
+data-store,none,left,
+channel,source,bottom,Web and mobile apps sending events sit below the hub (ingestion)
+channel,target,right,
+channel,two-way,bottom,
+channel,none,bottom,

@@ -1,0 +1,6 @@
+{
+  "name": "elements-change-impact",
+  "version": "1.0.1",
+  "description": "Plan a Salesforce automation or schema change with options, traced impact, an impact report and a draft delivery backlog. The customer makes the change.",
+  "author": {"name": "Elements.cloud"}
+}

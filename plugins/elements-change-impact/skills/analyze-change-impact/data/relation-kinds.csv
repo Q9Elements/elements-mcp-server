@@ -1,0 +1,32 @@
+metadata_type,relation_kind,mode,decided_by,story,report_text,last_used_rule
+Flow,any,value_or_type_update,card,judgement,Check how this automation uses the changed field or value,
+Process Builder Workflow,any,value_or_type_update,card,judgement,Check how this automation uses the changed field or value,
+Apex Class,any,value_or_type_update,card,judgement,Check how this automation uses the changed field or value,
+Apex Trigger,any,value_or_type_update,card,judgement,Check how this automation uses the changed field or value,
+Validation Rule,any,value_or_type_update,card,judgement,Check how this automation uses the changed field or value,
+Field,formula,value_or_type_update,card,judgement,Check how this formula uses the changed field or value,
+Flow,any,delete,card,judgement,Update the reference or remove this automation if its only purpose ends with the change,
+Apex Class,any,delete,card,judgement,Update the reference or remove this automation if its only purpose ends with the change,
+Apex Trigger,any,delete,card,judgement,Update the reference or remove this automation if its only purpose ends with the change,
+Validation Rule,any,delete,card,judgement,Update the reference or remove this automation if its only purpose ends with the change,
+Field,formula,delete,card,judgement,Update the reference or remove this automation if its only purpose ends with the change,
+Report,filter_or_bucket_or_cross_filter,report_change,script,yes,Review the report's changed records and confirm its filter,Name recent reports by lastUsed within 90 days; count older or unknown and list them in members
+Report,filter_or_bucket_or_cross_filter,delete,script,yes,Review the report's changed records and confirm its filter,Name recent reports by lastUsed within 90 days; count older or unknown and list them in members
+Report,filter_or_bucket_or_cross_filter,any,script,no,The report filter stays valid and needs no change,
+Report,column_or_plain_grouping,any,script,no,The report displays the updated field automatically and needs no change,
+Report,any,any,script,no,The report has no identified filter or bucket change,
+Email Template,other,any,script,no,The email template displays the updated merge value automatically and needs no change,
+Report Type,layout,delete,script,no,The report type drops this field from its layout automatically,
+List View,filter_or_bucket_or_cross_filter,report_change,script,yes,Review the list view's changed records and confirm its filter,Name every affected list view
+List View,filter_or_bucket_or_cross_filter,delete,script,yes,Review the list view's changed records and confirm its filter,Name every affected list view
+List View,filter_or_bucket_or_cross_filter,any,script,no,The list view filter stays valid and needs no change,
+List View,column,any,script,no,The list view displays the updated field automatically and needs no change,
+List View,any,any,script,no,The list view has no identified filter or bucket change,
+Page Layout,placement_or_required,placement_or_required_update,script,yes,Update the layout placement or requirement,
+Page Layout,placement_or_required,any,script,no,The layout placement and requirement stay the same,
+Record Type,restriction_or_values,any,script,yes,Update the record type's available values,
+Field,dependent_picklist_mapping,value_or_type_update,script,yes,Check the dependent picklist mapping manually,
+Path,value_mapping,value_or_type_update,script,yes,Check Path manually for the changed value,
+*,other,value_or_type_update,script,yes,Review the referencing component and update its affected reference,
+*,other,delete,script,yes,Review the referencing component and update its affected reference,
+*,other,any,script,no,The referenced {component_type} needs no change,

@@ -1,0 +1,13 @@
+sf_type,role,automation_type,why,skip_name
+Flow,automation,flow,Flows call out and publish events,
+Process Builder Workflow,automation,process-builder,Older automation that calls out and publishes events,
+Apex Trigger,automation,apex-trigger,Runs on save and often starts a callout,
+Apex Class,automation,apex-class,"Calls out, receives calls (REST resources) and handles events; also a gateway: the automations that call it reach the same system",(^Test|Test$|Tests$|_Test$|TestClass$|Mock$|^Mock)
+OmniScript,automation,omniscript,OmniStudio processes that call integration procedures,
+Omni Integration Procedure,automation,integration-procedure,Server-side calls to other systems built in OmniStudio,
+Field,key-field,,A field named after the system (Xero Contact ID) shows which object the exchange touches,
+Named Credential,gateway,,The automations that use it call the system,
+External Credential,gateway,,The automations that use it call the system,
+External Service,gateway,,The automations that use it call the system,
+Platform Event,gateway,,The automations that publish it or subscribe to it exchange with the system,
+Custom Metadata,gateway,,Configuration such as webhook addresses; the automations that read it call the system,

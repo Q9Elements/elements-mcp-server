@@ -1,0 +1,27 @@
+setting,value,unit,rule,evidence
+card_width,200,px,Width of every card manage_diagram creates on a capability map; it cannot be changed there,WG3 probes 18 Oct 2026: every card 200 px wide
+card_height,100,px,Height of a card with no footer and fewer than two list lines,WG3 probes
+list_base,60,px,A card with no footer is list_base plus list_line_height per list line tall (at least card_height),WG3 probes: 2/3/5 lines give 112/138/190 px
+footer_height,130,px,A card with a footer is footer_height plus list_line_height per list line tall,WG3 probes: 0/1/2/3 lines give 130/156/182/208 px
+list_line_height,26,px,Height a card gains per list line (card attribute),WG3 probes
+text_width,120,px,Width of a text box (a heading) as manage_diagram creates it whatever its text; the text is centred in it and wraps,WG3 probes: every text box 120 x 80 px
+text_height,80,px,Height of a text box; its text is centred in it and is cut after about four lines,WG3 probes and the editor (14 px text on 16.8 px lines)
+column_gap,40,px,Horizontal space between neighbouring columns of cards,Exemplar: 22 px between column boxes; more without boxes so columns read apart
+max_columns,6,columns,Columns on one row of the grid before the rest wrap to a new row; a capability continuing into a second column counts each,Six 240 px columns plus the legend fit the 2000 px canvas of a blank level
+max_stack,8,cards,Sub-capabilities stacked under one heading before the rest continue in the next column,Keeps a column under about 1100 px
+sibling_gap,10,px,Vertical space between cards stacked under one heading,Exemplar: 10-14 px between boxes
+group_gap,16,px,Vertical space before a sub-heading; the text box adds about 25 px of its own above the text so the visible gap is about 40 px and groups read apart,Text is centred in its 80 px box
+row_gap,50,px,Vertical space between the drivers row and the grid; between rows of the grid; and between band rows,Exemplar: 24-26 px between containers; more without containers
+label_gap,4,px,Space between a heading's text box and the first card under it; the text is centred in its 80 px box so the visible gap under two lines of heading is about 30 px,Editor: 14 px text on 16.8 px lines centred in the box
+legend_gap,60,px,Horizontal space between the legend column and the grid,Exemplar: 88 px
+heading_max_word,17,characters,Longest word a heading can hold; the text box is 120 px wide and does not break words (about 104 px of text),Editor: a 17-letter lower-case word is 115 px
+heading_max_word_upper,13,characters,Longest word a heading can hold in capitals; a top-level heading with a longer word keeps its own case,Editor: CONFIGURATION is 116 px and INTERDEPENDENCIES 152 px
+heading_case_top,upper,upper or as-is,Top-level capability headings and section headings (drivers and legend) in capitals so they read above sub-headings; a text box cannot be bold or larger,Text boxes take plain text only
+header_border,#051E56,hex colour,Border of a top-level capability or band drawn as a card (one whose sub-capabilities are list lines or that has none),Navy 2 px border used for emphasised boxes in the exemplar process maps
+header_fill,#E6ECF5,hex colour,Fill of such a card when it has no rating,Light tint so a category card reads as one
+rated_border,#6B6B6B,hex colour,Border of a rated card below the top level; fill comes from data/capability-ratings.csv,manage_diagram sets a navy border with any fill unless a border is sent
+drivers_title,Business Drivers,text,Text of the heading over the driver cards,Exemplars
+box_text_max_chars,60,characters,Longest card title before the plan warns it will crowd the card (the card does not grow for its title),Exemplar titles are 2-6 words; a 200 px card holds about three lines
+heading_max_chars,50,characters,Longest heading before the plan warns its text box will cut it,A 120 x 80 px text box shows about four lines of 11-15 characters
+footer_max_chars,120,characters,Longest footer before the plan warns (the card does not grow for its footer),Exemplar footers are one sentence
+list_max_items,8,lines,Most list lines on one card before the plan warns the card is getting long,Exemplar lists have 2-3

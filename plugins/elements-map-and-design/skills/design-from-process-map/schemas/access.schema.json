@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Data access matrix (access-deriver)",
+  "description": "One row per step, resource and entity: the access the step needs and the permission controller that grants it.",
+  "type": "object",
+  "required": ["rows", "controllers", "gaps"],
+  "additionalProperties": false,
+  "properties": {
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "step", "verb", "resource", "entity", "crud", "controller", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$"},
+          "step": {"description": "Id of the model activity.", "type": "string"},
+          "verb": {"description": "The verb the CRUD came from, as data/crud-verbs.csv lists it, or the step's own verb.", "type": "string", "minLength": 1, "maxLength": 60},
+          "resource": {"description": "Id of the model role (a person, team or AI agent) or system that does the step.", "type": "string"},
+          "system": {"description": "Id of the model system the access is in; left out for the target system itself.", "type": "string"},
+          "entity": {"description": "Id of the model entity.", "type": "string"},
+          "crud": {"type": "string", "pattern": "^C?R?U?D?$", "minLength": 1},
+          "fields": {"type": "array", "items": {"type": "string", "maxLength": 200}},
+          "integrationUser": {"description": "true when the resource is a system acting through an integration user.", "type": "boolean"},
+          "controller": {"description": "Name of an entry in controllers.", "type": "string", "minLength": 1},
+          "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "maxLength": 1000}},
+          "inferred": {"type": "boolean"}
+        }
+      }
+    },
+    "controllers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "action", "personas"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {"type": "string", "minLength": 1, "maxLength": 120},
+          "type": {"enum": ["permission-set", "permission-set-group", "profile", "role", "integration-user", "other"]},
+          "action": {"enum": ["reuse", "extend", "create"]},
+          "existing": {"description": "The existing controller's API name, from the org's access evidence, for reuse and extend.", "type": "string", "maxLength": 255},
+          "personas": {"description": "Ids of the model roles or systems the controller is for.", "type": "array", "minItems": 1, "items": {"type": "string"}},
+          "evidence": {"type": "array", "items": {"type": "string", "maxLength": 1000}}
+        }
+      }
+    },
+    "gaps": {"type": "array", "items": {"type": "object", "required": ["note"]}}
+  }
+}

@@ -1,0 +1,29 @@
+setting,value,unit,applies_to,rule,evidence
+box_width,150,px,process|journey,Width of every box created through manage_diagram; it cannot be changed there,Probe maps: every box 150 px wide; exemplars use one width per level (120-205 px)
+box_height_base,100,px,process|journey,Box height is box_height_base plus resource_row_height for each visible resource,Probe maps: 100/124/148/172/196 px for 0/1/2/3/4 resources (editor-made exemplar boxes use 80 + 24 per resource)
+resource_row_height,24,px,process|journey,Height added to a box for each visible resource,Probe maps and 315 of 345 exemplar boxes
+col_gap,180,px,process,Horizontal space between neighbouring boxes in a row; it must fit the label of the line between them,Exemplar process maps: median 181 px (middle half 165-196)
+col_gap,160,px,journey,Horizontal space between neighbouring boxes in a row on a customer journey,B2C 140 px; B2B median 186 px
+row_gap,140,px,process|journey,Vertical space from the bottom of the tallest box in a row to the top of the next row; it holds loop-back lines and their labels,Exemplars: median 140 px (middle half 107-192)
+row_align,middle,,process|journey,Boxes in a row share their middle (centre line) because every line attaches at the middle of a side; equal middles keep happy-path lines straight,manage_diagram attaches lines only at side middles
+top_margin,200,px,process|journey,Distance from the top of the canvas to the top of the first row; room for loops over it and for end markers above it,free_end_length_vertical plus a loop's height
+band_gap,200,px,process|journey,Vertical space between the bottom of one band of rows and the top of the next when a long main path wraps; the wrap line runs back through it,row_gap plus room for the wrap line
+max_columns,6,boxes,process|journey,Boxes on one row before the main path wraps to the next row,Exemplars wrap after 6-7; 6 x 330 px fits the 2000 px canvas of a blank level
+max_boxes_per_level,10,boxes,process|journey,Boxes on one level before the rest moves into a drill-down,Server warning upn_level_too_many_activities; rubric R01; exemplar child levels median 6
+max_decision_outcomes,3,lines,process|journey,Outcomes of one decision box before the skill warns that the decision is worth splitting,data/line-sides.csv L06: a fourth outcome has to share a side
+free_end_length,240,px,process|journey,Length of a start or end line (one end on a box; the other a free end or end marker) leaving or entering a left or right side,Requested placement; server clear-space routing can change the side or shorten the stub; check returned geometry
+free_end_length_vertical,120,px,process|journey,Length of a start or end line leaving or entering a top or bottom side,Three times the server's 40 px; the server still draws 40 px and manage_diagram cannot set it
+free_end_clearance,260,px,process|journey,Space kept clear left of a first box and right of a last box (140 px above or below a box with an early end) so the longer start and end lines fit,free_end_length plus the 16 px end marker and a small margin
+server_label_wrap,20,characters,process|journey,The server wraps every line label at about this many characters and centres it on its line; line breaks sent in a label are not kept,Probe maps
+label_max_chars,100,characters,process|journey,Longest line label; about five wrapped lines,Exemplars: median 49-88 characters by map
+end_label_max_chars,40,characters,process|journey,House label limit for start and end lines whose returned stubs can be short,Probe maps
+label_char_width,6.2,px,process|journey,Approximate width of one label character; a gap must exceed server_label_wrap times this plus 25 px,Exemplars: median gap minus 6.2 x longest line = 23 px
+box_text_max_words,6,words,process|journey,Box text is a verb and its object in at most this many words,Exemplars: median 4 words; 84% have 6 or fewer
+max_resources_shown,5,resources,process|journey,Most resources shown on one box; more go into attachments,Exemplars: typically 2-3; 95% of boxes have 5 or fewer
+max_resources_on_box,7,resources,process|journey,"Xavery's rule (Oct 2026): no box carries more than this many resources, people included, whatever skill draws it; every object left off is still named in the box's note. max_resources_shown stays the default for generated maps and must not exceed it",Xavery: a box listing every object an automation writes grew past the box below it
+emphasis_border,#051e56,hex colour,process|journey,Border colour for boxes that are not ordinary steps: continuous management bars; exception handling; set-up boxes,9 of 345 exemplar boxes (navy 2 px border on white)
+emphasis_fill,#FFFFFF,hex colour,process|journey,Fill colour for emphasised boxes,9 of 345 exemplar boxes
+journey_first_resource,Customer,resource name,journey,Every journey box lists the Customer resource (Human) first,68 of 68 exemplar journey boxes
+canvas_blank_width,2000,px,process|journey,Width of the canvas manage_diagram accepts positions in on a blank level (from x = 0),Probe maps
+canvas_blank_height,1200,px,process|journey,Height of the canvas on a blank level (from y = 0),Probe maps
+canvas_margin_factor,0.5,fraction,process|journey,Once a level has content the canvas is the content's bounding box plus this fraction of its width and height on each side,Probe maps and the six exemplar maps

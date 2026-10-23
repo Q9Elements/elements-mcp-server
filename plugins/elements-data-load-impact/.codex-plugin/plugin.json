@@ -1,0 +1,40 @@
+{
+  "name": "elements-data-load-impact",
+  "version": "1.0.0",
+  "description": "Turn a planned Salesforce data load into a ratified safety package, optional sandbox rehearsal, and customer-executed backlog without moving production records.",
+  "author": {
+    "name": "Elements.cloud",
+    "email": "success@elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "homepage": "https://developer.elements.cloud/",
+  "repository": "https://github.com/Q9Elements/elements-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": [
+    "elements-cloud",
+    "salesforce",
+    "data-load",
+    "bulk-api"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Data Load Impact",
+    "shortDescription": "Plan a Salesforce data load with an optional rehearsal.",
+    "longDescription": "Turn a planned Salesforce data load into a ratified safety package, optional sandbox rehearsal, and customer-executed backlog without moving production records.",
+    "developerName": "Elements.cloud",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://elements.cloud/",
+    "privacyPolicyURL": "https://elements.cloud/privacy-gdpr/",
+    "termsOfServiceURL": "https://elements.cloud/app-terms-of-service/",
+    "defaultPrompt": [
+      "Plan the impact of my Salesforce data load.",
+      "Help me rehearse my planned Salesforce data load.",
+      "Resume my in-progress data-load impact engagement."
+    ],
+    "brandColor": "#168FCE"
+  }
+}

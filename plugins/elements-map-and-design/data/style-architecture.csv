@@ -1,0 +1,49 @@
+setting,value,unit,rule,evidence
+card_width,200,px,Width of every system card manage_diagram creates; it cannot be changed there,Probe map 18 Oct 2026: every system architecture card is 200 px wide with up to three footer icons
+card_height_min,100,px,The server never makes a card shorter than this; a header icon does not add height,Probe map: a card with or without a header icon and nothing else is 100 px
+card_height_base,60,px,Card height is card_height_base plus attribute_row_height per attribute plus the footer allowance; at least card_height_min,Probe map: three attributes give 138 px
+attribute_row_height,26,px,Height the server adds for each attribute; it does not allow for text that wraps,Probe map
+footer_text_height,70,px,Height the server adds for footer text and no footer icons,Probe map: header and footer text give 130 px
+footer_icons_height,75,px,Height the server adds for footer icons and no footer text,Probe map: one or three footer icons give 135 px
+footer_both_height,125,px,Height the server adds for footer text with footer icons,Probe map: three attributes with footer text and two footer icons give 263 px
+footer_icon_width,54,px,Width each footer icon takes; a card is 38 px plus this per icon when that is wider than card_width,Probe dry runs: 8 icons 470 px; 22 icons 1226 px
+max_footer_icons,3,icons,Most footer icons written on one card; three keep it 200 px wide,Probe map
+max_attributes,6,attributes,Most attributes written on one card; the rest are summed up in a last attribute,Keeps a card under about 220 px tall
+attribute_max_chars,60,characters,Longest attribute title written; longer ones are cut with an ellipsis and the full text goes into the description,Two lines on a 200 px card
+footer_max_chars,200,characters,Longest footer written; longer text is cut at a word,Well-Architected cards use one short sentence
+footer_max_words,20,words,"Most words in a card footer (an automation's summary, a system's footer); longer text is cut at the 20th word with an ellipsis, so the card keeps a steady height",Xavery 20 Oct 2026: long automation descriptions stretched the drill-down cards
+editor_growth_allowance,30,px,Extra space kept below each card in a column because the editor may grow a card whose text wraps,As for interaction flows and data models
+hub_gap_x,340,px,Horizontal space between the hub column and the left and right zones; holds the labels of the lines that fan in,The server wraps labels at about 20 characters (about 130 px)
+hub_gap_y,200,px,Vertical space between the hub band and the top and bottom zones,Room for a wrapped label on a vertical line
+hub_stack_gap,160,px,Vertical space between hub cards stacked in the centre (MuleSoft above Data 360),Room for the line between them and its label
+zone_col_gap,120,px,Horizontal space between two columns of one left or right zone,Lines between neighbouring columns are short
+zone_stack_gap,70,px,Vertical space between cards stacked in a left or right zone,Room for a short line between neighbours and the editor growth allowance
+zone_row_gap,110,px,Horizontal space between cards side by side in a top or bottom zone,Room for a short label between neighbours
+zone_row_stack_gap,140,px,Vertical space between two rows of one top or bottom zone,
+max_zone_stack,6,cards,Cards stacked in one column of a left or right zone before a second column starts further out,Six cards and their gaps are about one screen tall
+max_zone_row,6,cards,Cards side by side in one row of a top or bottom zone before a second row starts further out,Six 200 px cards and their gaps are about one screen wide
+max_cards_per_level,20,cards,Cards on one level before the plan warns; put related systems in a group with a drill-down,Well-Architected: one message per diagram; several focused diagrams beat one dense one
+group_stack_gap,90,px,Vertical space between member cards stacked on a group's drill-down level,
+group_free_end_clearance,300,px,Space kept left and right of the member column on a group's drill-down level for the lines in and out,Free ends are 80 px; their labels need room
+child_label_max_chars,40,characters,House label limit for drill-down boundary lines whose returned stubs can be short,As for process maps
+label_max_chars,60,characters,Longest line label before the plan warns it will wrap onto many lines,The server wraps labels at about 20 characters
+label_separator, · ,text,Written between a line's mechanism and its timing word,
+start_shape,none,shape,Shape at the start of a one-way line: the system the data leaves,Default of new system architecture lines (probe map)
+end_shape,block_thin,shape,Shape at the end of every line: the system the data reaches,Default of new system architecture lines (probe map)
+two_way_start_shape,block_thin,shape,Shape at the start of a two-way line,Well-Architected landscapes draw two-way exchanges with arrows at both ends
+key,yes,yes/no,Add a card titled Key explaining the line ends; timing words and card colours used,Well-Architected: a key whenever icons; connectors or colours carry meaning
+key_gap,120,px,Space between the key card and the cards,
+zone_headings,yes,yes/no,Add a text box naming each zone (Sources; Destinations...) at its outer edge,Agreed with Xavery 18 Oct 2026
+heading_gap,30,px,Space between a zone heading and its cards,
+text_box_width,120,px,Width of a text box the server creates,Probe map
+text_box_height,80,px,Height of a text box the server creates,Probe map
+canvas_blank_width,2000,px,Width of the canvas manage_diagram accepts positions in on a blank level (from x = 0),Probe map 18 Oct 2026
+canvas_blank_height,1200,px,Height of the canvas on a blank level (from y = 0),Probe map
+canvas_margin_factor,0.5,fraction,Once a level has content the canvas is the content's bounding box plus this fraction of its width and height on each side,As for data models
+middleware_fold_threshold,6,systems,A middleware that carries more systems than this is drawn as a label on their lines ('via Make: Invoices') instead of a card they join; the system's placement in the model overrides it,"Scope decision 2 for org integration landscapes (Xavery, 20 Oct 2026): 6-8 suggested, to settle on a real org"
+via_label_format,via {via}: {label},text,"Label of a line whose middleware is drawn as a label: {via} is the middleware's name, {label} the integration's label",
+chain_col_gap,240,px,"Horizontal space between the columns of a system's drill-down (systems, middleware, automations, objects); holds a wrapped label",The server wraps labels at about 20 characters (about 130 px)
+chain_stack_gap,50,px,Vertical space between cards stacked in one column of a system's drill-down,
+chain_reads_label,reads,text,Label of a drill-down line from an object into the automation that reads it,
+chain_writes_label,writes,text,Label of a drill-down line from an automation into the object it creates or updates,
+chain_triggers_label,runs on,text,Label of a drill-down line from an object into the automation that runs when it is saved,

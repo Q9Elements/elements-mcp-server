@@ -1,0 +1,5 @@
+disposition,meaning,blast_radius,applies_to,source
+deactivate,Turn the metadata inactive for the load window,All users and concurrent activity,Apex Trigger; Flow; Validation Rule; Workflow Rule,Elements method
+bypass,Use an existing hook within its evidenced scope,Every user while the switch is off,Apex Trigger; Apex Class; Flow,Elements method
+leave-on,Keep the automation active and plan for its effects,Every loaded row plus any cascade,Other automation types,Elements method
+"review: runs only when invoked (trigger, flow, batch schedule or UI)",Confirm whether an invoker runs the class during the load,"Runs only when invoked (trigger, flow, batch schedule or UI); owner review required",Apex Class,Elements method

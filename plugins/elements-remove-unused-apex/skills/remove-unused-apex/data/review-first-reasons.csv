@@ -1,0 +1,11 @@
+reason,meaning,rescue_signal
+declared_root_not_observed,Carries a REST SOAP Aura invocable async email or global root and no event row observed it in the window (not emitted by the reasoner: the bundle carries no declared-root column),no - structural
+incoming_from_used,Has an incoming edge from a class in P,no - structural
+sole_caller_of_executed_class,Is the only non-test static Apex caller of a non-candidate class executed in the telemetry window; removing it may stop that live path,no - structural
+declared_schedule,A CronTrigger or AsyncApexJob row or a scheduled flow reaches it - a cadence longer than the window explains silence,yes - signal 1
+cadence_language,Its API name automation context or description names a period or cadence (weekly batch month-end quarter-end annual renewal fiscal year-end); the reviewer judges whether that cadence exceeds the window,yes - signal 3
+recently_modified,lastModifiedDate falls inside or after the start of the telemetry window and not inside a mass-deployment cluster,yes - signal 2
+telemetry_gap,A watched source has true-gap days in the telemetry window under the shared missing-day bound,no - ledger
+dynamic_dispatch_residue,Its name is held as a string by a class outside the candidate set (stringReferenceOutsideCandidates true; hits held only by test classes or by other candidates do not count) so it may be constructed by name at run time,yes - string search on the row
+package_boundary,Its only incoming edges cross a managed-package boundary or it is global,no - blind spot
+could_not_assess,The reasoning pass could not read the class (row malformed or a tool error); it is ranked review-first with verdict unknown,no - failure

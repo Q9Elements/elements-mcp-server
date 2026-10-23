@@ -1,0 +1,11 @@
+kind,id_prefix,name_prefix,role_kind,order,business_view,technical_view,path_globs,notes
+assistant,assistant,AI Assistant,ai-agent,1,yes,yes,,"The session that runs the package, on whichever platform; drawn first after the people"
+agent,agent,Agent,ai-agent,2,yes,yes,agents/*.md,A subagent the package dispatches
+skill,skill,Skill,system,3,yes,yes,skills/*/SKILL.md,Another skill the package hands over to
+command,command,Command,system,4,yes,yes,commands/**/*.md|.github/prompts/*.prompt.md,A slash command or prompt file
+mcp-server,server,MCP Server,system,5,yes,no,,An MCP server the step calls; shown in the business view in place of its tools
+mcp-tool,tool,MCP tool,system,6,no,yes,,"One MCP tool, named server/tool; shown in the technical view"
+script,script,Script,system,7,no,yes,**/scripts/*.py|**/scripts/*.sh|**/scripts/*.js|**/scripts/*.mjs|**/scripts/*.ts,A script the step runs
+data,data,Data,system,8,no,yes,**/data/*.csv|**/data/*.json|**/data/*.yaml|**/data/*.yml,A data table the step reads
+template,template,Template,system,9,no,yes,**/templates/*,A template the step fills
+reference,reference,Reference,system,10,no,yes,**/references/*.md,A method or reference file the step follows

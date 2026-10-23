@@ -1,0 +1,35 @@
+pattern_id,mechanism,match,fit,note
+request-reply,External Services,external services?,best,Declarative; for REST services with an OpenAPI definition
+request-reply,Apex callout through a Named Credential,named credential|apex (rest |soap |http )?callout,best,Synchronous callout started from a page or Lightning component
+request-reply,HTTP Callout from Flow,http callout,best,Declarative synchronous callout
+request-reply,Apex callout from a trigger,trigger callout|callout from (a |an )?(apex )?trigger|@future|future callout|queueable callout,suboptimal,Trigger callouts must run asynchronously; use Fire and Forget with platform events instead
+request-reply,Batch Apex callout,batch apex,suboptimal,Batch callouts are limited per batch; use Batch Data Synchronization instead
+fire-and-forget,Flow-driven platform events,platform events?,best,Declarative; publish an event when a record is inserted or updated
+fire-and-forget,Pub/Sub API,pub/?sub( api)?|pub sub,best,gRPC API for external subscribers and publishers
+fire-and-forget,Change Data Capture,change data capture|\bcdc\b,best,Streams record changes to subscribers
+fire-and-forget,Event Relay,event relay|eventbridge,best,Streams events to Amazon EventBridge without an integration app
+fire-and-forget,OmniStudio Integration Procedure,integration procedure,good,Declarative server-side orchestration
+fire-and-forget,Outbound Message,outbound messag,suboptimal,Legacy SOAP messaging; use Flow with platform events or Pub/Sub API instead
+fire-and-forget,Apex asynchronous callout,apex (async(hronous)? )?callout|@future|future callout|queueable callout,suboptimal,Custom code must build in guaranteed delivery
+fire-and-forget,Data Action (Data 360),data actions?,,Data 360 sends an event to a platform event; webhook or Marketing Cloud when data changes; not rated by Well-Architected
+batch-data-sync,ETL tool with Bulk API,\betl\b|bulk api|informatica|boomi|jitterbit,best,Best when the remote system is the master; good when Salesforce is
+batch-data-sync,Data 360 data actions and activations,activations?|data actions?,best,Moves data from Data 360 to other orgs and Marketing Cloud after ingestion
+batch-data-sync,Data 360 Data Graphs and Connect APIs (MuleSoft),data graphs?|connect api,best,MuleSoft extracts through Connect and Data Graph APIs
+batch-data-sync,Composite Graph API,composite graph,best,Many related records in one payload
+batch-data-sync,Out-of-the-box Data 360 connector,out[- ]of[- ]the[- ]box connector|native connector|\bconnector\b,,Data 360 connectors sync data on a schedule; not rated by Well-Architected
+batch-data-sync,Data Loader or Data Import Wizard,data loader|import wizard,fit,Fine for one-off loads; not a base for an integration
+batch-data-sync,Remote call-in for bulk movement,rest api|soap api,suboptimal,Continuous record-by-record traffic slows users; use an ETL tool with Bulk API
+remote-call-in,REST API,rest api,best,
+remote-call-in,Composite API,composite api,best,Up to 25 requests per call
+remote-call-in,GraphQL API,graphql,best,
+remote-call-in,Bulk API 2.0,bulk api,best,For operations over about 2000 records
+remote-call-in,Pub/Sub API,pub/?sub( api)?|pub sub,best,
+remote-call-in,Platform Events,platform events?,best,
+remote-call-in,Data 360 Ingestion API,ingestion api,,Streaming or bulk ingestion into Data 360; not rated by Well-Architected
+remote-call-in,SOAP API,soap api,suboptimal,Prefer REST or Composite API
+remote-call-in,Apex REST or SOAP web service,apex (rest|soap|web) ?services?|apex rest,suboptimal,Custom code; prefer the standard APIs
+ui-update,Platform events with a Lightning component,platform events?|pub/?sub|streaming api,best,
+data-virtualization,Salesforce Connect,salesforce connect|external objects?,best,Live access to external data without copying it
+data-virtualization,Data 360 Zero Copy,zero[- ]copy|federation,best,Data stays in the lakehouse; Data 360 queries it in place
+data-virtualization,Data Cloud One companion org,data cloud one|companion org,best,Other orgs read Data 360 data virtually
+data-virtualization,Request and reply callout,callout|external services?,suboptimal,Use Salesforce Connect for live access instead

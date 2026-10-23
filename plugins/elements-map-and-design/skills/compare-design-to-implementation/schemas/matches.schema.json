@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed links for one level (metadata-matcher)",
+  "description": "One entry per box of the matcher brief: the metadata to link to it, or why none is linked; and, before the final round, more words to search the org for.",
+  "type": "object",
+  "required": ["level", "boxes"],
+  "additionalProperties": false,
+  "properties": {
+    "level": {"description": "The brief's level number.", "type": "string", "minLength": 1},
+    "boxes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "decision"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"description": "The box's id in the brief.", "type": "string", "pattern": "^L[0-9.]+-[0-9]+$"},
+          "decision": {"description": "links: link the components listed. no-org-support: the step happens outside Salesforce (a phone call, a meeting, a decision in someone's head). nothing-found: the step needs the org, but no candidate does it.", "enum": ["links", "no-org-support", "nothing-found"]},
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["nodeId", "why", "confidence"],
+              "additionalProperties": false,
+              "properties": {
+                "nodeId": {"description": "Copied from the box's candidates.", "type": "string", "pattern": "^[0-9a-fA-F]{24}$"},
+                "why": {"description": "How the component serves the step, in one sentence; for a picklist field, the values the step sets.", "type": "string", "minLength": 1, "maxLength": 300},
+                "confidence": {"enum": ["high", "medium", "low"]}
+              }
+            }
+          },
+          "reason": {"description": "no-org-support or nothing-found: why, in one sentence.", "type": "string", "maxLength": 500},
+          "gapNote": {"description": "nothing-found: the sticky note's text, what the org lacks for this step.", "type": "string", "maxLength": 600}
+        }
+      }
+    },
+    "moreTerms": {
+      "description": "Before the final round only: words to search for boxes whose candidates do not settle them (a flow's likely name, a field's label).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["box", "queries"],
+        "additionalProperties": false,
+        "properties": {
+          "box": {"type": "string", "pattern": "^L[0-9.]+-[0-9]+$"},
+          "queries": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 2, "maxLength": 100}}
+        }
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string", "maxLength": 1000}}
+  }
+}

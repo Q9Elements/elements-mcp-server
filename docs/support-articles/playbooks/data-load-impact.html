@@ -1,0 +1,59 @@
+<p>Data Load Impact turns a planned Salesforce bulk data load into a ratified pre-load safety package, an optional small-batch sandbox rehearsal, and an ordered backlog for the customer's team. It analyzes the load and never performs the production load or changes Salesforce metadata.</p>
+
+<h2>What it does and when to use it</h2>
+<ul>
+<li>Use the playbook to understand what a planned load will fire, choose load parameters, identify safety controls, or plan a backfill rehearsal.</li>
+<li>It predicts the transitive automation and locking effects of the specific load, audits bypass options, records the data-load owner's safety rulings, and prepares an ordered backlog.</li>
+<li>The owner sees reasons to rehearse and chooses whether to use the recommended full-copy sandbox rehearsal. If rehearsal is skipped, the package states the risk.</li>
+<li>The playbook analyzes only. The customer's team applies checklist changes and executes the production load and backlog.</li>
+</ul>
+
+<h2>Requirements</h2>
+<ul>
+<li>Install and connect the core <code>elements</code> plugin to the Elements Model Context Protocol (MCP) server. Core plan subscribers also need the Automation &amp; Execution Intelligence add-on. See 'Connect your AI assistant to Elements' for core setup.</li>
+<li>Access to the <code>run_data_load_impact</code>, <code>list_reference_models</code>, <code>get_space_context</code>, <code>list_metadata_by_criteria</code>, <code>search_metadata</code>, <code>get_metadata_component</code>, <code>get_metadata_source</code>, and <code>explain_metadata_components</code> tools.</li>
+<li>Python 3 using the standard library only, and a host that runs the shipped local scripts, such as Claude Code or the Claude app.</li>
+<li>The script host needs network access to Amazon Simple Storage Service (S3) for source downloads.</li>
+<li>A named data-load owner, a planned source path or Salesforce Object Query Language (SOQL) file, and local access to the source files.</li>
+<li>A full-copy sandbox when the owner chooses rehearsal. The Salesforce command-line interface (sf CLI) signed in to that sandbox is optional.</li>
+<li>In the Claude app, an attached file may be read into the conversation. For a file with real rows, use Claude Code or attach a copy containing only the columns the load writes.</li>
+</ul>
+
+<h2>Install</h2>
+<h3>Claude Code</h3>
+<pre><code>/plugin marketplace add Q9Elements/elements-mcp-server
+/plugin install elements-data-load-impact@elements</code></pre>
+
+<h3>Codex</h3>
+<pre><code>codex plugin marketplace add Q9Elements/elements-mcp-server
+codex plugin add elements-data-load-impact@elements</code></pre>
+
+<h2>How it runs</h2>
+<ol>
+<li><strong>Kickoff:</strong> the owner provides their name and local source path. The playbook creates or resumes the engagement in the session working directory.</li>
+<li><strong>Prerequisites:</strong> the playbook confirms the Elements connection, resolves the active Space and reference model, and checks required tools and source access.</li>
+<li><strong>Intake manifest:</strong> the owner confirms the proposed object, operation, counted rows, written fields, loader, Application Programming Interface (API), and applicable upsert or portal-role facts in one reply. For update or upsert, the customer runs the generated SOQL query and saves its result locally.</li>
+<li><strong>Impact analysis:</strong> the playbook analyzes the confirmed load and predicts its transitive automation and locking effects.</li>
+<li><strong>Bypass audit:</strong> the playbook reviews downloaded metadata source files locally and records evidence for whether each predicted automation fires.</li>
+<li><strong>Safety package ruling:</strong> the owner accepts or changes proposed actions and replacement checks, answers the incident-class question, and gives a go or no-go decision with any stated risks.</li>
+<li><strong>Optional rehearsal:</strong> the owner chooses whether to rehearse in a full-copy sandbox. The playbook can slice up to 200 rows from a local comma-separated value (CSV) source. With a signed-in sf CLI that can match the ratified parameters, it runs the small test batch after the customer confirms the sandbox checklist is applied for that CLI user. Without the CLI path, the customer runs the batch manually and supplies same-job debug logs and loader success and error files.</li>
+<li><strong>Backlog:</strong> after rehearsal is closed or skipped, the playbook delivers the ordered stories and final report.</li>
+</ol>
+
+<h2>What you get</h2>
+<ul>
+<li><code>report/final-report.md</code>, the final safety and impact report.</li>
+<li>Five or six ordered Markdown story files under <code>stories/</code> for the customer's team to execute.</li>
+</ul>
+
+<h2>What stays with you</h2>
+<ul>
+<li>In Claude Code, raw CSV rows, SOQL results, and debug-log lines stay on the customer's machine, and the session receives only local script outputs with metadata names, aggregates, and counts. A file attached in the Claude app may be read into the conversation (see Requirements).</li>
+<li>The customer applies checklist metadata changes, runs any manual rehearsal batch, and executes the production load and backlog.</li>
+<li>The playbook never performs the production load or changes Salesforce metadata.</li>
+</ul>
+
+<h2>Tested with</h2>
+<ul>
+<li>Claude: command-line interface (CLI) and the Claude app.</li>
+</ul>

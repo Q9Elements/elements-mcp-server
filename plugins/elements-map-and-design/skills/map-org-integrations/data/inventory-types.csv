@@ -1,0 +1,12 @@
+metadata_type,role,read_source,direction,shows
+Connected App,proof,no,inbound,Another system or user signs in to Salesforce through OAuth to call its APIs
+External Client App,proof,no,inbound,Another system signs in to Salesforce through OAuth (the successor to connected apps)
+Remote Site Setting,proof,yes,outbound,A domain Apex is allowed to call; its URL names the vendor
+Named Credential,proof,yes,outbound,An endpoint Flow and Apex call out to; its URL names the vendor
+External Credential,proof,yes,outbound,How Salesforce signs in to another system for its callouts
+External Service,proof,yes,outbound,An outside API registered for Flow and Apex to call; it names the named credential it calls through
+Platform Event,proof,no,either,Events published to or received from other systems
+External Object,proof,no,inbound,Data read live from another system (data virtualization)
+Data Stream,proof,no,inbound,Data ingested into Data Cloud from another system
+Permission Set,support,no,either,Access granted to a system's users or its integration user; supports a match but never proves a system on its own
+Application,package-component,no,either,An app a managed package installs; the card links to it because a package itself cannot be linked

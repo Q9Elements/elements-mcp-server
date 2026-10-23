@@ -1,0 +1,13 @@
+order,method,event_type,identity_column,join,confidence,notes
+1,trigger_id,ApexTrigger,TRIGGER_ID,TRIGGER_ID equals ApexTrigger.csv Id (15 or 18 character form),high,
+2,job_id,QueuedExecution,JOB_ID,JOB_ID equals AsyncApexJob.Id in a snapshot then AsyncApexJob.ApexClassId equals ApexClass.csv Id,high,Batch identity only; queueable and future rows do not carry a usable JOB_ID 
+3,invocable_action,InvocableAction,ACTION_NAME,ACTION_TYPE APEX and ACTION_NAME equals qualifiedName,high,
+4,class_name,ApexSoap,CLASS_NAME,CLASS_NAME equals qualifiedName,high,
+5,entry_point_class,ApexExecution,ENTRY_POINT,QUIDDITY selects a class-shaped batch or queueable entry point and ENTRY_POINT equals qualifiedName (Namespace.Class form),high,
+6,entry_point_method,ApexExecution,ENTRY_POINT,QUIDDITY selects a method-shaped entry point; strip FLOW- or VF- prefix and a parameter signature then split before the last dot; H uses the ApexRestApi URI prefix on the same REQUEST_ID to restore a namespace,high,
+7,cron_name,ApexExecution,ENTRY_POINT,QUIDDITY C; normalize colon to hyphen and match CronJobDetail.Name then join CronTrigger and AsyncApexJob to ApexClass.csv by ID,high,
+8,vf_page,ApexExecution + VisualforceRequest,ENTRY_POINT + PAGE_NAME,For QUIDDITY V or VisualforceRequest strip VF- and /apex/ plus a trailing .apexp; match the Apex Page and use its controller or extension dependency edges,medium,
+9,aura_action_message,AuraRequest,ACTION_MESSAGE,Extract Class.method from ApexActionController ACTION$execute* and corroborate only the same class resolved from ApexExecution on the same REQUEST_ID,medium,
+10,rest_uri,ApexRestApi,URI,Match a declared REST urlMapping and corroborate only the same class resolved from ApexExecution on the same REQUEST_ID; the URI prefix disambiguates an omitted namespace,medium,
+11,flow_version,FlowExecution + InvocableAction,FLOW_VERSION_ID,FLOW_VERSION_ID resolves to a Flow node and the closure walks from it,medium,
+12,unmatched,any,any,No method above resolved the row,,Written to unmatched-events.csv with the identity value and reason

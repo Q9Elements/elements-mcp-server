@@ -1,0 +1,35 @@
+{
+  "change_request": {"sentence": null, "space": null, "model": {"name": null, "last_sync": null, "latest_sync_failed": false}, "targets": [], "unresolved": []},
+  "change_set": {"elements": [], "existing_values": {}},
+  "option_rounds": [],
+  "existing_automation": {"fits": [], "partials": [], "covered": [], "partly_covered": [], "lost": [], "delete_answer": null},
+  "_option_round_shape": {
+    "options": [{
+      "label": null,
+      "mode": null,
+      "recommendation": false,
+      "recommendation_reason": null,
+      "summary": null,
+      "rationale": null,
+      "pros": [],
+      "cons": [],
+      "elements": [{"action": null, "element": {"name": null, "apiName": null, "sfType": null, "nodeId": null}}],
+      "ooe_status": null,
+      "ooe_peers": [{"peer": null, "status": null, "reason": null, "analyst_note": null}],
+      "evidence": {"blast_radius": [], "migration": [], "population": [], "pattern": {"option": []}}
+    }],
+    "picked": null,
+    "why": null,
+    "set_aside": [{"label": null, "reason": null}],
+    "overturn_reason": null
+  },
+  "material_findings": [],
+  "_material_finding_shape": {"text": null, "blocking": false, "needs_repick": false, "element": null},
+  "incomplete": null,
+  "corrections": [],
+  "impacted_components": {"counts": {}, "read_counts": {}, "dispositions_file": null, "members": [], "zero_dependents": false, "no_existing_target": false, "delete_order_file": null, "older_reports_file": "members/older-reports.csv"},
+  "review_before_build": {"fire_chain_digest_file": null, "fire_chain_unavailable": null, "partial": null, "next_hops": [], "trigger_field_check": [], "ooe_files": [], "locks": []},
+  "drawers": [],
+  "backlog": {"drafted": false, "reason": null, "stories": [], "counts": {}, "flags": [], "member_groups": []},
+  "stated_limits": []
+}

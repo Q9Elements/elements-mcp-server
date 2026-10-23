@@ -1,0 +1,54 @@
+<p>An Elements Model Context Protocol (MCP) playbook is a separate plugin that guides one well-defined Salesforce process from start to finish using real evidence from your org in Elements. It works through stages you can pause and resume, includes points where a person makes decisions, and hands back analysis and deliverables such as stories. A playbook analyzes only; you make every change in Salesforce.</p>
+
+<p>A skill answers a question or does one task. A playbook guides a multi-stage engagement with decision points and saved progress.</p>
+
+<h2>What you need</h2>
+<ul>
+<li>Install and connect the core <code>elements</code> plugin to the Elements MCP server. Each playbook is a plugin that brings its own agents and scripts along with its skill; it adds no server or app of its own. See 'Connect your AI assistant to Elements' for setup steps.</li>
+<li>Python 3 must be available where the playbook runs scripts.</li>
+<li>Each playbook page lists its requirements.</li>
+</ul>
+
+<h2>Install a playbook</h2>
+<p>Playbooks are not included in <a href="https://github.com/Q9Elements/elements-mcp-server/raw/main/dist/elements-core-skills.zip"><code>elements-core-skills.zip</code></a> and cannot be installed as loose skills, so install each playbook as a plugin.</p>
+
+<h3>Claude Code</h3>
+<p>Add the <code>Q9Elements/elements-mcp-server</code> marketplace if you have not already, then run:</p>
+<pre><code>/plugin install elements-remove-unused-apex@elements</code></pre>
+<p>For Data Load Impact, run:</p>
+<pre><code>/plugin install elements-data-load-impact@elements</code></pre>
+<p>For Elements Map and Design, run:</p>
+<pre><code>/plugin install elements-map-and-design@elements</code></pre>
+<p>For Analyze Change Impact, run:</p>
+<pre><code>/plugin install elements-change-impact@elements</code></pre>
+
+<h3>Claude Desktop and claude.ai</h3>
+<p>Open 'Customize' &gt; 'Plugins', then install the playbook from the <code>Q9Elements/elements-mcp-server</code> marketplace under 'Yours' or 'Discover'.</p>
+
+<h3>Codex</h3>
+<p>Add the <code>Q9Elements/elements-mcp-server</code> marketplace if you have not already, then run:</p>
+<pre><code>codex plugin add elements-remove-unused-apex@elements</code></pre>
+<p>For Data Load Impact, run:</p>
+<pre><code>codex plugin add elements-data-load-impact@elements</code></pre>
+<p>For Elements Map and Design, run:</p>
+<pre><code>codex plugin add elements-map-and-design@elements</code></pre>
+<p>For Analyze Change Impact, run:</p>
+<pre><code>codex plugin add elements-change-impact@elements</code></pre>
+
+<h3>ChatGPT</h3>
+<ol>
+<li>Upload the plugin package <a href="https://github.com/Q9Elements/elements-mcp-server/raw/main/dist/elements-remove-unused-apex.zip"><code>elements-remove-unused-apex.zip</code></a> from the repository's <code>dist</code> folder.</li>
+<li>The core plugin provides the Elements app; you do not need to add an app separately.</li>
+</ol>
+
+<h3>Cursor, VS Code, and other tools</h3>
+<p>Run this command, then select the playbook:</p>
+<pre><code>npx plugins add Q9Elements/elements-mcp-server --target &lt;tool&gt;</code></pre>
+
+<h2>Playbooks</h2>
+<ul>
+<li><strong>Remove Unused Apex</strong>: find the Apex your Salesforce org can safely remove. It is tested with Claude command-line interface (CLI) and Cowork, ChatGPT (Work), and Codex CLI. See 'Remove Unused Apex'.</li>
+<li><strong>Data Load Impact</strong>: plan a Salesforce data load, including what it fires, safety controls, and an ordered backlog. It is tested with Claude command-line interface (CLI) and the Claude app. See 'Data Load Impact'.</li>
+<li><strong>Elements Map and Design</strong>: map and design your Salesforce business architecture as Elements diagrams. It is tested with Claude command-line interface (CLI). See 'Elements Map and Design'.</li>
+<li><strong>Analyze Change Impact</strong>: assess a proposed Salesforce automation or schema change and prepare an impact report with a draft delivery backlog. It is tested with Codex command-line interface (CLI). Other tools are untested. See 'Analyze Change Impact'.</li>
+</ul>

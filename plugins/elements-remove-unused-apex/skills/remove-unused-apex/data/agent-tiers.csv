@@ -1,0 +1,4 @@
+agent,tier,effort,why
+candidate-reasoner,fast,medium,Applies the rescue pass to selected assigned rows and scales across every selected package.
+removal-plan-generator,fast,high,Wraps a deterministic script and checks its invariants.
+removal-plan-reviewer,strong,high,Falsifies plans adversarially and checks every removal artifact.

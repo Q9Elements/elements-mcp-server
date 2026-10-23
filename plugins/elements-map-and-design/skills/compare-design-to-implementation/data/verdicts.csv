@@ -1,0 +1,6 @@
+verdict,colour,fill,label,legend,coloured
+supported,green,#9FE2A9,Fully supported,"Green: the org fully supports this step",yes
+partial,yellow,#FFE27A,Partly supported,"Yellow: the org supports part of this step; its note says what is missing",yes
+not-supported,red,#F4A3A3,Not supported,"Red: the org does not support this step; its note says why",yes
+not-assessed,,,Not assessed,"No colour, not assessed: no metadata is linked to the step, so it was not compared",no
+no-org-support,,,Needs no org support,"No colour, needs no org support: the step happens outside Salesforce",no

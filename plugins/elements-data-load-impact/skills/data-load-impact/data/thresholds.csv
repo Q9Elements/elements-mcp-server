@@ -1,0 +1,11 @@
+key,value,unit,used_by,source
+skew_threshold,10000,rows per parent,scripts/impact_report.py,run_data_load_impact server default [SERVER] rules 2.9.0
+poll_interval,30,seconds,steps/03-analyze-impact.md,run_data_load_impact v2 contract [SERVER] retryAfterSeconds
+poll_cap,20,polls,steps/03-analyze-impact.md,Elements method
+bundle_url_life,120,seconds,steps/03-analyze-impact.md,run_data_load_impact MCP v2 production contract [SERVER] tool contract
+depth_bound_default,5,hops,scripts/tool_targets.py,run_data_load_impact production contract [SERVER] tool contract
+targets_per_call,1,target,scripts/tool_targets.py,Elements method
+written_fields_max,200,fields,scripts/tool_targets.py,run_data_load_impact strict schema [SERVER] tool contract
+result_retention,7,days,scripts/stories.py,Salesforce platform limits [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/salesforce-app-limits-cheatsheet/guide/salesforce-app-limits-platform-bulkapi.html
+governor_limit_rehearsal_percent,80,percent of ceiling,scripts/rehearsal_reconcile.py,Playbook decision 26: rehearsal safety threshold
+rehearsal_batch_rows,200,data rows,steps/06-rehearse.md,Playbook decision 34: small local rehearsal batch

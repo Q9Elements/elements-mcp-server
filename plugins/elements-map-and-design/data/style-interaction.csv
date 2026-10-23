@@ -1,0 +1,33 @@
+setting,value,unit,applies_to,rule,evidence
+box_width,200,px,interaction-flow,Width of every card created through manage_diagram; it cannot be changed there,Probe map 18 Oct 2026: every interaction flow card is 200 px wide
+card_height_min,100,px,interaction-flow,The server never makes a card shorter than this,Probe map: a card with a header icon and up to one attribute and no footer is 100 px
+card_height_base,60,px,interaction-flow,Card height is card_height_base plus attribute_row_height per attribute plus footer_height with a footer; at least card_height_min,Probe map: 2/3/4/6/8 attributes give 112/138/164/216/268 px
+attribute_row_height,26,px,interaction-flow,Height the server adds for each attribute; it does not allow for text that wraps,Probe map
+footer_height,70,px,interaction-flow,Height the server adds for a footer of any length,"Probe map: footer of 20, 60 and 120 characters all add 70 px"
+editor_growth_allowance,40,px,interaction-flow,"Extra space kept between rows because the editor may grow a card whose title, attributes or footer wrap; it never shrinks","Palette cards made in the editor are 210-256 px with three attributes, where the server would make 208"
+box_height_base,100,px,interaction-flow,Not used for cards (card_height_* applies); kept so the shared layout engine loads,
+resource_row_height,0,px,interaction-flow,Not used for cards: the header icon does not change the height,Probe map
+col_gap,200,px,interaction-flow,Horizontal space between neighbouring cards in a row; it must fit the label of the line between them,Process maps use 180 px for 150 px boxes; interaction labels name objects and fields and run longer
+row_gap,160,px,interaction-flow,Vertical space from the bottom of the tallest card in a row to the top of the next row; it holds loop-back lines and labels and the editor growth allowance,row_gap of process maps (140 px) plus room for cards that grow
+row_align,middle,,interaction-flow,Cards in a row share their middle because every line attaches at the middle of a side,As for process maps
+top_margin,200,px,interaction-flow,Distance from the top of the canvas to the top of the first row,As for process maps
+band_gap,220,px,interaction-flow,Vertical space between bands when a long main path wraps,row_gap plus room for the wrap line
+max_columns,5,cards,interaction-flow,Cards on one row before the main path wraps to the next row,5 x 400 px is about the width of 6 process boxes
+max_boxes_per_level,12,cards,interaction-flow,Cards on one level before the drawing warns; loop bodies always go into a drill-down,Interaction flow support article: keep flows concise and use drill-downs
+max_decision_outcomes,3,lines,interaction-flow,Outcomes of one card before the drawing warns that a fourth shares a side,data/line-sides.csv L06
+max_attributes_shown,6,attributes,interaction-flow,Most attributes written on one card; the rest are summed up in a last attribute,Keeps a card under about 220 px tall
+attribute_max_chars,60,characters,interaction-flow,Longest attribute title written; longer ones are cut with an ellipsis and the full text goes into the attribute's description,Two lines on a 200 px card
+footer_max_chars,250,characters,interaction-flow,Longest footer written; longer summaries are cut at a sentence or word,About six lines on a 200 px card
+free_end_length,240,px,interaction-flow,Length of a start or end line leaving or entering a left or right side,As for process maps
+free_end_length_vertical,120,px,interaction-flow,Length of a start or end line leaving or entering a top or bottom side,As for process maps
+free_end_clearance,260,px,interaction-flow,Space kept clear left of a first card and right of a last card for start and end lines,As for process maps
+server_label_wrap,20,characters,interaction-flow,The server wraps every line label at about this many characters and centres it on its line,Probe maps
+label_max_chars,100,characters,interaction-flow,Longest line label,As for process maps
+end_label_max_chars,40,characters,interaction-flow,House label limit for start and end lines whose returned stubs can be short,As for process maps
+label_char_width,6.2,px,interaction-flow,Approximate width of one label character,As for process maps
+max_resources_shown,1,resources,interaction-flow,A card shows one header icon,
+entity_fill,#DCEBFA,hex colour,interaction-flow,Fill of an object or platform event card on the chain level (a hub several automations meet at),Commission chain map in WG3 (hand-made)
+entity_border,#2A4D8D,hex colour,interaction-flow,Border of an object or platform event card on the chain level,Commission chain map in WG3 (hand-made)
+canvas_blank_width,2000,px,interaction-flow,Width of the canvas manage_diagram accepts positions in on a blank level (from x = 0),Probe maps
+canvas_blank_height,1200,px,interaction-flow,Height of the canvas on a blank level (from y = 0),Probe maps
+canvas_margin_factor,0.5,fraction,interaction-flow,Once a level has content the canvas is the content's bounding box plus this fraction of its width and height on each side,Probe maps

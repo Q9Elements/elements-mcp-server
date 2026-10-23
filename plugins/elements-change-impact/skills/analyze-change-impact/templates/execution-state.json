@@ -1,0 +1,26 @@
+{
+  "engagement": {"name": null, "started": null, "playbook_version": "1.0.1"},
+  "current_state": "change-requested",
+  "current_step": "steps/01-understand-change.md",
+  "open_items": [],
+  "decisions_log": [],
+  "blocked": {"reason": null, "class": null, "entered_from": null, "entered_step": null, "retried": false},
+  "incomplete": null,
+  "change_request": {
+    "sentence": null,
+    "answers": [],
+    "plan_despite_findings": false,
+    "space": {"id": null, "name": null, "how": null},
+    "model": {"id": null, "name": null, "how": null, "last_sync": null, "latest_sync_failed": false},
+    "kind": null,
+    "action": null,
+    "targets": [],
+    "intent": {"object": null, "qualifier": null, "write_targets": [], "events": [], "effects": [], "capabilities": [], "mechanism_hint": null},
+    "unresolved": []
+  },
+  "option_rounds": [],
+  "change_set": {"elements": []},
+  "reads": {},
+  "analysis": {"dependents_digest": null, "units_file": null, "delete_order": null, "ooe_files": [], "fire_chain_digest": null, "fire_chain_partial": null, "material_findings": [], "counts": {}},
+  "delivery": {"story_plan": null, "backlog_json": null, "backlog_md": null, "members": null, "impact_report_json": null, "impact_report_html": null, "story_counts": {}, "flag_notes": []}
+}

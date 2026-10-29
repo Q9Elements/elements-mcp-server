@@ -1,0 +1,8 @@
+rule,condition,story_kind,evaluated_by
+Q-01,global class or @NamespaceAccessible,needs-rewrite,reviewer
+Q-02,@RestResource or webservice root,needs-rewrite,reviewer
+Q-03,interface or abstract class or implements Callable,needs-rewrite,reviewer
+Q-04,Named in work/triage/string-holders.csv by a non-test holder outside the confirmed set,needs-rewrite,planner
+Q-05,guest profile grants class access,needs-rewrite,reviewer
+Q-06,incoming edge from a class or trigger outside the confirmed set or from an unresolved Apex endpoint,precursor-rewrite,planner
+Q-07,implements UninstallHandler,needs-rewrite,reviewer

@@ -1,0 +1,8 @@
+end,shape,level_file_name,many,min,meaning
+zero-or-one,er_zero_to_one,ERzeroToOne,no,0,"At most one record at this end, and it may be missing: a lookup that can be blank"
+exactly-one,er_mand_one,ERmandOne,no,1,"Exactly one record at this end: a master-detail parent, or a required lookup"
+one,er_one,ERone,no,,"One record at this end, without saying whether it may be missing"
+zero-or-many,er_zero_to_many,ERzeroToMany,yes,0,"Any number of records at this end, including none: the usual child end"
+one-or-many,er_one_to_many,ERoneToMany,yes,1,"At least one record at this end"
+many,er_many,ERmany,yes,,"Many records at this end, without saying whether there must be one"
+none,none,None,,,"No symbol: a plain line end"

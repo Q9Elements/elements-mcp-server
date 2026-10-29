@@ -1,0 +1,42 @@
+{
+  "engagement": {
+    "name": null,
+    "started": null,
+    "playbook_version": "0.1.0"
+  },
+  "slots": {
+    "space_id": null,
+    "map_id": null,
+    "map_name": null,
+    "map_url": null,
+    "scope": null,
+    "ref_model_id": null,
+    "ref_model_name": null,
+    "can_edit": null
+  },
+  "current_state": "not-started",
+  "current_step": "steps/01-scope-the-run.md",
+  "match": {
+    "round": 1
+  },
+  "checks": {
+    "match_offer_answer": null,
+    "links_approved_on": null,
+    "colouring_answer": null,
+    "colouring_approved_on": null,
+    "reset_on": null
+  },
+  "deliverables": {
+    "report": null,
+    "boxes_compared": null,
+    "levels_coloured": [],
+    "outcome": null
+  },
+  "open_items": [],
+  "decisions_log": [],
+  "blocked": {
+    "reason": null,
+    "owner": null,
+    "entered_from": null
+  }
+}

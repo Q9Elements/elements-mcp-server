@@ -1,0 +1,10 @@
+condition,status,reason_text
+same phase and shared written field,blocking,both set the same field on the triggering object in the same save phase
+same phase and one writes a field the other reads,blocking,one sets a field the other reads in the same save phase
+same phase and both write triggering record on different fields,manageable,both update the triggering record in the same phase; their order is not guaranteed
+different phases and both write triggering record,manageable,the same record is written in different phases
+different phases and one writes a field the other reads,manageable,one sets a field the other reads in a different save phase
+two Apex triggers with overlapping events,manageable,Salesforce does not guarantee peer trigger order
+Workflow Rule or Process Builder peer,manageable,legacy automation runs on the same object
+phase unknown or peer field facts unavailable,insufficient evidence,the phase or field facts needed for an order check are unavailable
+known field facts share no written or read field,no shared field found,no shared field in the connections read; reads through subflows are not seen

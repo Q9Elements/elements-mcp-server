@@ -1,0 +1,3054 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "Business Process (Manufacturing Cloud)",
+    "description": "Golden reference for the map-process-from-data-model skill: a hand-made Manufacturing Cloud exemplar map, transcribed level by level on 18 October 2026. Box text, roles, objects and the labels of lines inside a level are verbatim, defects included (see gaps). Each child level's start and end labels are set to its box's lines on the top level, so the drill-downs match. Supporting processes on the top level: Manage Fleets of Assets; Create and manage manufacturing programs.",
+    "author": "golden fixture, transcribed from a hand-made exemplar map",
+    "sources": [
+      {
+        "kind": "diagram",
+        "ref": "6acf8cd5eee7bbb95ed909a2",
+        "note": "Hand-made exemplar map 'Business Process (Manufacturing Cloud)', 11 levels"
+      },
+      {
+        "kind": "document",
+        "ref": "https://developer.salesforce.com/docs/platform/data-models/guide/manufacturing-cloud-category.html",
+        "note": "Data Model Gallery, Manufacturing category: one guide per capability"
+      },
+      {
+        "kind": "document",
+        "ref": "https://developer.salesforce.com/docs/atlas.en-us.mfg_api_devguide.meta/mfg_api_devguide/mfg_api_overview.htm",
+        "note": "Manufacturing Cloud developer guide: standard objects and their API names"
+      }
+    ]
+  },
+  "roles": [
+    {
+      "id": "role.product-manager",
+      "name": "Product Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.warranty-manager",
+      "name": "Warranty manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.sales-manager",
+      "name": "Sales Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.sales-operations",
+      "name": "Sales Operations",
+      "kind": "human"
+    },
+    {
+      "id": "role.inventory-manager",
+      "name": "Inventory manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.customer-engagement-manager",
+      "name": "Customer engagement manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.fleet-manager",
+      "name": "Fleet manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.program-manager",
+      "name": "Program manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.pricing-analyst",
+      "name": "Pricing Analyst",
+      "kind": "human"
+    },
+    {
+      "id": "role.brand-manager",
+      "name": "Brand Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.product-engineer",
+      "name": "Product Engineer",
+      "kind": "human"
+    },
+    {
+      "id": "role.asset-manager",
+      "name": "Asset Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.maintenance-coordinator",
+      "name": "Maintenance Coordinator",
+      "kind": "human"
+    },
+    {
+      "id": "role.crm-specialist",
+      "name": "CRM Specialist",
+      "kind": "human"
+    },
+    {
+      "id": "role.database-administrator",
+      "name": "Database Administrator",
+      "kind": "human"
+    },
+    {
+      "id": "role.legal-advisor",
+      "name": "Legal Advisor",
+      "kind": "human"
+    },
+    {
+      "id": "role.service-technician",
+      "name": "Service Technician",
+      "kind": "human"
+    },
+    {
+      "id": "role.hr-manager",
+      "name": "HR Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.operations-manager",
+      "name": "Operations Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.customer-representative",
+      "name": "Customer representative",
+      "kind": "human"
+    },
+    {
+      "id": "role.customer-service-representative",
+      "name": "Customer Service Representative",
+      "kind": "human"
+    },
+    {
+      "id": "role.sales-analyst",
+      "name": "Sales Analyst",
+      "kind": "human"
+    },
+    {
+      "id": "role.account-manager",
+      "name": "Account manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.data-analyst",
+      "name": "Data Analyst",
+      "kind": "human"
+    },
+    {
+      "id": "role.sales-planner",
+      "name": "Sales Planner",
+      "kind": "human"
+    },
+    {
+      "id": "role.data-scientist",
+      "name": "Data Scientist",
+      "kind": "human"
+    },
+    {
+      "id": "role.business-analyst",
+      "name": "Business Analyst",
+      "kind": "human"
+    },
+    {
+      "id": "role.quality-assurance",
+      "name": "Quality Assurance",
+      "kind": "human"
+    },
+    {
+      "id": "role.inventory-specialist",
+      "name": "Inventory Specialist",
+      "kind": "human"
+    },
+    {
+      "id": "role.sales-department",
+      "name": "Sales Department",
+      "kind": "human"
+    },
+    {
+      "id": "role.logistics-coordinator",
+      "name": "Logistics Coordinator",
+      "kind": "human"
+    },
+    {
+      "id": "role.shipping-manager",
+      "name": "Shipping Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.warehouse-staff",
+      "name": "Warehouse Staff",
+      "kind": "human"
+    },
+    {
+      "id": "role.customer-service",
+      "name": "Customer Service",
+      "kind": "human"
+    },
+    {
+      "id": "role.customer",
+      "name": "Customer",
+      "kind": "human"
+    },
+    {
+      "id": "role.claims-processor",
+      "name": "Claims Processor",
+      "kind": "human"
+    },
+    {
+      "id": "role.warranty-specialist",
+      "name": "Warranty Specialist",
+      "kind": "human"
+    },
+    {
+      "id": "role.financial-analyst",
+      "name": "Financial Analyst",
+      "kind": "human"
+    },
+    {
+      "id": "role.claims-manager",
+      "name": "Claims Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.process-manager",
+      "name": "Process Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.scheduler",
+      "name": "Scheduler",
+      "kind": "human"
+    },
+    {
+      "id": "role.coordinator",
+      "name": "Coordinator",
+      "kind": "human"
+    },
+    {
+      "id": "role.task-manager",
+      "name": "Task Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.record-keeper",
+      "name": "Record Keeper",
+      "kind": "human"
+    },
+    {
+      "id": "role.asset-coordinator",
+      "name": "Asset Coordinator",
+      "kind": "human"
+    },
+    {
+      "id": "role.maintenance-team",
+      "name": "Maintenance Team",
+      "kind": "human"
+    },
+    {
+      "id": "role.template-designer",
+      "name": "Template Designer",
+      "kind": "human"
+    },
+    {
+      "id": "role.program-analyst",
+      "name": "Program Analyst",
+      "kind": "human"
+    },
+    {
+      "id": "role.forecast-analyst",
+      "name": "Forecast Analyst",
+      "kind": "human"
+    },
+    {
+      "id": "role.materials-manager",
+      "name": "Materials Manager",
+      "kind": "human"
+    },
+    {
+      "id": "role.account-forecaster",
+      "name": "Account Forecaster",
+      "kind": "human"
+    }
+  ],
+  "activities": [
+    {
+      "id": "product-assets",
+      "name": "Create Product and Asset Information",
+      "roles": [
+        {
+          "role": "role.product-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 11
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.mfg_revenue_management_features.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "warranty-terms",
+      "name": "Define and manage warranty terms and service standards for products",
+      "roles": [
+        {
+          "role": "role.warranty-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 16
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.mfg_warranties_parent.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "sales-agreements",
+      "name": "Establish and maintain sales agreements with customers",
+      "roles": [
+        {
+          "role": "role.sales-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 12
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.sa_admin_parent_concept.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "account-manager-targets",
+      "name": "Set and track sales goals for account managers based on sales agreements",
+      "roles": [
+        {
+          "role": "role.sales-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 13
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.admin_account_manager_targets_parent.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "advanced-account-forecast",
+      "name": "Predict future sales",
+      "roles": [
+        {
+          "role": "role.sales-operations"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 14
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.mfg_forecast_concept.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "inventory",
+      "name": "Track and manage inventory levels, including shipments and stock movements.",
+      "roles": [
+        {
+          "role": "role.inventory-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 15
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.mfg_inventory_parent.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "warranty-claims",
+      "name": "Submit, process, and manage warranty claims from customers",
+      "roles": [
+        {
+          "role": "role.warranty-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 17
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.mfg_warranties_claims_information.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "visits",
+      "name": "Track and organize customer and partner engagements",
+      "roles": [
+        {
+          "role": "role.customer-engagement-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 20
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.mfg_pvm_container.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "fleets",
+      "name": "Manage Fleets of Assets",
+      "roles": [
+        {
+          "role": "role.fleet-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 18
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.mfg_fleet_parent.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "manufacturing-programs",
+      "name": "Create and manage manufacturing programs, including templates, components, and forecasts",
+      "roles": [
+        {
+          "role": "role.program-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cd6eee7bbb95ed909a5",
+        "key": 19
+      },
+      "attachments": [
+        {
+          "type": "link",
+          "title": "How to? (Salesforce help)",
+          "url": "https://help.salesforce.com/s/articleView?id=sf.pbb_parent.htm&type=5"
+        }
+      ]
+    },
+    {
+      "id": "product-assets.1",
+      "name": "Define Product Portfolio",
+      "parent": "product-assets",
+      "roles": [
+        {
+          "role": "role.product-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c58d",
+        "key": 11
+      },
+      "uses": [
+        "obj.Product2",
+        "obj.ProductCatalog",
+        "obj.ProductCategory"
+      ],
+      "attachments": [
+        {
+          "type": "note",
+          "title": "Objects used",
+          "text": "Objects Used:\nProduct: Stores information about each product, such as model, part type, and commercial value.\nCatalog: Groups products into collections for easier management.\nCategory: Organizes products within catalogs into logical groups and subgroups."
+        }
+      ]
+    },
+    {
+      "id": "product-assets.2",
+      "name": "Set Pricing Information",
+      "parent": "product-assets",
+      "roles": [
+        {
+          "role": "role.pricing-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c58d",
+        "key": 12
+      },
+      "uses": [
+        "obj.PricebookEntry",
+        "obj.Pricebook2"
+      ]
+    },
+    {
+      "id": "product-assets.3",
+      "name": "Define Business Brand",
+      "parent": "product-assets",
+      "roles": [
+        {
+          "role": "role.brand-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c58d",
+        "key": 13
+      },
+      "uses": [
+        "obj.BusinessBrand"
+      ]
+    },
+    {
+      "id": "product-assets.4",
+      "name": "Map Product Components",
+      "parent": "product-assets",
+      "roles": [
+        {
+          "role": "role.product-engineer"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c58d",
+        "key": 14
+      },
+      "uses": [
+        "obj.ProductRelatedMaterial"
+      ]
+    },
+    {
+      "id": "product-assets.5",
+      "name": "Track Physical Assets",
+      "parent": "product-assets",
+      "roles": [
+        {
+          "role": "role.asset-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c58d",
+        "key": 15
+      },
+      "uses": [
+        "obj.Asset"
+      ]
+    },
+    {
+      "id": "product-assets.6",
+      "name": "Manage Asset Lifecycle",
+      "parent": "product-assets",
+      "roles": [
+        {
+          "role": "role.maintenance-coordinator"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c58d",
+        "key": 16
+      },
+      "uses": [
+        "obj.AssetMilestone"
+      ]
+    },
+    {
+      "id": "product-assets.7",
+      "name": "Associate Stakeholder Accounts and Contacts",
+      "parent": "product-assets",
+      "roles": [
+        {
+          "role": "role.crm-specialist"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c58d",
+        "key": 17
+      },
+      "uses": [
+        "obj.AssetAccountParticipant",
+        "obj.AssetContactParticipant"
+      ]
+    },
+    {
+      "id": "warranty-terms.1",
+      "name": "Define Warranty Terms",
+      "parent": "warranty-terms",
+      "roles": [
+        {
+          "role": "role.product-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c6e6",
+        "key": 11
+      },
+      "uses": [
+        "obj.WarrantyTerm"
+      ]
+    },
+    {
+      "id": "warranty-terms.2",
+      "name": "Associate Warranty Terms with Products",
+      "parent": "warranty-terms",
+      "roles": [
+        {
+          "role": "role.product-manager"
+        },
+        {
+          "role": "role.database-administrator"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c6e6",
+        "key": 12
+      },
+      "uses": [
+        "obj.ProductWarrantyTerm",
+        "obj.Product2"
+      ]
+    },
+    {
+      "id": "warranty-terms.3",
+      "name": "Define Warranty Coverage and Exclusions",
+      "parent": "warranty-terms",
+      "roles": [
+        {
+          "role": "role.product-manager"
+        },
+        {
+          "role": "role.legal-advisor"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c6e6",
+        "key": 13
+      },
+      "uses": [
+        "obj.WarrantyTermCoverage",
+        "obj.CodeSet"
+      ]
+    },
+    {
+      "id": "warranty-terms.4",
+      "name": "Define Product Fault Codes",
+      "parent": "warranty-terms",
+      "roles": [
+        {
+          "role": "role.service-technician"
+        },
+        {
+          "role": "role.product-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c6e6",
+        "key": 14
+      },
+      "uses": [
+        "obj.ProductFaultCode",
+        "obj.Product2"
+      ]
+    },
+    {
+      "id": "warranty-terms.5",
+      "name": "Define Product Labor Codes",
+      "parent": "warranty-terms",
+      "roles": [
+        {
+          "role": "role.service-technician"
+        },
+        {
+          "role": "role.hr-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c6e6",
+        "key": 15
+      },
+      "uses": [
+        "obj.ProductLaborCode"
+      ]
+    },
+    {
+      "id": "warranty-terms.6",
+      "name": "Establish Codeset Relationships",
+      "parent": "warranty-terms",
+      "roles": [
+        {
+          "role": "role.database-administrator"
+        },
+        {
+          "role": "role.product-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c6e6",
+        "key": 16
+      },
+      "uses": [
+        "obj.CodesetRelationship"
+      ]
+    },
+    {
+      "id": "warranty-terms.7",
+      "name": "Associate Warranty Terms with Assets",
+      "parent": "warranty-terms",
+      "roles": [
+        {
+          "role": "role.asset-manager"
+        },
+        {
+          "role": "role.product-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c6e6",
+        "key": 17
+      },
+      "uses": [
+        "obj.AssetWarranty",
+        "obj.Asset"
+      ]
+    },
+    {
+      "id": "sales-agreements.1",
+      "name": "Create Sales Agreement",
+      "parent": "sales-agreements",
+      "roles": [
+        {
+          "role": "role.sales-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c5d0",
+        "key": 11
+      },
+      "uses": [
+        "obj.SalesAgreement"
+      ]
+    },
+    {
+      "id": "sales-agreements.2",
+      "name": "Define Sales Agreement Products",
+      "parent": "sales-agreements",
+      "roles": [
+        {
+          "role": "role.sales-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c5d0",
+        "key": 12
+      },
+      "uses": [
+        "obj.SalesAgreementProduct",
+        "obj.SalesAgreeProductAttribute"
+      ]
+    },
+    {
+      "id": "sales-agreements.3",
+      "name": "Set Sales Agreement Product Schedule",
+      "parent": "sales-agreements",
+      "roles": [
+        {
+          "role": "role.operations-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c5d0",
+        "key": 13
+      },
+      "uses": [
+        "obj.SalesAgreementProductSchedule"
+      ]
+    },
+    {
+      "id": "sales-agreements.4",
+      "name": "Review sales agreement with customer",
+      "parent": "sales-agreements",
+      "roles": [
+        {
+          "role": "role.sales-manager"
+        },
+        {
+          "role": "role.customer-representative"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c5d0",
+        "key": 31
+      },
+      "uses": [
+        "obj.SalesAgreement"
+      ]
+    },
+    {
+      "id": "sales-agreements.5",
+      "name": "Create Contract",
+      "parent": "sales-agreements",
+      "roles": [
+        {
+          "role": "role.legal-advisor"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c5d0",
+        "key": 14
+      },
+      "uses": [
+        "obj.Contract",
+        "obj.SalesContractLine"
+      ]
+    },
+    {
+      "id": "sales-agreements.6",
+      "name": "Process Customer Orders",
+      "parent": "sales-agreements",
+      "roles": [
+        {
+          "role": "role.customer-service-representative"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c5d0",
+        "key": 15
+      },
+      "uses": [
+        "obj.Order",
+        "obj.OrderItem"
+      ]
+    },
+    {
+      "id": "sales-agreements.7",
+      "name": "Review contract with customer",
+      "parent": "sales-agreements",
+      "roles": [
+        {
+          "role": "role.legal-advisor"
+        },
+        {
+          "role": "role.customer-representative"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cefcf05c9a74579c5d0",
+        "key": 35
+      },
+      "uses": [
+        "obj.Contract"
+      ]
+    },
+    {
+      "id": "account-manager-targets.1",
+      "name": "Create Account Manager Target",
+      "parent": "account-manager-targets",
+      "roles": [
+        {
+          "role": "role.sales-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c614",
+        "key": 11
+      },
+      "uses": [
+        "obj.AcctMgrTarget"
+      ]
+    },
+    {
+      "id": "account-manager-targets.2",
+      "name": "Distribute Targets to Accounts and Products",
+      "parent": "account-manager-targets",
+      "roles": [
+        {
+          "role": "role.sales-operations"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c614",
+        "key": 12
+      },
+      "uses": [
+        "obj.AcctMgrTargetDstr",
+        "obj.Account",
+        "obj.Product2",
+        "obj.Pricebook2",
+        "obj.PricebookEntry"
+      ]
+    },
+    {
+      "id": "account-manager-targets.3",
+      "name": "Set Periodic Targets",
+      "parent": "account-manager-targets",
+      "roles": [
+        {
+          "role": "role.sales-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c614",
+        "key": 13
+      },
+      "uses": [
+        "obj.AcctMgrPeriodicTargetDstr"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.1",
+      "name": "Configure Advanced Account Forecast Set",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.sales-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 11
+      },
+      "uses": [
+        "obj.AdvAccountForecastSet"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.2",
+      "name": "Define Context for Forecasts",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.sales-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 12
+      },
+      "uses": [
+        "obj.AccountForecast",
+        "obj.AdvAcctForecastSetUse"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.3",
+      "name": "Associate Partners with Forecast Set",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.account-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 13
+      },
+      "uses": [
+        "obj.Account",
+        "obj.AdvAcctForecastSetPartner"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.4",
+      "name": "Define Forecast Dimensions and Sources",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.data-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 14
+      },
+      "uses": [
+        "obj.AccountProductForecast",
+        "obj.AccountProductPeriodForecast",
+        "obj.AdvAcctForecastDimension",
+        "obj.AdvAcctForecastDimSource"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.5",
+      "name": "Set Forecast Periods",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.sales-planner"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 15
+      },
+      "uses": [
+        "obj.AdvAccountForecastPeriod",
+        "obj.AdvAcctForecastPeriodGroup",
+        "obj.Period"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.6",
+      "name": "Define Forecast Measures",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.sales-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 16
+      },
+      "uses": [
+        "obj.AdvAcctForecastMeasureDef"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.7",
+      "name": "Calculate and Generate Forecasts",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.data-scientist"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 17
+      },
+      "uses": [
+        "obj.AccountForecastPeriodMetric",
+        "obj.AdvAccountForecastFact",
+        "obj.advanced-account-forecast-formula"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.8",
+      "name": "Adjust Forecasts as Necessary",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.sales-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 18
+      },
+      "uses": [
+        "obj.AccountForecastAdjustment",
+        "obj.AdvAcctForecastFactAdj",
+        "obj.AdvAcctForecastAdjPeriod"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.9",
+      "name": "Display and Analyze Forecast Data",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.business-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 19
+      },
+      "uses": [
+        "obj.AdvAcctFrcstDisplayGroup",
+        "obj.AdvAcctFrcstDplyGroupItem"
+      ]
+    },
+    {
+      "id": "advanced-account-forecast.10",
+      "name": "Monitor Forecast Accuracy and Outcomes",
+      "parent": "advanced-account-forecast",
+      "roles": [
+        {
+          "role": "role.quality-assurance"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c659",
+        "key": 20
+      },
+      "uses": [
+        "obj.AdvAccountForecastFact"
+      ]
+    },
+    {
+      "id": "inventory.1",
+      "name": "Record Product Items",
+      "parent": "inventory",
+      "roles": [
+        {
+          "role": "role.inventory-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c69f",
+        "key": 11
+      },
+      "uses": [
+        "obj.Product2",
+        "obj.ProductItem"
+      ]
+    },
+    {
+      "id": "inventory.2",
+      "name": "Track Item Transactions",
+      "parent": "inventory",
+      "roles": [
+        {
+          "role": "role.inventory-specialist"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c69f",
+        "key": 12
+      },
+      "uses": [
+        "obj.ProductItemTransaction"
+      ]
+    },
+    {
+      "id": "inventory.3",
+      "name": "Process Product Requests",
+      "parent": "inventory",
+      "roles": [
+        {
+          "role": "role.sales-department"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c69f",
+        "key": 13
+      },
+      "uses": [
+        "obj.ProductRequest",
+        "obj.ProductRequestLineItem"
+      ]
+    },
+    {
+      "id": "inventory.4",
+      "name": "Manage Product Transfers",
+      "parent": "inventory",
+      "roles": [
+        {
+          "role": "role.logistics-coordinator"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c69f",
+        "key": 14
+      },
+      "uses": [
+        "obj.ProductTransfer",
+        "obj.ProductTransferState"
+      ]
+    },
+    {
+      "id": "inventory.5",
+      "name": "Handle Shipments",
+      "parent": "inventory",
+      "roles": [
+        {
+          "role": "role.shipping-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c69f",
+        "key": 15
+      },
+      "uses": [
+        "obj.Shipment",
+        "obj.ShipmentItem"
+      ]
+    },
+    {
+      "id": "inventory.6",
+      "name": "Track Consumption",
+      "parent": "inventory",
+      "roles": [
+        {
+          "role": "role.warehouse-staff"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c69f",
+        "key": 16
+      },
+      "uses": [
+        "obj.ProductRequired",
+        "obj.ProductConsumed",
+        "obj.ProductConsumedState"
+      ]
+    },
+    {
+      "id": "inventory.7",
+      "name": "Process Return Orders",
+      "parent": "inventory",
+      "roles": [
+        {
+          "role": "role.customer-service"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c69f",
+        "key": 17
+      },
+      "uses": [
+        "obj.ReturnOrder",
+        "obj.ReturnOrderLineItem"
+      ]
+    },
+    {
+      "id": "inventory.8",
+      "name": "Track Serialized Products",
+      "parent": "inventory",
+      "roles": [
+        {
+          "role": "role.quality-assurance"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c69f",
+        "key": 18
+      },
+      "uses": [
+        "obj.SerializedProduct",
+        "obj.SerializedProductTransaction"
+      ]
+    },
+    {
+      "id": "warranty-claims.1",
+      "name": "Submit Warranty Claim",
+      "parent": "warranty-claims",
+      "roles": [
+        {
+          "role": "role.customer"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c72e",
+        "key": 11
+      },
+      "uses": [
+        "obj.Claim"
+      ]
+    },
+    {
+      "id": "warranty-claims.2",
+      "name": "Record Claim Items",
+      "parent": "warranty-claims",
+      "roles": [
+        {
+          "role": "role.claims-processor"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c72e",
+        "key": 12
+      },
+      "uses": [
+        "obj.ClaimItem"
+      ]
+    },
+    {
+      "id": "warranty-claims.3",
+      "name": "Define Claim Coverage",
+      "parent": "warranty-claims",
+      "roles": [
+        {
+          "role": "role.warranty-specialist"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c72e",
+        "key": 13
+      },
+      "uses": [
+        "obj.ClaimCoverage"
+      ]
+    },
+    {
+      "id": "warranty-claims.4",
+      "name": "Detail Claim Payments",
+      "parent": "warranty-claims",
+      "roles": [
+        {
+          "role": "role.financial-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c72e",
+        "key": 14
+      },
+      "uses": [
+        "obj.ClaimCoveragePaymentDetail"
+      ]
+    },
+    {
+      "id": "warranty-claims.5",
+      "name": "Identify Claim Participants",
+      "parent": "warranty-claims",
+      "roles": [
+        {
+          "role": "role.claims-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c72e",
+        "key": 15
+      },
+      "uses": [
+        "obj.ClaimParticipant"
+      ]
+    },
+    {
+      "id": "warranty-claims.6",
+      "name": "Link Claim to Accounts and Assets",
+      "parent": "warranty-claims",
+      "roles": [
+        {
+          "role": "role.database-administrator"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c72e",
+        "key": 16
+      },
+      "uses": [
+        "obj.Account",
+        "obj.Asset",
+        "obj.Claim"
+      ]
+    },
+    {
+      "id": "warranty-claims.7",
+      "name": "Monitor and Resolve Claim",
+      "parent": "warranty-claims",
+      "roles": [
+        {
+          "role": "role.customer-service"
+        },
+        {
+          "role": "role.claims-processor"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf0cf05c9a74579c72e",
+        "key": 17
+      },
+      "uses": [
+        "obj.Claim"
+      ]
+    },
+    {
+      "id": "visits.1",
+      "name": "Create Action Plan Template",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.process-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 11
+      },
+      "uses": [
+        "obj.ActionPlanTemplate"
+      ]
+    },
+    {
+      "id": "visits.2",
+      "name": "Plan and Schedule Visits",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.scheduler"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 12
+      },
+      "uses": [
+        "obj.Visit"
+      ]
+    },
+    {
+      "id": "visits.3",
+      "name": "Assign Action Plans to Visits",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.coordinator"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 13
+      },
+      "uses": [
+        "obj.ActionPlan",
+        "obj.ActionPlanTemplate"
+      ]
+    },
+    {
+      "id": "visits.4",
+      "name": "Assign and Track Generic Visit Tasks",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.task-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 14
+      },
+      "uses": [
+        "obj.GenericVisitTask"
+      ]
+    },
+    {
+      "id": "visits.5",
+      "name": "Define and Track Task Contexts",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.data-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 15
+      },
+      "uses": [
+        "obj.GenericVisitTaskContext",
+        "obj.GnrcVstTaskContextRelation"
+      ]
+    },
+    {
+      "id": "visits.6",
+      "name": "Measure and Record Assessment Indicators",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.quality-assurance"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 16
+      },
+      "uses": [
+        "obj.AssessmentIndicatorDefinition",
+        "obj.GnrcVstKeyPerformanceInd"
+      ]
+    },
+    {
+      "id": "visits.7",
+      "name": "Assign and Track Visitors",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.hr-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 17
+      },
+      "uses": [
+        "obj.Visitor"
+      ]
+    },
+    {
+      "id": "visits.8",
+      "name": "Record Visited Parties",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.record-keeper"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 18
+      },
+      "uses": [
+        "obj.Contact",
+        "obj.VisitedParty"
+      ]
+    },
+    {
+      "id": "visits.9",
+      "name": "Review and Analyze Visit Data",
+      "parent": "visits",
+      "roles": [
+        {
+          "role": "role.data-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c80c",
+        "key": 19
+      },
+      "uses": [
+        "obj.Visit"
+      ]
+    },
+    {
+      "id": "fleets.1",
+      "name": "Create and Define Fleet",
+      "parent": "fleets",
+      "roles": [
+        {
+          "role": "role.fleet-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c777",
+        "key": 11
+      },
+      "uses": [
+        "obj.Fleet"
+      ]
+    },
+    {
+      "id": "fleets.2",
+      "name": "Assign Assets to Fleet",
+      "parent": "fleets",
+      "roles": [
+        {
+          "role": "role.asset-coordinator"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c777",
+        "key": 12
+      },
+      "uses": [
+        "obj.Fleet",
+        "obj.Asset",
+        "obj.FleetAsset"
+      ]
+    },
+    {
+      "id": "fleets.3",
+      "name": "Identify Fleet Participants",
+      "parent": "fleets",
+      "roles": [
+        {
+          "role": "role.operations-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c777",
+        "key": 13
+      },
+      "uses": [
+        "obj.FleetParticipant",
+        "obj.Account",
+        "obj.Contact",
+        "obj.User"
+      ]
+    },
+    {
+      "id": "fleets.4",
+      "name": "Monitor and Maintain Fleet Assets",
+      "parent": "fleets",
+      "roles": [
+        {
+          "role": "role.maintenance-team"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c777",
+        "key": 14
+      },
+      "uses": [
+        "obj.Fleet"
+      ]
+    },
+    {
+      "id": "manufacturing-programs.1",
+      "name": "Define Manufacturing Program",
+      "parent": "manufacturing-programs",
+      "roles": [
+        {
+          "role": "role.program-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c7c1",
+        "key": 11
+      },
+      "uses": [
+        "obj.ManufacturingProgram"
+      ]
+    },
+    {
+      "id": "manufacturing-programs.2",
+      "name": "Create Manufacturing Program Template",
+      "parent": "manufacturing-programs",
+      "roles": [
+        {
+          "role": "role.template-designer"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c7c1",
+        "key": 12
+      },
+      "uses": [
+        "obj.MfgProgramTemplate"
+      ]
+    },
+    {
+      "id": "manufacturing-programs.3",
+      "name": "Define Program Template Items",
+      "parent": "manufacturing-programs",
+      "roles": [
+        {
+          "role": "role.program-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c7c1",
+        "key": 13
+      },
+      "uses": [
+        "obj.MfgProgramTemplateItem"
+      ]
+    },
+    {
+      "id": "manufacturing-programs.4",
+      "name": "Create Manufacturing Program Forecasts",
+      "parent": "manufacturing-programs",
+      "roles": [
+        {
+          "role": "role.forecast-analyst"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c7c1",
+        "key": 14
+      },
+      "uses": [
+        "obj.MfgProgramForecastFact",
+        "obj.MfgProgramVariantFrcstFact",
+        "obj.MfgProgramCpntFrcstFact"
+      ]
+    },
+    {
+      "id": "manufacturing-programs.5",
+      "name": "Manage Product Related Materials",
+      "parent": "manufacturing-programs",
+      "roles": [
+        {
+          "role": "role.materials-manager"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c7c1",
+        "key": 15
+      },
+      "uses": [
+        "obj.ProductRelatedMaterial"
+      ]
+    },
+    {
+      "id": "manufacturing-programs.6",
+      "name": "Generate Advanced Account Forecasts",
+      "parent": "manufacturing-programs",
+      "roles": [
+        {
+          "role": "role.account-forecaster"
+        }
+      ],
+      "diagramRef": {
+        "diagramId": "6acf8cf1cf05c9a74579c7c1",
+        "key": 16
+      }
+    }
+  ],
+  "flows": [
+    {
+      "from": "START",
+      "to": "product-assets",
+      "label": "New product development initiative approved by business stakeholders"
+    },
+    {
+      "from": "product-assets",
+      "to": "warranty-terms",
+      "label": "Accurate and up-to-date product information, enabling efficient production and inventory management"
+    },
+    {
+      "from": "warranty-terms",
+      "to": "sales-agreements",
+      "label": "Clear warranty terms, leading to increased customer trust and satisfaction."
+    },
+    {
+      "from": "START",
+      "to": "sales-agreements",
+      "label": "Opportunity successfully negotiated to proposal stage"
+    },
+    {
+      "from": "sales-agreements",
+      "to": "account-manager-targets",
+      "label": "Clear and enforceable sales terms, leading to satisfied customers and reliable revenue streams"
+    },
+    {
+      "from": "account-manager-targets",
+      "to": "advanced-account-forecast",
+      "label": "Measurable sales goals tied to periodic targets derived from clear sales agreements"
+    },
+    {
+      "from": "advanced-account-forecast",
+      "to": "inventory",
+      "label": "Reliable sales forecasts that guide production and inventory decisions"
+    },
+    {
+      "from": "inventory",
+      "to": "warranty-claims",
+      "label": "Efficient inventory control, minimizing stockouts and overstock situations"
+    },
+    {
+      "from": "warranty-claims",
+      "to": "visits",
+      "label": "Timely resolution of warranty claims, enhancing customer satisfaction"
+    },
+    {
+      "from": "visits",
+      "to": "product-assets",
+      "label": "Improved customer and partner relationships, leading to increased loyalty and business opportunities"
+    },
+    {
+      "from": "START",
+      "to": "fleets",
+      "label": "Production / logistics needs for smooth operation of the core manufacturing process"
+    },
+    {
+      "from": "fleets",
+      "to": "END",
+      "label": "Well-maintained fleet assets, leading to operational efficiency and cost savings"
+    },
+    {
+      "from": "START",
+      "to": "manufacturing-programs",
+      "label": "Sales and operations planning identifies the need for specific manufacturing programs"
+    },
+    {
+      "from": "manufacturing-programs",
+      "to": "END",
+      "label": "Successful execution of manufacturing programs, leading to efficient production and satisfied customers"
+    },
+    {
+      "from": "START",
+      "to": "product-assets.1",
+      "label": "New product development initiative approved by business stakeholders"
+    },
+    {
+      "from": "START",
+      "to": "product-assets.1",
+      "label": "Improved customer and partner relationships, leading to increased loyalty and business opportunities"
+    },
+    {
+      "from": "product-assets.1",
+      "to": "product-assets.2",
+      "label": "Comprehensive catalog of all products available for sale"
+    },
+    {
+      "from": "product-assets.2",
+      "to": "product-assets.3",
+      "label": "A comprehensive and accessible list of product prices that can be used for sales transactions"
+    },
+    {
+      "from": "product-assets.3",
+      "to": "product-assets.4",
+      "label": "Products differentiated by usage or market segment, aiding in targeted marketing and sales strategies"
+    },
+    {
+      "from": "product-assets.4",
+      "to": "product-assets.5",
+      "label": "All components required to create a product are accounted for and tracked"
+    },
+    {
+      "from": "product-assets.5",
+      "to": "product-assets.6",
+      "label": "A record of all physical assets with their lifecycle events"
+    },
+    {
+      "from": "product-assets.6",
+      "to": "product-assets.7",
+      "label": "Key events in an asset's lifecycle are tracked and recorded to ensure timely maintenance and servicing"
+    },
+    {
+      "from": "product-assets.7",
+      "to": "END",
+      "label": "Accurate and up-to-date product information, enabling efficient production and inventory management"
+    },
+    {
+      "from": "START",
+      "to": "warranty-terms.1",
+      "label": "Accurate and up-to-date product information, enabling efficient production and inventory management"
+    },
+    {
+      "from": "warranty-terms.1",
+      "to": "warranty-terms.2",
+      "label": "Warranty terms are created, detailing the labor, parts, expenses, and exchange options available to rectify issues with products"
+    },
+    {
+      "from": "warranty-terms.2",
+      "to": "warranty-terms.3",
+      "label": "Each product has clearly defined warranty terms that are easily accessible"
+    },
+    {
+      "from": "warranty-terms.3",
+      "to": "warranty-terms.4",
+      "label": "Detailed and specific warranty coverage that addresses various scenarios and conditions"
+    },
+    {
+      "from": "warranty-terms.4",
+      "to": "warranty-terms.5",
+      "label": "Well-defined fault codes associated with products/ product families for effective identification"
+    },
+    {
+      "from": "warranty-terms.5",
+      "to": "warranty-terms.6",
+      "label": "Labor costs and times are standardized for warranty and repair processes"
+    },
+    {
+      "from": "warranty-terms.6",
+      "to": "warranty-terms.7",
+      "label": "All relevant codes are interconnected, enabling comprehensive and accurate warranty and repair documentation"
+    },
+    {
+      "from": "warranty-terms.7",
+      "to": "END",
+      "label": "Clear warranty terms, leading to increased customer trust and satisfaction."
+    },
+    {
+      "from": "START",
+      "to": "sales-agreements.1",
+      "label": "Clear warranty terms, leading to increased customer trust and satisfaction."
+    },
+    {
+      "from": "START",
+      "to": "sales-agreements.1",
+      "label": "Opportunity successfully negotiated to proposal stage"
+    },
+    {
+      "from": "sales-agreements.1",
+      "to": "sales-agreements.2",
+      "label": "A clear and enforceable long-term agreement between the buyer and the seller, specifying negotiated prices and volumes"
+    },
+    {
+      "from": "sales-agreements.2",
+      "to": "sales-agreements.3",
+      "label": "A detailed record of the products included in the sales agreement, with all relevant pricing, attributes and quantity information"
+    },
+    {
+      "from": "sales-agreements.3",
+      "to": "sales-agreements.4",
+      "label": "A schedule is defined for each product or category in the sales agreement, detailing the quantity, revenue, and pricing for specific periods"
+    },
+    {
+      "from": "sales-agreements.4",
+      "to": "sales-agreements.5",
+      "label": "Details of the sales agreement agreed by customer representative"
+    },
+    {
+      "from": "sales-agreements.4",
+      "to": "sales-agreements.2"
+    },
+    {
+      "from": "sales-agreements.4",
+      "to": "sales-agreements.3",
+      "label": "Details not accepted by customer representative"
+    },
+    {
+      "from": "sales-agreements.5",
+      "to": "sales-agreements.7",
+      "label": "A contract is created detailing covered product information, including price, quantity, and components covered, as well as legal obligations to customer and supplier"
+    },
+    {
+      "from": "sales-agreements.7",
+      "to": "sales-agreements.6",
+      "label": "Contract approved by both customer and supplier"
+    },
+    {
+      "from": "sales-agreements.7",
+      "to": "sales-agreements.5",
+      "label": "Details of the contract not accepted by customer representative"
+    },
+    {
+      "from": "START",
+      "to": "sales-agreements.6",
+      "label": "Opportunity moved to closed-won"
+    },
+    {
+      "from": "sales-agreements.6",
+      "to": "END",
+      "label": "Clear and enforceable sales terms, leading to satisfied customers and reliable revenue streams"
+    },
+    {
+      "from": "START",
+      "to": "account-manager-targets.1",
+      "label": "Clear and enforceable sales terms, leading to satisfied customers and reliable revenue streams"
+    },
+    {
+      "from": "account-manager-targets.1",
+      "to": "account-manager-targets.2",
+      "label": "Target is created to set sales goals for account managers based on sales agreements and"
+    },
+    {
+      "from": "account-manager-targets.2",
+      "to": "account-manager-targets.3",
+      "label": "Targets are associated with the appropriate accounts and products, providing clear focus areas for account managers"
+    },
+    {
+      "from": "account-manager-targets.3",
+      "to": "END",
+      "label": "Measurable sales goals tied to periodic targets derived from clear sales agreements"
+    },
+    {
+      "from": "START",
+      "to": "advanced-account-forecast.1",
+      "label": "Measurable sales goals tied to periodic targets derived from clear sales agreements"
+    },
+    {
+      "from": "advanced-account-forecast.1",
+      "to": "advanced-account-forecast.2",
+      "label": "A well-defined set of configurations that guide the generation of accurate and comprehensive forecasts"
+    },
+    {
+      "from": "advanced-account-forecast.2",
+      "to": "advanced-account-forecast.3",
+      "label": "The context for generating forecasts is established, linking the forecast set to relevant account"
+    },
+    {
+      "from": "advanced-account-forecast.3",
+      "to": "advanced-account-forecast.4",
+      "label": "Accounts associated with the forecast set are identified and linked"
+    },
+    {
+      "from": "advanced-account-forecast.4",
+      "to": "advanced-account-forecast.5",
+      "label": "Dimensions that categorize forecast data and their sources are defined"
+    },
+    {
+      "from": "advanced-account-forecast.5",
+      "to": "advanced-account-forecast.6",
+      "label": "Forecasts will be generated for the relevant time frames, enabling timely decision-making."
+    },
+    {
+      "from": "advanced-account-forecast.6",
+      "to": "advanced-account-forecast.7",
+      "label": "Measures used in the forecast are defined, including types, aggregation methods, and calculation methods"
+    },
+    {
+      "from": "advanced-account-forecast.7",
+      "to": "advanced-account-forecast.9",
+      "label": "Forecasts are calculated and generated based on the defined configurations, contexts, and measures."
+    },
+    {
+      "from": "advanced-account-forecast.8",
+      "to": "advanced-account-forecast.7",
+      "label": "Adjustments to the generated forecasts are made based on new information or changes in business conditions"
+    },
+    {
+      "from": "advanced-account-forecast.9",
+      "to": "advanced-account-forecast.10",
+      "label": "Forecast data is grouped, displayed, and analyzed to derive insights"
+    },
+    {
+      "from": "advanced-account-forecast.10",
+      "to": "END",
+      "label": "Reliable sales forecasts that guide production and inventory decisions"
+    },
+    {
+      "from": "START",
+      "to": "advanced-account-forecast.8",
+      "label": "Change in business condition"
+    },
+    {
+      "from": "advanced-account-forecast.10",
+      "to": "advanced-account-forecast.8",
+      "label": "Forecasted amount will not be met"
+    },
+    {
+      "from": "START",
+      "to": "inventory.1",
+      "label": "Reliable sales forecasts that guide production and inventory decisions"
+    },
+    {
+      "from": "inventory.1",
+      "to": "inventory.2",
+      "label": "Product items are recorded and associated with specific inventory locations such as warehouses or distribution lots"
+    },
+    {
+      "from": "inventory.2",
+      "to": "inventory.3",
+      "label": "Transactions involving product items are tracked, including consumption, replenishment, adjustments, and transfers"
+    },
+    {
+      "from": "inventory.3",
+      "to": "inventory.4",
+      "label": "Orders or requests for parts or products are recorded and fulfilled efficiently"
+    },
+    {
+      "from": "inventory.4",
+      "to": "inventory.5",
+      "label": "Inventory is transferred between different locations, and the transfer is recorded"
+    },
+    {
+      "from": "inventory.5",
+      "to": "inventory.6",
+      "label": "Shipments are accurately recorded and monitored throughout the transport process"
+    },
+    {
+      "from": "inventory.6",
+      "to": "inventory.7",
+      "label": "Products required for work orders are tracked, and their consumption is recorded"
+    },
+    {
+      "from": "inventory.7",
+      "to": "inventory.8",
+      "label": "Returned products are accurately tracked and processed"
+    },
+    {
+      "from": "inventory.8",
+      "to": "END",
+      "label": "Efficient inventory control, minimizing stockouts and overstock situations"
+    },
+    {
+      "from": "START",
+      "to": "inventory.3",
+      "label": "Product request raised"
+    },
+    {
+      "from": "START",
+      "to": "inventory.7",
+      "label": "Returns, recalls, or repair request raised"
+    },
+    {
+      "from": "START",
+      "to": "warranty-claims.1",
+      "label": "Efficient inventory control, minimizing stockouts and overstock situations"
+    },
+    {
+      "from": "warranty-claims.1",
+      "to": "warranty-claims.2",
+      "label": "A claim is submitted to request compensation for repair work performed on a defective asset with product type, reason for failure, and account"
+    },
+    {
+      "from": "warranty-claims.2",
+      "to": "warranty-claims.3",
+      "label": "Specifics of the defect documented including usage, fault date, and repair date"
+    },
+    {
+      "from": "warranty-claims.3",
+      "to": "warranty-claims.4",
+      "label": "Coverage details for the claim are defined, including causal parts and coverage type"
+    },
+    {
+      "from": "warranty-claims.4",
+      "to": "warranty-claims.5",
+      "label": "Information about the labor services, part replacements, or expenses incurred to rectify the defect is recorded"
+    },
+    {
+      "from": "warranty-claims.5",
+      "to": "warranty-claims.6",
+      "label": "All participants involved in the claim process documented, ensuring accountability and transparency"
+    },
+    {
+      "from": "warranty-claims.6",
+      "to": "warranty-claims.7",
+      "label": "The claim is linked to the relevant customer accounts and assets"
+    },
+    {
+      "from": "warranty-claims.7",
+      "to": "END",
+      "label": "Timely resolution of warranty claims, enhancing customer satisfaction"
+    },
+    {
+      "from": "START",
+      "to": "visits.1",
+      "label": "Timely resolution of warranty claims, enhancing customer satisfaction"
+    },
+    {
+      "from": "visits.1",
+      "to": "visits.2",
+      "label": "Reusable template for tasks and metrics for visits, ensuring consistency and efficiency"
+    },
+    {
+      "from": "visits.2",
+      "to": "visits.3",
+      "label": "Visits are planned and scheduled, including details such as account, location, time, priority, and assigned visitors"
+    },
+    {
+      "from": "visits.3",
+      "to": "visits.4",
+      "label": "Specific action plans are created for each visit"
+    },
+    {
+      "from": "visits.4",
+      "to": "visits.5",
+      "label": "Tasks for each visit are assigned and tracked, including status, time, and sequence of the task"
+    },
+    {
+      "from": "visits.5",
+      "to": "visits.6",
+      "label": "Contexts for tasks are defined and tracked, ensuring that common attributes are captured for different types of tasks."
+    },
+    {
+      "from": "visits.6",
+      "to": "visits.7",
+      "label": "Parameters or metrics for each task are defined and recorded, capturing target and actual values"
+    },
+    {
+      "from": "visits.7",
+      "to": "visits.8",
+      "label": "Field reps performing the visits are assigned and tracked"
+    },
+    {
+      "from": "visits.8",
+      "to": "visits.9",
+      "label": "All relevant contacts are documented and can be followed up with"
+    },
+    {
+      "from": "visits.9",
+      "to": "END",
+      "label": "Improved customer and partner relationships, leading to increased loyalty and business opportunities"
+    },
+    {
+      "from": "START",
+      "to": "fleets.1",
+      "label": "Production / logistics needs for smooth operation of the core manufacturing process"
+    },
+    {
+      "from": "fleets.1",
+      "to": "fleets.2",
+      "label": "Fleet is created, grouping a set of assets used in fleet operations"
+    },
+    {
+      "from": "fleets.2",
+      "to": "fleets.3",
+      "label": "Each asset is tracked and managed as part of the fleet"
+    },
+    {
+      "from": "fleets.3",
+      "to": "fleets.4",
+      "label": "Comprehensive records of all participants associated with the fleet"
+    },
+    {
+      "from": "fleets.4",
+      "to": "END",
+      "label": "Well-maintained fleet assets, leading to operational efficiency and cost savings"
+    },
+    {
+      "from": "START",
+      "to": "manufacturing-programs.1",
+      "label": "Sales and operations planning identifies the need for specific manufacturing programs"
+    },
+    {
+      "from": "manufacturing-programs.1",
+      "to": "manufacturing-programs.2",
+      "label": "A well-defined manufacturing program that includes program-level, variant-level, and component-level forecasts"
+    },
+    {
+      "from": "manufacturing-programs.2",
+      "to": "manufacturing-programs.3",
+      "label": "A template for the manufacturing program is created to standardize the structure and elements of the program"
+    },
+    {
+      "from": "manufacturing-programs.3",
+      "to": "manufacturing-programs.4",
+      "label": "Items in the manufacturing program template are defined, including transformation types, display orders, and forecast sets"
+    },
+    {
+      "from": "manufacturing-programs.4",
+      "to": "manufacturing-programs.5",
+      "label": "Forecasts at the program level, variant level, and component level are created"
+    },
+    {
+      "from": "manufacturing-programs.5",
+      "to": "manufacturing-programs.6",
+      "label": "All product components are accurately tracked and managed within the program"
+    },
+    {
+      "from": "manufacturing-programs.6",
+      "to": "END",
+      "label": "Successful execution of manufacturing programs, leading to efficient production and satisfied customers"
+    }
+  ],
+  "entities": [
+    {
+      "id": "obj.Product2",
+      "name": "Product",
+      "kind": "standard",
+      "apiName": "Product2"
+    },
+    {
+      "id": "obj.ProductCatalog",
+      "name": "Catalog",
+      "kind": "standard",
+      "apiName": "ProductCatalog"
+    },
+    {
+      "id": "obj.ProductCategory",
+      "name": "Category",
+      "kind": "standard",
+      "apiName": "ProductCategory"
+    },
+    {
+      "id": "obj.PricebookEntry",
+      "name": "Price Book Entry",
+      "kind": "standard",
+      "apiName": "PricebookEntry"
+    },
+    {
+      "id": "obj.Pricebook2",
+      "name": "Price Book",
+      "kind": "standard",
+      "apiName": "Pricebook2"
+    },
+    {
+      "id": "obj.BusinessBrand",
+      "name": "Business Brand",
+      "kind": "standard",
+      "apiName": "BusinessBrand"
+    },
+    {
+      "id": "obj.ProductRelatedMaterial",
+      "name": "Product Related Material",
+      "kind": "standard",
+      "apiName": "ProductRelatedMaterial"
+    },
+    {
+      "id": "obj.Asset",
+      "name": "Asset",
+      "kind": "standard",
+      "apiName": "Asset"
+    },
+    {
+      "id": "obj.AssetMilestone",
+      "name": "Asset Milestone",
+      "kind": "standard",
+      "apiName": "AssetMilestone"
+    },
+    {
+      "id": "obj.AssetAccountParticipant",
+      "name": "Asset Account Participant",
+      "kind": "standard",
+      "apiName": "AssetAccountParticipant"
+    },
+    {
+      "id": "obj.AssetContactParticipant",
+      "name": "Asset Contact Participant",
+      "kind": "standard",
+      "apiName": "AssetContactParticipant"
+    },
+    {
+      "id": "obj.WarrantyTerm",
+      "name": "Warranty Term",
+      "kind": "standard",
+      "apiName": "WarrantyTerm"
+    },
+    {
+      "id": "obj.ProductWarrantyTerm",
+      "name": "Product Warranty Term",
+      "kind": "standard",
+      "apiName": "ProductWarrantyTerm"
+    },
+    {
+      "id": "obj.WarrantyTermCoverage",
+      "name": "Warranty Term Coverage",
+      "kind": "standard",
+      "apiName": "WarrantyTermCoverage"
+    },
+    {
+      "id": "obj.CodeSet",
+      "name": "Code Set",
+      "kind": "standard",
+      "apiName": "CodeSet"
+    },
+    {
+      "id": "obj.ProductFaultCode",
+      "name": "Product Fault Code",
+      "kind": "standard",
+      "apiName": "ProductFaultCode"
+    },
+    {
+      "id": "obj.ProductLaborCode",
+      "name": "Product Labor Code",
+      "kind": "standard",
+      "apiName": "ProductLaborCode"
+    },
+    {
+      "id": "obj.CodesetRelationship",
+      "name": "Codeset Relationship",
+      "kind": "standard",
+      "apiName": "CodesetRelationship"
+    },
+    {
+      "id": "obj.AssetWarranty",
+      "name": "Asset Warranty",
+      "kind": "standard",
+      "apiName": "AssetWarranty"
+    },
+    {
+      "id": "obj.SalesAgreement",
+      "name": "Sales Agreement",
+      "kind": "standard",
+      "apiName": "SalesAgreement"
+    },
+    {
+      "id": "obj.SalesAgreementProduct",
+      "name": "Sales Agreement Product",
+      "kind": "standard",
+      "apiName": "SalesAgreementProduct"
+    },
+    {
+      "id": "obj.SalesAgreeProductAttribute",
+      "name": "Sales Agreement Product Attribute",
+      "kind": "standard",
+      "apiName": "SalesAgreeProductAttribute"
+    },
+    {
+      "id": "obj.SalesAgreementProductSchedule",
+      "name": "Sales Agreement Product Schedule",
+      "kind": "standard",
+      "apiName": "SalesAgreementProductSchedule"
+    },
+    {
+      "id": "obj.Contract",
+      "name": "Contract",
+      "kind": "standard",
+      "apiName": "Contract"
+    },
+    {
+      "id": "obj.SalesContractLine",
+      "name": "Sales Contract Line",
+      "kind": "standard",
+      "apiName": "SalesContractLine"
+    },
+    {
+      "id": "obj.Order",
+      "name": "Order",
+      "kind": "standard",
+      "apiName": "Order"
+    },
+    {
+      "id": "obj.OrderItem",
+      "name": "Order Product",
+      "kind": "standard",
+      "apiName": "OrderItem"
+    },
+    {
+      "id": "obj.AcctMgrTarget",
+      "name": "Account Manager Target",
+      "kind": "standard",
+      "apiName": "AcctMgrTarget"
+    },
+    {
+      "id": "obj.AcctMgrTargetDstr",
+      "name": "Account Manager Target Distribution",
+      "kind": "standard",
+      "apiName": "AcctMgrTargetDstr"
+    },
+    {
+      "id": "obj.Account",
+      "name": "Account",
+      "kind": "standard",
+      "apiName": "Account"
+    },
+    {
+      "id": "obj.AcctMgrPeriodicTargetDstr",
+      "name": "Account Manager Periodic Target Distribution",
+      "kind": "standard",
+      "apiName": "AcctMgrPeriodicTargetDstr"
+    },
+    {
+      "id": "obj.AdvAccountForecastSet",
+      "name": "Advanced Account Forecast Set",
+      "kind": "standard",
+      "apiName": "AdvAccountForecastSet"
+    },
+    {
+      "id": "obj.AccountForecast",
+      "name": "Account Forecast",
+      "kind": "standard",
+      "apiName": "AccountForecast"
+    },
+    {
+      "id": "obj.AdvAcctForecastSetUse",
+      "name": "Advanced Account Forecast Set Use",
+      "kind": "standard",
+      "apiName": "AdvAcctForecastSetUse"
+    },
+    {
+      "id": "obj.AdvAcctForecastSetPartner",
+      "name": "Advanced Account Forecast Set Partner",
+      "kind": "standard",
+      "apiName": "AdvAcctForecastSetPartner"
+    },
+    {
+      "id": "obj.AccountProductForecast",
+      "name": "Account Product Forecast",
+      "kind": "standard",
+      "apiName": "AccountProductForecast"
+    },
+    {
+      "id": "obj.AccountProductPeriodForecast",
+      "name": "Account Product Period Forecast",
+      "kind": "standard",
+      "apiName": "AccountProductPeriodForecast"
+    },
+    {
+      "id": "obj.AdvAcctForecastDimension",
+      "name": "Advanced Account Forecast Dimension",
+      "kind": "standard",
+      "apiName": "AdvAcctForecastDimension"
+    },
+    {
+      "id": "obj.AdvAcctForecastDimSource",
+      "name": "Advanced Account Forecast Dimension Source",
+      "kind": "standard",
+      "apiName": "AdvAcctForecastDimSource"
+    },
+    {
+      "id": "obj.AdvAccountForecastPeriod",
+      "name": "Advanced Account Forecast Period",
+      "kind": "standard",
+      "apiName": "AdvAccountForecastPeriod"
+    },
+    {
+      "id": "obj.AdvAcctForecastPeriodGroup",
+      "name": "Advanced Account Forecast Period Group",
+      "kind": "standard",
+      "apiName": "AdvAcctForecastPeriodGroup"
+    },
+    {
+      "id": "obj.Period",
+      "name": "Period",
+      "kind": "standard",
+      "apiName": "Period"
+    },
+    {
+      "id": "obj.AdvAcctForecastMeasureDef",
+      "name": "Advanced Account Forecast Measure Definition",
+      "kind": "standard",
+      "apiName": "AdvAcctForecastMeasureDef"
+    },
+    {
+      "id": "obj.AccountForecastPeriodMetric",
+      "name": "Account Forecast Period Metric",
+      "kind": "standard",
+      "apiName": "AccountForecastPeriodMetric"
+    },
+    {
+      "id": "obj.AdvAccountForecastFact",
+      "name": "Advanced Account Forecast Fact",
+      "kind": "standard",
+      "apiName": "AdvAccountForecastFact"
+    },
+    {
+      "id": "obj.advanced-account-forecast-formula",
+      "name": "Advanced Account Forecast Formula",
+      "kind": "standard",
+      "evidence": [
+        "Listed by the Advanced Account Forecast data model guide; not in the Manufacturing Cloud standard object list, so its API name is not known."
+      ]
+    },
+    {
+      "id": "obj.AccountForecastAdjustment",
+      "name": "Account Forecast Adjustment",
+      "kind": "standard",
+      "apiName": "AccountForecastAdjustment"
+    },
+    {
+      "id": "obj.AdvAcctForecastFactAdj",
+      "name": "Advanced Account Forecast Fact Adjustment",
+      "kind": "standard",
+      "apiName": "AdvAcctForecastFactAdj"
+    },
+    {
+      "id": "obj.AdvAcctForecastAdjPeriod",
+      "name": "Advanced Account Forecast Adjustment Period",
+      "kind": "standard",
+      "apiName": "AdvAcctForecastAdjPeriod"
+    },
+    {
+      "id": "obj.AdvAcctFrcstDisplayGroup",
+      "name": "Advanced Account Forecast Display Group",
+      "kind": "standard",
+      "apiName": "AdvAcctFrcstDisplayGroup"
+    },
+    {
+      "id": "obj.AdvAcctFrcstDplyGroupItem",
+      "name": "Advanced Account Forecast Display Group Item",
+      "kind": "standard",
+      "apiName": "AdvAcctFrcstDplyGroupItem"
+    },
+    {
+      "id": "obj.ProductItem",
+      "name": "Product Item",
+      "kind": "standard",
+      "apiName": "ProductItem"
+    },
+    {
+      "id": "obj.ProductItemTransaction",
+      "name": "Product Item Transaction",
+      "kind": "standard",
+      "apiName": "ProductItemTransaction"
+    },
+    {
+      "id": "obj.ProductRequest",
+      "name": "Product Request",
+      "kind": "standard",
+      "apiName": "ProductRequest"
+    },
+    {
+      "id": "obj.ProductRequestLineItem",
+      "name": "Product Request Line Item",
+      "kind": "standard",
+      "apiName": "ProductRequestLineItem"
+    },
+    {
+      "id": "obj.ProductTransfer",
+      "name": "Product Transfer",
+      "kind": "standard",
+      "apiName": "ProductTransfer"
+    },
+    {
+      "id": "obj.ProductTransferState",
+      "name": "Product Transfer State",
+      "kind": "standard",
+      "apiName": "ProductTransferState"
+    },
+    {
+      "id": "obj.Shipment",
+      "name": "Shipment",
+      "kind": "standard",
+      "apiName": "Shipment"
+    },
+    {
+      "id": "obj.ShipmentItem",
+      "name": "Shipment Item",
+      "kind": "standard",
+      "apiName": "ShipmentItem"
+    },
+    {
+      "id": "obj.ProductRequired",
+      "name": "Product Required",
+      "kind": "standard",
+      "apiName": "ProductRequired"
+    },
+    {
+      "id": "obj.ProductConsumed",
+      "name": "Product Consumed",
+      "kind": "standard",
+      "apiName": "ProductConsumed"
+    },
+    {
+      "id": "obj.ProductConsumedState",
+      "name": "Product Consumed State",
+      "kind": "standard",
+      "apiName": "ProductConsumedState"
+    },
+    {
+      "id": "obj.ReturnOrder",
+      "name": "Return Order",
+      "kind": "standard",
+      "apiName": "ReturnOrder"
+    },
+    {
+      "id": "obj.ReturnOrderLineItem",
+      "name": "Return Order Line Item",
+      "kind": "standard",
+      "apiName": "ReturnOrderLineItem"
+    },
+    {
+      "id": "obj.SerializedProduct",
+      "name": "Serialized Product",
+      "kind": "standard",
+      "apiName": "SerializedProduct"
+    },
+    {
+      "id": "obj.SerializedProductTransaction",
+      "name": "Serialized Product Transaction",
+      "kind": "standard",
+      "apiName": "SerializedProductTransaction"
+    },
+    {
+      "id": "obj.Claim",
+      "name": "Claim",
+      "kind": "standard",
+      "apiName": "Claim"
+    },
+    {
+      "id": "obj.ClaimItem",
+      "name": "Claim Item",
+      "kind": "standard",
+      "apiName": "ClaimItem"
+    },
+    {
+      "id": "obj.ClaimCoverage",
+      "name": "Claim Coverage",
+      "kind": "standard",
+      "apiName": "ClaimCoverage"
+    },
+    {
+      "id": "obj.ClaimCoveragePaymentDetail",
+      "name": "Claim Coverage Payment Detail",
+      "kind": "standard",
+      "apiName": "ClaimCoveragePaymentDetail"
+    },
+    {
+      "id": "obj.ClaimParticipant",
+      "name": "Claim Participant",
+      "kind": "standard",
+      "apiName": "ClaimParticipant"
+    },
+    {
+      "id": "obj.ActionPlanTemplate",
+      "name": "Action Plan Template",
+      "kind": "standard",
+      "apiName": "ActionPlanTemplate"
+    },
+    {
+      "id": "obj.Visit",
+      "name": "Visit",
+      "kind": "standard",
+      "apiName": "Visit"
+    },
+    {
+      "id": "obj.ActionPlan",
+      "name": "Action Plan",
+      "kind": "standard",
+      "apiName": "ActionPlan"
+    },
+    {
+      "id": "obj.GenericVisitTask",
+      "name": "Generic Visit Task",
+      "kind": "standard",
+      "apiName": "GenericVisitTask"
+    },
+    {
+      "id": "obj.GenericVisitTaskContext",
+      "name": "Generic Visit Task Context",
+      "kind": "standard",
+      "apiName": "GenericVisitTaskContext"
+    },
+    {
+      "id": "obj.GnrcVstTaskContextRelation",
+      "name": "Generic Visit Task Context Relation",
+      "kind": "standard",
+      "apiName": "GnrcVstTaskContextRelation"
+    },
+    {
+      "id": "obj.AssessmentIndicatorDefinition",
+      "name": "Assessment Indicator Definition",
+      "kind": "standard",
+      "apiName": "AssessmentIndicatorDefinition"
+    },
+    {
+      "id": "obj.GnrcVstKeyPerformanceInd",
+      "name": "Generic Visit Key Performance Indicator",
+      "kind": "standard",
+      "apiName": "GnrcVstKeyPerformanceInd"
+    },
+    {
+      "id": "obj.Visitor",
+      "name": "Visitor",
+      "kind": "standard",
+      "apiName": "Visitor"
+    },
+    {
+      "id": "obj.Contact",
+      "name": "Contact",
+      "kind": "standard",
+      "apiName": "Contact"
+    },
+    {
+      "id": "obj.VisitedParty",
+      "name": "Visited Party",
+      "kind": "standard",
+      "apiName": "VisitedParty"
+    },
+    {
+      "id": "obj.Fleet",
+      "name": "Fleet",
+      "kind": "standard",
+      "apiName": "Fleet"
+    },
+    {
+      "id": "obj.FleetAsset",
+      "name": "Fleet Asset",
+      "kind": "standard",
+      "apiName": "FleetAsset"
+    },
+    {
+      "id": "obj.FleetParticipant",
+      "name": "Fleet Participant",
+      "kind": "standard",
+      "apiName": "FleetParticipant"
+    },
+    {
+      "id": "obj.User",
+      "name": "User",
+      "kind": "standard",
+      "apiName": "User"
+    },
+    {
+      "id": "obj.ManufacturingProgram",
+      "name": "Manufacturing Program",
+      "kind": "standard",
+      "apiName": "ManufacturingProgram"
+    },
+    {
+      "id": "obj.MfgProgramTemplate",
+      "name": "Manufacturing Program Template",
+      "kind": "standard",
+      "apiName": "MfgProgramTemplate"
+    },
+    {
+      "id": "obj.MfgProgramTemplateItem",
+      "name": "Manufacturing Program Template Item",
+      "kind": "standard",
+      "apiName": "MfgProgramTemplateItem"
+    },
+    {
+      "id": "obj.MfgProgramForecastFact",
+      "name": "Manufacturing Program Forecast Fact",
+      "kind": "standard",
+      "apiName": "MfgProgramForecastFact"
+    },
+    {
+      "id": "obj.MfgProgramVariantFrcstFact",
+      "name": "Manufacturing Program Variant Forecast Fact",
+      "kind": "standard",
+      "apiName": "MfgProgramVariantFrcstFact"
+    },
+    {
+      "id": "obj.MfgProgramCpntFrcstFact",
+      "name": "Manufacturing Program Component Forecast Fact",
+      "kind": "standard",
+      "apiName": "MfgProgramCpntFrcstFact"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "cap.product-assets",
+      "name": "Product and asset information",
+      "realisedBy": [
+        "product-assets",
+        "obj.Product2",
+        "obj.ProductCatalog",
+        "obj.ProductCategory",
+        "obj.PricebookEntry",
+        "obj.Pricebook2",
+        "obj.BusinessBrand",
+        "obj.Asset",
+        "obj.AssetMilestone",
+        "obj.AssetAccountParticipant",
+        "obj.AssetContactParticipant"
+      ],
+      "inferred": true,
+      "evidence": [
+        "No Data Model Gallery guide: the map groups the core product, price book, brand and asset objects here."
+      ]
+    },
+    {
+      "id": "cap.warranty-terms",
+      "name": "Warranty terms",
+      "realisedBy": [
+        "warranty-terms",
+        "obj.WarrantyTerm",
+        "obj.ProductWarrantyTerm",
+        "obj.WarrantyTermCoverage",
+        "obj.CodeSet",
+        "obj.ProductFaultCode",
+        "obj.ProductLaborCode",
+        "obj.CodesetRelationship",
+        "obj.AssetWarranty"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/warranty-terms.html"
+      ]
+    },
+    {
+      "id": "cap.sales-agreements",
+      "name": "Sales agreements",
+      "realisedBy": [
+        "sales-agreements",
+        "obj.SalesAgreement",
+        "obj.SalesAgreementProduct",
+        "obj.SalesAgreeProductAttribute",
+        "obj.SalesAgreementProductSchedule",
+        "obj.Contract",
+        "obj.SalesContractLine",
+        "obj.Order",
+        "obj.OrderItem"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/sales-agreements.html"
+      ]
+    },
+    {
+      "id": "cap.account-manager-targets",
+      "name": "Account manager targets",
+      "realisedBy": [
+        "account-manager-targets",
+        "obj.AcctMgrTarget",
+        "obj.AcctMgrTargetDstr",
+        "obj.AcctMgrPeriodicTargetDstr"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/account-manager-target.html"
+      ]
+    },
+    {
+      "id": "cap.advanced-account-forecast",
+      "name": "Advanced account forecasting",
+      "realisedBy": [
+        "advanced-account-forecast",
+        "obj.AdvAccountForecastSet",
+        "obj.AccountForecast",
+        "obj.AdvAcctForecastSetUse",
+        "obj.AdvAcctForecastSetPartner",
+        "obj.AccountProductForecast",
+        "obj.AccountProductPeriodForecast",
+        "obj.AdvAcctForecastDimension",
+        "obj.AdvAcctForecastDimSource",
+        "obj.AdvAccountForecastPeriod",
+        "obj.AdvAcctForecastPeriodGroup",
+        "obj.AdvAcctForecastMeasureDef",
+        "obj.AccountForecastPeriodMetric",
+        "obj.AdvAccountForecastFact",
+        "obj.advanced-account-forecast-formula",
+        "obj.AccountForecastAdjustment",
+        "obj.AdvAcctForecastFactAdj",
+        "obj.AdvAcctForecastAdjPeriod",
+        "obj.AdvAcctFrcstDisplayGroup",
+        "obj.AdvAcctFrcstDplyGroupItem"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/advanced-account-forecasting.html"
+      ]
+    },
+    {
+      "id": "cap.inventory",
+      "name": "Inventory",
+      "realisedBy": [
+        "inventory",
+        "obj.ProductItem",
+        "obj.ProductItemTransaction",
+        "obj.ProductRequest",
+        "obj.ProductRequestLineItem",
+        "obj.ProductTransfer",
+        "obj.ProductTransferState",
+        "obj.Shipment",
+        "obj.ShipmentItem",
+        "obj.ProductRequired",
+        "obj.ProductConsumed",
+        "obj.ProductConsumedState",
+        "obj.ReturnOrder",
+        "obj.ReturnOrderLineItem",
+        "obj.SerializedProduct",
+        "obj.SerializedProductTransaction"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/inventory.html"
+      ]
+    },
+    {
+      "id": "cap.warranty-claims",
+      "name": "Warranty claims",
+      "realisedBy": [
+        "warranty-claims",
+        "obj.Claim",
+        "obj.ClaimItem",
+        "obj.ClaimCoverage",
+        "obj.ClaimCoveragePaymentDetail",
+        "obj.ClaimParticipant"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/warranty-claims.html"
+      ]
+    },
+    {
+      "id": "cap.visits",
+      "name": "Visits",
+      "realisedBy": [
+        "visits",
+        "obj.ActionPlanTemplate",
+        "obj.Visit",
+        "obj.ActionPlan",
+        "obj.GenericVisitTask",
+        "obj.GenericVisitTaskContext",
+        "obj.GnrcVstTaskContextRelation",
+        "obj.AssessmentIndicatorDefinition",
+        "obj.GnrcVstKeyPerformanceInd",
+        "obj.Visitor",
+        "obj.VisitedParty"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/visits.html"
+      ]
+    },
+    {
+      "id": "cap.fleets",
+      "name": "Fleets",
+      "realisedBy": [
+        "fleets",
+        "obj.Fleet",
+        "obj.FleetAsset",
+        "obj.FleetParticipant"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/fleets.html"
+      ]
+    },
+    {
+      "id": "cap.manufacturing-programs",
+      "name": "Program-based business",
+      "realisedBy": [
+        "manufacturing-programs",
+        "obj.ProductRelatedMaterial",
+        "obj.ManufacturingProgram",
+        "obj.MfgProgramTemplate",
+        "obj.MfgProgramTemplateItem",
+        "obj.MfgProgramForecastFact",
+        "obj.MfgProgramVariantFrcstFact",
+        "obj.MfgProgramCpntFrcstFact"
+      ],
+      "evidence": [
+        "https://developer.salesforce.com/docs/platform/data-models/guide/program-based-business-advanced-account-forecasting.html"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "about": "product-assets",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Improved customer and partner relationships, leading to increased loyalty and new business opportunities' (from level 1.8); out: 'All relevant stakeholders are identified and their roles are tracked for each asset' (to level 1.2)."
+    },
+    {
+      "about": "warranty-terms",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'All relevant stakeholders are identified and their roles are tracked for each asset' (from level 1.1); out: 'Each asset has clear warranty coverage, facilitating effective service and support' (to level 1.3)."
+    },
+    {
+      "about": "sales-agreements.4",
+      "note": "The line from 'sales-agreements.4' to 'sales-agreements.2' has no label in the source map."
+    },
+    {
+      "about": "sales-agreements.6",
+      "note": "Level 'Establish and maintain sales agreements with customers' also starts from 'Opportunity moved to closed-won', which is not a line into its box on the top level."
+    },
+    {
+      "about": "sales-agreements",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Each asset has clear warranty coverage, facilitating effective service and support' (from level 1.2) and 'Opportunity successfully negotiated to proposal stage'; out: 'Orders are created based on the sales agreement and the contract, detailing the products or services the customer is purchasing' (to level 1.4)."
+    },
+    {
+      "about": "account-manager-targets",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Orders are created based on the sales agreement and the contract, detailing the products or services the customer is purchasing' (from level 1.3); out: 'Target values are distributed over specific periods, creating periodic targets for account managers to track progress' (to level 1.5)."
+    },
+    {
+      "about": "advanced-account-forecast.8",
+      "note": "Level 'Predict future sales' also starts from 'Change in business condition', which is not a line into its box on the top level."
+    },
+    {
+      "about": "advanced-account-forecast",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Target values are distributed over specific periods, creating periodic targets for account managers to track progress' (from level 1.4); out matched the parent already."
+    },
+    {
+      "about": "inventory.3",
+      "note": "Level 'Track and manage inventory levels, including shipments and stock movements.' also starts from 'Product request raised', which is not a line into its box on the top level."
+    },
+    {
+      "about": "inventory.7",
+      "note": "Level 'Track and manage inventory levels, including shipments and stock movements.' also starts from 'Returns, recalls, or repair request raised', which is not a line into its box on the top level."
+    },
+    {
+      "about": "inventory",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Reliable sales forecasts' (from level 1.5); out: 'Detailed records of serialized products, ensuring traceability and accountability' (to level 1.7)."
+    },
+    {
+      "about": "warranty-claims",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Clear warranty terms, leading to increased customer trust and satisfaction.' (from level 1.6); out matched the parent already."
+    },
+    {
+      "about": "visits",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Successful execution of manufacturing programs' (from level 1.7); out: 'Increased loyalty from partners and identification of new business opportunities' (to level 1.1)."
+    },
+    {
+      "about": "fleets",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Warranty claims resolved' (from level 1.7); out: 'Fleet assets maintained' (to level 1.10)."
+    },
+    {
+      "about": "manufacturing-programs.6",
+      "note": "This box has no object in the source map."
+    },
+    {
+      "about": "manufacturing-programs",
+      "note": "Start and end labels of this level are set to the lines of its box on the top level. The source map's off-page connectors read: in: 'Well-maintained fleet assets, leading to operational efficiency and cost savings' (from level 1.9); out matched the parent already."
+    },
+    {
+      "about": "obj.advanced-account-forecast-formula",
+      "note": "API name not found in the Manufacturing Cloud object reference."
+    },
+    {
+      "note": "The Data Model Gallery's Manufacturing category also lists Channel Partner Inventory Tracking, Product Service Campaign Management, Warranty Supplier Recovery and Warranty Supplier Recovery Plus Vehicle; the source map has no box for them."
+    },
+    {
+      "about": "account-manager-targets.1",
+      "note": "The label of the line out of this box is cut short in the source map ('... based on sales agreements and')."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+order,rule,acceptance,source
+1,Export result files,Export success and error comma-separated value (CSV) files within 7 days,Salesforce platform limits [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/salesforce-app-limits-cheatsheet/guide/salesforce-app-limits-platform-bulkapi.html
+2,Retain inserted identifiers,Use identifiers from the success file for rollback,Salesforce Bulk API results [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/api-asynch/guide/get-batch-results.html
+3,Use recoverable delete,Delete by success-file identifiers and retain Recycle Bin recovery,Elements method
+4,Never hard delete,Hard delete is prohibited on the rollback path,Elements method
+5,Use upsert match field,Key idempotent retries with the ratified upsert external-ID field,Migration practice [VENDOR] research section 5

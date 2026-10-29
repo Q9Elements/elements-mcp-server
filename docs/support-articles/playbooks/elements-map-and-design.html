@@ -1,0 +1,57 @@
+<p>Elements Map and Design is a guided playbook for mapping and designing Salesforce business architecture in Elements. Describe what you need through the <code>/start</code> skill, and it routes the request to the right map or design workflow.</p>
+
+<h2>What it does and when to use it</h2>
+<ul>
+<li>Create process maps, customer journeys, data models, interaction flows, capability maps and system architecture from supported inputs such as a description, transcript, standard operating procedure (SOP), document or picture. It can also map processes from vendor documentation or show an agent package as a process.</li>
+<li>Read the connected org to map the business process behind an object's data model, explain one automation, trace an automation chain, or show the automations behind each status in an org-based process map.</li>
+<li>Derive a solution design from an Elements process map, map the org's integration landscape, or check how far the org implements a design. The implementation check reports gaps and can colour the map by result; ask to reset the colours to remove them.</li>
+<li>Data models and system architecture diagrams can be amended. Other diagram types are drawn new.</li>
+</ul>
+
+<h2>Requirements</h2>
+<ul>
+<li>Install and connect the core <code>elements</code> plugin to the Elements Model Context Protocol (MCP) server.</li>
+<li>Python 3.8 or later and an assistant host that can run local scripts.</li>
+<li>The process-map design and org-integration workflows also need <code>curl</code>. The process-map design workflow needs the <code>python-docx</code> package to create its Word document; LibreOffice and Pillow are optional for adding diagram pictures to that document.</li>
+</ul>
+
+<h2>Install</h2>
+<h3>Claude Code</h3>
+<pre><code>/plugin marketplace add Q9Elements/elements-mcp-server
+/plugin install elements-map-and-design@elements</code></pre>
+
+<h3>Codex</h3>
+<pre><code>codex plugin marketplace add Q9Elements/elements-mcp-server
+codex plugin add elements-map-and-design@elements</code></pre>
+
+<h2>How it runs</h2>
+<ol>
+<li>Start with <code>/start</code> (or <code>/elements-map-and-design:start</code>) and describe the map, source and goal.</li>
+<li>The front door routes the request to a reader, a design workflow or a new-map workflow. It can resume supported work from its saved run folder.</li>
+<li>The workflow reads the supplied material or connected org, checks the map model, and draws or amends the diagram in Elements. Design and org-integration workflows pause at review points before drawing.</li>
+<li>For an implementation check, review the findings and choose whether to colour the map. Ask to reset the colours to remove them.</li>
+</ol>
+
+<h2>What you get</h2>
+<ul>
+<li>Draft diagrams in Elements, including process maps, customer journeys, data models, interaction flows, capability maps and system architecture.</li>
+<li>Depending on the request, a solution overview document and data access matrix, an integration report, automation explanations, or an implementation gap report.</li>
+<li>Some runs add names to the Elements space's resource library so they can appear on diagram cards.</li>
+</ul>
+
+<h2>What stays with you</h2>
+<ul>
+<li>Diagrams are created as drafts in Elements. You decide when to release them.</li>
+<li>Nothing in Salesforce changes.</li>
+</ul>
+
+<h2>Elements tools used</h2>
+<p>The plugin calls these Elements tools: <code>create_map</code>, <code>describe_metadata_schema</code>, <code>explain_metadata_components</code>, <code>get_access</code>, <code>get_analysis_result</code>, <code>get_component_change_history</code>, <code>get_component_usage</code>, <code>get_dependencies</code>, <code>get_diagram</code>, <code>get_metadata_component</code>, <code>get_metadata_source</code>, <code>get_org_health_detail</code>, <code>get_process_map</code>, <code>get_process_map_outline</code>, <code>get_space_context</code>, <code>list_managed_packages</code>, <code>list_metadata_by_criteria</code>, <code>list_process_maps</code>, <code>list_reference_models</code>, <code>manage_diagram</code>, <code>run_automation_inventory</code>, <code>run_code_search</code>, <code>search_metadata</code> and <code>understand_org_health</code>.</p>
+
+<h2>Tested with</h2>
+<ul>
+<li>Claude: command-line interface (CLI).</li>
+</ul>
+
+<h2>Version</h2>
+<p>Version 1.0.1.</p>

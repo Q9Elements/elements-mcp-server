@@ -1,0 +1,39 @@
+{
+  "name": "elements",
+  "owner": {
+    "name": "Elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "plugins": [
+    {
+      "name": "elements",
+      "source": "./plugins/elements",
+      "description": "Understand your Salesforce Org through Elements.cloud from your AI assistant: Spaces, metadata search and analysis, access reviews, org health, diagrams, and change history."
+    },
+    {
+      "name": "elements-remove-unused-apex",
+      "source": "./plugins/elements-remove-unused-apex",
+      "description": "Find the Apex a Salesforce org can safely remove: select dependency-complete packages toward the customer's capacity target, collect package rulings, and hand back dependency-ordered removal and annotation stories. Analysis only; the customer executes every change."
+    },
+    {
+      "name": "elements-map-and-design",
+      "source": "./plugins/elements-map-and-design",
+      "description": "Map and design Salesforce business architecture as Elements diagrams: business processes and data models from your org or vendor documentation, automation logic and chains, the systems your org integrates with, and process maps, journeys, data models, capability maps and architecture from your documents, pictures or descriptions. Also derives a solution design from a process map and checks how far the org implements a design."
+    },
+    {
+      "name": "elements-data-load-impact",
+      "source": "./plugins/elements-data-load-impact",
+      "description": "Turn a planned Salesforce bulk data load into a ratified pre-load safety package, an optional small-batch sandbox rehearsal, and an ordered backlog the customer executes. Analysis only; the customer performs the load."
+    },
+    {
+      "name": "elements-change-impact",
+      "source": "./plugins/elements-change-impact",
+      "description": "Plan a Salesforce automation or schema change with options, traced impact, an impact report and a draft delivery backlog. The customer makes the change."
+    },
+    {
+      "name": "elements-quote-line-pricing",
+      "source": "./plugins/elements-quote-line-pricing",
+      "description": "Explain how a Salesforce quote line's price was calculated using Quote Line Microscope and Elements evidence. Read-only analysis of calculator price rules."
+    }
+  ]
+}

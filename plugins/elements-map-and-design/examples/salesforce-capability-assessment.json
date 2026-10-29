@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "Salesforce capability map with assessment",
+    "description": "Example: a Salesforce-centred capability map with business drivers, assessment colours, list-style columns and platform bands.",
+    "author": "hand-written",
+    "sources": [
+      {
+        "kind": "user",
+        "ref": "Example written to exercise every capability map feature"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "sell",
+      "name": "Sell",
+      "description": "Win new business and grow existing accounts",
+      "childrenAs": "list",
+      "icon": "Salesforce"
+    },
+    {
+      "id": "lead-mgmt",
+      "name": "Lead management",
+      "parent": "sell"
+    },
+    {
+      "id": "opp-mgmt",
+      "name": "Opportunity management",
+      "parent": "sell"
+    },
+    {
+      "id": "cpq",
+      "name": "Quoting and pricing",
+      "parent": "sell"
+    },
+    {
+      "id": "forecast",
+      "name": "Forecasting",
+      "parent": "sell"
+    },
+    {
+      "id": "service",
+      "name": "Service",
+      "description": "Resolve customer issues across every channel"
+    },
+    {
+      "id": "case-mgmt",
+      "name": "Case management",
+      "parent": "service",
+      "rating": "advanced"
+    },
+    {
+      "id": "knowledge",
+      "name": "Knowledge management",
+      "parent": "service",
+      "rating": "intermediate"
+    },
+    {
+      "id": "field-service",
+      "name": "Field service",
+      "parent": "service",
+      "rating": "underperforming",
+      "inferred": true,
+      "evidence": [
+        "WorkOrder has 12 records",
+        "No dispatch console configured"
+      ]
+    },
+    {
+      "id": "self-service",
+      "name": "Customer self-service",
+      "parent": "service",
+      "rating": "missing"
+    },
+    {
+      "id": "market",
+      "name": "Market",
+      "description": "Attract and nurture demand"
+    },
+    {
+      "id": "campaigns",
+      "name": "Campaign management",
+      "parent": "market"
+    },
+    {
+      "id": "segment",
+      "name": "Segmentation",
+      "parent": "campaigns",
+      "rating": "intermediate"
+    },
+    {
+      "id": "journeys",
+      "name": "Journey orchestration",
+      "parent": "campaigns",
+      "rating": "missing"
+    },
+    {
+      "id": "attribution",
+      "name": "Attribution",
+      "parent": "market",
+      "rating": "underperforming"
+    },
+    {
+      "id": "bill",
+      "name": "Bill",
+      "description": "Turn orders into invoices and cash",
+      "childrenAs": "list"
+    },
+    {
+      "id": "orders",
+      "name": "Order management",
+      "parent": "bill"
+    },
+    {
+      "id": "invoicing",
+      "name": "Invoicing",
+      "parent": "bill"
+    },
+    {
+      "id": "collections",
+      "name": "Collections",
+      "parent": "bill"
+    },
+    {
+      "id": "analyse",
+      "name": "Analyse",
+      "description": "Turn data into decisions",
+      "rating": "intermediate",
+      "attachments": [
+        {
+          "type": "link",
+          "title": "Analytics strategy",
+          "url": "https://example.com/analytics"
+        }
+      ]
+    },
+    {
+      "id": "dashboards",
+      "name": "Operational dashboards",
+      "parent": "analyse",
+      "rating": "advanced"
+    },
+    {
+      "id": "predict",
+      "name": "Predictive insights",
+      "parent": "analyse",
+      "rating": "missing"
+    },
+    {
+      "id": "c360",
+      "name": "Salesforce Customer 360",
+      "placement": "band",
+      "childrenAs": "list",
+      "icon": "Salesforce"
+    },
+    {
+      "id": "c360-sales",
+      "name": "Sales Cloud",
+      "parent": "c360"
+    },
+    {
+      "id": "c360-service",
+      "name": "Service Cloud",
+      "parent": "c360"
+    },
+    {
+      "id": "c360-mkt",
+      "name": "Marketing Cloud",
+      "parent": "c360"
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "placement": "band",
+      "bandRow": 1,
+      "childrenAs": "list"
+    },
+    {
+      "id": "crm-data",
+      "name": "CRM data",
+      "parent": "data"
+    },
+    {
+      "id": "streams",
+      "name": "Data streams",
+      "parent": "data"
+    },
+    {
+      "id": "trust",
+      "name": "Einstein Trust Layer",
+      "placement": "band",
+      "bandRow": 1,
+      "childrenAs": "list"
+    },
+    {
+      "id": "gateway",
+      "name": "Secure gateway",
+      "parent": "trust"
+    },
+    {
+      "id": "zero-ret",
+      "name": "Zero retention",
+      "parent": "trust"
+    },
+    {
+      "id": "hyperforce",
+      "name": "Hyperforce",
+      "placement": "band",
+      "description": "Salesforce's public-cloud infrastructure"
+    }
+  ],
+  "drivers": [
+    {
+      "id": "d1",
+      "name": "Grow recurring revenue",
+      "description": "New business is slowing and upsell is ad hoc."
+    },
+    {
+      "id": "d2",
+      "name": "Improve customer retention",
+      "description": "Churn rose two years running."
+    },
+    {
+      "id": "d3",
+      "name": "Reduce cost to serve",
+      "description": "Most cases are handled by phone."
+    },
+    {
+      "id": "d4",
+      "name": "One view of the customer",
+      "description": "Sales, service and billing each hold their own customer record."
+    }
+  ]
+}

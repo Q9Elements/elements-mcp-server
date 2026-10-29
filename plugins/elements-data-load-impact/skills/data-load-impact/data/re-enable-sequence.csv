@@ -1,0 +1,12 @@
+order,item,optional,verification,source
+1,Deferred lookup relationships,false,Relationship values and failures reconciled,Salesforce Trailhead [SF-OFFICIAL] https://trailhead.salesforce.com/content/learn/modules/large-data-volumes/perform-data-loads
+2,Roll-up summaries,false,Controlled recalculation completed,Salesforce Trailhead [SF-OFFICIAL] https://trailhead.salesforce.com/content/learn/modules/large-data-volumes/perform-data-loads
+3,Apex triggers,false,Previously deactivated triggers restored and a verification record processed,Salesforce Trailhead [SF-OFFICIAL] https://trailhead.salesforce.com/content/learn/modules/large-data-volumes/perform-data-loads
+4,Trigger bypasses,false,Bypass state reset and a verification record processed,Salesforce Trailhead [SF-OFFICIAL] https://trailhead.salesforce.com/content/learn/modules/large-data-volumes/perform-data-loads
+5,Replacement data-quality checks,false,Run each replacement data-quality check before restoring its validation rule and resolve failures,Elements method
+6,Validation rules,false,Rules active and verification checks pass,Salesforce Trailhead [SF-OFFICIAL] https://trailhead.salesforce.com/content/learn/modules/large-data-volumes/perform-data-loads
+7,Flows,false,Previously deactivated flows restored and expected paths verified,Salesforce Trailhead [SF-OFFICIAL] https://trailhead.salesforce.com/content/learn/modules/large-data-volumes/perform-data-loads
+8,Workflow rules,false,Rules active and expected actions verified,Salesforce Trailhead [SF-OFFICIAL] https://trailhead.salesforce.com/content/learn/modules/large-data-volumes/perform-data-loads
+9,Assignment rules,false,Rules remain off unless the owner explicitly enables them,Salesforce Trailhead [SF-OFFICIAL] https://trailhead.salesforce.com/content/learn/modules/large-data-volumes/perform-data-loads
+10,Organization-wide defaults revert,true,Sharing defaults restored after an approved load-window change,Apex Hours [COMMUNITY] https://www.apexhours.com/salesforce-data-migration-best-practices/
+11,Community roll-ups,true,Community variant creates roll-ups last,Apex Hours [COMMUNITY] https://www.apexhours.com/salesforce-data-migration-best-practices/

@@ -1,0 +1,108 @@
+<p>Analyze Change Impact is a guided assessment for Salesforce administrators, architects, and consultants. It compares supported approaches to an automation or schema change, traces affected components and save-driven automation, and prepares an impact report with a draft delivery backlog. You make and deliver the change.</p>
+
+<h2>Start and resume</h2>
+<p>Start with one of these prompts:</p>
+<ul>
+<li>'Assess the impact of adding values to Opportunity.Lost_Reason__c.'</li>
+<li>'Compare approaches for adding an approval step to Opportunity.'</li>
+<li>'Resume my change-impact assessment.'</li>
+</ul>
+<p>At kickoff, provide:</p>
+<ul>
+<li>A sentence describing the proposed automation or schema change, including the object and named element when known.</li>
+<li>The Elements space and org model to use when more than one is available. With one suitable model, the playbook selects it and tells you.</li>
+<li>Answers to any confirmation or approach question. For an automation delete, the playbook may ask whether to delete despite lost work or move uncovered work first.</li>
+</ul>
+<p>The engagement directory stores <code>execution-state.json</code> and the run's files. To continue later, provide the directory containing that file and say 'resume'. The playbook continues from its recorded stage.</p>
+
+<h2>What it does and when to use it</h2>
+<ul>
+<li>Use it before building a Salesforce automation or schema change, including when you need to compare approaches, update or delete a named element, or understand the effects of a proposed change.</li>
+<li>Before offering approaches, including for requests without a named change set, it checks for automation that matches the requested purpose and writes the relevant field or creates the requested record. When it finds a confirmed match, that option leads as 'Use what you already have'. Apex classes with an unknown active status remain candidates unless an inactive or deleted fact excludes them.</li>
+<li>When strong evidence supports a way to meet your stated intent with materially less change, the playbook offers at most one alternative. A reuse option includes its evidence and population percentage and keeps the named element unchanged. Your named change stays the default and is always listed. Decide requests include the alternative at the approach pick; named updates and deletes offer it in one line at confirmation. Taking it follows the existing correction and confirmation route.</li>
+<li>For named automation updates, it compares current and proposed entry conditions when the conditions change. Its order-of-execution screen combines those comparisons with the existing field screen to show pre-existing conflicts.</li>
+<li>Before an approach pick, each automation option includes save-driven effects for its writes and creations. Identical targets share one analysis across options, and the first impact trace reuses those results on the same model sync.</li>
+<li>The save-order screen places Process Builder after before-save flows and before after-save flows. Two Process Builders on the same object have no guaranteed order. An empty peer screen is clear; hidden managed-package writes remain insufficient evidence and say "managed package: source not visible".</li>
+<li>It checks whether existing automation already does the requested work, traces incoming references and outgoing connections, reviews save-driven effects, and identifies dependencies, migration needs, and order-of-execution concerns.</li>
+<li>For automation deletes, it checks which jobs would be lost or partly covered and asks whether to delete anyway or move the uncovered work first.</li>
+<li>Every complete run produces a backlog. A finding is blocking only when no backlog story resolves it and it makes the change unsafe as planned. Findings resolved by backlog stories remain in the report. Blocking findings lead the report and appear as flags at the top of both backlog files with their text.</li>
+<li>The backlog contains change, defect, grouped review and regression stories. Change-story acceptance criteria define tests for the change, including its boundary cases. Existing paths stay in the report; a regression story covers cross-story interactions found in the run.</li>
+<li>This is analysis and planning only. You make every change. The playbook does not change Salesforce metadata or save Elements stories.</li>
+<li>Field population is reported as a percentage only.</li>
+</ul>
+
+<h2>Requirements</h2>
+<ul>
+<li>Install and connect the core <code>elements</code> plugin to the Elements Model Context Protocol (MCP) server. MCP must be enabled for the Elements space.</li>
+<li>Automation summaries require Automation &amp; Execution Intelligence (an add-on on Core Metadata Management; included in Advanced Metadata Management). Summaries must already exist for an automation in the target org. The playbook checks this first and stops before confirming or tracing the change until the summaries are available. Wait for summaries to finish, then say retry.</li>
+<li>Use an Elements model for the Salesforce org. A model with an earlier completed sync can be analyzed while its latest sync failed or remains in progress; the report identifies that status and uses the last complete sync. If the model has never completed a sync, wait for one and retry.</li>
+<li>Python 3 must run where the playbook scripts run.</li>
+</ul>
+
+<h2>Install</h2>
+<h3>Claude Code</h3>
+<pre><code>/plugin marketplace add Q9Elements/elements-mcp-server
+/plugin install elements-change-impact@elements</code></pre>
+
+<h3>Claude Desktop and claude.ai</h3>
+<ol>
+<li>Open 'Customize' &gt; 'Plugins'.</li>
+<li>Install <code>elements-change-impact</code> from the <code>Q9Elements/elements-mcp-server</code> marketplace.</li>
+</ol>
+
+<h3>Codex</h3>
+<pre><code>codex plugin marketplace add Q9Elements/elements-mcp-server
+codex plugin add elements-change-impact@elements</code></pre>
+
+<h3>Other tools</h3>
+<pre><code>npx plugins add Q9Elements/elements-mcp-server --target &lt;tool&gt;</code></pre>
+<p>Then select <code>elements-change-impact</code>.</p>
+
+<h2>Stages at a glance</h2>
+<ol>
+<li><code>00 Start</code>: Describe the proposed change and establish the working directory for the engagement files.</li>
+<li><code>01 Understand the change</code>: Select a synced org model, resolve the target elements, check that automation summaries exist, and confirm the request. If summaries are missing, wait for the automation summaries to finish, then say retry.</li>
+<li><code>02 Choose an approach</code>: Review supported options, evidence, and any automation already doing the work. For a delete with uncovered work, answer whether to delete anyway or move the work first.</li>
+<li><code>03 Trace impact</code>: Review dependencies, possible source references, data loading effects, migration needs, save order, and any findings. Some evidence may be unavailable and is identified in the report.</li>
+<li><code>04 Deliver</code>: Receive the impact report and draft backlog. Blocking findings lead the report and appear as flags at the top of the backlog files.</li>
+<li><code>05 Recover</code>: Resolve a recorded blocker and say retry. A transient read is retried once automatically; if it still fails, the playbook delivers an incomplete report and a backlog marked not drafted with the reason.</li>
+</ol>
+
+<h2>What you get</h2>
+<ul>
+<li>A self-contained HyperText Markup Language (HTML) impact report, <code>impact-report.html</code>, with a JavaScript Object Notation (JSON) report record, <code>impact-report.json</code>.</li>
+<li>A draft Markdown backlog, <code>backlog.md</code>, and its JSON record, <code>backlog.json</code>, with proposed work, acceptance criteria, delivery order, and any flags. Story member files accompany grouped work where needed.</li>
+<li>The report describes the confirmed request, selected org model and sync date, alternatives and choices, affected components, evidence gaps, data and automation effects, migration needs, findings, and proposed delivery work.</li>
+<li>Incoming references and outgoing connections are shown separately. A direction that was not read is marked 'not assessed'. A completed read with no results is reported as zero.</li>
+<li>The backlog is a draft and has not been saved as Elements stories. Each complete run drafts it, with blocking findings flagged at the top.</li>
+<li>The report identifies a failed latest sync and states that the analysis uses its last complete sync. For a sync in progress, it says: "A newer sync is in progress; this analysis uses the last complete sync."</li>
+</ul>
+
+<h2>Tools it uses</h2>
+<p>Elements tools used by the playbook:</p>
+<ul>
+<li><code>get_space_context</code> and <code>list_reference_models</code>: identify the available Elements space and org models.</li>
+<li><code>search_metadata</code>, <code>get_metadata_component</code>, <code>get_metadata_source</code>, and <code>list_metadata_by_criteria</code>: resolve targets and read model details, definitions, fields, and values.</li>
+<li><code>get_dependencies</code>: read component relationships and dependency evidence.</li>
+<li><code>explain_metadata_components</code>: check automation summaries and provide automation evidence.</li>
+<li><code>run_code_search</code>: search for possible source references outside available Apex bodies.</li>
+<li><code>run_data_load_impact</code>: assess save-driven effects of a change.</li>
+</ul>
+<p>The playbook's local scripts normalize evidence, compare options, check dependencies and save order, build the draft backlog, and render the report.</p>
+
+<h2>Data handling</h2>
+<ul>
+<li>The engagement directory stores <code>execution-state.json</code>, report and backlog files, and intermediate evidence used by the analysis.</li>
+<li>The <code>work/</code> folder stores downloaded evidence bundles and normalized files used to produce the report and backlog.</li>
+<li>The report and backlog may contain org object, field, automation, and component names; descriptions and automation summaries; dependency and source-reference evidence; population percentages; findings; and your request and replies.</li>
+<li>The playbook does not change Salesforce metadata or save Elements stories. Review report, backlog, and member files before sharing them because they contain information from your org and conversation.</li>
+</ul>
+
+<h2>Tested with</h2>
+<ul>
+<li>Codex: command-line interface (CLI).</li>
+<li>Other tools are untested.</li>
+</ul>
+
+<h2>Version</h2>
+<p>Version 1.1.0.</p>

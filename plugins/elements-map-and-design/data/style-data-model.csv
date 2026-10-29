@@ -1,0 +1,27 @@
+setting,value,unit,rule
+card_width,200,px,Width of every card manage_diagram creates on a data model; it cannot be changed there
+card_height_min,100,px,The server never makes a card shorter than this
+card_height_base,60,px,Card height is card_height_base plus attribute_row_height per attribute plus footer_height with a footer; at least card_height_min
+attribute_row_height,26,px,Height the server adds for each attribute; it does not allow for text that wraps
+footer_height,70,px,Height the server adds for a footer of any length
+editor_growth_allowance,30,px,Extra space kept below each row because the editor may grow a card whose title or attributes wrap; it never shrinks
+col_gap,80,px,Horizontal space between neighbouring cards in a row: room for two crow's feet and a short label
+row_gap,130,px,Vertical space from the bottom of the tallest card in a row to the top of the next row; holds the bend of every line between the rows
+tree_gap,160,px,Horizontal space between separate groups of related objects
+comb_gap,60,px,Horizontal space between a parent card and a column of child cards beside it; the lines' shared vertical runs in its middle
+comb_stack_gap,30,px,Vertical space between cards stacked in a column beside their parent
+max_row_children,7,cards,Children of one card laid out in a row under it before the childless ones move into columns beside it
+max_comb_children,8,cards,Childless children stacked in one column beside their parent before a second column starts on the other side
+max_width,3400,px,Widest the groups of related objects may run side by side before the next group starts a new band below
+band_gap,200,px,Vertical space between bands of groups
+max_entities,30,cards,Objects on one data model before the plan warns it will be hard to read
+max_fields,6,attributes,Most fields shown on one card; the rest are listed in the plan as not shown
+field_max_chars,60,characters,Longest field title written; longer ones are cut with an ellipsis and the full text goes into the description
+label_max_chars,40,characters,Longest line label written
+primary_marker,#,text,Written before the name of a field that identifies the record (key primary)
+show_api_names,yes,yes/no,Write an entity's API name as its card footer when it differs from its name
+legend,yes,yes/no,Add a card titled Key left of the diagram listing the colours and line ends used
+legend_gap,80,px,Space between the legend note and the cards
+canvas_blank_width,2000,px,Width of the canvas manage_diagram accepts positions in on a blank level (from x = 0)
+canvas_blank_height,1200,px,Height of the canvas on a blank level (from y = 0)
+canvas_margin_factor,0.5,fraction,Once a level has content the canvas is the content's bounding box plus this fraction of its width and height on each side

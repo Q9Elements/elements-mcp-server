@@ -1,0 +1,93 @@
+<p>The Elements Model Context Protocol (MCP) server exposes 56 tools. Your assistant usually selects the right tool from your request. Which tools you see depends on the Spaces you authorize. Elements checks role requirements, such as Space admin or Author, and access to a reference model, diagram, or view when a tool is called; without the required access, the call is refused with <code>access_denied</code>.</p>
+<p>The required inputs column lists the key fields each tool needs. Read tools that support file delivery return a file only when a reply is larger than the 30,000-character response budget, unless their rows always come as part files.</p>
+<p>These labels describe the MCP (Model Context Protocol) annotation each tool sends. Read-only means <code>readOnlyHint: true</code>; Writes to Elements means <code>readOnlyHint: false</code> and <code>destructiveHint: false</code>; Destructive in Elements means <code>readOnlyHint: false</code> and <code>destructiveHint: true</code>. Whatever its label, every tool reads and changes only data stored in Elements, the Elements database: diagrams, MetaFields, saved views, proposed nodes, Spaces, and this connection's authorization. No tool writes to, deploys to, or deletes anything in a Salesforce org.</p>
+<ul>
+<li>Replaces the draft of a diagram with an edited copy. Your assistant first shows you what would be replaced and only goes ahead after you confirm. It changes the draft only; publishing stays with a person in Elements.</li>
+<li>Can remove activities, lines, notes and text boxes from one level of a diagram, along with the attachments and links on a removed activity. For a large removal, or one that would take away a sub-process beneath an activity, your assistant must first ask you to confirm. A removed sub-process goes to the Elements recycle bin, and Elements keeps a history entry of the level before the assistant's first change.</li>
+<li>Removing a picklist option, or narrowing which metadata a MetaField applies to, permanently deletes those values wherever they're used. Your assistant first shows you how many items would lose a value and only goes ahead after you confirm.</li>
+<li>Disconnects your assistant from Elements. It deletes no data; you reconnect by signing in again. Your assistant asks you to confirm first.</li>
+</ul>
+
+<h2>Spaces</h2>
+<table style="table-layout:fixed;border-collapse:collapse;width:100%;"><tr><th>Tool</th><th>What it does</th><th>Required inputs</th><th>Availability</th></tr>
+<tr><td><code>get_space_context</code> (Read-only)</td><td>Shows the active Space and pages Spaces authorized for this connection.</td><td>No required inputs. Optional: teamId, skip, pageSize.</td><td></td></tr>
+<tr><td><code>set_active_space</code> (Writes to Elements)</td><td>Selects the Space for following calls.</td><td>teamId.</td><td></td></tr>
+<tr><td><code>create_space</code> (Writes to Elements)</td><td>Creates an Elements Space.</td><td>name; optional prefix, description.</td><td></td></tr>
+<tr><td><code>revoke_access</code> (Destructive in Elements)</td><td>Revokes this client connection after confirmation.</td><td>confirm: true.</td><td>At least one consented Space must have an active membership and not be suspended; otherwise revoke the connection from the Connected apps tab in Elements. Confirmation required.</td></tr>
+</table>
+<h2>Metadata</h2>
+<table style="table-layout:fixed;border-collapse:collapse;width:100%;"><tr><th>Tool</th><th>What it does</th><th>Required inputs</th><th>Required add-on*</th><th>Per-resource check</th></tr>
+<tr><td><code>list_reference_models</code> (Read-only)</td><td>Lists Salesforce reference models available in a Space.</td><td>No required inputs. Optional: teamId, search.</td><td></td><td></td></tr>
+<tr><td><code>get_dependencies</code> (Read-only)</td><td>Returns dependency rows for selected metadata nodes.</td><td>refModelId, nodeIds or nodeId; direction and metadata selection options.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>get_metadata_component</code> (Read-only)</td><td>Returns fields or relationships for a metadata node.</td><td>refModelId and exactly one of nodeId or nodeIds; optional page.list for single-component paging.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>explain_metadata_components</code> (Read-only)</td><td>Explains metadata behavior in plain English.</td><td>aspect and metadata node selection; refModelId when identifying a node.</td><td>Automation &amp; Execution Intelligence*</td><td></td></tr>
+<tr><td><code>run_data_load_impact</code> (Read-only)</td><td>Analyzes automation and record-lock impact for a planned data load.</td><td>refModelId and one or more target definitions.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>search_metadata</code> (Read-only)</td><td>Finds reference-model metadata by search terms.</td><td>refModelId, search terms.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>get_component_change_history</code> (Read-only)</td><td>Lists change history for a metadata component.</td><td>refModelId, nodeId.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>get_component_usage</code> (Read-only)</td><td>Returns usage and telemetry for an object.</td><td>refModelId, nodeId.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>get_metadata_source</code> (Read-only)</td><td>Returns source for selected metadata nodes.</td><td>refModelId, nodeIds.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>get_access</code> (Read-only)</td><td>Audits access granted to selected metadata nodes.</td><td>refModelId and nodeId or nodeIds.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>describe_metadata_schema</code> (Read-only)</td><td>Describes available metadata types and query columns.</td><td>refModelId; optional metadataList or allNodes.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>list_metadata_by_criteria</code> (Read-only)</td><td>Lists metadata matching criteria or a saved cleanup view.</td><td>refModelId; criteria or a view id.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>save_metadata_view</code> (Writes to Elements)</td><td>Saves a metadata criteria view.</td><td>refModelId, name, viewSpec.</td><td></td><td>edit access to the reference model</td></tr>
+<tr><td><code>create_proposed_node</code> (Writes to Elements)</td><td>Adds a proposed metadata node to a reference model.</td><td>refModelId, metadataType, label, apiName, parentId identifying the parent container.</td><td></td><td>edit access to the reference model.</td></tr>
+<tr><td><code>list_managed_packages</code> (Read-only)</td><td>Lists managed packages and component counts.</td><td>refModelId.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>plan_package_uninstall</code> (Read-only)</td><td>Plans a managed package removal and identifies dependencies.</td><td>refModelId, package selection.</td><td></td><td>view access to the reference model where required.</td></tr>
+<tr><td><code>get_metafields</code> (Read-only)</td><td>Lists MetaField definitions and dependencies.</td><td>No required inputs; optional implementationId and filters.</td><td></td><td></td></tr>
+<tr><td><code>create_metafield</code> (Writes to Elements)</td><td>Creates a MetaField definition.</td><td>implementation, title, type, appliesTo; list and multi-picklist types also require options.</td><td></td><td>Space admin role.</td></tr>
+<tr><td><code>update_metafield</code> (Destructive in Elements)</td><td>Updates a MetaField definition.</td><td>metafieldId and at least one definition field.</td><td></td><td>Space admin role.</td></tr>
+<tr><td><code>set_metafield_values</code> (Writes to Elements)</td><td>Sets MetaField values on selected nodes.</td><td>refModelId and assignments: [{metafieldId, values: [...]}]; each value selects nodes with nodeIds or nodeFilter.</td><td></td><td>edit access to the reference model.</td></tr>
+<tr><td><code>set_metafield_dependency</code> (Writes to Elements)</td><td>Creates or replaces the dependency matrix between two MetaFields; values already on your items are never deleted.</td><td>controllerId, dependentId, relationMap.</td><td></td><td>Space admin role.</td></tr>
+<tr><td><code>list_metadata_changes</code> (Read-only)</td><td>Lists metadata change records in a date range.</td><td>refModelId; optional fromDate, toDate, metadataTypes, status.</td><td></td><td>view access to the reference model where required.</td></tr>
+</table>
+<p>* Advanced Metadata Management includes every add-on. On Core Metadata Management, this add-on is required in addition to Agentic Org Management, which the MCP server itself requires.</p>
+<h2>Org health</h2>
+<table style="table-layout:fixed;border-collapse:collapse;width:100%;"><tr><th>Tool</th><th>What it does</th><th>Required inputs</th><th>Access requirements</th></tr>
+<tr><td><code>understand_org_health</code> (Read-only)</td><td>Returns a selected org-health dimension.</td><td>refModelId, area.</td><td>view access to the reference model.</td></tr>
+<tr><td><code>get_org_health_detail</code> (Read-only)</td><td>Returns detail rows for an org-health chart or item.</td><td>refModelId, chartType; chart-specific detail inputs.</td><td>view access to the reference model.</td></tr>
+</table>
+<h2>Agent opportunities</h2>
+<table style="table-layout:fixed;border-collapse:collapse;width:100%;"><tr><th>Tool</th><th>What it does</th><th>Required inputs</th><th>Access requirements</th></tr>
+<tr><td><code>scan_agentic_opportunities</code> (Read-only)</td><td>Ranks objects for agentic opportunities using usage signals.</td><td>refModelId.</td><td>view access to the reference model where required.</td></tr>
+</table>
+<h2>Diagrams</h2>
+<table style="table-layout:fixed;border-collapse:collapse;width:100%;"><tr><th>Tool</th><th>What it does</th><th>Required inputs</th><th>Per-resource check</th></tr>
+<tr><td><code>list_process_maps</code> (Read-only)</td><td>Lists process maps in the active Space.</td><td>No required inputs. Optional: query for a name fragment, folderId, limit, skip.</td><td></td></tr>
+<tr><td><code>get_process_map_outline</code> (Read-only)</td><td>Lists every level of a process map, including titles, nesting, activity counts, and publish and edit status. A map being copied from a template is included.</td><td>mapId.</td><td>view access to the named map where required.</td></tr>
+<tr><td><code>get_diagram</code> (Read-only)</td><td>Reads one level of a process map or architecture diagram: activities, resources and RASCI (Responsible, Accountable, Support, Consulted, Informed), lines, notes and text boxes, with optional layout and attachments.</td><td>diagramId or mapId plus levelNumber or title.</td><td>view access to the named map where required.</td></tr>
+<tr><td><code>describe_diagram_schema</code> (Read-only)</td><td>Returns schemas for diagram reads and changes.</td><td>No required inputs.</td><td></td></tr>
+<tr><td><code>manage_diagram</code> (Destructive in Elements)</td><td>Changes one level of a diagram: adds, updates, moves or removes activities, resources, lines, notes and text boxes, child levels and attachments. Your assistant previews the change first and asks you to confirm large removals or removing a child level.</td><td>diagramId and baseVersion; optional element changes, title, or description; dryRun optional.</td><td>access to the reference model for metadata attachments.</td></tr>
+<tr><td><code>create_map</code> (Writes to Elements)</td><td>Creates a new, empty map with one blank top-level diagram.</td><td>name; optional type, description, folderId.</td><td>Author role</td></tr>
+<tr><td><code>list_map_templates</code> (Read-only)</td><td>Lists the diagram templates you can start a map from.</td><td>No required inputs. Optional: templateSpaceId, category, type, search.</td><td></td></tr>
+<tr><td><code>create_map_from_template</code> (Writes to Elements)</td><td>Starts a new map as a copy of a template; the copy runs in the background.</td><td>templateMapId, templateSpaceId.</td><td>Author role; view access and Can copy on the template.</td></tr>
+<tr><td><code>get_process_map</code> (Read-only)</td><td>Polls generated process-map results.</td><td>diagramId.</td><td>view access to the named map where required.</td></tr>
+<tr><td><code>generate_process_map</code> (Writes to Elements)</td><td>Generates a process map from text or images, or from a Salesforce lifecycle object. Your assistant checks for completion afterward.</td><td>Input depends on source: text, images, or refModelId and objectApiName.</td><td>Author role; edit access to the reference model for org_object source.</td></tr>
+<tr><td><code>upload_process_map_image</code> (Writes to Elements)</td><td>Uploads an image for process-map generation.</td><td>contentType and image data or upload URL mode inputs.</td><td>Author role.</td></tr>
+<tr><td><code>export_diagram</code> (Read-only)</td><td>Exports a process map for editing.</td><td>mapId.</td><td>Manage access to the diagram.</td></tr>
+<tr><td><code>import_diagram</code> (Destructive in Elements)</td><td>Imports an edited process map.</td><td>mapId and import source; confirm when applying.</td><td>Author role; edit access to that diagram.</td></tr>
+</table>
+<h2>Stories</h2>
+<table style="table-layout:fixed;border-collapse:collapse;width:100%;"><tr><th>Tool</th><th>What it does</th><th>Required inputs</th><th>Access requirements</th></tr>
+<tr><td><code>list_stories</code> (Read-only)</td><td>Lists stories in a Space or on a diagram.</td><td>No required inputs. Optional: diagramId, skip, limit, mode.</td><td></td></tr>
+<tr><td><code>generate_stories_from_diagram</code> (Writes to Elements)</td><td>Generates draft stories from diagram activities.</td><td>mapId; optional activityMxKeys to select activities.</td><td>requirements manager role; edit access to the diagram.</td></tr>
+</table>
+<h2>Decision Engine</h2>
+<table style="table-layout:fixed;border-collapse:collapse;width:100%;"><tr><th>Tool</th><th>What it does</th><th>Required inputs</th><th>Access requirements</th></tr>
+<tr><td><code>run_automation_inventory</code> (Read-only)</td><td>Inventories automation relevant to a proposed change.</td><td>refModelId, request.</td><td>edit access to the reference model.</td></tr>
+<tr><td><code>run_automation_recommendation</code> (Read-only)</td><td>Recommends automation implementation options.</td><td>refModelId, missionId.</td><td>edit access to the reference model.</td></tr>
+<tr><td><code>run_dependency_scan</code> (Read-only)</td><td>Scans direct dependencies for a proposed change.</td><td>refModelId; missionId or standalone target.</td><td>edit access to the reference model.</td></tr>
+<tr><td><code>run_change_impact_analysis</code> (Read-only)</td><td>Analyzes the impact of a proposed change.</td><td>refModelId, missionId, change description.</td><td>edit access to the reference model.</td></tr>
+<tr><td><code>run_architecture_risk_analysis</code> (Read-only)</td><td>Analyzes architecture risks in a proposed change.</td><td>refModelId and missionId or standalone target.</td><td>edit access to the reference model.</td></tr>
+<tr><td><code>run_backlog_draft</code> (Read-only)</td><td>Drafts requirements and stories for delivery.</td><td>refModelId, missionId.</td><td>edit access to the reference model.</td></tr>
+<tr><td><code>run_schema_inventory</code> (Writes to Elements)</td><td>Inventories schema related to a proposed change.</td><td>refModelId, request.</td><td>edit access to the reference model.</td></tr>
+<tr><td><code>run_schema_recommendation</code> (Read-only)</td><td>Recommends schema implementation options.</td><td>refModelId, missionId.</td><td>edit access to the reference model.</td></tr>
+<tr><td><code>get_analysis_result</code> (Read-only)</td><td>Retrieves a Decision Engine mission result.</td><td>refModelId, missionId.</td><td>edit access to the reference model.</td></tr>
+</table>
+<h2>Playbook tools</h2>
+<table style="table-layout:fixed;border-collapse:collapse;width:100%;"><tr><th>Tool</th><th>What it does</th><th>Required inputs</th><th>Access requirements</th></tr>
+<tr><td><code>has_event_monitoring</code> (Read-only)</td><td>Checks whether Apex event monitoring data is available.</td><td>refModelId.</td><td>view access to the reference model.</td></tr>
+<tr><td><code>get_unused_apex_candidates</code> (Read-only)</td><td>Ranks potentially unused Apex using synced metadata and telemetry.</td><td>refModelId.</td><td>view access to the reference model.</td></tr>
+<tr><td><code>run_code_search</code> (Read-only)</td><td>Searches indexed source for literal text.</td><td>refModelId, query.</td><td>view access to the reference model.</td></tr>
+</table>
+<h2>Large results</h2>
+<p>Six tools always return rows as downloadable part files: <code>get_dependencies</code>, <code>get_access</code>, <code>run_code_search</code>, <code>list_metadata_changes</code>, <code>list_metadata_by_criteria</code>, and <code>get_metadata_source</code>. They use newline-delimited JSON or comma-separated values where supported. Manifest mode returns counts without rows where available. For file-only tools, <code>delivery</code> does not change row files; five accept it for oversized manifest replies, while <code>list_metadata_changes</code> does not accept it. Each reply states how long its links last (<code>expiresInSeconds</code>); call again for fresh links.</p>

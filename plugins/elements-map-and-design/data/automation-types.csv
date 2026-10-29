@@ -1,0 +1,18 @@
+type,sf_types,chain_resource,chain_resource_type,definition,label,notes
+flow,Flow,Flow,Flow,flow-xml,Flow,"Screen, autolaunched, record-triggered, scheduled and platform-event flows; scripts/flow_to_steps.py reads the .flow-meta.xml"
+process-builder,Process Builder Workflow|Process Builder Workflows,Flow,Flow,flow-xml,Process Builder,A Flow with processType Workflow; scripts/flow_to_steps.py reads it like any flow
+apex-class,Apex Class,Apex,Flow,apex-source,Apex class,The automation-logic-reader agent reads the .cls source; data/automation-elements.csv maps code to cards
+apex-trigger,Apex Trigger,Apex,Flow,apex-source,Apex trigger,The automation-logic-reader agent reads the .trigger source and follows the handler class it calls
+workflow-rule,Workflow Rule,Workflow,Flow,rule-xml,Workflow rule,"Criteria, then field updates, email alerts, tasks and outbound messages, immediate or time-based"
+assignment-rule,Assignment Rule,Workflow,Flow,rule-xml,Assignment rule,Rule entries in order; the first that matches assigns the owner
+auto-response-rule,Auto-Response Rule,Workflow,Flow,rule-xml,Auto-response rule,Rule entries in order; the first that matches sends its email template
+escalation-rule,Escalation Rule,Workflow,Flow,rule-xml,Escalation rule,Rule entries with time-based escalation actions
+approval-process,Approval Process,Workflow,Flow,rule-xml,Approval process,"Entry criteria, approval steps, and the actions on submit, approve, reject and recall"
+validation-rule,Validation Rule,Workflow,Flow,rule-xml,Validation rule,One condition and its error message; drawn as a decision and a custom error
+omniscript,OmniScript,Workflow,Flow,omniscript-json,OmniScript,"The OmniScript definition (JSON); steps, set values, data mapper and integration procedure actions"
+integration-procedure,Omni Integration Procedure,Workflow,Flow,omniscript-json,Integration procedure,The integration procedure definition (JSON)
+data-mapper,Data Mapper,Workflow,Flow,omniscript-json,Data mapper,"Extract, load or transform; usually one card"
+flexcard,FlexCard|OmniUiCard,Workflow,Flow,none,FlexCard,Drawn as one card on the chain level; no logic level
+lightning-component,Lightning Component|Lightning Component Bundle|Aura Component Bundle|Lightning web component|Aura component bundle,Workflow,Flow,none,Lightning component,Drawn as one card on the chain level; its Apex controller is the automation to trace
+platform-event,Platform Event,Workflow,Flow,none,Platform event,Prefer an entity with an __e API name; kept for models that list the event as an automation
+other,,Workflow,Flow,none,Automation,Anything else; the reader explains it in the card's footer

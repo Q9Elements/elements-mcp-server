@@ -1,0 +1,8 @@
+{
+  "name": "elements-quote-line-pricing",
+  "version": "1.0.0",
+  "description": "Explain how a Salesforce quote line's price was calculated using Quote Line Microscope and Elements evidence. Read-only analysis of calculator price rules.",
+  "author": {
+    "name": "Elements.cloud"
+  }
+}

@@ -1,0 +1,639 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.elements.cloud/schemas/business-architecture/map-process-from-data-model/inventory-1.0.json",
+  "title": "Object inventory",
+  "description": "What one system's data model contains, gathered either from the vendor's official documentation (route docs) or from the Elements Metadata Dictionary (route metadata): the objects, how they relate, and the capabilities they are grouped into. The doc reader writes partial inventories in this shape; scripts/inventory.py merges them, builds one from Metadata Dictionary exports, and applies the capability grouping. Objects are keyed by apiName everywhere.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "system",
+    "route",
+    "sources",
+    "objects"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "description": "Version of this format. Always \"1.0\".",
+      "const": "1.0"
+    },
+    "system": {
+      "description": "The system as the person confirmed it, such as 'Salesforce Manufacturing Cloud' or 'HubSpot Sales Hub'.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "variant": {
+      "description": "Edition, release or other variant the person confirmed, such as 'Winter '27, out of the box'.",
+      "type": "string",
+      "maxLength": 200
+    },
+    "route": {
+      "description": "docs: read from the vendor's official documentation. metadata: read from a reference model in the Elements Metadata Dictionary.",
+      "enum": [
+        "docs",
+        "metadata"
+      ]
+    },
+    "focus": {
+      "description": "Set when the person asked for the process of one object (\"the Case process\"): its apiName. The map is then that object's process, with one capability holding it and the objects it works with, and the top level is the capability's own steps.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "basis": {
+      "description": "Route metadata: what decides which objects the map shows, copied from scope.json metadata.basis. configuration: every object in scope, records or not. usage: only objects that hold records (read with get_component_usage into each object's usage); an object holding none is left off every box and named in a note. Left out: configuration.",
+      "enum": [
+        "usage",
+        "configuration"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "objects": {
+      "description": "Every object (entity, table, collection) in scope. A partial inventory may list none.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/object"
+      }
+    },
+    "relationships": {
+      "description": "Reference fields between objects in scope. 'from' holds the field and points at 'to': a Sales Agreement Product points at its Sales Agreement.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relationship"
+      }
+    },
+    "capabilities": {
+      "description": "Groups of objects that together deliver one business capability. Each becomes a box on the top level (or on an area level) and gets its own child level.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "gaps": {
+      "description": "What could not be read or established, and why.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gap"
+      }
+    }
+  },
+  "$defs": {
+    "apiName": {
+      "description": "The object's API name as the source gives it (Salesforce: SalesAgreement, Deferred_Revenue__c; other systems: the table or collection name). When a document shows only a label, use the label and say so in a gap.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "id": {
+      "description": "Lower-case identifier: letters, digits and '-'; up to 48 characters.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,47}$"
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^https?://",
+      "maxLength": 1024
+    },
+    "evidence": {
+      "description": "Where this came from: a URL, a page section, a quote, an API name.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "document: a vendor page. metadata: a reference model in the Elements Metadata Dictionary. user: what the person said.",
+          "enum": [
+            "document",
+            "metadata",
+            "user"
+          ]
+        },
+        "ref": {
+          "description": "A URL, a reference model id, or a short description.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      }
+    },
+    "keyField": {
+      "description": "A field that drives the process: a status, stage or type picklist, a date that marks a milestone, an approval flag.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "apiName": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "type": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "values": {
+          "description": "Picklist values as the source lists them. Salesforce reference pages list them alphabetically, so the order is not the lifecycle.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 200
+          }
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "required": [
+        "apiName",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "apiName": {
+          "$ref": "#/$defs/apiName"
+        },
+        "name": {
+          "description": "The label people know the object by: 'Sales Agreement Product'.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "description": "What one record represents, in a sentence or two, from the source.",
+          "type": "string",
+          "maxLength": 2000
+        },
+        "kind": {
+          "description": "standard and custom are Salesforce objects; managed is a custom object from a managed package; external is an object of a system other than Salesforce.",
+          "enum": [
+            "standard",
+            "custom",
+            "managed",
+            "external"
+          ]
+        },
+        "role": {
+          "description": "Set by scripts/inventory.py from data/platform-objects.csv and the reference counts. platform: plumbing (users, files, activities, sharing) left out of capabilities. hub: referenced by many capabilities, so it never glues clusters together, but one capability still owns it.",
+          "enum": [
+            "platform",
+            "hub"
+          ]
+        },
+        "hasRecords": {
+          "description": "true when the org holds records of it (route metadata). Left out when unknown. The older yes/no flag: usage (inventory.py usage) is what decides on basis usage.",
+          "type": "boolean"
+        },
+        "usage": {
+          "$ref": "#/$defs/usage"
+        },
+        "lastRecordCreated": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "nodeId": {
+          "description": "Elements metadata node id (route metadata).",
+          "type": "string",
+          "maxLength": 40
+        },
+        "docUrl": {
+          "$ref": "#/$defs/url"
+        },
+        "keyFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/keyField"
+          }
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/lifecycle"
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "required": [
+        "from",
+        "to"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "description": "apiName of the object that holds the reference field.",
+          "$ref": "#/$defs/apiName"
+        },
+        "to": {
+          "description": "apiName of the object it points at.",
+          "$ref": "#/$defs/apiName"
+        },
+        "field": {
+          "description": "API name of the reference field on 'from'.",
+          "type": "string",
+          "maxLength": 255
+        },
+        "kind": {
+          "description": "master-detail: 'from' cannot exist without 'to'. lookup: an optional or required reference. reference: any other link, such as an external id or an association in another system.",
+          "enum": [
+            "lookup",
+            "master-detail",
+            "reference"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "polymorphic": {
+          "description": "true when the field can point at many object types (Task.WhatId). Set by scripts/inventory.py; such relationships say nothing about which capability an object belongs to.",
+          "type": "boolean"
+        },
+        "populationPercent": {
+          "description": "Share of 'from' records with the field filled, when Elements knows it.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "link": {
+      "type": "object",
+      "required": [
+        "title",
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "url": {
+          "$ref": "#/$defs/url"
+        }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "origin",
+        "objects"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "description": "A noun phrase for what the business can do: 'Warranty claims', 'Sales agreements'.",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "origin": {
+          "description": "source: the documentation groups the objects this way. inferred: the grouping was worked out from names, descriptions and relationships.",
+          "enum": [
+            "source",
+            "inferred"
+          ]
+        },
+        "parent": {
+          "description": "Id of the area this capability belongs to, when the top level shows areas rather than capabilities.",
+          "$ref": "#/$defs/id"
+        },
+        "objects": {
+          "description": "apiNames of the objects this capability owns. Every object in scope that is not platform is owned by exactly one leaf capability, and its child level uses every one of them. An area owns none.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/apiName"
+          }
+        },
+        "sharedObjects": {
+          "description": "apiNames of objects owned elsewhere that this capability's steps may also use, such as Account or Product.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/apiName"
+          }
+        },
+        "supporting": {
+          "description": "true for a capability that runs alongside the main value chain rather than in it, such as fleet management in Manufacturing Cloud. The top-level writer gives it its own start and end.",
+          "type": "boolean"
+        },
+        "docUrl": {
+          "$ref": "#/$defs/url"
+        },
+        "helpLinks": {
+          "description": "How-to pages for the capability, put on its top-level box.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        },
+        "confirmed": {
+          "description": "true once the person has confirmed the capability list, or the run is on autopilot and the list has been applied.",
+          "type": "boolean"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "required": [
+        "note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "about": {
+          "description": "apiName or capability id the gap concerns, when there is one.",
+          "type": "string",
+          "maxLength": 255
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      }
+    },
+    "lifecycle": {
+      "description": "The picklist field that carries the record's workflow (a status or stage), with its active values in the order the record moves through them. A process level built on this object makes each value the outcome of a step.",
+      "type": "object",
+      "required": [
+        "field",
+        "values"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "description": "API name of the picklist field, such as StageName or Status__c.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "label": {
+          "description": "The field's label, such as Stage.",
+          "type": "string",
+          "maxLength": 255
+        },
+        "ordered": {
+          "description": "true when the source gives the order (the org's picklist order, or documentation that lists the values in process order); false when the values come in another order, such as alphabetical, and the order on the map is worked out.",
+          "type": "boolean"
+        },
+        "source": {
+          "description": "Where the values come from: metadata (the Metadata Dictionary) or documentation.",
+          "enum": [
+            "metadata",
+            "documentation"
+          ]
+        },
+        "recordTypes": {
+          "description": "Active record types of the object other than Master (route metadata), each with the lifecycle values it uses. The object's level is then split by record type, and each record type gets a lifecycle level of its own.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "description": "Developer name of the record type.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "nodeId": {
+                "description": "The record type's node in the Metadata Dictionary.",
+                "type": "string",
+                "maxLength": 64
+              },
+              "process": {
+                "description": "Lead, Opportunity and Case: the sales, support or lead process the record type uses; its values are then the process's values.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "values": {
+                "description": "The lifecycle values this record type uses: from its process on Lead, Opportunity and Case, otherwise from the value's where-used record types; left out when unknown (then all values).",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 255
+                }
+              },
+              "usage": {
+                "description": "Records of this record type (get_component_usage byRecordType, matched by label, then API name); total null when unknown.",
+                "type": "object",
+                "required": [
+                  "total"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "total": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "fieldNodeId": {
+          "description": "The picklist field's node in the Metadata Dictionary (route metadata).",
+          "type": "string",
+          "maxLength": 64
+        },
+        "helpText": {
+          "description": "The field's help text, when it says something about the values.",
+          "type": "string",
+          "maxLength": 2000
+        },
+        "values": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "description": "The stored value (API name of the picklist value).",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "closed": {
+                "description": "true when the record is closed in this value (OpportunityStage and CaseStatus say so; otherwise when the source says it is final).",
+                "type": "boolean"
+              },
+              "won": {
+                "description": "true for a closed value that is the good outcome (Closed Won); false for a closed value that is not (Closed Lost).",
+                "type": "boolean"
+              },
+              "default": {
+                "description": "true for the value a new record gets.",
+                "type": "boolean"
+              },
+              "probability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "nodeId": {
+                "description": "The value's node in the Metadata Dictionary (route metadata).",
+                "type": "string",
+                "maxLength": 64
+              }
+            }
+          }
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "usage": {
+      "description": "How much the org uses an object, from get_component_usage (inventory.py usage). Missing telemetry is null, never 0.",
+      "type": "object",
+      "required": [
+        "available",
+        "total",
+        "readAt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "description": "false when Elements has no usage for the object (reason says why); total is then null and the object counts as used.",
+          "type": "boolean"
+        },
+        "total": {
+          "description": "Records of the object in the org; null when unknown.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "byRecordType": {
+          "description": "Records per record type label, Master aside.",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "withoutRecordType": {
+          "description": "Records of the Master record type (get_component_usage's '*Without Record Type*').",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "lastCreated": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 40
+        },
+        "lastModified": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 40
+        },
+        "net7": {
+          "description": "Net change in the record count over 7 days (daily snapshots); null when unknown.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "net30": {
+          "description": "Net change over 30 days; null when unknown.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "windowDays": {
+          "description": "Days of daily snapshots behind net7 and net30.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "trend": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 40
+        },
+        "readAt": {
+          "description": "The day usage was read (YYYY-MM-DD).",
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "reason": {
+          "description": "Why usage is not available, when it is not.",
+          "type": "string",
+          "maxLength": 500
+        }
+      }
+    }
+  }
+}

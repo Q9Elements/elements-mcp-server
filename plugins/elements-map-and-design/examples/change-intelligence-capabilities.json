@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "Change Intelligence capability assessment",
+    "description": "Golden example: the Elements Change Intelligence capability map, redrawn from the hand-made exemplar.",
+    "author": "hand-written",
+    "sources": [
+      {
+        "kind": "diagram",
+        "ref": "Elements capability assessment template (hand-made exemplar image)"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "operational-knowledge",
+      "name": "Operational knowledge",
+      "description": "Understanding of current processes, roles, and policies"
+    },
+    {
+      "id": "process-led-design",
+      "name": "Business process-led design",
+      "parent": "operational-knowledge"
+    },
+    {
+      "id": "process-capture",
+      "name": "Business process capture",
+      "parent": "process-led-design"
+    },
+    {
+      "id": "content-versioning",
+      "name": "Content versioning",
+      "parent": "process-led-design"
+    },
+    {
+      "id": "fit-gap",
+      "name": "Fit-gap analysis",
+      "parent": "process-led-design"
+    },
+    {
+      "id": "system-process-linkage",
+      "name": "System <-> process linkage",
+      "parent": "process-led-design"
+    },
+    {
+      "id": "stakeholder-linkage",
+      "name": "Stakeholder map <-> system linkage",
+      "parent": "operational-knowledge"
+    },
+    {
+      "id": "regulatory-linkage",
+      "name": "Regulatory policies <-> system linkage",
+      "parent": "operational-knowledge"
+    },
+    {
+      "id": "configuration-knowledge",
+      "name": "Configuration knowledge",
+      "description": "Understanding of system configuration and interdependencies"
+    },
+    {
+      "id": "architecture-design",
+      "name": "Architecture design",
+      "parent": "configuration-knowledge"
+    },
+    {
+      "id": "metadata-dictionary",
+      "name": "Metadata dictionary",
+      "parent": "configuration-knowledge"
+    },
+    {
+      "id": "sf-specific",
+      "name": "Salesforce-specific",
+      "parent": "metadata-dictionary"
+    },
+    {
+      "id": "system-generic",
+      "name": "System-generic",
+      "parent": "metadata-dictionary"
+    },
+    {
+      "id": "in-sf-deps",
+      "name": "In-Salesforce dependencies",
+      "parent": "metadata-dictionary"
+    },
+    {
+      "id": "cross-system-deps",
+      "name": "Cross-system dependencies",
+      "parent": "metadata-dictionary"
+    },
+    {
+      "id": "user-access-config",
+      "name": "User access configuration",
+      "parent": "configuration-knowledge"
+    },
+    {
+      "id": "user-access-visibility",
+      "name": "User access setup visibility",
+      "parent": "user-access-config"
+    },
+    {
+      "id": "system-health",
+      "name": "System health insights",
+      "description": "Awareness of system performance, bottlenecks, and vulnerabilities"
+    },
+    {
+      "id": "tech-debt",
+      "name": "Technical debt visibility",
+      "parent": "system-health"
+    },
+    {
+      "id": "complexity",
+      "name": "Complexity scoring",
+      "parent": "system-health"
+    },
+    {
+      "id": "config-quality",
+      "name": "Configuration quality",
+      "parent": "system-health"
+    },
+    {
+      "id": "doc-retention",
+      "name": "Documentation retention",
+      "parent": "system-health"
+    },
+    {
+      "id": "adoption",
+      "name": "Adoption / RoI tracking",
+      "parent": "system-health"
+    },
+    {
+      "id": "impact-assessment",
+      "name": "Impact assessment",
+      "description": "Ability to gauge the ripple effects of potential changes on processes and systems"
+    },
+    {
+      "id": "tech-impact",
+      "name": "Technical impact assessment",
+      "parent": "impact-assessment"
+    },
+    {
+      "id": "single-request",
+      "name": "On a single request",
+      "parent": "tech-impact"
+    },
+    {
+      "id": "many-components",
+      "name": "Across many components",
+      "parent": "tech-impact"
+    },
+    {
+      "id": "ops-impact",
+      "name": "Operational impact assessment",
+      "parent": "impact-assessment"
+    },
+    {
+      "id": "on-processes",
+      "name": "On business processes",
+      "parent": "ops-impact"
+    },
+    {
+      "id": "reg-impact",
+      "name": "Regulatory impact assessment",
+      "parent": "impact-assessment"
+    },
+    {
+      "id": "sensitive-data",
+      "name": "On access to sensitive data",
+      "parent": "reg-impact"
+    },
+    {
+      "id": "regulations",
+      "name": "On regulations / policies",
+      "parent": "reg-impact"
+    },
+    {
+      "id": "change-governance",
+      "name": "Change governance",
+      "description": "A structured framework for overseeing and steering digital transformations"
+    },
+    {
+      "id": "coordinate-delivery",
+      "name": "Coordinate and plan delivery",
+      "parent": "change-governance"
+    },
+    {
+      "id": "capability-mapping",
+      "name": "Capability mapping",
+      "parent": "coordinate-delivery"
+    },
+    {
+      "id": "roadmapping",
+      "name": "Roadmapping",
+      "parent": "coordinate-delivery"
+    },
+    {
+      "id": "change-repository",
+      "name": "Central repository of change tickets",
+      "parent": "coordinate-delivery"
+    },
+    {
+      "id": "conflict-awareness",
+      "name": "Conflict awareness",
+      "parent": "coordinate-delivery"
+    },
+    {
+      "id": "change-awareness",
+      "name": "Change awareness",
+      "parent": "change-governance"
+    },
+    {
+      "id": "change-monitoring",
+      "name": "Change monitoring",
+      "parent": "change-awareness"
+    },
+    {
+      "id": "sensitive-alerts",
+      "name": "Sensitive change alerts",
+      "parent": "change-awareness"
+    },
+    {
+      "id": "change-intelligence",
+      "name": "Change Intelligence",
+      "placement": "band",
+      "description": "Ability to learn about the business and systems configuration and an ability to apply that knowledge to decide how the business change is to be executed most effectively"
+    }
+  ],
+  "drivers": [
+    {
+      "id": "drv-standardise",
+      "name": "Understand and standardize how the business operates",
+      "description": "We build features that the business does not need or that do not address the real business objectives."
+    },
+    {
+      "id": "drv-retain",
+      "name": "Retain knowledge of how the systems are put together",
+      "description": "We don't know how anything works or why. Therefore we lose agility, duplicate effort and build up technical debt."
+    },
+    {
+      "id": "drv-roi",
+      "name": "Understand RoI of Salesforce development",
+      "description": "We do not know how effective we are at managing our Org and where we need to improve most urgently."
+    },
+    {
+      "id": "drv-derisk",
+      "name": "Accelerate and de-risk delivery of changes",
+      "description": "The system is so big and complex, and documentation so scarce, that assessing impact of changes takes forever."
+    },
+    {
+      "id": "drv-coe",
+      "name": "Establish Center of Excellence",
+      "description": "Every member of the team follows a different process and there is no agreed upon standard of work."
+    }
+  ]
+}

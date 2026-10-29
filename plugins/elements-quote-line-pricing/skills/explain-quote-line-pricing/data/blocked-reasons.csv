@@ -1,0 +1,6 @@
+reason,meaning,owner_role,recovery_step
+ROUTE_UNAVAILABLE,The selected data route is unavailable or is not authorized.,Salesforce System Administrator,"Set up or authorize the selected route, then run the analysis again."
+PACKAGE_MISSING,"The Salesforce CPQ or Quote Line Microscope package is not installed, or the user cannot read a required object.","Salesforce CPQ administrator or Salesforce System Administrator","Install or enable the required package, or grant read access to the required object, then run the analysis again."
+ACCESS_GAP,The user cannot read a required field.,Salesforce CPQ administrator or Salesforce System Administrator,"Grant read access to the listed fields, then run the analysis again."
+NO_QLM_LOG,No quote line pricing log exists for this line.,User,"Click Create Diagram on the quote line, then run the analysis again."
+QUERY_FAILED,A data query or diagnostic calculation failed.,Salesforce CPQ administrator or Salesforce System Administrator,"Resolve the query or calculation error, then run the analysis again."

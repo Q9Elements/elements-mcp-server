@@ -1,0 +1,294 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "MuleSoft and Data 360: solution architecture",
+    "description": "Solution architecture for connecting back-office systems to the Salesforce clouds: MuleSoft exposes and governs the APIs, Data 360 ingests and unifies customer data. Redrawn from the Salesforce Well-Architected MuleSoft and Data 360 reference diagram.",
+    "author": "draw-system-architecture (example)",
+    "sources": [
+      {
+        "kind": "document",
+        "ref": "Salesforce Well-Architected reference diagram: MuleSoft and Data 360 solution"
+      }
+    ]
+  },
+  "systems": [
+    {
+      "id": "mulesoft",
+      "name": "MuleSoft",
+      "kind": "middleware",
+      "hub": true,
+      "attributes": [
+        {
+          "title": "API management: experience, process and system APIs"
+        },
+        {
+          "title": "API governance: authentication, rate limiting, monitoring"
+        }
+      ],
+      "footer": "Integrate and govern"
+    },
+    {
+      "id": "data360",
+      "name": "Data 360",
+      "kind": "salesforce",
+      "hub": true,
+      "attributes": [
+        {
+          "title": "Batch"
+        },
+        {
+          "title": "Zero Copy"
+        }
+      ],
+      "footer": "Data ingestion"
+    },
+    {
+      "id": "billing",
+      "name": "Billing and Payment",
+      "kind": "external-app",
+      "attributes": [
+        {
+          "title": "Accounts payable"
+        },
+        {
+          "title": "Accounts receivable"
+        }
+      ]
+    },
+    {
+      "id": "erp",
+      "name": "ERP System",
+      "kind": "external-app",
+      "attributes": [
+        {
+          "title": "Supply chain"
+        },
+        {
+          "title": "Inventory"
+        }
+      ]
+    },
+    {
+      "id": "hr",
+      "name": "HR System",
+      "kind": "external-app",
+      "attributes": [
+        {
+          "title": "Payroll"
+        },
+        {
+          "title": "HRIS"
+        }
+      ]
+    },
+    {
+      "id": "dwh",
+      "name": "Data Warehouse",
+      "kind": "data-store",
+      "attributes": [
+        {
+          "title": "User engagement data"
+        },
+        {
+          "title": "Purchase history"
+        }
+      ]
+    },
+    {
+      "id": "informatica",
+      "name": "Informatica",
+      "kind": "middleware",
+      "zone": "left",
+      "attributes": [
+        {
+          "title": "MDM"
+        },
+        {
+          "title": "ETL/ELT"
+        }
+      ]
+    },
+    {
+      "id": "sales-cloud",
+      "name": "Sales Cloud",
+      "kind": "salesforce",
+      "zone": "right",
+      "attributes": [
+        {
+          "title": "Leads, accounts, contacts"
+        },
+        {
+          "title": "Multichannel support"
+        }
+      ]
+    },
+    {
+      "id": "marketing-cloud",
+      "name": "Marketing Cloud",
+      "kind": "salesforce",
+      "zone": "right",
+      "attributes": [
+        {
+          "title": "Real-time"
+        },
+        {
+          "title": "Batch and streaming"
+        },
+        {
+          "title": "Affinity and intent"
+        },
+        {
+          "title": "Campaign optimizer"
+        }
+      ]
+    },
+    {
+      "id": "commerce-cloud",
+      "name": "Commerce Cloud",
+      "kind": "salesforce",
+      "zone": "right",
+      "attributes": [
+        {
+          "title": "Shopping cart"
+        },
+        {
+          "title": "Product catalog"
+        },
+        {
+          "title": "Personal shopper agent"
+        },
+        {
+          "title": "Unified profile"
+        },
+        {
+          "title": "Merchandising"
+        }
+      ]
+    },
+    {
+      "id": "service-cloud",
+      "name": "Service Cloud",
+      "kind": "salesforce",
+      "zone": "right",
+      "attributes": [
+        {
+          "title": "Case management"
+        },
+        {
+          "title": "Multichannel support"
+        }
+      ]
+    }
+  ],
+  "integrations": [
+    {
+      "from": "billing",
+      "to": "mulesoft",
+      "direction": "two-way",
+      "pattern": "remote-call-in",
+      "technology": "System API",
+      "timing": "real-time",
+      "step": 1
+    },
+    {
+      "from": "erp",
+      "to": "mulesoft",
+      "direction": "two-way",
+      "pattern": "remote-call-in",
+      "technology": "System API",
+      "timing": "real-time",
+      "step": 2
+    },
+    {
+      "from": "mulesoft",
+      "to": "sales-cloud",
+      "direction": "two-way",
+      "pattern": "remote-call-in",
+      "technology": "Experience API",
+      "timing": "real-time",
+      "step": 3
+    },
+    {
+      "from": "mulesoft",
+      "to": "marketing-cloud",
+      "direction": "two-way",
+      "technology": "Process API",
+      "timing": "near-real-time",
+      "step": 4
+    },
+    {
+      "from": "mulesoft",
+      "to": "commerce-cloud",
+      "direction": "two-way",
+      "technology": "Experience API",
+      "timing": "real-time",
+      "step": 5
+    },
+    {
+      "from": "hr",
+      "to": "data360",
+      "pattern": "batch-data-sync",
+      "technology": "Bulk API",
+      "timing": "batch",
+      "step": 6
+    },
+    {
+      "from": "dwh",
+      "to": "data360",
+      "direction": "two-way",
+      "pattern": "data-virtualization",
+      "technology": "Zero Copy",
+      "step": 7
+    },
+    {
+      "from": "informatica",
+      "to": "data360",
+      "pattern": "batch-data-sync",
+      "technology": "ETL",
+      "timing": "batch",
+      "step": 8
+    },
+    {
+      "from": "data360",
+      "to": "marketing-cloud",
+      "pattern": "batch-data-sync",
+      "technology": "Data Activation",
+      "timing": "batch",
+      "step": 9
+    },
+    {
+      "from": "data360",
+      "to": "commerce-cloud",
+      "pattern": "batch-data-sync",
+      "technology": "Data Activation",
+      "timing": "batch",
+      "step": 10
+    },
+    {
+      "from": "data360",
+      "to": "service-cloud",
+      "direction": "two-way",
+      "pattern": "data-virtualization",
+      "technology": "Data Cloud One",
+      "step": 11
+    },
+    {
+      "from": "sales-cloud",
+      "to": "marketing-cloud",
+      "direction": "two-way",
+      "technology": "Marketing Cloud Connect"
+    },
+    {
+      "from": "marketing-cloud",
+      "to": "commerce-cloud",
+      "direction": "two-way",
+      "technology": "Commerce connector"
+    },
+    {
+      "from": "commerce-cloud",
+      "to": "service-cloud",
+      "direction": "two-way",
+      "technology": "Commerce connector"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+setting,value,unit,rule
+card_width,200,px,Width of every card manage_diagram creates on a capability map; it cannot be changed there
+card_height,100,px,Height of a card with no footer and fewer than two list lines
+list_base,60,px,A card with no footer is list_base plus list_line_height per list line tall (at least card_height)
+footer_height,130,px,A card with a footer is footer_height plus list_line_height per list line tall
+list_line_height,26,px,Height a card gains per list line (card attribute)
+text_width,120,px,Width of a text box (a heading) as manage_diagram creates it whatever its text; the text is centred in it and wraps
+text_height,80,px,Height of a text box; its text is centred in it and is cut after about four lines
+column_gap,40,px,Horizontal space between neighbouring columns of cards
+max_columns,6,columns,Columns on one row of the grid before the rest wrap to a new row; a capability continuing into a second column counts each
+max_stack,8,cards,Sub-capabilities stacked under one heading before the rest continue in the next column
+sibling_gap,10,px,Vertical space between cards stacked under one heading
+group_gap,16,px,Vertical space before a sub-heading; the text box adds about 25 px of its own above the text so the visible gap is about 40 px and groups read apart
+row_gap,50,px,Vertical space between the drivers row and the grid; between rows of the grid; and between band rows
+label_gap,4,px,Space between a heading's text box and the first card under it; the text is centred in its 80 px box so the visible gap under two lines of heading is about 30 px
+legend_gap,60,px,Horizontal space between the legend column and the grid
+heading_max_word,17,characters,Longest word a heading can hold; the text box is 120 px wide and does not break words (about 104 px of text)
+heading_max_word_upper,13,characters,Longest word a heading can hold in capitals; a top-level heading with a longer word keeps its own case
+heading_case_top,upper,upper or as-is,Top-level capability headings and section headings (drivers and legend) in capitals so they read above sub-headings; a text box cannot be bold or larger
+header_border,#051E56,hex colour,Border of a top-level capability or band drawn as a card (one whose sub-capabilities are list lines or that has none)
+header_fill,#E6ECF5,hex colour,Fill of such a card when it has no rating
+rated_border,#6B6B6B,hex colour,Border of a rated card below the top level; fill comes from data/capability-ratings.csv
+drivers_title,Business Drivers,text,Text of the heading over the driver cards
+box_text_max_chars,60,characters,Longest card title before the plan warns it will crowd the card (the card does not grow for its title)
+heading_max_chars,50,characters,Longest heading before the plan warns its text box will cut it
+footer_max_chars,120,characters,Longest footer before the plan warns (the card does not grow for its footer)
+list_max_items,8,lines,Most list lines on one card before the plan warns the card is getting long

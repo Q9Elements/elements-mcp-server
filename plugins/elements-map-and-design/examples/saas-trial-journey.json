@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "SaaS trial journey (example)",
+    "description": "A made-up B2B SaaS customer journey from first search to advocacy, with the trial stage drilled down to its touchpoints. For testing the journey drawing; not taken from a real company.",
+    "author": "example",
+    "sources": [{"kind": "user", "ref": "Worked example shipped with the elements-map-and-design plugin"}]
+  },
+  "roles": [
+    {"id": "customer", "name": "Customer", "kind": "human"},
+    {"id": "csm", "name": "Customer Success Manager", "kind": "human"},
+    {"id": "website", "name": "Website", "kind": "system"},
+    {"id": "video", "name": "Video-Conferencing", "kind": "system"},
+    {"id": "product", "name": "Product / Application", "kind": "system"},
+    {"id": "community", "name": "Community portal", "kind": "system"}
+  ],
+  "activities": [
+    {"id": "explore", "name": "Explore options for my problem", "stage": "Awareness", "roles": [{"role": "customer"}, {"role": "website"}]},
+    {"id": "trial", "name": "Try out the product", "stage": "Consideration", "roles": [{"role": "customer"}, {"role": "product"}]},
+    {"id": "buy", "name": "Buy a subscription", "stage": "Purchase", "roles": [{"role": "customer"}, {"role": "website"}]},
+    {"id": "adopt", "name": "Adopt the product", "stage": "Retention", "roles": [{"role": "customer"}, {"role": "csm"}, {"role": "product"}]},
+    {"id": "advocate", "name": "Recommend the product to peers", "stage": "Advocacy", "roles": [{"role": "customer"}, {"role": "community"}]},
+    {"id": "request", "name": "Request a demo", "parent": "trial", "roles": [{"role": "customer"}, {"role": "website"}]},
+    {"id": "demo", "name": "Watch the product demo", "parent": "trial", "roles": [{"role": "customer"}, {"role": "video"}]},
+    {"id": "signup", "name": "Sign up for a trial", "parent": "trial", "roles": [{"role": "customer"}, {"role": "product"}]},
+    {"id": "evaluate", "name": "Evaluate the product with my team", "parent": "trial", "roles": [{"role": "customer"}, {"role": "product"}]},
+    {"id": "help", "name": "Ask the trial team for help", "parent": "trial", "roles": [{"role": "customer"}, {"role": "csm"}], "inferred": true, "evidence": ["No trial-support step in the source; assumed from the onboarding emails"]}
+  ],
+  "flows": [
+    {"from": "START", "to": "explore", "label": "Customer becomes aware of a problem"},
+    {"from": "explore", "to": "trial", "label": "Product shortlisted"},
+    {"from": "explore", "to": "END", "label": "Customer picks another vendor"},
+    {"from": "trial", "to": "buy", "label": "Product value proven in trial"},
+    {"from": "trial", "to": "END", "label": "Trial ends without a purchase"},
+    {"from": "buy", "to": "adopt", "label": "Subscription active"},
+    {"from": "adopt", "to": "advocate", "label": "Customer sees the value"},
+    {"from": "adopt", "to": "END", "label": "Customer churns at renewal"},
+    {"from": "advocate", "to": "END", "label": "Customer remains loyal"},
+    {"from": "advocate", "to": "explore", "label": "Peers start their own search"},
+    {"from": "START", "to": "request", "label": "Product shortlisted"},
+    {"from": "request", "to": "demo", "label": "Demo booked"},
+    {"from": "demo", "to": "signup", "label": "Customer wants hands-on time"},
+    {"from": "signup", "to": "evaluate", "label": "Trial workspace ready"},
+    {"from": "evaluate", "to": "END", "label": "Product value proven in trial"},
+    {"from": "evaluate", "to": "help", "label": "Customer is stuck"},
+    {"from": "evaluate", "to": "END", "label": "Trial ends without a purchase"},
+    {"from": "help", "to": "evaluate", "label": "Question answered", "inferred": true}
+  ],
+  "gaps": [
+    {"about": "help", "note": "The source does not say who answers trial questions; the model assumes the Customer Success Manager."}
+  ]
+}

@@ -1,0 +1,19 @@
+element,resource,resource_type,flow_xml,apex,omniscript,meaning
+start,Start,Flow,start,"the trigger or method entry: trigger context (before/after insert, update, delete), @InvocableMethod, execute()","the script's launch",What starts the automation: the trigger object and event and the entry conditions
+screen,Screen,Flow,screens,,"Step, Text Block, Input elements",A screen the user sees and fills in
+get-records,Get Records,Flow,recordLookups,"SOQL query: [SELECT ...], Database.query","DataRaptor Extract, DataRaptor Turbo Extract, Data Mapper Extract",Reads records that match conditions
+create-records,Create Records,Flow,recordCreates,"insert, Database.insert, EventBus.publish (a platform event)","DataRaptor Load (insert), Data Mapper Load",Creates records; publishing a platform event is a create on the event
+update-records,Update Records,Flow,recordUpdates,"update, upsert, Database.update, Database.upsert","DataRaptor Load (update or upsert)",Changes existing records
+delete-records,Delete Records,Flow,recordDeletes,"delete, Database.delete",,Deletes records
+roll-back-records,Roll Back Records,Flow,recordRollbacks,"Database.rollback, Database.setSavepoint",,Undoes the record changes made so far in this transaction
+assignment,Assignment,Flow,"assignments, transforms","setting variables or fields in memory, building a collection, mapping data",Set Values,Sets variables or field values in memory; nothing is saved yet
+decision,Decision,Flow,decisions,"if / else if / else, switch on, a ternary that changes the path","Conditional Block, conditional view",Takes one path or another depending on conditions
+collection-filter,Collection Filter,Flow,collectionProcessors:FilterCollectionProcessor,a loop that keeps only matching items,,Keeps only the items of a collection that match conditions
+collection-sort,Collection Sort,Flow,collectionProcessors:SortCollectionProcessor,"List.sort, a Comparator",,Sorts a collection
+loop,Loop,Flow,loops,"for, while, do-while over records or a list",Loop Block,"Repeats its body (a drill-down level) for each item, then goes on"
+pause,Pause,Flow,waits,"System.schedule, a scheduled job, a time-based wait",,Waits for a time or an event before going on
+subflow,Flow,Flow,subflows,Flow.Interview start,,Runs another flow and waits for it
+action,Action,Flow,"actionCalls (apex, quickAction, chatterPost, generatePromptResponse, externalService, submit, flow and every other action type), apexPluginCalls, orchestratedStages","a call to another class's method, an HTTP callout, System.enqueueJob, an @future method, Database.executeBatch","Integration Procedure Action, Remote Action, HTTP Action, DocuSign and other actions","Runs an action: Apex, a callout, a prompt template, a Chatter post, an approval submission"
+send-email,Send email,Flow,"actionCalls:emailSimple, actionCalls:emailAlert, actionCalls:sendEmail","Messaging.sendEmail, Messaging.SingleEmailMessage",Email Action,Sends an email
+custom-error,Custom Error,Flow,customErrors,"addError(), throw new ...Exception",,Stops the save with an error message and rolls back
+prompt-instructions,Add Prompt Instructions,Flow,"(template-triggered prompt flows) Add Prompt Instructions",,,Adds text to a prompt template's instructions

@@ -1,0 +1,44 @@
+{
+  "name": "elements-map-and-design",
+  "version": "1.0.1",
+  "description": "Map and design Salesforce business architecture as Elements diagrams: business processes and data models from your org or vendor documentation, automation logic and chains, the systems your org integrates with, and process maps, journeys, data models, capability maps and architecture from your documents, pictures or descriptions. Also derives a solution design from a process map and checks how far the org implements a design.",
+  "author": {
+    "name": "Elements.cloud",
+    "email": "success@elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "homepage": "https://developer.elements.cloud/",
+  "repository": "https://github.com/Q9Elements/elements-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": [
+    "elements-cloud",
+    "salesforce",
+    "business-architecture",
+    "process-mapping",
+    "data-model",
+    "system-architecture",
+    "solution-design",
+    "capability-map"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Elements Map and Design",
+    "shortDescription": "Map your Salesforce org's processes, data, automations and integrations, and design from them, as Elements diagrams.",
+    "longDescription": "Turns what Elements knows about your Salesforce org, plus vendor documentation and your own documents, pictures and descriptions, into well-laid-out Elements diagrams. From the org: the business process its objects support, data models, how an automation or a chain of automations works, the automations behind each status, and every outside system the org exchanges data with. From vendor documentation: a product's out-of-the-box process. From your documents, pictures or descriptions: process maps, customer journeys, data models, interaction flows, capability maps and system architecture. From a process map in Elements: the solution design it implies (a data model, a system architecture, a data access matrix and a solution overview document), or a check of how far the org implements it, coloured on the map. It also draws an agent package, such as a Claude skill or plugin, as a process for sign-off. Data models and system architecture diagrams can be amended; other diagrams are drawn new. Diagrams are created as drafts in Elements; nothing in Salesforce is changed. Needs the Elements.cloud plugin and its connection.",
+    "developerName": "Elements.cloud",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://elements.cloud/",
+    "privacyPolicyURL": "https://elements.cloud/privacy-gdpr/",
+    "termsOfServiceURL": "https://elements.cloud/app-terms-of-service/",
+    "defaultPrompt": [
+      "Draw the data model for our Opportunity and Quote objects.",
+      "Which systems does our Salesforce org integrate with? Draw the landscape.",
+      "Is our to-be lead qualification process map actually built in the org?"
+    ],
+    "brandColor": "#168FCE"
+  }
+}

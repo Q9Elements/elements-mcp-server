@@ -1,0 +1,9 @@
+order,stage,label,sf_field,owner_agent,source_rule
+1,original,Original Price,SBQQ__OriginalPrice__c,Pricing Method Agent,Price Book
+2,list,List Price,SBQQ__ListPrice__c,Pricing Method Agent,"Price Rule, Option Unit Price or Price Book when its recorded value equals List Price; else not determined from the recorded data"
+3,special,Special Price,SBQQ__SpecialPrice__c,Pricing Method Agent,Bundled when a bundled option has zero Special Price; else Special price type or special source rule; null when Special equals List
+4,prorated,Prorated Price,SBQQ__ProratedPrice__c,Pricing Method Agent,Proration when multiplier is not 1
+5,regular,Regular Price,SBQQ__RegularPrice__c,Discount Agent,Discount Schedule when a schedule applied; Bundled when a bundled option first reaches zero at Regular
+6,customer,Customer Price,SBQQ__CustomerPrice__c,Discount Agent,Additional Discount when manual discount applies
+7,partner,Partner Price,SBQQ__PartnerPrice__c,Discount Agent,Partner Discount when partner discount applies
+8,net,Net Price,SBQQ__NetPrice__c,Discount Agent,Distributor Discount when distributor discount applies

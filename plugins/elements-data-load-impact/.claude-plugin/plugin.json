@@ -1,0 +1,6 @@
+{
+  "name": "elements-data-load-impact",
+  "version": "1.1.0",
+  "description": "Turn a planned Salesforce data load into a ratified safety package, optional sandbox rehearsal, and customer-executed backlog without moving production records.",
+  "author": { "name": "Elements.cloud" }
+}

@@ -1,0 +1,3 @@
+reason,owner,recovery_outcome,source
+MISSING_PRIMITIVE,Elements administrator,Required tool resolves and the engagement restarts at prerequisites,Elements method
+SYNC_INCOMPLETE,Salesforce administrator,Reference Model sync completes and the engagement restarts at prerequisites,run_data_load_impact production contract [SERVER] tool contract

@@ -1,0 +1,12 @@
+flag,json_path,rule,gates_agent
+pricingMethodType,pricingMethod.type,Value of pricingMethod.type.,"pricing-method, always"
+isSupportedPricingMethod,flags.isSupportedPricingMethod,"True when type is List, Cost, Block, Percent Of Total, or Custom.",
+isOption,flags.isOption,True when P01.SBQQ__RequiredBy__c is not null.,bundle-and-options
+isBundleParent,flags.isBundleParent,True when P01.SBQQ__Bundle__c is true.,bundle-and-options
+hasBundleContext,flags.hasBundleContext,True when isOption or isBundleParent.,bundle-and-options gate
+isBundledOption,flags.isBundledOption,True when isOption and P01.SBQQ__Bundled__c or P06.SBQQ__Bundled__c is true.,
+isDiscounted,flags.isDiscounted,Value of discounts.anyApplied.,discount gate
+hasPriceRulesApplied,flags.hasPriceRulesApplied,True when priceRules.status is rules_fired and some rule has at least one logged action on any target object.,
+isMdq,flags.isMdq,True when P01.SBQQ__Dimension__c is not null.,mdq gate
+hasBlockPriceOverage,flags.hasBlockPriceOverage,"True for Block method when a tier overage rate applies above its lower bound, or when a Slab quantity schedule is applied.",
+broadQuestionAgents,flags.broadQuestionAgents,"Array contains pricing-method, plus discount when isDiscounted, bundle-and-options when hasBundleContext, and mdq when isMdq.",Any applicable agent gate flags

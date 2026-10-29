@@ -1,0 +1,6 @@
+{
+  "name": "elements-map-and-design",
+  "version": "1.0.1",
+  "description": "Map and design Salesforce business architecture as Elements diagrams: business processes and data models from your org or vendor documentation, automation logic and chains, the systems your org integrates with, and process maps, journeys, data models, capability maps and architecture from your documents, pictures or descriptions. Also derives a solution design from a process map and checks how far the org implements a design.",
+  "author": { "name": "Elements.cloud" }
+}

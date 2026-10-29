@@ -1,0 +1,106 @@
+{
+  "engagement": {
+    "name": null,
+    "started": null,
+    "playbook_version": "1.1.0"
+  },
+  "slots": {
+    "space_id": null,
+    "model_id": null,
+    "data_load_owner": null,
+    "data_source": null,
+    "space_name": null,
+    "model_name": null
+  },
+  "current_state": "kickoff",
+  "current_step": "steps/00-kickoff.md",
+  "sync": {
+    "timestamp": null,
+    "orgId": null
+  },
+  "manifest": {
+    "loader": null,
+    "api": null,
+    "targets": [],
+    "payloadFiles": [],
+    "orgContextFile": null,
+    "rulesVersion": null,
+    "toolTargetsFile": null,
+    "calls": [],
+    "residueFile": null,
+    "roleBasedPortalUser": {
+      "applicable": null,
+      "answer": null,
+      "operations": [],
+      "confirmedBy": null,
+      "confirmedOn": null
+    },
+    "targetFacts": [],
+    "privacyGateHeld": null,
+    "confirmedBy": null,
+    "confirmedOn": null
+  },
+  "analysis": {
+    "calls": [],
+    "absenceIsEvidence": null,
+    "reportFile": null,
+    "duplicateRules": {},
+    "managedPackages": {}
+  },
+  "bypass": {
+    "verdictsFile": null
+  },
+  "package": {
+    "draftChecklistFile": null,
+    "draftParametersFile": null,
+    "ownerChecklistFile": null,
+    "ownerParametersFile": null,
+    "checklistFile": null,
+    "parametersFile": null,
+    "reviewFindings": [],
+    "reviewRoundsUsed": 0,
+    "incidentClassRulings": [],
+    "ratifiedBy": null,
+    "ratifiedOn": null,
+    "goNoGo": null
+  },
+  "rehearsal": {
+    "choice": null,
+    "choiceBy": null,
+    "choiceOn": null,
+    "reasonsToRehearse": [],
+    "sandboxAlias": null,
+    "sandboxOrgId": null,
+    "capturePath": null,
+    "cliRuns": [],
+    "successFiles": [],
+    "rowsLoaded": null,
+    "observedFile": null,
+    "reconciliationFile": null,
+    "summaryFile": null,
+    "controlFailures": [],
+    "unpredicted": [],
+    "informationalNotObserved": [],
+    "measuredIncidentClasses": [],
+    "acceptedBy": null,
+    "acceptedOn": null,
+    "errorFiles": [],
+    "duplicatesDetected": null,
+    "lockErrors": null,
+    "lockErrorsAccepted": null,
+    "ladderChanges": []
+  },
+  "backlog": {
+    "storiesDir": null,
+    "storyFiles": [],
+    "generatedOn": null
+  },
+  "open_items": [],
+  "decisions_log": [],
+  "blocked": {
+    "reason": null,
+    "owner": null,
+    "entered_from": null,
+    "evidence": null
+  }
+}

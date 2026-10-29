@@ -1,0 +1,367 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.elements.cloud/schemas/business-architecture/map-agent-as-process/inventory-1.0.json",
+  "title": "Agent package inventory",
+  "description": "What scripts/inventory_package.py found in an agent package: its format, its stages in order with their instructions, outcomes and the components each one calls, the people it names, and what it could not place. prepare_briefs.py writes the level briefs from it; build_model.py turns components into resources.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "package",
+    "stages",
+    "components",
+    "humanRoles",
+    "unused",
+    "unclassified",
+    "gaps"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "package": {
+      "type": "object",
+      "required": [
+        "name",
+        "path",
+        "format",
+        "stageSource",
+        "tested"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "stageSource": {
+          "enum": [
+            "dispatch-table",
+            "stage-table",
+            "headings",
+            "commands",
+            "package-list"
+          ]
+        },
+        "tested": {
+          "type": "boolean",
+          "description": "false when the format's adapter has not yet been tried on a real package"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 4000
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stage"
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/component"
+      }
+    },
+    "humanRoles": {
+      "description": "People the package names as deciding or approving, as written in it.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      }
+    },
+    "unused": {
+      "description": "The package's own agents, skills, scripts and files that no stage calls, directly or through a component it calls. mentionedIn lists other package files (not the entry) that mention one; one mentioned nowhere is dead.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "path"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "mentionedIn": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 1000
+            }
+          }
+        }
+      }
+    },
+    "unclassified": {
+      "description": "Files in the package that are neither a stage nor a component kind in data/resource-prefixes.csv.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "note"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "about": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stage": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "source",
+        "states",
+        "instructions",
+        "outcomes",
+        "uses",
+        "drillDown"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,47}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "states": {
+          "description": "Playbook states this stage's card serves.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        "terminal": {
+          "type": "boolean",
+          "description": "A dispatch-table state with no card: the run ends there."
+        },
+        "purpose": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "failure": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "who": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "finishedWhen": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "command": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "instructions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 8000
+          }
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "condition",
+              "to"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 40
+              },
+              "condition": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "to": {
+                "description": "The stage it leads to, or null when the run ends or the package names no next stage.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "default": {
+                "type": "boolean"
+              },
+              "inferred": {
+                "type": "boolean",
+                "description": "The order was assumed, not stated."
+              },
+              "recovery": {
+                "type": "boolean",
+                "description": "The outcome sends the run to the recovery stage: drawn on the stage's own level as a loop through 'Resolve the block', not as a top-level line."
+              }
+            }
+          }
+        },
+        "humanMoments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        },
+        "uses": {
+          "description": "Component ids the stage's text calls, in the order they first appear.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        },
+        "drillDown": {
+          "type": "boolean",
+          "description": "The stage gets a level of its own (two or more instructions, and depth children)."
+        },
+        "indirect": {
+          "description": "Components in uses that the stage reaches through another one: a data table a script reads, a reference an agent follows.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "via"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "via": {
+                "type": "string",
+                "maxLength": 255
+              }
+            }
+          }
+        },
+        "recovery": {
+          "type": "boolean",
+          "description": "A stage that only gets a stopped run unstuck and resumes where it stopped (a playbook's blocked card). It gets no box on the top level; every stage that can fail carries it as a 'Resolve the block' step on its own level."
+        }
+      }
+    },
+    "component": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "name",
+        "usedBy"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "kind": {
+          "enum": [
+            "assistant",
+            "agent",
+            "skill",
+            "command",
+            "mcp-server",
+            "mcp-tool",
+            "script",
+            "data",
+            "template",
+            "reference"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "server": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 600
+        },
+        "usedBy": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 60
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1391 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.elements.cloud/schemas/business-architecture/ba-model-1.0.json",
+  "title": "Business architecture model",
+  "description": "What a reader (an agent or a skill) found about a business, in one shape every drawing skill can read. Every content section is optional, but a model needs at least one item, or at least one gap when the reader found nothing. Ids are unique across the whole model, so any field that points at another item uses its id. scripts/validate.py checks this file and the rules this schema cannot express, such as whether a referenced id exists.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "meta"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "description": "Version of this format. Always \"1.0\" for this schema.",
+      "const": "1.0"
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "roles": {
+      "description": "Who or what performs activities: people, teams, systems, AI agents. Drawn as resources on process maps and journeys.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/role"
+      }
+    },
+    "activities": {
+      "description": "Steps of a process or touchpoints of a customer journey. An activity with a parent sits on the child level that drills down from that parent.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/activity"
+      }
+    },
+    "flows": {
+      "description": "Lines between activities on the same level. Use START as 'from' for what starts a level and END as 'to' for how it ends. List an activity's expected outcome first: drawing skills put the first-listed line out of each activity on the main path. Lines out of one activity with the same label are one outcome that starts several activities in parallel.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/flow"
+      }
+    },
+    "entities": {
+      "description": "Data objects (Salesforce objects or entities in other systems) with their key fields. Drawn as cards on data models.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entity"
+      }
+    },
+    "relationships": {
+      "description": "How entities relate. Drawn as lines with crow's-foot ends on data models.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relationship"
+      }
+    },
+    "systems": {
+      "description": "Applications, platforms, data stores and channels. Drawn as cards on system architecture diagrams.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/system"
+      }
+    },
+    "integrations": {
+      "description": "How systems exchange data or calls. Drawn as labelled lines on system architecture diagrams.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/integration"
+      }
+    },
+    "automations": {
+      "description": "Flows, Apex, OmniScripts and other automation components. Drawn as cards on interaction flow diagrams.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/automation"
+      }
+    },
+    "interactions": {
+      "description": "What triggers, calls, reads, writes or publishes what, between automations, entities, systems and roles. START as 'from' marks what starts the chain and END as 'to' where it ends. Drawn as numbered lines on the chain level of interaction flow diagrams.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/interaction"
+      }
+    },
+    "steps": {
+      "description": "The logic inside an automation, one card per step: what it gets, decides, assigns, creates, updates, deletes, calls or sends. A step with no parent sits on its automation's own logic level (the child level of the automation's card on a chain, or the top level when the model has one automation and no interactions); a step with a parent sits on the drill-down level of that step, such as a loop's body. Drawn as cards on interaction flow diagrams, with the header icon that data/automation-elements.csv gives its element.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    },
+    "connectors": {
+      "description": "Lines between steps on the same logic level. Use START as 'from' for what starts the level and END as 'to' for where it ends. List a step's expected outcome first: drawing puts the first-listed line out of each step on the main path, and lays the other outcomes out above and below it.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/connector"
+      }
+    },
+    "capabilities": {
+      "description": "What the organisation can do, as a tree: a capability with a parent is a sub-capability of it. Drawn on capability maps.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "drivers": {
+      "description": "Business drivers: the outcomes or problems the capabilities serve. Drawn as a band of cards above the capabilities on a capability map.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/driver"
+      }
+    },
+    "levelNotes": {
+      "description": "Sticky notes drawn on a level of a process map or journey, beside one of its boxes (by default the box the level starts at). Use them for what concerns the level as a whole, such as how much the org uses the object or record type the level follows; what concerns one step belongs in that step's note attachment. A note is drawn 150 x 150 px and loses its line breaks, so write a short title and a few sentences.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/levelNote"
+      }
+    },
+    "gaps": {
+      "description": "What the reader could not establish or cover, with the reason. Never fill a gap silently; record it here.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gap"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "description": "Identifier unique across the whole model: letters, digits, '_', '.', '-'; up to 64 characters. START and END are reserved for flows.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$"
+    },
+    "name": {
+      "description": "What the box shows, in the reader's language.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 5000
+    },
+    "label": {
+      "description": "Text on a line, such as a decision outcome ('Qualified') or what is passed.",
+      "type": "string",
+      "maxLength": 200
+    },
+    "inferred": {
+      "description": "true when the source did not state this and the reader worked it out. Drawing skills flag inferred items so nobody mistakes them for fact.",
+      "type": "boolean"
+    },
+    "evidence": {
+      "description": "Where this came from: a ticket key, a metadata API name, a document section, a quote.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      }
+    },
+    "attachments": {
+      "description": "Links to put on the drawn box: Salesforce metadata, Elements stories, web links or notes.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/attachment"
+      }
+    },
+    "attachment": {
+      "description": "A link to put on the drawn box. metadata: a Salesforce item by API name (a field as Object.Field). story: an Elements story by number. link: a web page. note: a titled note.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/metadataAttachment"
+        },
+        {
+          "$ref": "#/$defs/storyAttachment"
+        },
+        {
+          "$ref": "#/$defs/linkAttachment"
+        },
+        {
+          "$ref": "#/$defs/noteAttachment"
+        }
+      ]
+    },
+    "meta": {
+      "description": "What the model is about and where it came from.",
+      "type": "object",
+      "required": [
+        "title",
+        "sources"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/mapTitle"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "author": {
+          "description": "The skill or agent that wrote the model, such as ticket-reader.",
+          "type": "string",
+          "maxLength": 100
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "description": "metadata: the Elements Metadata Dictionary. document: a file, page or picture. tickets: Jira issues or Elements stories. diagram: an existing Elements diagram. user: what the person said in the conversation.",
+          "enum": [
+            "metadata",
+            "document",
+            "tickets",
+            "diagram",
+            "user"
+          ]
+        },
+        "ref": {
+          "description": "Which one: a reference model id, file name, epic key or filter, map id, or a short description.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "note": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "role": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "kind": {
+          "description": "human covers people, teams and customers; system covers applications such as Salesforce; ai-agent covers Agentforce and other AI agents.",
+          "enum": [
+            "human",
+            "system",
+            "ai-agent"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "roleAssignment": {
+      "type": "object",
+      "required": [
+        "role"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "$ref": "#/$defs/id"
+        },
+        "rasci": {
+          "description": "Any of R, A, S, C, I (Responsible, Accountable, Supportive, Consulted, Informed). Human roles only.",
+          "type": "string",
+          "pattern": "^[RASCI]{0,5}$"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "activity": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "description": "Verb first, what happens: 'Qualify lead', not 'Lead qualification'.",
+          "$ref": "#/$defs/name"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/roleAssignment"
+          }
+        },
+        "parent": {
+          "description": "Id of the activity this one drills down from. Leave out for the top level.",
+          "$ref": "#/$defs/id"
+        },
+        "stage": {
+          "description": "Customer journey stage, such as Awareness or Purchase. Used by journey maps.",
+          "type": "string",
+          "maxLength": 100
+        },
+        "join": {
+          "description": "How the lines coming into this activity combine. any (the default): any one of them starts it. all: it waits until every one has arrived, and drawing skills bring them all in at one point.",
+          "type": "string",
+          "enum": [
+            "any",
+            "all"
+          ]
+        },
+        "uses": {
+          "description": "Ids of the entities, systems and automations this step reads, writes or runs on.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "diagramRef": {
+          "description": "Where this activity came from, when it was read from an existing Elements diagram.",
+          "type": "object",
+          "required": [
+            "diagramId",
+            "key"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "diagramId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "key": {
+              "description": "The box key from get_diagram.",
+              "type": "integer"
+            }
+          }
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attachments": {
+          "$ref": "#/$defs/attachments"
+        }
+      }
+    },
+    "flow": {
+      "type": "object",
+      "required": [
+        "from",
+        "to"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "from": {
+          "description": "An activity id, or START.",
+          "$ref": "#/$defs/id"
+        },
+        "to": {
+          "description": "An activity id, or END.",
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "sets": {
+          "description": "The lifecycle value an entity has once this line's outcome holds ('Opportunity moved to Needs Analysis' sets Opportunity's StageName to Needs Analysis). The value must be one of the entity's lifecycle values.",
+          "type": "object",
+          "required": [
+            "entity",
+            "value"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "entity": {
+              "description": "An entity id; the entity has a lifecycle.",
+              "$ref": "#/$defs/id"
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            }
+          }
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "apiName": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "type": {
+          "description": "Data type as the source names it, such as Text, Lookup(Account), Picklist.",
+          "type": "string",
+          "maxLength": 100
+        },
+        "key": {
+          "enum": [
+            "primary",
+            "foreign"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "apiName": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "kind": {
+          "description": "standard and custom are Salesforce objects; external lives in another system; proposed does not exist yet.",
+          "enum": [
+            "standard",
+            "custom",
+            "external",
+            "proposed"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "fields": {
+          "description": "Only the fields worth showing on the diagram, usually keys and the fields that drive the process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/field"
+          }
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attachments": {
+          "$ref": "#/$defs/attachments"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/lifecycle"
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "required": [
+        "from",
+        "to",
+        "cardinality"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "from": {
+          "$ref": "#/$defs/id"
+        },
+        "to": {
+          "$ref": "#/$defs/id"
+        },
+        "cardinality": {
+          "description": "Read from 'from' to 'to': one-to-many means one 'from' has many 'to'.",
+          "enum": [
+            "one-to-one",
+            "one-to-many",
+            "many-to-one",
+            "many-to-many"
+          ]
+        },
+        "kind": {
+          "description": "lookup and master-detail are Salesforce relationship fields; reference is any other link, such as an external id.",
+          "enum": [
+            "lookup",
+            "master-detail",
+            "reference"
+          ]
+        },
+        "fromEnd": {
+          "description": "Line end drawn at the 'from' entity: how many 'from' records one 'to' record relates to. Overrides the default data/relationship-ends.csv gives for the cardinality and kind; data/er-line-ends.csv lists the values and their Elements shapes.",
+          "enum": [
+            "zero-or-one",
+            "exactly-one",
+            "one",
+            "zero-or-many",
+            "one-or-many",
+            "many",
+            "none"
+          ]
+        },
+        "toEnd": {
+          "description": "Line end drawn at the 'to' entity: how many 'to' records one 'from' record relates to. Overrides the default, as fromEnd does.",
+          "enum": [
+            "zero-or-one",
+            "exactly-one",
+            "one",
+            "zero-or-many",
+            "one-or-many",
+            "many",
+            "none"
+          ]
+        },
+        "field": {
+          "description": "API name of the field that holds the relationship, when known.",
+          "type": "string",
+          "maxLength": 255
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "system": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "kind": {
+          "description": "salesforce: a Salesforce org, cloud or product. middleware: MuleSoft, ETL and other integration platforms. external-app: ERP, marketing, ads and other applications outside Salesforce. data-store: warehouses, lakes and lakehouses. channel: web, mobile, portals and other ways people reach the business. On a system architecture diagram the kind sets the card colour (data/system-kinds.csv) and, with the direction of its integrations, the zone the card goes in (data/architecture-zones.csv).",
+          "enum": [
+            "salesforce",
+            "middleware",
+            "external-app",
+            "data-store",
+            "channel"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attachments": {
+          "$ref": "#/$defs/attachments"
+        },
+        "hub": {
+          "description": "true: the system the diagram is about, drawn in the centre with the others around it (Data 360, MuleSoft, the Salesforce org). Several hubs on one level are stacked in the centre. When no system on a level is a hub, the Salesforce or middleware system with the most integrations is.",
+          "type": "boolean"
+        },
+        "zone": {
+          "description": "Where the card goes around the hub, overriding the default from data/architecture-zones.csv: left (sources), right (destinations), top (engagement) or bottom (ingestion).",
+          "enum": [
+            "top",
+            "left",
+            "right",
+            "bottom"
+          ]
+        },
+        "parent": {
+          "description": "Id of the group system this one belongs to, such as the 'Sales org' that holds Agentforce and Tableau Next. A group is drawn as one card listing its members, with a drill-down level showing each member as its own card. Groups are one level deep: a member cannot have members.",
+          "$ref": "#/$defs/id"
+        },
+        "icon": {
+          "description": "Name of the resource in the space library to show as the card's header icon, such as 'Data Cloud Logo'. Left out, data/system-icons.csv picks one from the name and kind, or none.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "attributes": {
+          "description": "The system's key components or capabilities, listed on its card (Data Ingress, Identity Resolution). A group with none lists its members' names.",
+          "$ref": "#/$defs/cardAttributes"
+        },
+        "footer": {
+          "description": "One short sentence or label shown in the card's footer, such as 'Collect and unify customer data' or 'Batch and Zero Copy'.",
+          "type": "string",
+          "maxLength": 1000
+        },
+        "footerIcons": {
+          "description": "Names of library resources shown as small icons in the card's footer, such as the products a group holds. More than three make the card wider. A group with none shows its members' header icons.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "placement": {
+          "description": "Middleware only: where the diagram draws it. card: its own card, with the systems it carries joined to it. label: those systems join the other end directly and their lines say 'via <middleware>'. Left out, the threshold middleware_fold_threshold in data/style-architecture.csv decides by how many systems it carries.",
+          "enum": [
+            "card",
+            "label"
+          ]
+        }
+      }
+    },
+    "integration": {
+      "type": "object",
+      "required": [
+        "from",
+        "to"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "from": {
+          "$ref": "#/$defs/id"
+        },
+        "to": {
+          "$ref": "#/$defs/id"
+        },
+        "via": {
+          "description": "Id of the middleware system (kind middleware) the data passes through on its way, such as Make between the org and Xero. The diagram draws it by the middleware's placement: as two lines through the middleware's card, or as one line labelled 'via <middleware>'. Leave out for a direct exchange.",
+          "$ref": "#/$defs/id"
+        },
+        "pattern": {
+          "description": "A pattern_id from data/integration-patterns.csv: the Salesforce integration pattern (Well-Architected) the exchange follows.",
+          "type": "string",
+          "maxLength": 100
+        },
+        "direction": {
+          "description": "one-way (default): data moves from 'from' to 'to'; the line has an arrow at 'to'. two-way: data moves both ways, arrows at both ends, and 'from' is the side that starts the exchange.",
+          "enum": [
+            "one-way",
+            "two-way"
+          ]
+        },
+        "technology": {
+          "description": "The mechanism, as people name it: REST API, Platform Events, Bulk API, Zero Copy, Data Activation, Out of the box connector, MuleSoft. Shown as the line's label when there is no label. Matched against data/integration-mechanisms.csv to check it is a mechanism Well-Architected recommends for the pattern.",
+          "type": "string",
+          "maxLength": 200
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "timing": {
+          "description": "How soon the data arrives, as data/integration-timing.csv lists: real-time (the caller waits), near-real-time (events or messages, no waiting) or batch (on a schedule). Written after the label ('Zero Copy · batch') and explained in the diagram's key.",
+          "enum": [
+            "real-time",
+            "near-real-time",
+            "batch"
+          ]
+        },
+        "step": {
+          "description": "Order of this exchange in a solution's flow; the label then starts 'N. '. Leave it out on landscapes.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "automations": {
+          "description": "Ids of the automations (in 'automations') that carry this exchange. With 'objects', they draw the system's drill-down: the system, the middleware, these automations and the objects, left to right.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "objects": {
+          "description": "Ids of the entities (in 'entities'): the objects the exchange's automations read, write or run on. What each automation does to each object comes from 'interactions'.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        }
+      }
+    },
+    "automation": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "type": {
+          "enum": [
+            "flow",
+            "apex-class",
+            "apex-trigger",
+            "omniscript",
+            "integration-procedure",
+            "data-mapper",
+            "flexcard",
+            "lightning-component",
+            "validation-rule",
+            "workflow-rule",
+            "process-builder",
+            "approval-process",
+            "assignment-rule",
+            "auto-response-rule",
+            "escalation-rule",
+            "platform-event",
+            "other"
+          ],
+          "description": "data/automation-types.csv gives each type's header icon on the chain level."
+        },
+        "apiName": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "summary": {
+          "description": "What the automation does, in one or two plain sentences, shown as its card's footer on the chain level. Elements allows 1000 characters; keep it under 250 so the card stays readable.",
+          "type": "string",
+          "maxLength": 1000
+        },
+        "attributes": {
+          "description": "Short facts shown on the automation's card, such as 'Record-triggered: after save' or 'Object: Invoice'.",
+          "$ref": "#/$defs/cardAttributes"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attachments": {
+          "$ref": "#/$defs/attachments"
+        }
+      }
+    },
+    "interaction": {
+      "type": "object",
+      "required": [
+        "from",
+        "to",
+        "kind"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "from": {
+          "description": "An automation, entity, system or role id, or START for what starts the chain. A role starts a chain, such as a user launching a screen flow.",
+          "$ref": "#/$defs/id"
+        },
+        "to": {
+          "description": "An automation, entity, system or role id, or END for where the chain ends.",
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "description": "A platform event triggers each of its subscribers, so the line follows the data.",
+          "enum": [
+            "triggers",
+            "calls",
+            "reads",
+            "writes",
+            "publishes"
+          ]
+        },
+        "order": {
+          "description": "Position in the chain, starting at 1, when the order is known.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "fromStep": {
+          "description": "When 'from' is an automation with steps: the id of its step that causes this interaction, such as the Update Records step that fires the next flow. The line out of the automation's logic level leaves that step.",
+          "$ref": "#/$defs/id"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "automation",
+        "element"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "description": "The card title: what the step does, as the source labels it ('Get related invoice', 'Update task'). Unique among the steps on its level.",
+          "$ref": "#/$defs/name"
+        },
+        "automation": {
+          "description": "Id of the automation this step belongs to.",
+          "$ref": "#/$defs/id"
+        },
+        "parent": {
+          "description": "Id of the step this one drills down from, such as the loop whose body it is. Leave out for steps on the automation's own logic level.",
+          "$ref": "#/$defs/id"
+        },
+        "element": {
+          "description": "What kind of step it is: an 'element' value from data/automation-elements.csv, such as get-records, decision or loop. It sets the card's header icon.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,39}$"
+        },
+        "attributes": {
+          "description": "Short facts on the card: the object, the conditions, the fields set.",
+          "$ref": "#/$defs/cardAttributes"
+        },
+        "summary": {
+          "description": "What the step does and why, in one plain sentence, shown as the card's footer. Elements allows 1000 characters; keep it under 250.",
+          "type": "string",
+          "maxLength": 1000
+        },
+        "sourceRef": {
+          "description": "Where the step is in the source: a flow element's API name, or Class.method and line numbers.",
+          "type": "string",
+          "maxLength": 255
+        },
+        "calls": {
+          "description": "Id of the automation this step starts, such as the subflow or Apex class it calls.",
+          "$ref": "#/$defs/id"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attachments": {
+          "$ref": "#/$defs/attachments"
+        }
+      }
+    },
+    "connector": {
+      "type": "object",
+      "required": [
+        "from",
+        "to"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "from": {
+          "description": "A step id, or START.",
+          "$ref": "#/$defs/id"
+        },
+        "to": {
+          "description": "A step id, or END.",
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "kind": {
+          "description": "next: the step that follows. outcome: one outcome of a decision or pause. default: a decision's default outcome. fault: the path taken when the step fails. loop-each and loop-done: a loop's 'for each item' and 'after last item'. scheduled: a scheduled path of a record-triggered flow. goto: a jump back to an earlier step.",
+          "enum": [
+            "next",
+            "outcome",
+            "default",
+            "fault",
+            "loop-each",
+            "loop-done",
+            "scheduled",
+            "goto"
+          ]
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "description": "A noun phrase for what the business can do: 'Lead management', not 'Manage leads'.",
+          "$ref": "#/$defs/name"
+        },
+        "parent": {
+          "description": "Id of the capability this one belongs to. Leave out for top-level capabilities.",
+          "$ref": "#/$defs/id"
+        },
+        "realisedBy": {
+          "description": "Ids of the activities, entities, systems and automations that deliver this capability.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "rating": {
+          "description": "A score shown as the box's fill colour on a capability map, such as an assessment or maturity level. It is a value of the rating scale the drawing uses (data/capability-ratings.csv); the default scale 'assessment' has advanced, intermediate, underperforming and missing.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "placement": {
+          "description": "Top-level capabilities only. column (the default): a column of the capability grid. band: below the grid, as one card or a heading over a row of cards, for foundation capabilities and platform layers that serve every column.",
+          "enum": [
+            "column",
+            "band"
+          ]
+        },
+        "bandRow": {
+          "description": "Bands only. Bands with the same bandRow share one row, side by side, in model order; a band without one has a row of its own.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99
+        },
+        "childrenAs": {
+          "description": "How this capability's sub-capabilities are drawn on a capability map. boxes (the default): cards of their own, under a heading on a capability map. list: lines of text on this capability's card, for short lists.",
+          "enum": [
+            "boxes",
+            "list"
+          ]
+        },
+        "icon": {
+          "description": "Name of a resource in the Elements space library to show as the box's header icon on a capability map, such as 'Salesforce'.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attachments": {
+          "$ref": "#/$defs/attachments"
+        }
+      }
+    },
+    "driver": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "description": "The driver as a goal, such as 'Accelerate and de-risk delivery of changes'.",
+          "$ref": "#/$defs/name"
+        },
+        "description": {
+          "description": "The problem behind the driver in a sentence or two; drawn as the card's footer.",
+          "$ref": "#/$defs/text"
+        },
+        "inferred": {
+          "$ref": "#/$defs/inferred"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attachments": {
+          "$ref": "#/$defs/attachments"
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "required": [
+        "note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "about": {
+          "description": "Id of the item the gap concerns, when there is one.",
+          "$ref": "#/$defs/id"
+        },
+        "note": {
+          "description": "What is missing and why, such as 'Stopped tracing at OrderService: dynamic Apex call'.",
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "cardAttributes": {
+      "description": "Attributes listed on a card under its title, in order.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cardAttribute"
+      }
+    },
+    "cardAttribute": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "description": "The line shown on the card, such as 'Stage = Approved or Paid'.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "description": "More detail, shown when the attribute is opened. Elements allows 400 characters.",
+          "type": "string",
+          "maxLength": 400
+        }
+      }
+    },
+    "mapTitle": {
+      "description": "Used as the map name in Elements. The final emitted name, after overrides and transformations, is trimmed and must contain 2 to 80 characters.",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "metadataAttachment": {
+      "type": "object",
+      "required": [
+        "type",
+        "apiName"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "metadata"
+        },
+        "apiName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "metadataType": {
+          "description": "The metadata type whenever the source supplies it, such as Standard Object, Custom Object or Flow.",
+          "type": "string",
+          "maxLength": 64
+        },
+        "nodeId": {
+          "description": "The item's Metadata Dictionary node, when its name alone is ambiguous (a picklist value of a standard value set exists on the value set and on each field). Kept for the drawing's report; manage_diagram links by name.",
+          "type": "string",
+          "pattern": "^[a-f0-9]{24}$"
+        },
+        "text": {
+          "description": "Why the box links to this item; shown as the attachment description.",
+          "type": "string",
+          "maxLength": 2000
+        },
+        "refModelId": {
+          "description": "The run's selected reference model. Drawing skills fill a missing value from the run context at planning and resume, and pass it with the attachment to resolve the item within that model.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "storyAttachment": {
+      "type": "object",
+      "required": [
+        "type",
+        "storyId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "story"
+        },
+        "storyId": {
+          "description": "The Elements story number.",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "linkAttachment": {
+      "type": "object",
+      "required": [
+        "type",
+        "title",
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "link"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https?://",
+          "maxLength": 1024
+        }
+      }
+    },
+    "noteAttachment": {
+      "type": "object",
+      "required": [
+        "type",
+        "title",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "note"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "lifecycle": {
+      "description": "The picklist field that carries the record's workflow (a status or stage), with its active values in the order the record moves through them. A process level built on this object makes each value the outcome of a step.",
+      "type": "object",
+      "required": [
+        "field",
+        "values"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "description": "API name of the picklist field, such as StageName or Status__c.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "fieldNodeId": {
+          "description": "The picklist field's node in the Metadata Dictionary (route metadata).",
+          "type": "string",
+          "maxLength": 64
+        },
+        "label": {
+          "description": "The field's label, such as Stage.",
+          "type": "string",
+          "maxLength": 255
+        },
+        "ordered": {
+          "description": "true when the source gives the order (the org's picklist order, or documentation that lists the values in process order); false when the values come in another order, such as alphabetical, and the order on the map is worked out.",
+          "type": "boolean"
+        },
+        "source": {
+          "description": "Where the values come from: metadata (the Metadata Dictionary) or documentation.",
+          "enum": [
+            "metadata",
+            "documentation"
+          ]
+        },
+        "recordTypes": {
+          "description": "Active record types of the object other than Master (route metadata), each with the lifecycle values it uses. The object's level is then split by record type, and each record type gets a lifecycle level of its own.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "description": "Developer name of the record type.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "nodeId": {
+                "description": "The record type's node in the Metadata Dictionary.",
+                "type": "string",
+                "maxLength": 64
+              },
+              "process": {
+                "description": "Lead, Opportunity and Case: the sales, support or lead process the record type uses; its values are then the process's values.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "values": {
+                "description": "The lifecycle values this record type uses: from its process on Lead, Opportunity and Case, otherwise from the value's where-used record types; left out when unknown (then all values).",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 255
+                }
+              }
+            }
+          }
+        },
+        "helpText": {
+          "description": "The field's help text, when it says something about the values.",
+          "type": "string",
+          "maxLength": 2000
+        },
+        "values": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "description": "The stored value (API name of the picklist value).",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "closed": {
+                "description": "true when the record is closed in this value (OpportunityStage and CaseStatus say so; otherwise when the source says it is final).",
+                "type": "boolean"
+              },
+              "won": {
+                "description": "true for a closed value that is the good outcome (Closed Won); false for a closed value that is not (Closed Lost).",
+                "type": "boolean"
+              },
+              "default": {
+                "description": "true for the value a new record gets.",
+                "type": "boolean"
+              },
+              "probability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "nodeId": {
+                "description": "The value's node in the Metadata Dictionary (route metadata).",
+                "type": "string",
+                "maxLength": 64
+              }
+            }
+          }
+        }
+      }
+    },
+    "levelNote": {
+      "type": "object",
+      "required": [
+        "title",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "parent": {
+          "description": "Id of the activity whose child level holds the note; left out for the top level (as an activity's parent).",
+          "$ref": "#/$defs/id"
+        },
+        "near": {
+          "description": "Id of the activity on that level the note is placed beside; left out, the box the level's first start line enters (step 1).",
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "description": "The note's first sentence, such as 'Usage of Initial Opportunity as of 2026-10-21'.",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "text": {
+          "description": "The rest of the note, as sentences (line breaks are not kept).",
+          "type": "string",
+          "maxLength": 2000
+        },
+        "purpose": {
+          "description": "What the note is for, so a later run can find and replace its own notes, such as 'usage'.",
+          "type": "string",
+          "maxLength": 40
+        }
+      }
+    }
+  }
+}

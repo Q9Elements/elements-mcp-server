@@ -1,0 +1,7 @@
+pattern_id,name,short_label,use_when,salesforce_end,timing,reference
+request-reply,Remote Process Invocation: Request and Reply,Request and reply,Salesforce calls a remote system and waits for the result,from,real-time,https://architect.salesforce.com/fundamentals/integration-patterns
+fire-and-forget,Remote Process Invocation: Fire and Forget,Fire and forget,Salesforce calls a remote system and does not wait for the result,from,near-real-time,https://architect.salesforce.com/fundamentals/integration-patterns
+batch-data-sync,Batch Data Synchronization,Batch sync,Data is copied between systems in bulk on a schedule,,batch|near-real-time,https://architect.salesforce.com/fundamentals/integration-patterns
+remote-call-in,Remote Call-In,Remote call-in,A remote system creates reads updates or deletes Salesforce data,to,real-time|near-real-time|batch,https://architect.salesforce.com/fundamentals/integration-patterns
+ui-update,UI Update Based on Data Changes,UI update,The Salesforce user interface updates when data changes without a page refresh,to,near-real-time,https://architect.salesforce.com/fundamentals/integration-patterns
+data-virtualization,Data Virtualization,Data virtualization,Salesforce shows data held in another system without copying it,to,real-time,https://architect.salesforce.com/fundamentals/integration-patterns

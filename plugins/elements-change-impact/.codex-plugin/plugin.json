@@ -1,0 +1,28 @@
+{
+  "name": "elements-change-impact",
+  "version": "1.1.0",
+  "description": "Plan a Salesforce automation or schema change with options, traced impact, an impact report and a draft delivery backlog. The customer makes the change.",
+  "author": {"name": "Elements.cloud", "email": "success@elements.cloud", "url": "https://elements.cloud/"},
+  "homepage": "https://developer.elements.cloud/",
+  "repository": "https://github.com/Q9Elements/elements-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": ["elements-cloud", "salesforce", "change-impact"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Analyze Change Impact",
+    "shortDescription": "Plan a Salesforce automation or schema change.",
+    "longDescription": "Compare options, trace impact and prepare an impact report with a draft delivery backlog for a Salesforce automation or schema change.",
+    "developerName": "Elements.cloud",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "defaultPrompt": [
+      "Assess the impact of this proposed Salesforce change.",
+      "What could this change affect in my org?",
+      "Resume my change-impact assessment."
+    ],
+    "websiteURL": "https://elements.cloud/",
+    "privacyPolicyURL": "https://elements.cloud/privacy-gdpr/",
+    "termsOfServiceURL": "https://elements.cloud/app-terms-of-service/",
+    "brandColor": "#168FCE"
+  }
+}

@@ -1,0 +1,7 @@
+diagram_type,create_map_type,needs,also_uses,description,drawing_skill
+process,business_process,activities,roles|flows,Business process map in Universal Process Notation (UPN),draw-process-map
+journey,customer_journey,activities,roles|flows,Customer journey map; activities are touchpoints grouped by stage,draw-process-map
+data-model,data_model,entities,relationships,Entities with key fields and their relationships,draw-data-model
+interaction-flow,interaction_flow,automations,interactions|steps|connectors|entities|systems|roles,Which automations fire in what order (the chain level) and the logic inside each one (one level per automation),draw-interaction-flow
+capability,capability_map,capabilities,drivers,Capability tree as a grid of columns: text-box headings over capability cards; optional business drivers above and rating colours,draw-capability-map
+system-architecture,system_architecture,systems,integrations,"Systems and the data flowing between them: a hub in the centre with sources left, destinations right, engagement above and ingestion below; groups as cards with a drill-down",draw-system-architecture

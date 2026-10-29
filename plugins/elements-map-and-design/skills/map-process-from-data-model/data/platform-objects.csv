@@ -1,0 +1,69 @@
+pattern,match,role,reason
+Share,suffix,platform,Sharing rows for another object
+History,suffix,platform,Field history rows for another object
+Feed,suffix,platform,Chatter feed rows for another object
+ChangeEvent,suffix,platform,Change data capture events
+__Share,suffix,platform,Sharing rows for a custom object
+__History,suffix,platform,Field history rows for a custom object
+__Feed,suffix,platform,Chatter feed rows for a custom object
+__ChangeEvent,suffix,platform,Change data capture events for a custom object
+__mdt,suffix,platform,Custom metadata type: configuration rather than business records
+__e,suffix,platform,Platform event: a message rather than a stored record
+User,exact,platform,Platform users; shown as roles on boxes rather than as objects
+Group,exact,platform,Public groups and queues
+GroupMember,exact,platform,Group membership
+Profile,exact,platform,Access configuration
+PermissionSet,exact,platform,Access configuration
+RecordType,exact,platform,Configuration of another object
+Organization,exact,platform,Org settings
+BusinessHours,exact,platform,Calendar configuration
+Holiday,exact,platform,Calendar configuration
+Attachment,exact,platform,Files attached to any record
+Note,exact,platform,Notes attached to any record
+ContentDocument,exact,platform,Files
+ContentVersion,exact,platform,Files
+ContentDocumentLink,exact,platform,Files linked to any record
+Document,exact,platform,Files
+Folder,exact,platform,Folders for reports and files
+Task,exact,platform,Activities logged against any record (polymorphic WhatId)
+Event,exact,platform,Activities logged against any record (polymorphic WhatId)
+EmailMessage,exact,platform,Email logged against any record
+FeedItem,exact,platform,Chatter posts
+FeedComment,exact,platform,Chatter comments
+EntitySubscription,exact,platform,Chatter follows
+Topic,exact,platform,Chatter topics
+TopicAssignment,exact,platform,Chatter topics
+CollaborationGroup,exact,platform,Chatter groups
+ProcessInstance,exact,platform,Approval process runtime
+ProcessInstanceWorkitem,exact,platform,Approval process runtime
+FlowInterview,exact,platform,Flow runtime
+FlowOrchestrationWorkItem,exact,platform,Flow orchestration runtime (polymorphic RelatedRecordId)
+RecordAction,exact,platform,Record action runtime (polymorphic RecordId)
+RecordAlert,exact,platform,Record alerts against any record
+AgentWork,exact,platform,Omni-Channel routing runtime
+PendingServiceRouting,exact,platform,Omni-Channel routing runtime
+VideoCall,exact,platform,Call records against any record
+VoiceCall,exact,platform,Call records against any record
+ContactRequest,exact,platform,Callback requests against any record
+LinkedArticle,exact,platform,Knowledge article links on any record
+DuplicateRecordSet,exact,platform,Duplicate management runtime
+DuplicateRecordItem,exact,platform,Duplicate management runtime
+AsyncApexJob,exact,platform,Job runtime
+CronTrigger,exact,platform,Job runtime
+Report,exact,platform,Analytics
+Dashboard,exact,platform,Analytics
+Account,exact,hub,Customer and partner companies referenced by most clouds
+Contact,exact,hub,People referenced by most clouds
+Lead,exact,hub,Prospects referenced by sales and marketing
+Opportunity,exact,hub,Deals referenced by sales and industry clouds
+Case,exact,hub,Service requests referenced by service and industry clouds
+Product2,exact,hub,Products referenced by sales; service and industry clouds
+Pricebook2,exact,hub,Price books referenced by sales and industry clouds
+PricebookEntry,exact,hub,Prices referenced by sales and industry clouds
+Asset,exact,hub,Installed products referenced by service and industry clouds
+Contract,exact,hub,Contracts referenced by sales and industry clouds
+Order,exact,hub,Orders referenced by sales; service and industry clouds
+Location,exact,hub,Places referenced by field service and industry clouds
+Address,exact,hub,Addresses referenced by field service and industry clouds
+WorkOrder,exact,hub,Field work referenced by service and industry clouds
+Period,exact,hub,Fiscal periods referenced by forecasting and targets

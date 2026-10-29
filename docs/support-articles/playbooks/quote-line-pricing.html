@@ -1,0 +1,70 @@
+<p>Quote Line Pricing explains how one Salesforce CPQ quote line's price was calculated. Use it when you want to understand a line's price or the price rules that affected it, using Quote Line Microscope and Elements evidence.</p>
+
+<h2>What it does and when to use it</h2>
+<ul>
+<li>Ask why a quote line is priced a particular way or which price rules affected it.</li>
+<li>The playbook explains the available evidence, identifies gaps, and answers follow-up questions about the line.</li>
+</ul>
+
+<h2>Requirements</h2>
+<ul>
+<li>Salesforce CPQ and Elements Quote Line Microscope (QLM) are installed in the org.</li>
+<li>The user has the 'Salesforce CPQ Admin' and 'Elements Quote Line Microscope Admin' permission sets. Together they grant every CPQ and QLM read the playbook uses. Elements Quote Line Microscope Admin is the only set that grants access to the QLM objects. The playbook reads as that user, subject to object and field access and record sharing.
+<ul>
+<li>Access to contracted prices (<code>SBQQ__ContractedPrice__c</code>) and standard objects (<code>Account</code>, <code>Product2</code>, <code>PricebookEntry</code>, <code>Pricebook2</code>, <code>Organization</code>) comes from the user's profile.</li>
+<li>Contracted prices also require record sharing on the parent account.</li>
+<li>Block overage rates come from <code>OverageRate__c</code>, a custom field the CPQ administrator creates on Block Price (<code>SBQQ__BlockPrice__c</code>); when the field exists, the user also needs read access to it, which no CPQ permission set grants.</li>
+</ul>
+<p>A missing required field stops the analysis and identifies the access gap.</p>
+<p>An unreadable required object can mean the package is missing or the object is inaccessible; the playbook asks an administrator to check both.</p>
+<p>Missing optional access limits the answer, which says what could not be read. For example, an unreadable contracted price is reported as unreadable, not as an absent price.</p></li>
+<li>The playbook reads the quote line, its QLM log and related CPQ records from Salesforce. The playbook needs a way to make those queries. The two supported routes are the Salesforce command-line interface (CLI) and the Salesforce Hosted Model Context Protocol (MCP) server.
+<ul>
+<li><strong>Salesforce CLI (recommended):</strong> The <code>sf cli</code> is installed and an org alias is authenticated. The plugin's script runs every query and reads the results directly; the AI assistant copies nothing.</li>
+<li><strong>Salesforce Hosted MCP server <code>platform/sobject-reads</code>:</strong> This route is available when the CLI cannot be used. The administrator has activated <code>platform/sobject-reads</code> under MCP Servers in Setup, has created an External Client App, and has authenticated the Salesforce MCP server with the AI assistant. When using the Salesforce MCP server, the AI assistant runs each query and passes each result to the script, copying it when the result is shown in the conversation rather than saved to a file. AI assistants have gotten better at copying, but are not 100% foolproof. A copying slip can drop or change a value. The playbook can and does check result completeness and queried record identifiers (Ids), quote line names, and log-to-line links, but cannot detect changes to other values; a field other than a record Id dropped in copying is reported as not readable. Check any surprising figure against the quote line in Salesforce.</li>
+</ul></li>
+<li>The core <code>elements</code> plugin is installed and connected to Elements, in an authorized space linked to the Salesforce org with its reference model synced.</li>
+<li><strong>Optional price rule change history:</strong> The Revenue Cloud flag is enabled in Elements, and <code>SBQQ__PriceRule__c</code>, <code>SBQQ__PriceCondition__c</code>, and <code>SBQQ__PriceAction__c</code> are selected on the org's Industries settings tab in Elements. History starts with the first sync after the flag and objects are set; earlier changes are unavailable. If history is unavailable, the answer says so and the analysis continues. Change history covers price rules, price conditions and price actions only; Elements does not sync quote, quote line or QLM records, so the playbook shows no change history for them.</li>
+</ul>
+
+<h2>Install</h2>
+<p>The playbook is tested on Claude Code with the Salesforce CLI and Salesforce Hosted MCP routes, and on Codex with the Salesforce CLI route.</p>
+<h3>Claude Code</h3>
+<pre><code>/plugin marketplace add Q9Elements/elements-mcp-server
+/plugin install elements-quote-line-pricing@elements</code></pre>
+
+<h3>Codex</h3>
+<pre><code>codex plugin marketplace add Q9Elements/elements-mcp-server
+codex plugin add elements-quote-line-pricing@elements</code></pre>
+
+<h2>Start and resume</h2>
+<p>On the quote line, click QLM 'Create Diagram'. Creating a QLM diagram also creates a Quote Line log record that is required by the playbook.</p>
+<p>Start with 'Why is this quote line priced this way?' or 'Which price rules affected this quote line?' Provide the line identifier or name, your question, and your chosen data route. For the CLI route, also provide the org alias.</p>
+<p>The playbook saves progress and evidence in an engagement directory. To continue, say 'Resume my quote line pricing explanation'. The playbook uses <code>execution-state.json</code> in the current working directory or a directory you supply, asking for the engagement directory only when it cannot find the state file. An unfinished collection resumes from its saved evidence for the same line; naming a different line gathers fresh evidence. The closing report lists the distinct quote lines with saved answers. Keep the directory and its contents together.</p>
+
+<h2>What you get</h2>
+<ul>
+<li>An explanation of the price waterfall, pricing method and proration, discounts, bundle and option context, calculator price rules and their available history, and Multi-Dimensional Quoting (MDQ) segments and uplift, as relevant to your question and the available evidence. Price rule history shows who changed each rule, condition and action and when. To see before-and-after values, open that component's history in Elements.</li>
+<li>Follow-up answers use the line's saved evidence and focus on the question. You can request a full re-analysis or rebuild the data.</li>
+<li>The answer identifies missing evidence and warns when the quote line has changed since its log was written.</li>
+</ul>
+
+<p>The playbook builds an explanation from the available pricing evidence and focuses follow-up answers on your question.</p>
+<p>When a log holds several calculations, the playbook explains the last one, which produced the current price. If it cannot separate them, the answer says "Earlier calculation passes may be included in these figures."</p>
+<p>A List Price source of Price Rule, Option Unit Price, or Price Book requires its recorded value to equal the line's List Price. When those values disagree and no other pricing method or manual edit explains it, the source is "not determined from the recorded data".</p>
+
+<h2>What it does not do</h2>
+<ul>
+<li>The playbook reads Salesforce and Elements data and makes no changes in the org. It explains one quote line at a time.</li>
+<li>Price rule analysis covers calculator rules captured by Quote Line Microscope. Configurator rules, price actions on quote line groups or custom objects, and repeat firings within one calculation event are not recorded.</li>
+</ul>
+
+<h2>When it stops</h2>
+<ul>
+<li><strong>Data route unavailable or unauthorized:</strong> a Salesforce System Administrator sets up or authorizes the route.</li>
+<li><strong>Package missing or required object unreadable:</strong> a Salesforce CPQ administrator or Salesforce System Administrator installs or enables the package, or grants object read access.</li>
+<li><strong>Required field unreadable:</strong> a Salesforce CPQ administrator or Salesforce System Administrator grants access to the listed fields.</li>
+<li><strong>Pricing log missing:</strong> the user clicks 'Create Diagram' on the quote line.</li>
+<li><strong>Query or calculation failed:</strong> a Salesforce CPQ administrator or Salesforce System Administrator resolves the error.</li>
+</ul>
+<p>Once the issue is resolved, tell the playbook and it rechecks the analysis.</p>

@@ -1,0 +1,137 @@
+label,field_api_name
+Additional Disc.,SBQQ__AdditionalDiscount__c
+Additional Disc. (%),SBQQ__Discount__c
+Additional Disc. (Amt),SBQQ__AdditionalDiscountAmount__c
+Additional Quantity,SBQQ__AdditionalQuantity__c
+Allow Asset Refunds,SBQQ__AllowAssetRefund__c
+Batch Quantity,SBQQ__BatchQuantity__c
+Billing Frequency,SBQQ__BillingFrequency__c
+Billing Type,SBQQ__BillingType__c
+Block Price,SBQQ__BlockPrice__c
+Bundled,SBQQ__Bundled__c
+Carry-Over Line,SBQQ__CarryoverLine__c
+Charge Type,SBQQ__ChargeType__c
+Component Cost,SBQQ__ComponentCost__c
+Component Discounted By Package,SBQQ__ComponentDiscountedByPackage__c
+Component List Total,SBQQ__ComponentListTotal__c
+Component Net Total,SBQQ__ComponentTotal__c
+Component Percent of Total Scope,SBQQ__ComponentSubscriptionScope__c
+Component Uplifted By Package,SBQQ__ComponentUpliftedByPackage__c
+Component Visibility,SBQQ__ComponentVisibility__c
+Compound Discount (%),SBQQ__CompoundDiscountRate__c
+Configuration Required,SBQQ__ConfigurationRequired__c
+Contracted Price,SBQQ__ContractedPrice__c
+Cost,SBQQ__Cost__c
+Cost Editable,SBQQ__CostEditable__c
+Customer Total,SBQQ__CustomerTotal__c
+Customer Unit Price,SBQQ__CustomerPrice__c
+Default Subscription Term,SBQQ__DefaultSubscriptionTerm__c
+Description,SBQQ__Description__c
+Discount (%),SBQQ__Discount__c
+Discount Schedule,SBQQ__DiscountSchedule__c
+Discount Schedule Type,SBQQ__DiscountScheduleType__c
+Discount Tier,SBQQ__DiscountTier__c
+Distributor Discount,SBQQ__DistributorDiscount__c
+Dynamic Option ID,SBQQ__DynamicOptionId__c
+Earliest Valid Amendment Start Date,SBQQ__EarliestValidAmendmentStartDate__c
+Effective End Date,SBQQ__EffectiveEndDate__c
+Effective Quantity,SBQQ__EffectiveQuantity__c
+Effective Start Date,SBQQ__EffectiveStartDate__c
+Effective Subscription Term,SBQQ__EffectiveSubscriptionTerm__c
+End Date,SBQQ__EndDate__c
+Existing,SBQQ__Existing__c
+Favorite,SBQQ__Favorite__c
+Generate Contracted Price,SBQQ__GenerateContractedPrice__c
+Gross Profit,SBQQ__GrossProfit__c
+Group,SBQQ__Group__c
+Guidance,SBQQ__Guidance__c
+Has Consumption Schedules,SBQQ__HasConsumptionSchedule__c
+Hidden,SBQQ__Hidden__c
+Incomplete,SBQQ__Incomplete__c
+List Total,SBQQ__ListTotal__c
+List Unit Price,SBQQ__ListPrice__c
+Markup,SBQQ__Markup__c
+Markup (%),SBQQ__MarkupRate__c
+Markup (Amt),SBQQ__MarkupAmount__c
+Maximum List Unit Price,SBQQ__MaximumPrice__c
+Minimum List Unit Price,SBQQ__MinimumPrice__c
+Net Total,SBQQ__NetTotal__c
+Net Unit Price,SBQQ__NetPrice__c
+Non Discountable,SBQQ__NonDiscountable__c
+Non Partner Discountable,SBQQ__NonPartnerDiscountable__c
+Number,SBQQ__Number__c
+Option Discount (%),SBQQ__OptionDiscount__c
+Option Discount (Amt),SBQQ__OptionDiscountAmount__c
+Option Level,SBQQ__OptionLevel__c
+Option Type,SBQQ__OptionType__c
+Optional,SBQQ__Optional__c
+Original Price,SBQQ__OriginalPrice__c
+Original Quantity,SBQQ__BundledQuantity__c
+Original Quote Line Id,SBQQ__OriginalQuoteLineId__c
+Original Unit Cost,SBQQ__OriginalUnitCost__c
+Package,SBQQ__Bundle__c
+Package Cost,SBQQ__PackageCost__c
+Package List Total,SBQQ__PackageListTotal__c
+Package Product Code,SBQQ__PackageProductCode__c
+Package Product Description,SBQQ__PackageProductDescription__c
+Package Total,SBQQ__PackageTotal__c
+Partner Discount,SBQQ__PartnerDiscount__c
+Partner Total,SBQQ__PartnerTotal__c
+Partner Unit Price,SBQQ__PartnerPrice__c
+Percent of Total (%),SBQQ__SubscriptionPercent__c
+Percent of Total Base,SBQQ__SubscriptionBase__c
+Percent of Total Category,SBQQ__SubscriptionCategory__c
+Percent of Total Scope,SBQQ__SubscriptionScope__c
+Percent of Total Target Price,SBQQ__SubscriptionTargetPrice__c
+Previous Segment Regular Price,SBQQ__PreviousSegmentPrice__c
+Previous Segment Uplift,SBQQ__PreviousSegmentUplift__c
+Price Dimension,SBQQ__Dimension__c
+Price Editable,SBQQ__PriceEditable__c
+Pricebook Entry Id,SBQQ__PricebookEntryId__c
+Pricing Method,SBQQ__PricingMethod__c
+Pricing Method Editable,SBQQ__PricingMethodEditable__c
+Prior Quantity,SBQQ__PriorQuantity__c
+Product,SBQQ__Product__c
+Product Code,SBQQ__ProductCode__c
+Product Family,SBQQ__ProductFamily__c
+Product Name,SBQQ__ProductName__c
+Product Option,SBQQ__ProductOption__c
+Product Subscription Type,SBQQ__ProductSubscriptionType__c
+Prorate Multiplier,SBQQ__ProrateMultiplier__c
+Prorated List Price,SBQQ__ProratedListPrice__c
+Prorated Unit Price,SBQQ__ProratedPrice__c
+Quantity,SBQQ__Quantity__c
+Quote,SBQQ__Quote__c
+Regular Total,SBQQ__RegularTotal__c
+Regular Unit Price,SBQQ__RegularPrice__c
+Renewal,SBQQ__Renewal__c
+Renewed Asset,SBQQ__RenewedAsset__c
+Renewed Subscription,SBQQ__RenewedSubscription__c
+Required By,SBQQ__RequiredBy__c
+Segment Index,SBQQ__SegmentIndex__c
+Segment Key,SBQQ__SegmentKey__c
+Segment Label,SBQQ__SegmentLabel__c
+Source,SBQQ__Source__c
+Special Price,SBQQ__SpecialPrice__c
+Special Price Description,SBQQ__SpecialPriceDescription__c
+Special Price Type,SBQQ__SpecialPriceType__c
+Start Date,SBQQ__StartDate__c
+Subscribed Asset IDs,SBQQ__SubscribedAssetIds__c
+Subscription Pricing,SBQQ__SubscriptionPricing__c
+Subscription Term,SBQQ__SubscriptionTerm__c
+Subscription Type,SBQQ__SubscriptionType__c
+Tax code,SBQQ__TaxCode__c
+Taxable,SBQQ__Taxable__c
+Term Discount,SBQQ__TermDiscount__c
+Term Discount Schedule,SBQQ__TermDiscountSchedule__c
+Term Discount Tier,SBQQ__TermDiscountTier__c
+Total Discount (%),SBQQ__TotalDiscountRate__c
+Total Discount (Amt),SBQQ__TotalDiscountAmount__c
+Unit Cost,SBQQ__UnitCost__c
+Unprorated Net Price,SBQQ__UnproratedNetPrice__c
+Upgraded Asset,SBQQ__UpgradedAsset__c
+Upgraded Quantity,SBQQ__UpgradedQuantity__c
+Upgraded Subscription,SBQQ__UpgradedSubscription__c
+Uplift,SBQQ__Uplift__c
+Uplift (Amt),SBQQ__UpliftAmount__c
+Volume Discount,SBQQ__VolumeDiscount__c

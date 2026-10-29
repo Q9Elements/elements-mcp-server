@@ -1,0 +1,33 @@
+setting,value,unit,applies_to,rule
+box_width,200,px,interaction-flow,Width of every card created through manage_diagram; it cannot be changed there
+card_height_min,100,px,interaction-flow,The server never makes a card shorter than this
+card_height_base,60,px,interaction-flow,Card height is card_height_base plus attribute_row_height per attribute plus footer_height with a footer; at least card_height_min
+attribute_row_height,26,px,interaction-flow,Height the server adds for each attribute; it does not allow for text that wraps
+footer_height,70,px,interaction-flow,Height the server adds for a footer of any length
+editor_growth_allowance,40,px,interaction-flow,"Extra space kept between rows because the editor may grow a card whose title, attributes or footer wrap; it never shrinks"
+box_height_base,100,px,interaction-flow,Not used for cards (card_height_* applies); kept so the shared layout engine loads
+resource_row_height,0,px,interaction-flow,Not used for cards: the header icon does not change the height
+col_gap,200,px,interaction-flow,Horizontal space between neighbouring cards in a row; it must fit the label of the line between them
+row_gap,160,px,interaction-flow,Vertical space from the bottom of the tallest card in a row to the top of the next row; it holds loop-back lines and labels and the editor growth allowance
+row_align,middle,,interaction-flow,Cards in a row share their middle because every line attaches at the middle of a side
+top_margin,200,px,interaction-flow,Distance from the top of the canvas to the top of the first row
+band_gap,220,px,interaction-flow,Vertical space between bands when a long main path wraps
+max_columns,5,cards,interaction-flow,Cards on one row before the main path wraps to the next row
+max_boxes_per_level,12,cards,interaction-flow,Cards on one level before the drawing warns; loop bodies always go into a drill-down
+max_decision_outcomes,3,lines,interaction-flow,Outcomes of one card before the drawing warns that a fourth shares a side
+max_attributes_shown,6,attributes,interaction-flow,Most attributes written on one card; the rest are summed up in a last attribute
+attribute_max_chars,60,characters,interaction-flow,Longest attribute title written; longer ones are cut with an ellipsis and the full text goes into the attribute's description
+footer_max_chars,250,characters,interaction-flow,Longest footer written; longer summaries are cut at a sentence or word
+free_end_length,240,px,interaction-flow,Length of a start or end line leaving or entering a left or right side
+free_end_length_vertical,120,px,interaction-flow,Length of a start or end line leaving or entering a top or bottom side
+free_end_clearance,260,px,interaction-flow,Space kept clear left of a first card and right of a last card for start and end lines
+server_label_wrap,20,characters,interaction-flow,The server wraps every line label at about this many characters and centres it on its line
+label_max_chars,100,characters,interaction-flow,Longest line label
+end_label_max_chars,40,characters,interaction-flow,House label limit for start and end lines whose returned stubs can be short
+label_char_width,6.2,px,interaction-flow,Approximate width of one label character
+max_resources_shown,1,resources,interaction-flow,A card shows one header icon
+entity_fill,#DCEBFA,hex colour,interaction-flow,Fill of an object or platform event card on the chain level (a hub several automations meet at)
+entity_border,#2A4D8D,hex colour,interaction-flow,Border of an object or platform event card on the chain level
+canvas_blank_width,2000,px,interaction-flow,Width of the canvas manage_diagram accepts positions in on a blank level (from x = 0)
+canvas_blank_height,1200,px,interaction-flow,Height of the canvas on a blank level (from y = 0)
+canvas_margin_factor,0.5,fraction,interaction-flow,Once a level has content the canvas is the content's bounding box plus this fraction of its width and height on each side

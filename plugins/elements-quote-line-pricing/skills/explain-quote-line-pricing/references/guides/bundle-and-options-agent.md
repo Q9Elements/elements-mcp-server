@@ -1,0 +1,11 @@
+# Bundle and Options Agent guide
+
+Read `bundle`, `line`, `priceWaterfall.stages`, `discounts.option`, and relevant `flags`. `bundle.role` can be parent, option, parent and option, or standalone. A nested option's `bundle.parent` is its immediate parent. If an option's configuration is unavailable, say so; a missing option record is not proof that the line is standalone.
+
+A parent line has its own price; options have their own line prices. Use `bundle.children` and `bundle.childrenTotals` for the available children, and distinguish their extended net totals from unit prices. Add the parent and child totals only when the available data supports the rollup.
+
+For an option, report the recorded quantity, editability, required flag and limits. Describe a quantity as editable or locked only when `bundle.option.quantityEditable` records that behavior; option type alone does not establish editability or quantity behavior.
+
+`bundle.option.optionUnitPrice` records the configured option price. `hasOptionPriceOverride` indicates that it equals the line's List Price; use the List stage's source for attribution. A mismatched option price does not establish the source. Block and Percent Of Total pricing take precedence over option pricing. `discounts.option` identifies option discounts, which affect Special; leave discount arithmetic to the Discount Agent. When its status is `blocked`, explain `statusReason`, which identifies the quote line or product non-discountable flag that blocks it. For Discounted by Package, a parent's percentage additional discount copies to the option; an amount discount does not copy down. Use `bundle.parent.parentDiscountKind` and the recorded values; unknown kind is not a percentage. State group or quote discount behavior only when the data records it.
+
+A bundled option can reach zero at Special Price, with zero prices continuing through Net. The Special stage source is "Bundled" when the line records that treatment; `bundle.bundledZeroing.zeroedStages` lists the recorded zero stages from Special through Net. Use `bundle.bundledZeroing` and the actual waterfall: if Net is zero, explain the bundled treatment; if it is nonzero, report the contradiction and any evidenced influence. Mention another influence when the evidence shows it changed a price, without guessing why.

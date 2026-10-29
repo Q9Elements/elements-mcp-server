@@ -1,0 +1,11 @@
+id,when,text
+FALLBACK,The question is unclear or an agent response cannot be used.,"I can't answer that from this quote line's data. Ask about its price, discounts, bundle, price rules or Multi-Dimensional Quoting (MDQ) segments."
+OUT-OF-SCOPE,The question is outside quote line pricing analysis.,That question is outside what this analysis covers: how this quote line's price was calculated.
+QUOTE-NOT-LINE,The user asks about a whole quote.,This analysis explains one quote line at a time. Which quote line on the quote should I look at?
+LINE-NOT-FOUND,The quote line reference matches no row or is ambiguous.,"The quote line was not found, or is not visible with your access."
+STALE-LOG,The quote line was changed more than 120 seconds after the log was written.,"This quote line changed after its Quote Line Microscope (QLM) log was written, so the explanation may not match the current price. Click Create Diagram on the line again for a fresh log."
+SCOPE-CALC-RULES,A price rule answer is presented.,"This covers calculator price rules logged by Quote Line Microscope (QLM). Configurator rules, price actions on quote line groups or custom objects, and repeat firings within one calculation event are not recorded."
+HISTORY-PER-SYNC,"A price rule, condition, or action history answer is presented.","Elements records a price rule history each time it syncs with Salesforce, keeping only the latest change before each sync, so changes made in between are not shown. History starts at the first sync after price rule tracking was turned on in Elements; earlier changes are not available."
+CONTRACTED-NOT-READABLE,The contracted price cannot be read.,"A contracted price may apply, but your access does not let me read contracted prices, so I can't say whether one was used."
+CALCULATION-PASSES-AMBIGUOUS,Calculation pass boundaries cannot be established.,Earlier calculation passes may be included in these figures.
+HISTORY-UNAVAILABLE,Elements history cannot be retrieved.,Price rule history could not be retrieved from Elements. Check that an authorized Elements space is linked to this Salesforce org and its reference model is synced; then rebuild the diagnostics.

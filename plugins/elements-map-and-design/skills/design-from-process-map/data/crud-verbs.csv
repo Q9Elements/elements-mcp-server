@@ -1,0 +1,63 @@
+verb,crud,notes
+create,C,
+add,C,
+register,C,
+record,C,
+log,C,
+capture,C,
+enter,C,
+raise,C,
+open,C,"Opening a case or ticket creates it"
+submit,CU,"Creates the request, or moves an existing record to a submitted status"
+request,C,
+book,C,
+schedule,CU,"Creates the appointment or task, or sets the date on an existing record"
+generate,C,"Creates a document, quote or record from other data"
+import,C,
+upload,C,"Creates a file attached to a record"
+review,R,
+check,R,
+verify,R,
+view,R,
+read,R,
+search,R,
+find,R,
+look,R,"As in 'look up'"
+assess,RU,"Reads the record and records the assessment on it"
+evaluate,RU,"As assess"
+compare,R,
+analyse,R,
+analyze,R,
+monitor,R,
+identify,R,
+select,RU,"Reads candidates and records the choice"
+send,R,"Reads the record it sends; the message itself is an integration or an activity"
+notify,R,"As send"
+email,R,"As send"
+share,R,"As send"
+publish,RU,"Reads the record and sets it published"
+export,R,
+update,U,
+edit,U,
+change,U,
+amend,U,
+approve,RU,
+reject,RU,
+accept,RU,
+decline,RU,
+confirm,RU,
+assign,U,
+reassign,U,
+qualify,RU,
+disqualify,RU,
+escalate,U,
+complete,U,
+close,U,
+resolve,U,
+convert,CRU,"Reads the source record, creates the target records and marks the source converted"
+cancel,U,"Cancelling sets a status; the record stays"
+archive,U,"Archiving sets a status; the record stays"
+merge,RUD,"Keeps one record, updates it, deletes the duplicates"
+delete,D,
+remove,D,
+purge,D,

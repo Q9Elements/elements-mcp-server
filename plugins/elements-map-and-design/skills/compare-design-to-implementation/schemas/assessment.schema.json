@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "One box's verdict (implementation-assessor)",
+  "description": "How far the org's linked metadata implements one step of the design, with what is supported, what is missing, the sticky note, and the evidence.",
+  "type": "object",
+  "required": ["box", "verdict", "supported", "missing", "note", "evidence", "confidence", "gaps"],
+  "additionalProperties": false,
+  "properties": {
+    "box": {"description": "The pack's box id.", "type": "string", "pattern": "^L[0-9.]+-[0-9]+$"},
+    "verdict": {"description": "supported: every part of the step the design states is done by the linked metadata. partial: some of it is. not-supported: none of it is, or the metadata does something else.", "enum": ["supported", "partial", "not-supported"]},
+    "supported": {"description": "What the org does for the step, one line each, naming the component.", "type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 400}},
+    "missing": {"description": "What the design asks that the org does not do, one line each.", "type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 400}},
+    "note": {"description": "partial or not-supported: the sticky note, what is missing in plain words, within the pack's noteMaxWords. Empty for supported.", "type": "string", "maxLength": 600},
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["nodeId", "what"],
+        "additionalProperties": false,
+        "properties": {
+          "nodeId": {"description": "A component the pack lists: its nodeId, or for a component the org lacks (missingInOrg) the pack's missing: id.", "type": "string", "pattern": "^([0-9a-fA-F]{24}|missing:.+)$"},
+          "what": {"description": "What it shows, in one sentence.", "type": "string", "minLength": 1, "maxLength": 400}
+        }
+      }
+    },
+    "confidence": {"enum": ["high", "medium", "low"]},
+    "gaps": {"description": "What the verdict could not see: explanations that failed, definitions missing or cut, rows not shown.", "type": "array", "items": {"type": "string", "maxLength": 400}}
+  }
+}

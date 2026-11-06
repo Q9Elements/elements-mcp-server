@@ -1,0 +1,30 @@
+component,kind,tier,effort,why
+diagram-reviewer,agent,strong,high,The quality gate: judges a drawn diagram against its model and the rubric
+automation-logic-reader,agent,strong,high,"Reads Flow XML, Apex or only dependency evidence and reconstructs the logic; much of it is interpretation"
+capability-grouper,agent,strong,high,Decides how a whole system's objects group into capabilities; every later level depends on it
+process-level-writer,agent,strong,medium,"Writes one process level by the method; the brief bounds it and a script checks it"
+system-doc-reader,agent,fast,medium,Bounded gathering: reads vendor pages into a fixed inventory format that a script checks
+start,skill,strong,medium,"Classifies requests, and on a generic route writes the model itself"
+map-process-from-data-model,skill,strong,medium,"Runs the eight-stage method, the checkpoints and the fix loop"
+explain-automation,skill,strong,medium,Finds the automation and judges where its definition comes from
+trace-automation-chain,skill,strong,medium,Ranks candidate roots and decides with the person what is in the chain
+draw-data-model,skill,strong,medium,Builds the model from org objects or reads a drawn map back for an amendment
+draw-system-architecture,skill,strong,medium,"Builds the model from a description, document or picture, with the Well-Architected checks"
+draw-process-map,skill,fast,low,The layout script decides everything; the session carries steps to Elements
+draw-interaction-flow,skill,fast,low,The layout script decides everything; the session carries steps to Elements
+draw-capability-map,skill,fast,low,The layout script decides everything; the session carries steps to Elements
+process-quality-assessor,agent,strong,medium,"Judges whether every step and outcome of a map is worded well enough to derive a design; the score gates the run"
+data-model-deriver,agent,strong,high,"Groups a process's nouns into entities and matches them to the target system; every later card builds on it"
+integration-deriver,agent,strong,high,"Finds named and implied systems, chooses patterns and middleware; architecture judgement"
+access-deriver,agent,strong,high,"Turns verbs and handoffs into CRUD and chooses permission controllers to reuse, extend or create"
+solution-overview-writer,agent,strong,medium,"Writes the narrative of the customer-facing document; a script checks it against the run's files"
+design-from-process-map,skill,strong,medium,"Runs the playbook: the checkpoint, corrections, and the calls the drawing skills would otherwise ask"
+map-agent-as-process,skill,strong,medium,"Runs the six stages, chooses the package and the view with the person, and the fix loop"
+system-classifier,agent,fast,medium,"Bounded classification of leftover integration metadata into a fixed format that a script checks and the architect reviews at check 1"
+integration-tracer,agent,strong,high,"Reads a system's traced automations and names the exchanges and the systems behind a middleware; every later card builds on it"
+map-org-integrations,skill,strong,medium,"Runs the playbook: the two checks, corrections, and the calls the drawing skill would otherwise ask"
+automation-firing-reader,agent,fast,medium,"Reads one explanation into a fixed facts format; a script checks every quote, value and length"
+show-status-automations,skill,strong,medium,"Runs the triple check, the explanation fallbacks and the drawing, and judges what the report shows the person"
+metadata-matcher,agent,strong,medium,"Interprets each design step and picks the org components that implement it from Elements' candidates; a script checks every id, and the analyst approves the table"
+implementation-assessor,agent,strong,high,"Judges a design step against definitions, dependency rows and change history; its verdict colours the analyst's diagram"
+compare-design-to-implementation,skill,strong,medium,"Runs the playbook: the two questions and the link checkpoint, the corrections, the waves of assessors and the writes to the map"

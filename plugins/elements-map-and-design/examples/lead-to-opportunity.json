@@ -1,0 +1,507 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "Lead to opportunity (example)",
+    "description": "A made-up model that uses every section, for testing the validator and the drawing skills. Not taken from a real org.",
+    "author": "example",
+    "sources": [
+      {
+        "kind": "user",
+        "ref": "Worked example shipped with the elements-map-and-design plugin"
+      }
+    ]
+  },
+  "roles": [
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "kind": "human"
+    },
+    {
+      "id": "sdr",
+      "name": "Sales Development Rep",
+      "kind": "human"
+    },
+    {
+      "id": "ae",
+      "name": "Account Executive",
+      "kind": "human"
+    },
+    {
+      "id": "customer",
+      "name": "Customer",
+      "kind": "human"
+    },
+    {
+      "id": "sf",
+      "name": "Salesforce",
+      "kind": "system"
+    }
+  ],
+  "activities": [
+    {
+      "id": "capture",
+      "name": "Capture lead",
+      "roles": [
+        {
+          "role": "marketing",
+          "rasci": "A"
+        },
+        {
+          "role": "sf"
+        }
+      ],
+      "stage": "Awareness",
+      "uses": [
+        "lead",
+        "web"
+      ],
+      "evidence": [
+        "Web-to-lead form"
+      ]
+    },
+    {
+      "id": "qualify",
+      "name": "Qualify lead",
+      "roles": [
+        {
+          "role": "sdr",
+          "rasci": "R"
+        }
+      ],
+      "stage": "Consideration",
+      "uses": [
+        "lead",
+        "lead-assign"
+      ],
+      "attachments": [
+        {
+          "type": "metadata",
+          "apiName": "Lead.Status",
+          "metadataType": "Field",
+          "text": "Status drives the qualification decision."
+        },
+        {
+          "type": "note",
+          "title": "Qualification criteria",
+          "text": "Budget, authority, need and timing confirmed on the discovery call."
+        }
+      ]
+    },
+    {
+      "id": "convert",
+      "name": "Convert to opportunity",
+      "roles": [
+        {
+          "role": "sdr",
+          "rasci": "R"
+        },
+        {
+          "role": "sf"
+        }
+      ],
+      "stage": "Consideration",
+      "uses": [
+        "lead",
+        "opportunity"
+      ]
+    },
+    {
+      "id": "sell",
+      "name": "Run sales cycle",
+      "roles": [
+        {
+          "role": "ae",
+          "rasci": "RA"
+        },
+        {
+          "role": "customer",
+          "rasci": "C"
+        }
+      ],
+      "stage": "Purchase"
+    },
+    {
+      "id": "close",
+      "name": "Close opportunity",
+      "roles": [
+        {
+          "role": "ae",
+          "rasci": "R"
+        },
+        {
+          "role": "sf"
+        }
+      ],
+      "stage": "Purchase",
+      "uses": [
+        "opportunity",
+        "opp-trigger"
+      ]
+    },
+    {
+      "id": "discover",
+      "name": "Discover needs",
+      "parent": "sell",
+      "roles": [
+        {
+          "role": "ae",
+          "rasci": "R"
+        },
+        {
+          "role": "customer",
+          "rasci": "C"
+        }
+      ]
+    },
+    {
+      "id": "quote",
+      "name": "Send quote",
+      "parent": "sell",
+      "roles": [
+        {
+          "role": "ae",
+          "rasci": "R"
+        }
+      ],
+      "uses": [
+        "quote-obj"
+      ],
+      "inferred": true,
+      "evidence": [
+        "No approval step found in tickets or metadata"
+      ]
+    },
+    {
+      "id": "negotiate",
+      "name": "Negotiate terms",
+      "parent": "sell",
+      "roles": [
+        {
+          "role": "ae",
+          "rasci": "R"
+        },
+        {
+          "role": "customer",
+          "rasci": "C"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "START",
+      "to": "capture",
+      "label": "Web form submitted"
+    },
+    {
+      "from": "capture",
+      "to": "qualify",
+      "label": "New lead"
+    },
+    {
+      "from": "qualify",
+      "to": "convert",
+      "label": "Qualified"
+    },
+    {
+      "from": "qualify",
+      "to": "END",
+      "label": "Not qualified: back to nurture"
+    },
+    {
+      "from": "convert",
+      "to": "sell",
+      "label": "Opportunity"
+    },
+    {
+      "from": "sell",
+      "to": "close",
+      "label": "Agreed terms"
+    },
+    {
+      "from": "close",
+      "to": "END",
+      "label": "Closed won or lost"
+    },
+    {
+      "from": "START",
+      "to": "discover",
+      "label": "Opportunity"
+    },
+    {
+      "from": "discover",
+      "to": "quote",
+      "label": "Requirements"
+    },
+    {
+      "from": "quote",
+      "to": "negotiate",
+      "label": "Quote"
+    },
+    {
+      "from": "negotiate",
+      "to": "END",
+      "label": "Agreed terms"
+    }
+  ],
+  "entities": [
+    {
+      "id": "lead",
+      "name": "Lead",
+      "apiName": "Lead",
+      "kind": "standard",
+      "fields": [
+        {
+          "name": "Lead ID",
+          "apiName": "Id",
+          "key": "primary"
+        },
+        {
+          "name": "Status",
+          "apiName": "Status",
+          "type": "Picklist",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "account",
+      "name": "Account",
+      "apiName": "Account",
+      "kind": "standard",
+      "fields": [
+        {
+          "name": "Account ID",
+          "apiName": "Id",
+          "key": "primary"
+        }
+      ]
+    },
+    {
+      "id": "opportunity",
+      "name": "Opportunity",
+      "apiName": "Opportunity",
+      "kind": "standard",
+      "fields": [
+        {
+          "name": "Opportunity ID",
+          "apiName": "Id",
+          "key": "primary"
+        },
+        {
+          "name": "Account",
+          "apiName": "AccountId",
+          "type": "Lookup(Account)",
+          "key": "foreign"
+        },
+        {
+          "name": "Stage",
+          "apiName": "StageName",
+          "type": "Picklist",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "quote-obj",
+      "name": "Quote",
+      "apiName": "Quote",
+      "kind": "standard",
+      "fields": [
+        {
+          "name": "Quote ID",
+          "apiName": "Id",
+          "key": "primary"
+        },
+        {
+          "name": "Opportunity",
+          "apiName": "OpportunityId",
+          "type": "Master-Detail(Opportunity)",
+          "key": "foreign"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "account",
+      "to": "opportunity",
+      "cardinality": "one-to-many",
+      "kind": "lookup",
+      "field": "Opportunity.AccountId"
+    },
+    {
+      "from": "opportunity",
+      "to": "quote-obj",
+      "cardinality": "one-to-many",
+      "kind": "master-detail",
+      "field": "Quote.OpportunityId"
+    },
+    {
+      "from": "lead",
+      "to": "opportunity",
+      "cardinality": "one-to-one",
+      "kind": "reference",
+      "label": "converts to"
+    }
+  ],
+  "systems": [
+    {
+      "id": "web",
+      "name": "Website forms",
+      "kind": "channel"
+    },
+    {
+      "id": "salesforce",
+      "name": "Salesforce Sales Cloud",
+      "kind": "salesforce"
+    },
+    {
+      "id": "mulesoft",
+      "name": "MuleSoft",
+      "kind": "middleware"
+    },
+    {
+      "id": "erp",
+      "name": "ERP",
+      "kind": "external-app"
+    }
+  ],
+  "integrations": [
+    {
+      "from": "web",
+      "to": "salesforce",
+      "pattern": "remote-call-in",
+      "direction": "one-way",
+      "technology": "Web-to-Lead",
+      "label": "New leads"
+    },
+    {
+      "from": "salesforce",
+      "to": "mulesoft",
+      "pattern": "fire-and-forget",
+      "direction": "one-way",
+      "technology": "Platform Events",
+      "label": "Closed-won orders"
+    },
+    {
+      "from": "mulesoft",
+      "to": "erp",
+      "pattern": "request-reply",
+      "direction": "two-way",
+      "technology": "REST API",
+      "label": "Create sales order"
+    }
+  ],
+  "automations": [
+    {
+      "id": "lead-assign",
+      "name": "Lead assignment",
+      "type": "flow",
+      "apiName": "Lead_Assignment"
+    },
+    {
+      "id": "opp-trigger",
+      "name": "Opportunity trigger",
+      "type": "apex-trigger",
+      "apiName": "OpportunityTrigger"
+    },
+    {
+      "id": "order-service",
+      "name": "Order service",
+      "type": "apex-class",
+      "apiName": "OrderService"
+    },
+    {
+      "id": "order-event",
+      "name": "Order requested event",
+      "type": "platform-event",
+      "apiName": "Order_Requested__e"
+    }
+  ],
+  "interactions": [
+    {
+      "from": "lead",
+      "to": "lead-assign",
+      "kind": "triggers",
+      "order": 1,
+      "label": "Lead created"
+    },
+    {
+      "from": "opportunity",
+      "to": "opp-trigger",
+      "kind": "triggers",
+      "order": 2,
+      "label": "Stage = Closed Won"
+    },
+    {
+      "from": "opp-trigger",
+      "to": "order-service",
+      "kind": "calls",
+      "order": 3
+    },
+    {
+      "from": "order-service",
+      "to": "order-event",
+      "kind": "publishes",
+      "order": 4
+    },
+    {
+      "from": "order-event",
+      "to": "mulesoft",
+      "kind": "triggers",
+      "order": 5
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "cap-sell",
+      "name": "Sales"
+    },
+    {
+      "id": "cap-leads",
+      "name": "Lead management",
+      "parent": "cap-sell",
+      "realisedBy": [
+        "capture",
+        "qualify",
+        "lead",
+        "lead-assign"
+      ]
+    },
+    {
+      "id": "cap-opps",
+      "name": "Opportunity management",
+      "parent": "cap-sell",
+      "realisedBy": [
+        "sell",
+        "close",
+        "opportunity"
+      ]
+    },
+    {
+      "id": "cap-quoting",
+      "name": "Quoting",
+      "parent": "cap-sell",
+      "realisedBy": [
+        "quote",
+        "quote-obj"
+      ]
+    },
+    {
+      "id": "cap-fulfil",
+      "name": "Order fulfilment",
+      "realisedBy": [
+        "order-service",
+        "erp"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "about": "quote",
+      "note": "No source shows whether quotes need approval; the model assumes the AE sends them directly."
+    }
+  ]
+}

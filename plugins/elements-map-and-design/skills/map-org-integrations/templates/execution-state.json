@@ -1,0 +1,35 @@
+{
+  "engagement": {
+    "name": null,
+    "started": null,
+    "playbook_version": "0.1.0"
+  },
+  "slots": {
+    "space_id": null,
+    "ref_model_id": null,
+    "ref_model_name": null,
+    "map_name": null,
+    "hub_name": null
+  },
+  "current_state": "not-started",
+  "current_step": "steps/01-scope-the-run.md",
+  "trace": {
+    "round": 1
+  },
+  "checks": {
+    "systems_confirmed_on": null,
+    "integrations_approved_on": null
+  },
+  "deliverables": {
+    "map_name": null,
+    "map_url": null,
+    "review_verdict": null
+  },
+  "open_items": [],
+  "decisions_log": [],
+  "blocked": {
+    "reason": null,
+    "owner": null,
+    "entered_from": null
+  }
+}

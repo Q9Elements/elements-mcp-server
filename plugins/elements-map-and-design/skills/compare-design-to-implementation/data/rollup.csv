@@ -1,0 +1,21 @@
+own,children,parent,why
+supported,all-supported,supported,Everything under the box and on it is supported
+supported,all-not-supported,partial,The box's own metadata works but nothing beneath it does
+supported,mixed,partial,Some steps beneath the box are missing or partial
+supported,all-not-assessed,partial,The steps beneath were not compared; the box cannot be called fully supported
+supported,none,supported,No counted steps beneath; the box's own metadata decides
+partial,all-supported,partial,The box's own metadata misses part of the design
+partial,all-not-supported,partial,Part of the box is supported
+partial,mixed,partial,Part of the box is supported
+partial,all-not-assessed,partial,Part of the box is supported
+partial,none,partial,No counted steps beneath; the box's own metadata decides
+not-supported,all-supported,partial,The steps beneath are supported but the box's own metadata does not do what it says
+not-supported,all-not-supported,not-supported,Nothing on or beneath the box is supported
+not-supported,mixed,partial,The steps beneath are a mix; the box cannot be called wholly unsupported
+not-supported,all-not-assessed,not-supported,The box's own metadata does not support it and nothing beneath was compared
+not-supported,none,not-supported,No counted steps beneath; the box's own metadata decides
+none,all-supported,supported,Every step beneath is supported
+none,all-not-supported,not-supported,No step beneath is supported
+none,mixed,partial,The steps beneath are a mix of verdicts
+none,all-not-assessed,not-assessed,Nothing on or beneath the box was compared
+none,none,no-org-support,Every step beneath needs no org support

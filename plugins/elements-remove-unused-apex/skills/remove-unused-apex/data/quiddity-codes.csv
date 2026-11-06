@@ -1,0 +1,30 @@
+code,meaning,context,resolution_method,root_kind,protects
+A,ACS Batch Apex - batch job driven by an API query cursor; ENTRY_POINT Namespace.Class; QueuedExecution URI Batch Apex on the same REQUEST_ID,production,entry_point_class,batchable,true
+B,Bulk API and Bulk API 2.0 ,production,unmatched,,false
+BA,Start method of a Batch Apex job; ENTRY_POINT Class; two-letter code,production,entry_point_class,batchable,true
+C,Scheduled Apex; ENTRY_POINT is the cron job name from System.schedule - never a class; resolve through the CronJobDetail CronTrigger AsyncApexJob snapshot,production,cron_name,schedulable,true
+CI,Commerce Integration ,production,unmatched,,false
+DL,Discoverable Login page ,production,unmatched,,false
+E,Inbound Email Service; ENTRY_POINT Class.method(signature); REQUEST_ID empty,production,entry_point_method,inbound_email,true
+F,Future; ENTRY_POINT Class.method or Class.method(signature),production,entry_point_method,future,true
+FC,Function Callback ,production,unmatched,,false
+H,Apex REST; ENTRY_POINT Class.method with the namespace omitted - disambiguate by the ApexRestApi URI prefix,production,entry_point_method,rest,true
+I,Invocable Action; ENTRY_POINT FLOW- Class.method or interaction.InteractionServiceImpl; InvocableAction rows on the same REQUEST_ID carry the class in ACTION_NAME,production,entry_point_method,invocable,true
+K,Quick Action - grammar unobserved,production,unmatched,,false
+L,Lightning - Aura and LWC @AuraEnabled calls; ENTRY_POINT Class.method,production,entry_point_method,aura,true
+M,Remote Action - grammar unobserved,production,unmatched,,false
+P,Not used in API version 63.0 and later - retired parallel batch chunk code,production,unmatched,,false
+PEPC,Platform Event Publish Callback ,production,unmatched,,false
+PI,Post install script for a managed package ,production,unmatched,,false
+Q,Queueable; ENTRY_POINT Class or Namespace.Class; QueuedExecution carries no identity for it,production,entry_point_class,queueable,true
+QTXF,Transaction Finalizer for Queueable ,production,unmatched,,false
+R,Synchronous uncategorized - all transactions not specified elsewhere incl. Process.Plugin; ENTRY_POINT is TRIGGERS or Trigger on Object trigger event Type or Flow-... - never a class; trigger identity comes from ApexTrigger rows on the same REQUEST_ID,production,unmatched,,false
+S,QueryLocator Batch Apex; one row per execute chunk - QueuedExecution URI SerialBatchApexRangeChunkHandler or Batch Apex; ENTRY_POINT Namespace.Class or Class,production,entry_point_class,batchable,true
+TA,Tests Async; ENTRY_POINT TestClass.testMethod,test,entry_point_method,,false
+TD,Tests Deployment; ENTRY_POINT TestClass.testMethod,test,entry_point_method,,false
+TS,Tests Synchronous ,test,entry_point_method,,false
+UD,Undefined - the default when an event has not been assigned a more descriptive quiddity; no System.Quiddity enum value,unknown,unmatched,,false
+V,Visualforce; ENTRY_POINT VF- /apex/Page with or without .apexp - a page not a class,production,vf_page,vf_controller,true
+W,SOAP Webservices; ENTRY_POINT Class.method; ApexSoap CLASS_NAME corroborates,production,entry_point_method,soap,true
+X,Execute Anonymous; ENTRY_POINT execute_anonymous_apex has no class identity; a person at a console; not a production path; counted in the ledger only,unknown,anonymous_apex,,false
+,Any code not listed above - the documented list is published as an Example and is not declared exhaustive; use the UD branch,unknown,unmatched,,false

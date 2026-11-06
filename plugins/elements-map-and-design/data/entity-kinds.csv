@@ -1,0 +1,6 @@
+kind,fill,border,colour,legend
+standard,#f3f3f5,#2e2e2e,Grey,Standard Salesforce object
+custom,#f3e9f5,#79147e,Purple,Custom or industry object
+external,#ffffff,#747474,White,Object in another system
+proposed,#fff4d6,#c98a00,Amber,Proposed object (does not exist yet)
+,#ffffff,#747474,White,Object

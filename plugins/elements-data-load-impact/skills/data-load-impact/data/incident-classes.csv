@@ -1,0 +1,12 @@
+incident_class,plain_wording,control,control_reference,source
+unexpected_email,Unexpected email,Propose bypass or deactivate for each email sender; carry an owner leave-on ruling as a named risk,email-safety,Elements method
+lock_contention,Records blocked by locks,Apply the ordered lock-mitigation ladder and reconcile UNABLE_TO_LOCK_ROW,lock-mitigation-ladder.csv,Elements method
+duplicate_records,Duplicate records,Review active duplicate rules and de-duplicate the source,duplicate-rule,Elements method
+owner_overwritten,Record owner changed,Keep assignment rules opt-in,assignment-rule,Elements method
+bad_data_while_validation_off,Bad data while validation is off,Complete a replacement data-quality check for every disabled validation rule,validation-replacement,Elements method
+parent_grandparent_cascade,Parent and grandparent changes,Review the complete fire chain and branch coverage,fire-chain,Elements method
+governor_limit_failure,Salesforce processing limit reached,Use the ratified Application Programming Interface and batch size,api-thresholds.csv,Elements method
+unpredicted_automation,Automation outside the expected fire chain,Compare predicted with observed automation in an optional rehearsal; carry the risk when skipped,rehearsal,Elements method
+evidence_lost,Load result files lost,Export success and error files within 7 days,result_retention,Elements method
+accidental_re_fire,Automation runs again after restoration,Follow the ordered re-enable sequence and verify each step,re-enable-sequence.csv,Elements method
+unrecoverable_rollback,Loaded records cannot be rolled back,Delete only by success-file identifiers and never hard delete,rollback-rules.csv,Elements method

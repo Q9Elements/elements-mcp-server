@@ -1,0 +1,47 @@
+{
+  "engagement": {
+    "name": null,
+    "started": null,
+    "playbook_version": "0.1.0"
+  },
+  "slots": {
+    "source_map": {
+      "map_id": null,
+      "name": null,
+      "url": null
+    },
+    "space_id": null,
+    "target_system": null,
+    "reference_source": null,
+    "ref_model_id": null,
+    "customer_name": null,
+    "customer_logo": null,
+    "project_name": null,
+    "prepared_by": null
+  },
+  "current_state": "not-started",
+  "current_step": "steps/01-scope-the-run.md",
+  "check": {
+    "confidence": "normal"
+  },
+  "evidence": {
+    "gaps": []
+  },
+  "review": {
+    "approved_by": null,
+    "approved_on": null
+  },
+  "deliverables": {
+    "data_model_maps": [],
+    "architecture_map": null,
+    "access_matrix_csv": null,
+    "overview_docx": null
+  },
+  "open_items": [],
+  "decisions_log": [],
+  "blocked": {
+    "reason": null,
+    "owner": null,
+    "entered_from": null
+  }
+}

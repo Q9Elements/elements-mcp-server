@@ -1,0 +1,7 @@
+topic,example_phrases,agent
+discount,Discounts,Discount Agent
+pricing-method,Base price; pricing method; subscription terms; list price; special price; proration; how a term was determined,Pricing Method Agent
+bundle-and-options,Bundles; options; why a product is in a bundle; option configuration,Bundle and Options Agent
+price-rules,Price rules; a specific automation or rule,Price Rules Agent
+mdq,Segments; segment index or label; dimension type; uplift; one-time charges; per-segment totals,MDQ Agent (Multi-Dimensional Quoting)
+broad,How was this calculated?; multi-topic question; undeterminable topic,Pricing Method Agent plus applicable Discount Agent; Bundle and Options Agent; MDQ Agent

@@ -1,0 +1,13 @@
+order,section_id,title,on,content
+1,delivered-with,Delivered with,yes,"Fixed page: 'Delivered with' and the Elements.cloud logo"
+2,title,Title page,yes,"Customer logo and name, project name, document title, date, version, prepared by"
+3,contents,Contents,yes,"Generated from the sections that are on"
+4,overview,Document overview and governance,yes,"Purpose, audience, context, target system and source of reference, change log, contributors, how the design was produced and its confidence"
+5,process,Business process in scope,yes,"Link to the source map, summary of its top level, personas from its people resources"
+6,by-area,Solution by process area,yes,"One subsection per top-level step: its process level pictured and summed up, then the data model it uses pictured and summed up, then its integrations pictured and summed up when it has any, then the solution direction"
+7,data-model,Data model,yes,"Diagram picture and links, legend, entity table, field tables for custom and proposed objects"
+8,integrations,Integrations,yes,"Diagram picture and links, integration table, middleware decisions"
+9,security,Users and data security,yes,"The access matrix named as a separate file and summed up (counts, delete access, integration users), personas to permission controllers"
+10,decisions,"Decisions, assumptions, gaps and open questions",yes,"Decisions log, inferred items, gaps, manual handoffs with no system"
+11,appendix-traceability,Appendix A: traceability,yes,"Each process step with the entities and systems it gives rise to"
+12,appendix-check,Appendix B: derivability check,yes,"Each level's score and findings"

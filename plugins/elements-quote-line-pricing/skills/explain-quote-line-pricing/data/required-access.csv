@@ -1,0 +1,43 @@
+object,field,query_id,required,likely_missing,why
+SBQQ__QuoteLine__c,Id,P01,true,false,"Required to identify the quote line. For Salesforce CPQ, assign the Salesforce CPQ Admin permission set."
+SBQQ__QuoteLine__c,Name,P01,true,false,Required to identify the quote line. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,LastModifiedDate,P01,true,false,Required to compare the line with its pricing log. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__Quote__c,P01,true,false,Required to read the associated quote. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__Product__c,P01,true,false,Required to read the associated product. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__PricingMethod__c,P01,true,false,Required to determine the pricing method. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__OriginalPrice__c,P01,true,false,Required for the price waterfall. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__ListPrice__c,P01,true,false,Required for the price waterfall. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__SpecialPrice__c,P01,true,false,Required for the price waterfall. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__ProratedPrice__c,P01,true,false,Required for the price waterfall. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__RegularPrice__c,P01,true,false,Required for the price waterfall. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__CustomerPrice__c,P01,true,false,Required for the price waterfall. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__PartnerPrice__c,P01,true,false,Required for the price waterfall. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__NetPrice__c,P01,true,false,Required for the price waterfall. Assign the Salesforce CPQ Admin permission set.
+SBQQ__QuoteLine__c,SBQQ__Quantity__c,P01,true,false,Required to analyze quantity-based pricing. Assign the Salesforce CPQ Admin permission set.
+SBQQ__Quote__c,,P03,true,false,The quote record is required; individual unreadable quote fields reduce detail. Assign the Salesforce CPQ Admin permission set.
+Q9_QLM__Quote_Line_Log__c,,P02,true,false,"A quote line log is required. Assign the Elements Quote Line Microscope Admin permission set, the only permission set supplied by Quote Line Microscope."
+Q9_QLM__Quote_Line_Log__c,Q9_QLM__Diagram_Url__c,P02,false,true,Optional Elements diagram link; without it the answer has no link.
+Q9_QLM__Quote_Line_Log__c,Q9_QLM__Quote_Line_Log_String__c,P02,false,false,Optional log text used for calculation pass begin markers to identify the final pass. Unreadable or absent text uses evaluation stage ordering; ambiguous boundaries produce a warning.
+Q9_QLM__Price_Rule_Evaluation__c,,P16,false,false,Optional price rule details. The Elements Quote Line Microscope Admin permission set grants access.
+Q9_QLM__Price_Action_Evaluation__c,,P17,false,false,Optional price action details. The Elements Quote Line Microscope Admin permission set grants access.
+SBQQ__ContractedPrice__c,,P09,false,true,"Optional contracted price details. Read access and record sharing on the parent Account are also needed. Without access, the explanation states that the contracted price cannot be read."
+Account,,P09,false,true,Optional parent Account read for contracted price details; record sharing is required.
+SBQQ__BlockPrice__c,SBQQ__Price__c,P12,false,true,Optional Block pricing tier value; may be missing from field access.
+SBQQ__BlockPrice__c,SBQQ__LowerBound__c,P12,false,true,Optional Block pricing tier boundary; may be missing from field access.
+SBQQ__BlockPrice__c,OverageRate__c,P12,false,true,"Optional Block overage rate, when this field exists in the org."
+SBQQ__DiscountTier__c,SBQQ__Price__c,P11,false,true,Optional price-unit schedule tier value; may be missing from field access.
+SBQQ__QuoteLine__c,Q9_QLM__Quote_Line_Logging_Enabled__c,P01,false,false,Optional logging setting. The Elements Quote Line Microscope Admin permission set grants field access.
+SBQQ__QuoteLine__c,SBQQ__UnitCost__c,P01,false,true,Optional unit cost value; may be missing from field access.
+SBQQ__QuoteLine__c,SBQQ__OriginalUnitCost__c,P01,false,true,Optional original unit cost value; may be missing from field access.
+SBQQ__QuoteLine__c,SBQQ__MarkupRate__c,P01,false,true,Optional markup rate; may be missing from field access.
+SBQQ__QuoteLine__c,SBQQ__MarkupAmount__c,P01,false,true,Optional markup amount; may be missing from field access.
+SBQQ__QuoteLine__c,SBQQ__Markup__c,P01,false,true,Optional markup value; may be missing from field access.
+SBQQ__QuoteLine__c,SBQQ__CostEditable__c,P01,false,true,Optional cost edit setting; may be missing from field access.
+Product2,,P04,false,false,Optional product details; normally available through the user profile.
+PricebookEntry,,P05,false,false,Optional price book entry details; normally available through the user profile.
+Pricebook2,,P05,false,false,Optional price book details; normally available through the user profile.
+SBQQ__DiscountTier__c,,P11,false,false,Optional discount schedule tier records; readable through Salesforce CPQ Admin.
+SBQQ__Dimension__c,,P13,false,false,Optional price dimension records; readable through Salesforce CPQ Admin.
+SBQQ__PriceRule__c,Name,P16,false,false,Optional price rule names; readable through Salesforce CPQ Admin.
+SBQQ__PriceCondition__c,,P20,false,false,Optional price rule condition history lookup.
+Organization,Id,P19,false,false,Optional organization identifier used to select the matching Elements reference model.

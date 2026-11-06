@@ -1,0 +1,8 @@
+tool,api,batch_control,serial_mode,automation_bypass,verification,source
+Data Loader,"SOAP; Bulk API 1.0; Bulk API 2.0",configurable for SOAP and Bulk API 1.0,Bulk API 1.0 only,no,verified,Salesforce Data Loader [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/data-loader-impl/guide/configuring-the-data-loader.html
+Bulk API 1.0,Bulk API 1.0,"10000 records; 10 megabytes",yes,no,verified,Salesforce platform limits [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/salesforce-app-limits-cheatsheet/guide/salesforce-app-limits-platform-bulkapi.html
+Bulk API 2.0,Bulk API 2.0,server-managed,no,no,verified,Salesforce Bulk API 2.0 [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/api-asynch/guide/create-job.html
+sf CLI,Bulk API 2.0,server-managed,no,no,verified,Salesforce Bulk API 2.0 [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/api-asynch/guide/create-job.html
+Salesforce Inspector Reloaded,REST API,configurable,no,no,community,Salesforce Inspector Reloaded [COMMUNITY] https://github.com/tprouvot/Salesforce-Inspector-reloaded
+Workbench,"SOAP; REST API; Bulk API",selected API controls,unknown,no,unverified,Research section 6 [UNVERIFIED] research section 6
+dataloader.io,Bulk API,vendor-managed,unknown,no,unverified,dataloader.io [VENDOR] https://dataloader.io/frequently-asked-questions

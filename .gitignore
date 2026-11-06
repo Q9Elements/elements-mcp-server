@@ -1,0 +1,8 @@
+TODO.md
+.playwright-mcp/
+__pycache__/
+_runs/
+.DS_Store
+*.pyc
+*.tgz
+**/_workspace/dist/

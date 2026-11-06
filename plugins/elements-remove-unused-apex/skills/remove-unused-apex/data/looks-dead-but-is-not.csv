@@ -1,0 +1,17 @@
+id,pattern,why_it_looks_dead,check
+LD-01,Dynamic instantiation,Constructed through Type.forName or Type.newInstance so no static edge exists,the row's string-reference columns
+LD-02,Name held in Custom Metadata Custom Setting or Label,Referenced as data not code,the row's string-reference columns
+LD-03,Runtime-assembled identifier,Class name built from string fragments,the row's string-reference columns (fragments are a declared blind spot)
+LD-04,Interface resolved by a framework,Implementation chosen by a trigger framework or DI container at run time,dynamic dispatch marker on the framework class
+LD-05,global or @NamespaceAccessible,Callable from installed packages or other namespaces,root-kinds global_api
+LD-06,External REST or SOAP callers,Integrations call it from outside the org,declared_root_not_observed with root kind rest or soap
+LD-07,Guest-user permission surface,Reachable from a public site,get_access shows a guest profile grant
+LD-08,UninstallHandler,Runs only when a package is uninstalled,root-kinds uninstall_handler
+LD-09,Cadence longer than the window,Month-end quarter-end or annual work never fired inside the telemetry window,rescue signals 1 and 3
+LD-10,Long-interval schedule,CronTrigger with a next fire beyond the window,the row's scheduledJobNames and scheduleLive columns (work/bundle/schedule-liveness.csv carries the evidence)
+LD-11,Human-run anonymous Apex,Operations scripts kept as classes and run by hand,ask the customer at review
+LD-12,Newly created and unwired,Written recently and not yet connected,recently_modified reason
+LD-13,Does not compile,Marked invalid in Setup so it cannot run today but a fix may be pending,not a liveness signal - counted and judged like any other row; the validate-only deploy is the gate
+LD-14,Vendor extension point,Implements an interface a managed package calls,incoming edge crossing a package boundary
+LD-15,Truncated reference search,A dependency source was incomplete,blind-spots.json unresolvedEdgeEndpoints
+LD-16,Unresolved managed types,References into a package whose body is hidden,blind-spots.json hiddenBodies

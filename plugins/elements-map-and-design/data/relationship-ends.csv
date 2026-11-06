@@ -1,0 +1,8 @@
+cardinality,kind,one_end,other_end,rule
+one-to-many,master-detail,exactly-one,zero-or-many,"A detail record cannot exist without its master, so the master end is exactly one"
+one-to-many,lookup,zero-or-one,zero-or-many,"The house default: a lookup may be blank, and a parent may have any number of children"
+one-to-many,reference,zero-or-one,zero-or-many,As for a lookup
+one-to-many,,zero-or-one,zero-or-many,The house default when the kind is not known
+one-to-one,master-detail,exactly-one,zero-or-one,"One master, at most one detail"
+one-to-one,,zero-or-one,zero-or-one,At most one record at each end
+many-to-many,,zero-or-many,zero-or-many,"Many at both ends; usually better drawn through a junction object, one-to-many at each side"

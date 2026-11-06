@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Classifier calls (system-classifier)",
+  "description": "One call per item of systems/unmatched.json: the outside system it proves, or why it is not an outside system; and one entry per system named, with what it is and the words to search the org's code for.",
+  "type": "object",
+  "required": ["items", "systems"],
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "verdict", "reason", "confidence"],
+        "additionalProperties": false,
+        "properties": {
+          "item": {"description": "The item's id in systems/unmatched.json (u1, u2, ...).", "type": "string", "pattern": "^u[0-9]+$"},
+          "verdict": {"enum": ["system", "noise"]},
+          "system": {"description": "verdict system: the vendor or product as people name it (a known system's name when it is one).", "type": "string", "minLength": 1, "maxLength": 100},
+          "kind": {"description": "verdict system: what kind of system it is.", "enum": ["salesforce", "middleware", "external-app", "data-store", "channel"]},
+          "middleware": {"description": "verdict system: true for an integration platform that carries data on to other systems (Make, Zapier, MuleSoft).", "type": "boolean"},
+          "reason": {"description": "The evidence for the call in one sentence: the domain, the description, the publisher.", "type": "string", "minLength": 1, "maxLength": 500},
+          "confidence": {"enum": ["high", "medium", "low"]},
+          "sources": {"description": "Web pages the call rests on, when it rests on any.", "type": "array", "items": {"type": "string", "maxLength": 500}}
+        }
+      }
+    },
+    "systems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "searchTerms"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {"type": "string", "minLength": 1, "maxLength": 100},
+          "description": {"description": "What the system is, in one short sentence.", "type": "string", "maxLength": 300},
+          "searchTerms": {"description": "Words that name the system in Flow and Apex source: its name when that is distinctive, otherwise distinctive words only (never an everyday word such as 'make' or 'box').", "type": "array", "items": {"type": "string", "minLength": 2, "maxLength": 100}}
+        }
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string", "maxLength": 1000}}
+  }
+}

@@ -1,0 +1,5 @@
+order,phase,item,condition,source
+1,foundation,Load parent records,When child rows reference new parents,Elements method
+2,security,Load roles before sharing rules,When the load changes security-model records,Elements method
+3,membership,Load people and data before groups and queues,When groups or queues reference those records,Elements method
+4,data,Load the ratified target sequence,Always after applicable prerequisite phases,Elements method

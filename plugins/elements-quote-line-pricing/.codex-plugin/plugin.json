@@ -1,0 +1,41 @@
+{
+  "name": "elements-quote-line-pricing",
+  "version": "1.0.0",
+  "description": "Explain how a Salesforce quote line's price was calculated using Quote Line Microscope and Elements evidence. Read-only analysis of calculator price rules.",
+  "author": {
+    "name": "Elements.cloud",
+    "email": "success@elements.cloud",
+    "url": "https://elements.cloud/"
+  },
+  "homepage": "https://developer.elements.cloud/",
+  "repository": "https://github.com/Q9Elements/elements-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": [
+    "elements-cloud",
+    "salesforce",
+    "cpq",
+    "quote-line",
+    "pricing"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Quote Line Pricing",
+    "shortDescription": "Explain how a quote line price was calculated.",
+    "longDescription": "A guided playbook that explains a Salesforce quote line price from Quote Line Microscope and Elements evidence, answers follow-up questions, and reports gaps in the available evidence. Read-only analysis of calculator price rules.",
+    "developerName": "Elements.cloud",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://elements.cloud/",
+    "privacyPolicyURL": "https://elements.cloud/privacy-gdpr/",
+    "termsOfServiceURL": "https://elements.cloud/app-terms-of-service/",
+    "defaultPrompt": [
+      "Why is this quote line priced this way?",
+      "Which price rules affected this quote line?",
+      "Resume my quote line pricing explanation."
+    ],
+    "brandColor": "#168FCE"
+  }
+}

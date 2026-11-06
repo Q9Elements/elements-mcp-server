@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Integrations section (integration-deriver)",
+  "description": "Systems and integrations in the business-architecture model's own shape, plus the fields only this playbook uses: status, steps and sourceResources on systems; status, steps and data on integrations; and manualHandoffs.",
+  "type": "object",
+  "required": ["systems", "integrations", "manualHandoffs", "gaps"],
+  "additionalProperties": false,
+  "properties": {
+    "systems": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "kind", "status", "steps", "evidence"],
+        "properties": {
+          "status": {"enum": ["existing", "proposed"]},
+          "steps": {"type": "array", "items": {"type": "string"}},
+          "sourceResources": {"type": "array", "items": {"type": "string", "maxLength": 200}},
+          "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "maxLength": 1000}}
+        }
+      }
+    },
+    "integrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "from", "to", "status", "data", "steps", "pattern", "timing", "evidence"],
+        "properties": {
+          "status": {"enum": ["existing", "proposed"]},
+          "data": {"description": "What moves: the records or messages, in business words.", "type": "string", "minLength": 1, "maxLength": 300},
+          "steps": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "maxLength": 1000}}
+        }
+      }
+    },
+    "manualHandoffs": {
+      "description": "Handoffs the process does by hand or with no system named, which the design leaves as they are.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "data", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "step": {"type": "string"},
+          "from": {"type": "string", "maxLength": 200},
+          "to": {"type": "string", "maxLength": 200},
+          "data": {"type": "string", "maxLength": 300},
+          "note": {"type": "string", "maxLength": 1000}
+        }
+      }
+    },
+    "gaps": {"type": "array", "items": {"type": "object", "required": ["note"]}}
+  }
+}

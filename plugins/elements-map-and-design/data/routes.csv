@@ -1,0 +1,60 @@
+diagram_type,source,mode,when,route,reader,reader_section,notes
+process,org-metadata,create,the whole process a set of org objects supports,dedicated,map-process-from-data-model,route metadata,Multi-level process worked out from the objects in the Metadata Dictionary; top level one box per capability
+process,org-metadata,create,the process of one lifecycle object (Case or Opportunity),external,elements:elements-org-to-process,,"Base Elements plugin; draws the map itself, outside this plugin's model and drawing skills. When it fails or is not available, run map-process-from-data-model with scope object (route metadata) and say so"
+process,existing-diagram,amend,the automations that run at each status or stage box of a process map built from org metadata,dedicated,show-status-automations,,"Adds a child level of automations to each status box and sets each box's Object resources and note to what those automations write"
+process,vendor-docs,create,the process of one object (Case or Opportunity),dedicated,map-process-from-data-model,scope object,"Out-of-the-box process of one object from its documentation, built on its status or stage values"
+process,vendor-docs,create,,dedicated,map-process-from-data-model,route docs,Out-of-the-box process of any system from its official data model and API documentation
+process,description,create,,generic,generic,,"Write activities, roles and flows from the person's words; everything not stated is inferred"
+process,document,create,,generic,generic,,"Write the model from a process description, SOP or requirements document"
+process,picture,create,,generic,generic,,Transcribe a picture of a process diagram into the model
+process,model-file,create,,direct,,,The model already exists: validate and draw
+process,tickets,create,,paused,,,Use case 9 (paused): process from Jira or Elements stories
+process,agent-package,create,,dedicated,map-agent-as-process,,"Use case 10: stages of a skill, agent, plugin, playbook or framework as the top level, their instructions as the levels behind, people, agents, tools and scripts as resources"
+process,existing-diagram,amend,,unsupported,,,draw-process-map only draws new maps; offer a new version of the map instead
+process,existing-diagram,check,,dedicated,compare-design-to-implementation,,"Playbook: box by box, how far the connected org implements the map (a design); proposes metadata links for approval, reports the gaps and, on approval, colours the boxes with a sticky note per gap; ""reset the colours"" removes them"
+journey,description,create,,generic,generic,,"Touchpoints in the customer's voice, grouped by stage, Customer on every activity"
+journey,document,create,,generic,generic,,"Write the journey from research, personas or a journey write-up"
+journey,picture,create,,generic,generic,,Transcribe a picture of a journey map into the model
+journey,model-file,create,,direct,,,The model already exists: validate and draw
+journey,tickets,create,,paused,,,Use case 9 (paused): journey from Jira or Elements stories
+journey,org-metadata,create,,unsupported,,,"A journey is the customer's experience; org metadata shows the internal process. Offer a process map from the org's objects (map-process-from-data-model), or a journey from a description or document"
+journey,vendor-docs,create,,unsupported,,,"Data model and API documentation describes objects, not the customer's experience. Offer the out-of-the-box process from the documentation (map-process-from-data-model), or a journey from a description or document"
+journey,existing-diagram,amend,,unsupported,,,draw-process-map only draws new maps; offer a new version of the map instead
+journey,existing-diagram,check,,dedicated,compare-design-to-implementation,,"Playbook: box by box, how far the connected org implements the journey; proposes metadata links for approval, reports the gaps and, on approval, colours the boxes with a sticky note per gap"
+data-model,org-metadata,create,,dedicated,draw-data-model,1a; references/org-route.md,"Objects the person names, resolved in the Metadata Dictionary, with their fields and relationships"
+data-model,vendor-docs,create,,generic,generic,,Entities and relationships from the vendor's object reference; never invent an API name
+data-model,description,create,,generic,generic,,"Entities, key fields and relationships from the person's words; proposed objects marked kind proposed"
+data-model,document,create,,generic,generic,,Entities and relationships from a schema write-up or design document
+data-model,picture,create,,generic,generic,,Transcribe a picture of an ERD into the model
+data-model,model-file,create,,direct,,,The model already exists: validate and draw
+data-model,existing-diagram,amend,,dedicated,draw-data-model,1c,"Reads the map back into a model, applies the change, writes only the difference"
+data-model,existing-diagram,check,,dedicated,compare-design-to-implementation,,"Playbook: entity by entity, how far the connected org implements the designed data model; proposes metadata links for approval, reports the gaps and, on approval, colours the cards"
+data-model,process-map,create,,dedicated,design-from-process-map,,"Playbook: derives the data model, the integrations and the access matrix from the map and draws the data model and the system architecture, with a solution overview document"
+interaction-flow,org-metadata,create,one automation,dedicated,explain-automation,,"One Flow, Process Builder, Apex class or trigger, OmniScript or rule, as its logic"
+interaction-flow,org-metadata,create,a chain of automations,dedicated,trace-automation-chain,,"Walks calls, saves and platform events through the dependency graph; the person confirms the chain"
+interaction-flow,document,create,an automation's definition file (Flow XML or Apex source),dedicated,explain-automation,definition source: a file they attach,The file becomes the definition; the automation is still looked up in Elements
+interaction-flow,description,create,,generic,generic,,Automations and their order from the person's words; every step inferred
+interaction-flow,picture,create,,generic,generic,,"Transcribe a picture of an automation chain into the chain level: one automation per card, in order, every interaction inferred; for an automation's logic use the org-metadata route"
+interaction-flow,vendor-docs,create,,unsupported,,,"Automations are built in each org; vendor documentation does not hold them. Offer one automation or a chain from the connected org (explain-automation, trace-automation-chain)"
+interaction-flow,agent-package,create,,dedicated,map-agent-as-process,Stage 1 diagrams: interaction flow,"Use case 10: the package's call graph, which skill dispatches which agent, script and MCP tool, in order"
+interaction-flow,model-file,create,,direct,,,The model already exists: validate and draw
+interaction-flow,existing-diagram,amend,,unsupported,,,draw-interaction-flow only draws new maps; offer a new version of the map instead
+interaction-flow,existing-diagram,check,,dedicated,compare-design-to-implementation,,"Playbook: step by step, how far the connected org implements the designed flow; proposes metadata links for approval, reports the gaps and, on approval, colours the cards"
+capability,description,create,,generic,generic,,"Capability tree, drivers and ratings from the person's words"
+capability,document,create,,generic,generic,,"Capability tree from a strategy, assessment or operating-model document"
+capability,picture,create,,generic,generic,,Transcribe a picture of a capability map into the model
+capability,model-file,create,,direct,,,The model already exists: validate and draw
+capability,vendor-docs,create,,unsupported,,,"Not built. Offer the out-of-the-box process from the vendor's documentation, whose top level is one box per capability (map-process-from-data-model), or a capability map from a description or document"
+capability,org-metadata,create,,paused,,,Use case 8 (paused): service catalogue of an org
+capability,process-map,create,,paused,,,Left out of use case 7 and waiting on use case 8 (paused): derive capabilities from a process map
+capability,existing-diagram,amend,,unsupported,,,"Capability maps are drawn new with manage_diagram; amending an existing one is not built yet, so offer a new version instead"
+capability,existing-diagram,check,,unsupported,,,"Checking a capability map against the org is not built; offer a check of a process map that covers the same capabilities (compare-design-to-implementation)"
+system-architecture,description,create,,dedicated,draw-system-architecture,1a; references/modelling-guide.md,"Landscape or solution, with Well-Architected checks on every integration"
+system-architecture,document,create,,dedicated,draw-system-architecture,1a; references/modelling-guide.md,A solution design or architecture document
+system-architecture,picture,create,,dedicated,draw-system-architecture,1a; references/modelling-guide.md,A picture of an architecture diagram
+system-architecture,model-file,create,,direct,,,The model already exists: validate and draw
+system-architecture,vendor-docs,create,,unsupported,,,"Data model and API documentation does not describe a landscape. Offer a landscape from a description or a solution design document (draw-system-architecture), or from the connected org (map-org-integrations)"
+system-architecture,existing-diagram,amend,,dedicated,draw-system-architecture,1c,"Reads the diagram back into a model, applies the change, writes only the difference"
+system-architecture,existing-diagram,check,,dedicated,compare-design-to-implementation,,"Playbook: system by system, how far the connected org implements the designed architecture; proposes metadata links for approval, reports the gaps and, on approval, colours the cards"
+system-architecture,org-metadata,create,,dedicated,map-org-integrations,,"Playbook: finds every outside system the org exchanges data with from its integration metadata, traces the automations that carry each exchange, and draws a landscape with one drill-down per system (middleware, automations, objects), every card linked to its metadata"
+system-architecture,process-map,create,,dedicated,design-from-process-map,,"Playbook: derives the integrations, the data model and the access matrix from the map and draws the system architecture and the data model, with a solution overview document"

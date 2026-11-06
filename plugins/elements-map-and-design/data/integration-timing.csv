@@ -1,0 +1,4 @@
+timing,word,short,meaning,patterns
+real-time,real-time,the caller waits for the answer,The caller waits for the answer (synchronous; seconds),request-reply|remote-call-in|data-virtualization
+near-real-time,near real-time,sent as it happens,Sent as it happens without waiting for an answer (asynchronous events or messages),fire-and-forget|remote-call-in|ui-update|batch-data-sync
+batch,batch,moved in bulk on a schedule,Moved in bulk on a schedule,batch-data-sync|remote-call-in

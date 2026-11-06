@@ -1,0 +1,5 @@
+disposition,meaning,planned
+remove,The reviewer confirms the class may be removed; it enters the removal plan,true
+keep,The reviewer rules the class stays; it never enters the plan,false
+decide-later,No ruling yet; carried in open_items and excluded from the plan,false
+annotate,Mark this test-only class @isTest so its characters stop counting; nothing is deleted,true

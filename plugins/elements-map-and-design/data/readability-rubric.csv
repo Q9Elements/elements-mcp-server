@@ -1,0 +1,46 @@
+rule_id,applies_to,checked_by,severity,threshold,rule
+R01,process|journey,validator,warn,10,Each level shows at most the threshold number of activities; move the rest into a child level
+R02,process|journey,validator,warn,,Every activity has at least one line in or out
+R03,process|journey,validator,warn,,When an activity has more than one outgoing line every one of them is labelled with its condition
+R04,process|journey,validator,warn,,Every level shows what starts it with a line from START
+R05,capability,validator,warn,4,The capability tree is at most the threshold number of levels deep: two levels of headings over cards and a fourth level drawn as list lines on its parent card; deeper levels are not drawn
+R06,data-model,validator,warn,,When there is more than one entity every entity has at least one relationship
+R07,process|journey,validator,warn,,Every role performs at least one activity
+R08,process|journey|capability,validator,warn,,Names of activities roles and capabilities are business language rather than API names
+R09,*,reviewer,error,,Everything the model expects on this diagram is drawn and nothing is drawn that the model does not have
+R10,process|journey|interaction-flow|system-architecture,reviewer,warn,,A child level's lines in and out match the lines into and out of the box it drills down from
+R11,*,reviewer,warn,,No two boxes overlap
+R12,*,reviewer,warn,,Inferred items are flagged: an inferred box has a note attachment titled Inferred and an inferred line's label ends with (inferred)
+R13,process|journey|interaction-flow,layout-check,warn,,Every line leaves and enters a box at the middle of the side data/line-sides.csv gives it
+R14,process|journey|interaction-flow,layout-check,warn,2,Boxes in a row share their middle and boxes in a column share their left edge to within the threshold in pixels
+R15,process|journey|interaction-flow,layout-check,warn,,No box sits in the space the style file (data/style-process.csv or data/style-interaction.csv) keeps clear for a start or end line
+R16,process|journey|interaction-flow,layout-check,warn,,No line is likely to run through a box it does not join
+R17,process|journey|interaction-flow,layout-check,warn,3,A decision box has at most the threshold number of different outcomes
+R18,interaction-flow,validator,warn,12,Each logic level shows at most the threshold number of steps; move loop bodies and long branches into drill-downs
+R19,interaction-flow,validator,warn,,Every step has at least one line in or out
+R20,interaction-flow,validator,warn,,When a step has more than one outgoing line every one of them is labelled with its condition
+R21,interaction-flow,validator,warn,,An automation's own logic level has exactly one Start step
+R22,interaction-flow,validator,warn,,Names of automations and steps are labels people read rather than API names
+R23,interaction-flow,validator,warn,6,A card lists at most the threshold number of attributes
+R24,interaction-flow,validator,warn,250,A footer summary is at most the threshold number of characters
+R25,interaction-flow,validator,warn,,When the model has more than one automation every automation is joined to the chain by an interaction
+R26,capability,layout-check,warn,,Every card and sub-heading sits below the heading of the capability it belongs to and in that heading's column
+R27,capability,layout-check,warn,,No two cards or labels overlap and cards stacked in a column keep at least the sibling gap
+R28,capability,layout-check,warn,2,Column headers in one row share their top and every card sits where the layout puts it from the sizes Elements reports to within the threshold in pixels
+R30,data-model,validator,warn,30,A data model shows at most the threshold number of entities; split a larger one into several maps by area
+R31,data-model,validator,warn,,A relationship's fromEnd and toEnd agree with its cardinality: a many end only where the cardinality says many
+R32,data-model,layout-check,warn,2,Every card is where the plan put it to within the threshold in pixels and no two cards overlap or touch
+R33,data-model,layout-check,error,,Every relationship is drawn once between the right two cards with the planned line ends and every card shows its planned fields with their descriptions and its planned API name and colour
+R34,data-model,layout-check,warn,,No line is likely to run through a card it does not join
+R40,system-architecture,validator,warn,20,Each level (the top and each group's drill-down) shows at most the threshold number of systems; put related systems in a group
+R41,system-architecture,validator,warn,,When a level has more than one system every system has at least one integration
+R42,system-architecture,validator,warn,,"Every integration has a label, technology or pattern so its line says how the data moves"
+R43,system-architecture,validator,warn,,"An integration that names a pattern has Salesforce at the end the pattern needs: the caller for request and reply and fire and forget, the receiver for remote call-in and data virtualization"
+R44,system-architecture,validator,warn,,An integration's technology is not a mechanism Well-Architected rates suboptimal for its pattern (data/integration-mechanisms.csv)
+R45,system-architecture,validator,warn,,An integration's timing is one its pattern allows (data/integration-patterns.csv)
+R46,system-architecture,validator,warn,3,A card shows at most the threshold number of footer icons; more make it wider than the others
+R47,system-architecture,validator,warn,6,A card lists at most the threshold number of attributes
+R48,system-architecture,layout-check,warn,2,Every card is where the plan put it to within the threshold in pixels and no two cards overlap
+R49,system-architecture,layout-check,error,,Every integration is drawn once between the right two cards with the planned arrows and label; every card shows its planned icon attributes and footer; every group card has its drill-down
+R50,system-architecture,layout-check,warn,,No line is likely to run through a card it does not join
+R51,system-architecture,validator,warn,20,"A system's drill-down (its middleware, automations and objects, drawn when its integrations list them) shows at most the threshold number of cards"

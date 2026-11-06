@@ -1,0 +1,8 @@
+pattern,relation,notes
+^Start$,trigger,The automation runs when this object is saved or this event is published (the element that starts a record-triggered or platform event-triggered flow)
+^Create Record\b,create,Creates records of this object; on a platform event it publishes the event
+^Update Record\b,update,Changes records of this object
+^Delete Record\b,delete,Deletes records of this object
+^Record Lookup\b,read,Reads records of this object
+^$,unstated,The dependency graph names no element: Apex and some platform event subscribers; see the rules in references/chain-walk.md
+.*,reference,Any other element that names the item (a decision, formula, assignment, screen); read only

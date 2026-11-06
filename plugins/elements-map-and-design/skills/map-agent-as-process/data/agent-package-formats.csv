@@ -1,0 +1,15 @@
+format,priority,detect,entry,stage_source,recovery_states,default_mcp_server,tested,notes
+elements-playbook,10,SKILL.md|steps/*.md|templates/execution-state.json,SKILL.md,dispatch-table,blocked,elements,yes,A playbook built with build-elements-playbook: the SKILL.md state dispatch table lists the cards; each card has a numbered Procedure and Outcomes that name the next state; the Human moments table names who decides
+runbook-skill,20,SKILL.md|scripts/status.py,SKILL.md,stage-table,,,yes,"A skill that runs fixed stages in order (like map-process-from-data-model): a table with a Stage column lists them, and a '## Stage N.' section holds each one's instructions"
+claude-plugin,30,.claude-plugin/plugin.json,,package-list,,,yes,"A plugin holds several packages: list its skills, agents and commands and ask which one to draw"
+codex-plugin,31,.codex-plugin/plugin.json,,package-list,,,no,"Same as claude-plugin, for a plugin packaged for Codex"
+gsd,40,commands/gsd/*.md,,commands,,,no,Get Shit Done installed in a project or home folder: each command is a stage; commands pull their instructions from get-shit-done/workflows/ through @ includes
+gsd-source,41,get-shit-done/workflows/*.md|commands/*.md,,commands,,,no,The GSD repository itself: commands/ and get-shit-done/workflows/
+claude-skill,50,SKILL.md,SKILL.md,headings,,,yes,"A skill whose stages are its numbered '## N.' sections, or the items of its one numbered list, or else its sections"
+claude-agent,60,file:agents/*.md,,headings,,,yes,One agent definition; its Procedure's numbered items become the steps
+claude-command,61,file:commands/*.md,,headings,,,no,One slash command
+agents-md,70,AGENTS.md,AGENTS.md,headings,,,no,"Instructions for Codex and other agents that read AGENTS.md; sections only, the reader interprets the rest"
+copilot-instructions,71,.github/copilot-instructions.md,.github/copilot-instructions.md,headings,,,no,GitHub Copilot repository instructions
+copilot-prompts,72,.github/prompts/*.prompt.md,,commands,,,no,"GitHub Copilot prompt files, one stage per prompt"
+gemini-extension,73,gemini-extension.json,GEMINI.md,headings,,,no,A Gemini CLI extension: its context file and commands
+cursor-rules,74,.cursor/rules/*.mdc,,commands,,,no,"Cursor rules, one stage per rule file"

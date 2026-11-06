@@ -1,0 +1,9 @@
+code,severity,meaning,reader,canned_message_id
+STALE_LOG,warn,The quote line was changed more than 120 seconds after the log was written.,ALL,STALE-LOG
+POT_SIBLINGS_TRUNCATED,warn,The Percent of Total sibling-line results were incomplete; analysis continues with the available rows.,ALL,
+BLOCK_BASIS_NOT_QUANTITY,warn,The Block pricing basis is not Quantity.,ALL,
+POT_UNPRORATE_FAILED,warn,"A Percent of Total subscription row has no usable proration multiplier, so its stored prorated contribution is used.",ALL,
+TIER_VALUE_NULL,warn,"A matched discount tier has a blank discount value, which is treated as zero.",ALL,
+ACTION_FIELD_UNMAPPED,warn,A price action label could not be mapped to a verified field name; its impact is indirect.,ALL,
+HISTORY_UNAVAILABLE,warn,"Price rule, condition, or action history could not be retrieved from Elements.",ALL,HISTORY-UNAVAILABLE
+CALCULATION_PASSES_AMBIGUOUS,warn,Earlier calculation passes may be included in these figures.,ALL,CALCULATION-PASSES-AMBIGUOUS

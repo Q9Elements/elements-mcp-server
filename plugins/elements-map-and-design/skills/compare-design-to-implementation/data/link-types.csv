@@ -1,0 +1,21 @@
+sf_type,kind,qualify,why
+Standard Object,object,,"The records the step creates, reads or changes"
+Custom Object,object,,"The records the step creates, reads or changes"
+Field,field,object,"A value the step sets or reads, a status or stage field above all; picklist values are named in the link's description, because a value often matches a value set too and cannot be linked on its own"
+Record Type,record-type,,The kind of record the step works on
+Process,record-type,,"A business process (the stage, status or solution values a record type offers)"
+Global Action,interface,,An action a person runs for the step
+Lightning Page,interface,,The page a person uses for the step
+Page Layout,interface,,The layout a person uses for the step
+Permission Set,access,,Access the step's role needs
+Queue,access,,Where work for the step is routed
+Report,insight,,A report the step uses or produces
+Dashboard,insight,,A dashboard the step uses or produces
+Email Template,interface,,A message the step sends
+Connected App,integration,,An outside system the step exchanges data with
+Named Credential,integration,,An outside system the step calls
+External Service,integration,,An outside system the step calls
+Platform Event,integration,,An event the step publishes or reacts to
+Agent,automation,,An Agentforce agent that does the step
+Agent Action,automation,,An agent action that does the step
+Prompt Template,automation,,A prompt template the step uses

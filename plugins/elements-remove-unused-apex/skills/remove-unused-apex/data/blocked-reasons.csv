@@ -1,0 +1,7 @@
+reason,meaning,owner_role
+NO_APEX_TELEMETRY,"The telemetry probe returned fewer distinct daily log dates than T-13, or the complete telemetry ledger lacks ApexExecution or has zero daysProcessed for it, or lacks ApexTrigger or has zero daysProcessed for it when work/bundle/catalog.csv contains a row with kind=trigger and isManagedPackage=false; card 01 probe or card 02 ledger",the customer's Salesforce platform owner (licenses Event Monitoring)
+INSUFFICIENT_TELEMETRY,"The daily Apex telemetry is below the T-12 gate of 29 held days; the daily ingest extends the span one day per day and the block states the date the gate is reached",time: the daily Elements ingest; the customer waits until the stated date
+SYNC_INCOMPLETE,The Elements sync has not completed for this model or the model holds no Apex; a missing edge is trusted only after a completed sync,the Elements space administrator
+MISSING_PRIMITIVE,A required Elements tool (get_unused_apex_candidates or has_event_monitoring) does not resolve on the MCP server; there is no interim route,the method owner
+INGEST_PENDING,Elements has not ingested this org's telemetry yet; the daily pull runs at 15:00 UTC,the Elements space administrator
+TELEMETRY_NOT_COLLECTED,Elements is not collecting the Event Monitoring data for the production org,the Elements space administrator

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Wording findings (process-quality-assessor)",
+  "description": "One entry per level of the source map, listing only the activities and lines that fail rule D05 or D06 of data/derivability-rubric.csv.",
+  "type": "object",
+  "required": ["levels"],
+  "additionalProperties": false,
+  "properties": {
+    "levels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["diagramId", "levelNumber", "failing"],
+        "additionalProperties": false,
+        "properties": {
+          "diagramId": {"type": "string", "minLength": 1},
+          "levelNumber": {"type": "string", "minLength": 1},
+          "failing": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["rule", "kind", "key", "text", "why", "fix"],
+              "additionalProperties": false,
+              "properties": {
+                "rule": {"enum": ["D05", "D06"]},
+                "kind": {"enum": ["activity", "line"]},
+                "key": {"type": "integer"},
+                "text": {"type": "string", "maxLength": 1000},
+                "why": {"type": "string", "minLength": 1, "maxLength": 500},
+                "fix": {"description": "The wording the assessor suggests, in the map's language.", "type": "string", "minLength": 1, "maxLength": 500}
+              }
+            }
+          }
+        }
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string", "maxLength": 1000}}
+  }
+}

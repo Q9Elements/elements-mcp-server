@@ -1,0 +1,423 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "Data 360 on AWS: system landscape",
+    "description": "System landscape of a Data 360 home org on AWS: the AWS sources it ingests or federates, the Salesforce apps that use its data through Data Cloud One companion orgs, and the destinations it activates data to. Redrawn from the Salesforce Well-Architected Customer 360 reference landscape.",
+    "author": "draw-system-architecture (example)",
+    "sources": [
+      {
+        "kind": "document",
+        "ref": "Salesforce Well-Architected reference diagram: Data 360 system landscape (AWS)"
+      }
+    ]
+  },
+  "systems": [
+    {
+      "id": "data360",
+      "name": "Data 360 Home Org",
+      "kind": "salesforce",
+      "hub": true,
+      "attributes": [
+        {
+          "title": "Data Spaces: Sales, Marketing, Finance"
+        },
+        {
+          "title": "Einstein Studio"
+        },
+        {
+          "title": "Bring Your Own Model (BYOM)"
+        },
+        {
+          "title": "Data 360 Code Extension"
+        }
+      ],
+      "footer": "Collect, unify and activate customer data"
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "kind": "salesforce",
+      "icon": "Slack Logo"
+    },
+    {
+      "id": "slack-agentforce",
+      "name": "Agentforce in Slack",
+      "kind": "salesforce",
+      "parent": "slack"
+    },
+    {
+      "id": "slack-workflow",
+      "name": "Slack Workflow",
+      "kind": "salesforce",
+      "parent": "slack",
+      "icon": "Slack Logo"
+    },
+    {
+      "id": "sales-org",
+      "name": "Sales",
+      "kind": "salesforce",
+      "footer": "Data Cloud One companion org"
+    },
+    {
+      "id": "sales-agentforce",
+      "name": "Agentforce Sales",
+      "kind": "salesforce",
+      "parent": "sales-org",
+      "icon": "Sales Logo"
+    },
+    {
+      "id": "sales-tableau",
+      "name": "Tableau Next for Sales",
+      "kind": "salesforce",
+      "parent": "sales-org"
+    },
+    {
+      "id": "sales-dc1",
+      "name": "Data Cloud One (Sales)",
+      "kind": "salesforce",
+      "parent": "sales-org"
+    },
+    {
+      "id": "service-org",
+      "name": "Service",
+      "kind": "salesforce",
+      "footer": "Data Cloud One companion org"
+    },
+    {
+      "id": "service-agentforce",
+      "name": "Agentforce Service",
+      "kind": "salesforce",
+      "parent": "service-org",
+      "icon": "Service Logo"
+    },
+    {
+      "id": "service-tableau",
+      "name": "Tableau Next for Service",
+      "kind": "salesforce",
+      "parent": "service-org"
+    },
+    {
+      "id": "service-dc1",
+      "name": "Data Cloud One (Service)",
+      "kind": "salesforce",
+      "parent": "service-org"
+    },
+    {
+      "id": "aws-streaming",
+      "name": "AWS Streaming Apps",
+      "kind": "external-app",
+      "attributes": [
+        {
+          "title": "AWS Kinesis"
+        },
+        {
+          "title": "AWS MSK"
+        }
+      ]
+    },
+    {
+      "id": "aws-rdbms",
+      "name": "AWS RDBMS",
+      "kind": "data-store",
+      "attributes": [
+        {
+          "title": "AWS Aurora PostgreSQL"
+        },
+        {
+          "title": "AWS RDS PostgreSQL"
+        }
+      ]
+    },
+    {
+      "id": "aws-object",
+      "name": "AWS Object Storage",
+      "kind": "data-store",
+      "attributes": [
+        {
+          "title": "Structured"
+        },
+        {
+          "title": "Unstructured"
+        }
+      ]
+    },
+    {
+      "id": "aws-lakehouse",
+      "name": "AWS Lakehouse",
+      "kind": "data-store",
+      "attributes": [
+        {
+          "title": "S3 object storage"
+        },
+        {
+          "title": "AWS Redshift"
+        }
+      ]
+    },
+    {
+      "id": "crm-apps",
+      "name": "Salesforce CRM Apps",
+      "kind": "salesforce",
+      "attributes": [
+        {
+          "title": "Sales"
+        },
+        {
+          "title": "Service"
+        },
+        {
+          "title": "Commerce"
+        }
+      ]
+    },
+    {
+      "id": "web-mobile",
+      "name": "Web and Mobile Apps",
+      "kind": "channel",
+      "attributes": [
+        {
+          "title": "Mobile apps"
+        },
+        {
+          "title": "Web applications"
+        }
+      ]
+    },
+    {
+      "id": "first-third-party",
+      "name": "1P and 3P Data",
+      "kind": "external-app",
+      "zone": "bottom",
+      "attributes": [
+        {
+          "title": "Databases"
+        },
+        {
+          "title": "APIs"
+        }
+      ]
+    },
+    {
+      "id": "mc-engagement",
+      "name": "Marketing Cloud Engagement",
+      "kind": "salesforce",
+      "attributes": [
+        {
+          "title": "Engagement"
+        },
+        {
+          "title": "Personalization"
+        }
+      ]
+    },
+    {
+      "id": "mc-activation",
+      "name": "Marketing Cloud",
+      "kind": "salesforce",
+      "zone": "right",
+      "attributes": [
+        {
+          "title": "Engagement"
+        },
+        {
+          "title": "Personalization"
+        },
+        {
+          "title": "Intelligence"
+        }
+      ]
+    },
+    {
+      "id": "ads-apps",
+      "name": "3rd Party Ads Applications",
+      "kind": "external-app",
+      "attributes": [
+        {
+          "title": "LinkedIn Ads"
+        },
+        {
+          "title": "Meta Ads"
+        },
+        {
+          "title": "Snapchat Ads"
+        }
+      ]
+    },
+    {
+      "id": "tableau-cloud",
+      "name": "Tableau Cloud",
+      "kind": "salesforce",
+      "zone": "right",
+      "attributes": [
+        {
+          "title": "Dashboards and reports"
+        }
+      ]
+    },
+    {
+      "id": "aws-ads",
+      "name": "AWS Ads",
+      "kind": "external-app",
+      "attributes": [
+        {
+          "title": "AWS DSP"
+        },
+        {
+          "title": "AWS AMC"
+        }
+      ]
+    },
+    {
+      "id": "s3-target",
+      "name": "S3 Object Storage",
+      "kind": "data-store"
+    },
+    {
+      "id": "redshift-target",
+      "name": "AWS Redshift",
+      "kind": "data-store"
+    }
+  ],
+  "integrations": [
+    {
+      "from": "slack-agentforce",
+      "to": "sales-agentforce",
+      "direction": "two-way",
+      "technology": "Slack app"
+    },
+    {
+      "from": "slack-workflow",
+      "to": "service-agentforce",
+      "direction": "two-way",
+      "technology": "Slack app"
+    },
+    {
+      "from": "data360",
+      "to": "sales-dc1",
+      "pattern": "data-virtualization",
+      "technology": "Data Cloud One companion org",
+      "timing": "real-time"
+    },
+    {
+      "from": "data360",
+      "to": "service-dc1",
+      "pattern": "data-virtualization",
+      "technology": "Data Cloud One companion org",
+      "timing": "real-time"
+    },
+    {
+      "from": "sales-dc1",
+      "to": "sales-tableau",
+      "label": "Semantic model"
+    },
+    {
+      "from": "sales-dc1",
+      "to": "sales-agentforce",
+      "label": "Grounding data"
+    },
+    {
+      "from": "service-dc1",
+      "to": "service-tableau",
+      "label": "Semantic model"
+    },
+    {
+      "from": "service-dc1",
+      "to": "service-agentforce",
+      "label": "Grounding data"
+    },
+    {
+      "from": "aws-streaming",
+      "to": "data360",
+      "pattern": "batch-data-sync",
+      "technology": "Out of the box connector",
+      "timing": "near-real-time"
+    },
+    {
+      "from": "aws-rdbms",
+      "to": "data360",
+      "pattern": "batch-data-sync",
+      "technology": "Out of the box connector",
+      "timing": "batch"
+    },
+    {
+      "from": "aws-object",
+      "to": "data360",
+      "pattern": "batch-data-sync",
+      "technology": "Out of the box connector",
+      "timing": "batch"
+    },
+    {
+      "from": "aws-lakehouse",
+      "to": "data360",
+      "pattern": "data-virtualization",
+      "technology": "Zero Copy (query and file federation)"
+    },
+    {
+      "from": "crm-apps",
+      "to": "data360",
+      "pattern": "batch-data-sync",
+      "technology": "Out of the box connector",
+      "timing": "near-real-time"
+    },
+    {
+      "from": "web-mobile",
+      "to": "data360",
+      "pattern": "remote-call-in",
+      "technology": "Web and mobile SDK",
+      "timing": "near-real-time"
+    },
+    {
+      "from": "first-third-party",
+      "to": "data360",
+      "pattern": "remote-call-in",
+      "technology": "Ingestion API and MuleSoft",
+      "timing": "batch"
+    },
+    {
+      "from": "mc-engagement",
+      "to": "data360",
+      "pattern": "batch-data-sync",
+      "technology": "Out of the box connector",
+      "timing": "batch"
+    },
+    {
+      "from": "data360",
+      "to": "mc-activation",
+      "pattern": "batch-data-sync",
+      "technology": "Data Activation",
+      "timing": "batch"
+    },
+    {
+      "from": "data360",
+      "to": "ads-apps",
+      "pattern": "batch-data-sync",
+      "technology": "Data Activation",
+      "timing": "batch"
+    },
+    {
+      "from": "data360",
+      "to": "tableau-cloud",
+      "technology": "Out of the box connector",
+      "timing": "near-real-time"
+    },
+    {
+      "from": "data360",
+      "to": "aws-ads",
+      "pattern": "batch-data-sync",
+      "technology": "Data Activation",
+      "timing": "batch"
+    },
+    {
+      "from": "data360",
+      "to": "s3-target",
+      "pattern": "batch-data-sync",
+      "technology": "Data Activation",
+      "timing": "batch"
+    },
+    {
+      "from": "data360",
+      "to": "redshift-target",
+      "technology": "Zero Copy data sharing"
+    }
+  ]
+}

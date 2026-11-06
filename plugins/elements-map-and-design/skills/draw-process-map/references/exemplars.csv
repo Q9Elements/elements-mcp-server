@@ -1,0 +1,57 @@
+map_key,map_name,map_id,diagram_id,level,title,diagram_type,boxes,lines,unlabelled_lines,inputs,outputs,lines_with_waypoints,rows,columns,box_width,median_col_gap,median_row_gap,median_resources,notes,swimlanes,drilldowns
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163cff36f5d60045b721a,1,Sales Cloud Process Template,process,11,20,0,4,3,4,3,7,153,173,139,3,7,0,8
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d3c9d55c5bafcc4528,1.1,Design and launch marketing campaign,process,8,9,0,3,1,2,3,7,150,170,40,1.5,4,0,2
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d6c9d55c5bafcc4ae1,1.1.8,Set up webinar campaign,process,8,12,1,1,2,5,3,5,150,150,90,2.0,2,0,0
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d6c9d55c5bafcc4aad,1.1.10,Set up digital advertising campaign,process,7,10,0,1,1,2,2,5,150,150,192,2,1,0,0
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d3c9d55c5bafcc458e,1.3,Qualify and convert leads,process,4,8,0,2,3,0,1,4,120,180,,2.0,2,0,0
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d3c9d55c5bafcc465d,1.4,Nurture leads,process,3,5,0,1,1,1,1,3,130,170,,3,2,0,1
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d9c9d55c5bafcc4ce1,1.4.2,Run nurture campaigns for existing leads,process,7,10,0,2,1,4,2,4,150,188,128,3,3,0,0
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d3c9d55c5bafcc45f5,1.5,Develop sales opportunity,process,7,14,4,1,2,1,2,6,171,239,128,4,1,0,0
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d3c9d55c5bafcc46c6,1.6,(Re)Configure and generate quote,process,9,13,0,2,1,3,3,6,150,192,140,2,0,0,0
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d4c9d55c5bafcc4730,1.9,Close Opportunity and fulfil quote,process,7,8,0,1,1,0,2,4,160,190,140,4,2,0,0
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d4c9d55c5bafcc4807,1.10,Resolve issue for customer,process,7,9,0,2,1,1,2,5,160,181,182,3,4,0,0
+sales,Business Process (Sales Cloud),6ad163cff36f5d60045b7217,6ad163d4c9d55c5bafcc479b,1.11,Monitor and report on sales forecast,process,8,12,0,3,1,3,3,4,138,189,180,3.5,1,0,0
+service,Business Process (Service Cloud),6ad1634af36f5d60045b6da1,6ad1634bf36f5d60045b6da4,1,Service Cloud Process Template,process,7,15,0,3,6,5,2,6,162,166,299,3,4,0,6
+service,Business Process (Service Cloud),6ad1634af36f5d60045b6da1,6ad1635ac9d55c5bafcc3825,1.1,Provide self-help materials to customers,process,4,6,0,1,2,0,1,4,140,190,,2.5,0,0,0
+service,Business Process (Service Cloud),6ad1634af36f5d60045b6da1,6ad16359c9d55c5bafcc36a4,1.2,Process inbound customer inquiry,process,9,16,4,5,3,5,6,5,162,189,45,4,3,2,0
+service,Business Process (Service Cloud),6ad1634af36f5d60045b6da1,6ad16359c9d55c5bafcc36ef,1.3,Route case to appropriate agent,process,7,10,0,1,1,2,1,7,150,160,,3,0,0,0
+service,Business Process (Service Cloud),6ad1634af36f5d60045b6da1,6ad16359c9d55c5bafcc373b,1.4,Review and document the case,process,11,25,4,2,4,4,5,6,130,165,107,3,2,0,0
+service,Business Process (Service Cloud),6ad1634af36f5d60045b6da1,6ad1635ac9d55c5bafcc3788,1.5,Resolve a case using found knowledge,process,4,7,0,1,3,1,2,3,130,170,74,3.0,0,0,0
+service,Business Process (Service Cloud),6ad1634af36f5d60045b6da1,6ad1635ac9d55c5bafcc37d6,1.6,Initiate swarm of subject matter experts,process,8,10,0,1,1,2,2,4,162,218,205,3.0,1,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c4f36f5d60045b704a,1,Automotive Cloud Process Template,process,13,19,0,5,2,3,4,8,161,168,140,1,5,0,13
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c90c777f2e3f727bfa,1.1,Define Warranty Standards,process,7,8,0,1,1,1,2,5,160,189,168,4,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c70c777f2e3f727a83,1.2,Create or update vehicle asset details,process,7,8,0,1,1,1,2,5,150,196,168,2,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c90c777f2e3f727ce7,1.3,Maintain up to date inventory of sold vehicle assets across,process,6,10,0,4,2,1,3,4,192,177,100,4.0,1,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c70c777f2e3f7279ae,1.4,Capture Leads and Opportunities,process,6,9,0,3,2,1,2,4,150,185,210,3.5,2,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c70c777f2e3f7279f4,1.5,Identify Stakeholder Relationships,process,6,7,0,1,1,0,2,5,150,165,176,2.5,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c70c777f2e3f727a3b,1.6,Group Stakeholders,process,6,7,0,1,1,1,2,5,150,202,108,2.0,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c80c777f2e3f727bad,1.7,Manage Test Drive and Vehicle Service Appointments,process,5,8,0,2,2,1,2,3,192,175,104,4,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c80c777f2e3f727b16,1.8,Capture finance information,process,5,6,0,2,1,0,1,5,192,247,,5,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c80c777f2e3f727acc,1.9,Record and validate retail vehicle sales for incentive and compliance purposes,process,2,3,0,1,1,0,1,2,192,202,,5.0,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c90c777f2e3f727c48,1.10,Process Warranty Claims,process,7,9,0,2,1,1,2,5,160,173,168,3,1,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c90c777f2e3f727d38,1.11,Appraise vehicle or asset,process,5,7,0,1,2,0,1,5,161,192,,2,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c90c777f2e3f727c97,1.12,Manage Fleets,process,4,5,0,1,1,0,1,4,160,153,,3.0,0,0,0
+automotive,Business Process (Automotive),6ad163c4f36f5d60045b7047,6ad163c80c777f2e3f727b61,1.13,Plan visits and audits at the dealerships,process,9,10,0,1,1,0,2,5,151,206,168,3,0,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad16359f36f5d60045b6e76,1,Salesforce Revenue Cloud (Legacy) Process Template,process,14,21,1,1,2,5,3,7,170,187,245,2.0,11,0,9
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163670c777f2e3f7269ae,1.1,Create Quote from Opportunity,process,9,10,0,1,1,1,2,5,196,214,168,4,5,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163670c777f2e3f726a10,1.2,Approve Quote(internal),process,5,9,0,1,1,2,3,3,205,214,131,4,3,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163670c777f2e3f726a73,1.3,Review quote with customer,process,2,3,0,1,1,0,1,2,205,181,,4.5,1,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163670c777f2e3f726ad7,1.4,Create or amend Contract,process,3,4,0,1,1,0,1,3,159,171,,3,3,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163680c777f2e3f726cda,1.8,Configure Internal Systems,process,4,5,0,1,1,0,1,4,190,175,,4.5,0,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163680c777f2e3f726c71,1.10,Fulfill Order,process,6,9,0,1,2,3,3,4,160,170,68,4.0,0,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163680c777f2e3f726b3c,1.11,Send invoice to customer,process,4,5,0,1,1,0,1,4,144,164,,4.5,0,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163680c777f2e3f726c09,1.13,Receive payment from customer,process,2,3,0,1,1,0,1,2,186,179,,6.5,0,0,0
+revenue,Business Process (Revenue Cloud Legacy),6ad16359f36f5d60045b6e73,6ad163680c777f2e3f726ba2,1.14,Track revenue recognition,process,4,5,0,1,1,0,1,4,169,201,,5.0,0,0,0
+b2c,B2C E-Commerce Customer Journey Map,6ad16431f36f5d60045b7378,6ad16431f36f5d60045b737b,1,B2C E-Commerce Customer Journey Map Template,journey,5,7,0,1,0,2,1,5,160,140,,3,2,0,5
+b2c,B2C E-Commerce Customer Journey Map,6ad16431f36f5d60045b7378,6ad16433c9d55c5bafcc6479,1.1,Explore available options to remedy the problem,journey,4,11,1,3,5,2,2,3,160,140,98,3.0,0,0,0
+b2c,B2C E-Commerce Customer Journey Map,6ad16431f36f5d60045b7378,6ad16433c9d55c5bafcc64a8,1.2,Consider product/service offering,journey,5,11,0,2,5,0,1,5,160,174,,2,0,0,0
+b2c,B2C E-Commerce Customer Journey Map,6ad16431f36f5d60045b7378,6ad16433c9d55c5bafcc64d8,1.3,Decide whether to purchase the solution from our company,journey,6,13,2,1,2,3,2,5,160,140,122,2.5,0,0,0
+b2c,B2C E-Commerce Customer Journey Map,6ad16431f36f5d60045b7378,6ad16433c9d55c5bafcc6509,1.4,Await and accept delivery,journey,6,10,0,1,1,2,2,4,160,140,104,2.5,0,0,0
+b2c,B2C E-Commerce Customer Journey Map,6ad16431f36f5d60045b7378,6ad16433c9d55c5bafcc653b,1.5,Engage with post-purchase experiences,journey,3,7,1,1,4,2,1,3,160,148,,2,0,0,0
+b2b,B2B SaaS Customer Journey Map Template,6ad16426f36f5d60045b72fe,6ad16426f36f5d60045b7301,1,B2B SaaS Customer Journey Map Template,journey,6,7,0,1,0,1,1,6,160,140,,4.0,2,0,6
+b2b,B2B SaaS Customer Journey Map Template,6ad16426f36f5d60045b72fe,6ad16429c9d55c5bafcc5985,1.1,Explore available options to remedy the problem,journey,7,18,3,3,6,10,5,5,160,510,175,3,0,0,0
+b2b,B2B SaaS Customer Journey Map Template,6ad16426f36f5d60045b72fe,6ad16429c9d55c5bafcc59c0,1.2,Try out and acquire the new service,journey,5,9,0,1,4,0,1,5,160,190,,2,0,0,0
+b2b,B2B SaaS Customer Journey Map Template,6ad16426f36f5d60045b72fe,6ad16429c9d55c5bafcc59fc,1.3,Adopt the product,journey,9,17,3,3,1,7,5,3,160,279,138,2,1,0,0
+b2b,B2B SaaS Customer Journey Map Template,6ad16426f36f5d60045b72fe,6ad16429c9d55c5bafcc5a39,1.4,Renew the product subscription,journey,3,6,0,2,2,1,1,3,160,160,,3,0,0,0
+b2b,B2B SaaS Customer Journey Map Template,6ad16426f36f5d60045b72fe,6ad16429c9d55c5bafcc5a77,1.5,Expand usage to other features / products,journey,6,12,0,2,5,0,1,6,160,186,,2.5,2,0,0
+b2b,B2B SaaS Customer Journey Map Template,6ad16426f36f5d60045b72fe,6ad1642ac9d55c5bafcc5ab6,1.6,Become an advocate for the brand,journey,3,7,1,1,4,1,1,3,160,160,,2,0,0,0

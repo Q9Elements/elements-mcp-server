@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.elements.cloud/schemas/business-architecture/level-outline-1.0.json",
+  "title": "Level outline",
+  "description": "One level of a process, written by the process-level-writer agent from a brief: per step what happens, why, the outcome that proves it is done, what it uses, who does it, and what comes next. Every process reader that works one level at a time (map-process-from-data-model, map-agent-as-process) uses this format; its build script turns the outlines of every level into one business-architecture model. Step ids only need to be unique within the outline; the build makes them unique across the model.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "level",
+    "steps",
+    "starts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "level": {
+      "description": "'top' for the top level, otherwise the id of the item (a capability, an area or a package stage) whose box this level drills down from. Matches the brief's level.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,47}$"
+    },
+    "title": {
+      "description": "Optional title for the level. The top level's becomes the map name when the scope gives none.",
+      "type": "string",
+      "maxLength": 120
+    },
+    "source": {
+      "description": "Where the outline comes from when no writer wrote it: 'record-type-split' (prepare_briefs.py writes the split by record type), 'org-to-process' (taken over from an Elements org-to-process map). Left out for a writer's outline.",
+      "enum": [
+        "record-type-split",
+        "org-to-process"
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    },
+    "starts": {
+      "description": "What starts the level. On a child level, copy each of the parent box's input labels from the brief exactly, so the drill-down matches its box; add any other trigger the source shows as its own start.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/start"
+      }
+    },
+    "ends": {
+      "description": "How the level ends. On a child level, copy each of the parent box's output labels from the brief exactly.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/end"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "note"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "about": {
+            "description": "A step id, or an id from the brief's uses (an object apiName, a component id).",
+            "type": "string",
+            "maxLength": 255
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stepId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+    },
+    "label": {
+      "description": "A distinct, verifiable outcome written as a completed state, naming the record or status change that proves it where there is one.",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      }
+    },
+    "role": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "A job title or team people recognise: 'Warranty manager', 'Claims processor', 'Customer'.",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "kind": {
+          "description": "human (the default), system for an application doing the step on its own, ai-agent for an AI agent.",
+          "enum": [
+            "human",
+            "system",
+            "ai-agent"
+          ]
+        },
+        "rasci": {
+          "description": "Any of R, A, S, C, I; human roles only.",
+          "type": "string",
+          "pattern": "^[RASCI]{1,5}$"
+        }
+      }
+    },
+    "link": {
+      "type": "object",
+      "required": [
+        "title",
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https?://",
+          "maxLength": 1024
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "what",
+        "why",
+        "roles"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/stepId"
+        },
+        "name": {
+          "description": "The box text: an active verb and its object, sentence case, 2 to 6 words.",
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 100
+        },
+        "what": {
+          "description": "What happens in this step, in one or two sentences.",
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "why": {
+          "description": "Why the business does it: what would go wrong without it.",
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "roles": {
+          "description": "Who does it, the responsible person or team first. A reader may add further resources from the step's uses.",
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/role"
+          }
+        },
+        "uses": {
+          "description": "Ids from the brief of what the step creates, reads, updates or runs: object apiNames from a data-model brief, component ids from an agent-package brief. The reader's build script turns them into resources on the box.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        },
+        "item": {
+          "description": "On an overview level (the top level, an area level): the id of the brief item this box stands for (a capability, an area, a package stage). When that item has a level of its own, the box drills down to it.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,47}$"
+        },
+        "links": {
+          "description": "Help or documentation pages for the step.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        },
+        "next": {
+          "description": "The lines out of this step to other steps on this level, each labelled with the outcome that starts the next step. List the expected outcome first: the drawing puts it on the main path. Several entries with different outcomes make a decision; entries with the same outcome start those steps in parallel.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "to",
+              "outcome"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "to": {
+                "$ref": "#/$defs/stepId"
+              },
+              "outcome": {
+                "$ref": "#/$defs/label"
+              },
+              "inferred": {
+                "type": "boolean"
+              },
+              "sets": {
+                "$ref": "#/$defs/sets"
+              }
+            }
+          }
+        },
+        "join": {
+          "description": "all: the step may start only when every line into it has arrived. Left out (any): any one incoming line starts it.",
+          "enum": [
+            "any",
+            "all"
+          ]
+        },
+        "inferred": {
+          "description": "true when the source gives nothing to support this step. Do not set it on every step; the brief's rules say when.",
+          "type": "boolean"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "value": {
+          "description": "On a level built on a lifecycle (brief cover.lifecycle): the lifecycle value this step's work puts the record in, spelt as the brief spells it. Every value has exactly one step; the step's first line out (or its end) carries the outcome and sets that value.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      }
+    },
+    "start": {
+      "type": "object",
+      "required": [
+        "to",
+        "trigger"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "to": {
+          "$ref": "#/$defs/stepId"
+        },
+        "trigger": {
+          "description": "What starts the level, written as a completed state: 'Opportunity moved to Proposal'. On a child level, a parent input label copied exactly.",
+          "$ref": "#/$defs/label"
+        },
+        "sets": {
+          "$ref": "#/$defs/sets"
+        }
+      }
+    },
+    "end": {
+      "type": "object",
+      "required": [
+        "from",
+        "outcome"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "$ref": "#/$defs/stepId"
+        },
+        "outcome": {
+          "description": "The state the level ends in. On a child level, a parent output label copied exactly.",
+          "$ref": "#/$defs/label"
+        },
+        "sets": {
+          "$ref": "#/$defs/sets"
+        }
+      }
+    },
+    "sets": {
+      "description": "The lifecycle value a record has once this outcome holds, when the outcome is a status or stage change: the object's apiName and one of the values of its lifecycle in the brief, exactly as the brief spells it. The outcome label names the value too.",
+      "type": "object",
+      "required": [
+        "object",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "object": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      }
+    }
+  }
+}

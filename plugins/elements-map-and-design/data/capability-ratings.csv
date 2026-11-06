@@ -1,0 +1,14 @@
+scale,title,order,value,label,fill,border
+assessment,Assessment,1,advanced,Advanced,#A3D9A5,#6B6B6B
+assessment,Assessment,2,intermediate,Intermediate,#EBC777,#6B6B6B
+assessment,Assessment,3,underperforming,Underperforming,#D98A88,#6B6B6B
+assessment,Assessment,4,missing,Missing,#FFFFFF,#6B6B6B
+maturity,Maturity,1,1,1 Initial,#F2D4D3,#6B6B6B
+maturity,Maturity,2,2,2 Developing,#F7E3B5,#6B6B6B
+maturity,Maturity,3,3,3 Defined,#F2F0B8,#6B6B6B
+maturity,Maturity,4,4,4 Managed,#CDE8C6,#6B6B6B
+maturity,Maturity,5,5,5 Optimised,#9ED3A4,#6B6B6B
+coverage,Salesforce coverage,1,covered,Covered by Salesforce,#B9D7F2,#6B6B6B
+coverage,Salesforce coverage,2,partial,Partly covered,#DCEAF7,#6B6B6B
+coverage,Salesforce coverage,3,outside,Outside Salesforce,#EDEDED,#6B6B6B
+coverage,Salesforce coverage,4,planned,Planned,#FFFFFF,#6B6B6B

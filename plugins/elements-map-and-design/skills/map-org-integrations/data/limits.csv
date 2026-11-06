@@ -1,0 +1,10 @@
+setting,value,rule
+min_term_length,4,A search term shorter than this matches too much to tell anything; it is not searched and is recorded as a gap
+max_terms_per_system,12,Search terms run for one system; the rest are recorded as gaps
+max_searches,300,Code searches in one run; the rest are recorded as gaps
+max_explained,400,Automations given a summary explanation in one run; the rest are recorded as gaps
+explain_batch,25,Automations per explain_metadata_components call (the tool's limit)
+dependency_batch,1000,Nodes per get_dependencies call (the tool's limit)
+source_batch,5000,Nodes per get_metadata_source call (the tool's limit)
+trace_rounds,2,"Search passes: the confirmed systems, then once more for systems named only behind a middleware"
+fix_rounds,2,Times an agent's file is sent back with the check's findings before the run is blocked

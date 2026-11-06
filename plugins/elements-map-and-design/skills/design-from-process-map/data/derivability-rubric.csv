@@ -1,0 +1,8 @@
+rule_id,checked_by,applies_to,weight,threshold,rule
+D01,script,activity,2,,"Has at least one resource saying who or what does it"
+D02,script,activity,1,,"Has a line in and a line out"
+D03,script,line,2,,"Is labelled"
+D04,script,level,1,,"Has a line that starts it and a line that ends it"
+D05,agent,activity,2,,"Starts with an active verb and names the thing it acts on, specifically enough to tell what data it touches ('Approve the quote', not 'Approval' or 'Do checks')"
+D06,agent,line,2,,"Its label is an outcome: a completed state naming the thing it is about ('Quote approved by the deal desk'), not an instruction; a bare 'Yes' or 'No' passes only when the box it leaves asks a question"
+PASS,score,level,,8,"Pass mark: every level must score at least this out of 10"

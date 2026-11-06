@@ -1,0 +1,8 @@
+setting,value,rule
+down_depth,3,Automation hops followed after the root (what happens next); a card at this depth is drawn but not followed further
+up_depth,2,Automation hops followed before the root (what leads to it)
+max_automations,25,Most automations in scope at once; more become candidates for the person to include
+max_fanout,8,Most automations one object or event may bring into scope at once; more become candidates
+hub_writers,2,An object or event becomes its own card on the chain level when at least this many automations in scope write it...
+hub_triggered,2,...and at least this many automations in scope run when it is saved or published
+describe_batch,50,Automations described per get_metadata_component call

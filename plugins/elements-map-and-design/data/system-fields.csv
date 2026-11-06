@@ -1,0 +1,23 @@
+api_name,why
+Id,Record id; every object has it
+IsDeleted,Recycle bin flag
+CreatedById,Audit field
+CreatedDate,Audit field
+LastModifiedById,Audit field
+LastModifiedDate,Audit field
+SystemModstamp,Audit field
+LastActivityDate,Activity roll-up
+LastViewedDate,Per-user view tracking
+LastReferencedDate,Per-user view tracking
+CurrencyIsoCode,Multi-currency setting on every object
+OwnerId,Record owner: a lookup to User or Queue on almost every object
+RecordTypeId,Record type selector
+MasterRecordId,Merge tracking
+ConnectionReceivedId,Salesforce to Salesforce
+ConnectionSentId,Salesforce to Salesforce
+Jigsaw,Data.com
+JigsawCompanyId,Data.com
+JigsawContactId,Data.com
+PhotoUrl,Image URL
+SetupOwnerId,Hierarchy custom setting owner
+UserRecordAccessId,Sharing helper

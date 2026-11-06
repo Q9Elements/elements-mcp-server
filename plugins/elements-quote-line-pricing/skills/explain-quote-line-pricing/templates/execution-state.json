@@ -1,0 +1,26 @@
+{
+  "engagement": {
+    "started": null,
+    "playbook_version": "1.0.0"
+  },
+  "slots": {
+    "route": null,
+    "org_alias": null,
+    "quote_line_ref": null,
+    "question": null,
+    "quote_line_id": null
+  },
+  "current_state": "kickoff",
+  "current_step": "steps/01-build-diagnostics.md",
+  "diagnostics": {
+    "directory": null,
+    "file": null
+  },
+  "open_items": [],
+  "decisions_log": [],
+  "blocked": {
+    "reason": null,
+    "owner": null,
+    "evidence": null
+  }
+}

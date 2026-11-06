@@ -1,0 +1,9 @@
+order,section,mode,source,condition
+1,Summary with final Net Price,full,compose script,Multi-agent report
+2,Price waterfall from Original to Net,full,compose script,Multi-agent report
+3.1,Base Price,full,Pricing Method Agent; compose script,Include direct-impact price rules on List Price or Special Price
+3.2,Discounts,full,Discount Agent; compose script,Include direct-impact price rules on discount fields
+3.3,Bundle Logic,full,Bundle and Options Agent,Multi-agent report
+3.4,MDQ Segmentation,full,MDQ Agent (Multi-Dimensional Quoting),When MDQ is flagged
+4,Other Automation Summary,full,compose script,"Include firing count, indirect rule facts, impact summary, and per-rule history"
+5,Closing question about this quote line,full,compose script,Multi-agent report

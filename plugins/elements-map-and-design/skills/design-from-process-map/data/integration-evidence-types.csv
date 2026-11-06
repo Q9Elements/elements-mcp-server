@@ -1,0 +1,11 @@
+metadata_type,shows,direction
+Named Credential,"Salesforce calls out to the endpoint it names",outbound
+External Credential,"Authentication Salesforce uses to call another system",outbound
+External Service,"An external API registered for Flow and Apex to call",outbound
+Remote Site Setting,"A domain Salesforce is allowed to call from Apex",outbound
+Connected App,"Another system or user signs in to Salesforce through OAuth to call its APIs",inbound
+External Client App,"Another system signs in to Salesforce through OAuth (the successor to connected apps)",inbound
+Platform Event,"Events published to or subscribed from other systems",either
+External Object,"Data read live from another system (data virtualization)",inbound
+Omni Integration Procedure,"Server-side calls to other systems built in OmniStudio",outbound
+Data Stream,"Data ingested into Data Cloud from another system",inbound

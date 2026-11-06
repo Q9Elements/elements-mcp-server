@@ -1,0 +1,9 @@
+type,aspect,found_at_hint,kind,first_status_only,objects,rung_before,rung_after,resource_type,notes
+Apex Trigger,chain,object,step,false,,2,3,System,Trigger type must be set
+Flow,chain,value,step,false,,1,8,Flow,"Record-triggered only (stored subtype); schedule-triggered flows tied to the status are listed beside the chain. Trigger order 1-1000 runs before unordered flows, 1001-2000 after"
+Workflow Rule,summary,field,step,false,,6,6,System,Create-only is possible
+Process Builder Workflow,summary,field,step,false,,7,7,System,Relationship mentions Decision
+Assignment Rule,summary,object,step,true,Case;Lead,4,4,System,Case and Lead only. One active. First status only
+Auto-Response Rule,summary,object,step,true,Case;Lead,5,5,System,Case and Lead only. One active. First status only
+Escalation Rule,summary,object,report,false,Case,,,System,Specified in the product but not built: report it and do not place it
+Validation Rule,summary,value,condition,false,,,,System,Not a step: a condition on the status box

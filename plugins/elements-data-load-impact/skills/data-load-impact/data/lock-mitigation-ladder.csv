@@ -1,0 +1,4 @@
+order,action,when,source
+1,Group input by parent Id,When test batch has lock errors and finalized grouping is off,Salesforce Bulk API guidance [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/api-asynch/guide/datafiles-organize-data.html
+2,Use Bulk API 1.0 serial mode if the loader supports it,When lock errors persist with grouped input in parallel mode and the loader supports serial mode,Salesforce Bulk API planning [SF-OFFICIAL] https://developer.salesforce.com/docs/platform/api-asynch/guide/asynch-api-planning-guidelines.html
+3,Owner rules on persistent lock count,When lock errors persist after serial mode or serial mode is unavailable in the chosen loader,Playbook decision 22

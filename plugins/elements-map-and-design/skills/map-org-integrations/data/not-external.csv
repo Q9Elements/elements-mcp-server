@@ -1,0 +1,11 @@
+match_on,pattern,reason
+domain,(^|\.)salesforce\.com$,A Salesforce login or org domain: the org itself or another Salesforce org
+domain,(^|\.)force\.com$,A Salesforce Visualforce or Lightning domain of this org
+domain,(^|\.)sfdc\.sh$,A Salesforce service domain
+domain,(^|\.)salesforce-sites\.com$,A Salesforce Sites domain
+domain,(^|\.)site\.com$,A Salesforce Sites domain
+domain,(^|\.)cloudforce\.com$,A Salesforce domain
+api_name,^a[0-9A-Za-z]{14}([0-9A-Za-z]{3})?_,A named credential DevOps Center generates for a pipeline stage (its API name starts with a record id)
+name,^(Ant Migration Tool|Chatter Desktop|Chatter Mobile for BlackBerry|Chatter Express|Dataloader Bulk|Dataloader Partner|Data Loader|DevOps Center|Environment Hub|Force\.com IDE|Salesforce CLI|Salesforce Chatter|Salesforce Files|Salesforce Mobile Dashboards|Salesforce Touch|Salesforce for Android|Salesforce for iOS|Salesforce for Outlook|SalesforceA|SalesforceDX Namespace Registry|Salesforce Mobile Apps|Salesforce Authenticator|Workbench|Salesforce Inbox|Salesforce ?IQ|Lightning Login|Salesforce Mobile SDK.*|Salesforce Platform Mobile.*|Agentforce.*|Einstein.*|CRM Analytics.*|Salesforce Developers VS Code.*|Code Builder.*|Platform Integration User)$,A connected app Salesforce ships for its own tools
+namespace,^(esy_rlup|datapm|Profile2PermSet|sf_devops|sfcma|sfLma|sfFma|sfdcInternalInt|CHANNEL_ORDERS|relateiq|DLRS|dlrs|SDOC_Util|fferpcore|wkcc)$,A managed package that works inside the org (utilities and Salesforce's own partner apps); its remote sites and credentials still count when their domain names a vendor
+name,^(Salesforce|Salesforce Platform|Tooling API|Metadata API)$,Salesforce itself

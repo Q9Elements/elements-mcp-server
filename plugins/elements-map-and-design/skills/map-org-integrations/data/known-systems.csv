@@ -1,0 +1,63 @@
+vendor,kind,middleware,aliases,domains,namespaces,search_terms,icon
+HubSpot,external-app,no,Hubspot|HAPI,hubapi.com|hubapiqa.com|hubspot.com|hs-sites.com,HubSpot_Inc|hubspot,,
+DocuSign,external-app,no,Docusign|DocuSign CLM|SpringCM,docusign.com|docusign.net|springcm.com,dsfs|dfsle|SpringCMEos,,DocuSign
+Make,middleware,yes,Integromat|Make.com,make.com|integromat.com,,Integromat|make.com|callout:Make,
+Zapier,middleware,yes,,zapier.com,zapier,Zapier,
+MuleSoft,middleware,yes,Anypoint|Mule,mulesoft.com|cloudhub.io|anypoint.mulesoft.com,,MuleSoft|Anypoint|cloudhub,
+Boomi,middleware,yes,Dell Boomi,boomi.com,,Boomi,
+Workato,middleware,yes,,workato.com,,Workato,
+Informatica,middleware,yes,,informatica.com|informaticacloud.com,,Informatica,
+Jitterbit,middleware,yes,,jitterbit.com|jitterbit.net,,Jitterbit,
+Celigo,middleware,yes,integrator.io,celigo.com|integrator.io,celigo,Celigo|integrator.io,
+Tray.io,middleware,yes,Tray,tray.io,,tray.io,
+n8n,middleware,yes,,n8n.cloud|n8n.io,,n8n.cloud|n8n.io,
+Power Automate,middleware,yes,Microsoft Flow|Logic Apps,logic.azure.com|flow.microsoft.com,,Power Automate|logic.azure.com,
+Xero,external-app,no,,xero.com,xero|XeroFF,,
+QuickBooks,external-app,no,Intuit|QBO,intuit.com|quickbooks.com,QBSF|qbsync,,
+NetSuite,external-app,no,Oracle NetSuite,netsuite.com,celigo_nsf|NetSuiteConn,,
+Sage Intacct,external-app,no,Intacct,intacct.com,,,
+SAP,external-app,no,SAP S/4HANA|S4HANA,sap.com|hana.ondemand.com|s4hana.cloud.sap,,SAP,
+Oracle,external-app,no,Oracle ERP,oracle.com|oraclecloud.com,,,
+Workday,external-app,no,,workday.com|myworkday.com,,Workday,
+ServiceNow,external-app,no,,service-now.com|servicenow.com,,ServiceNow,
+Jira,external-app,no,Atlassian|Jira Cloud,atlassian.net|atlassian.com,JIRAC|jira,Jira,JIRA
+Confluence,external-app,no,,,,,
+GitHub,external-app,no,,github.com|githubusercontent.com,,,
+Bitbucket,external-app,no,,bitbucket.org,,,
+Slack,salesforce,no,,slack.com,slackv2|slack,,Slack Logo
+Gong,external-app,no,Gong.io,gong.io,Gong,,
+Intercom,external-app,no,,intercom.io|intercom.com,Intercom99|Intercom,,
+Docebo,external-app,no,,docebo.com|docebosaas.com,docebo_v3|docebo,,
+Stripe,external-app,no,,stripe.com,stripe,,Stripe
+Taxjar,external-app,no,TaxJar,taxjar.com,taxjar,,
+Avalara,external-app,no,AvaTax,avalara.com|avalara.net,AVA_SFCORE|AVA_MAPPER,,
+Chargebee,external-app,no,,chargebee.com,chargebeeapps,,
+Zuora,external-app,no,,zuora.com,Zuora|zqu,,
+Google Workspace,external-app,no,Google Drive|Gmail|Google Sheets|Google Calendar,googleapis.com|google.com,,Google Drive|googleapis,Google Drive
+Microsoft 365,external-app,no,Outlook|Office 365|Microsoft Teams|SharePoint|OneDrive,microsoft.com|office.com|office365.com|outlook.com|sharepoint.com|graph.microsoft.com,,Microsoft Graph|Office 365|SharePoint,
+Mailchimp,external-app,no,,mailchimp.com|list-manage.com,MC4SF|mailchimp,,
+Marketo,external-app,no,Adobe Marketo,marketo.com|mktoapi.com,mkto_si|mkto,,
+Zendesk,external-app,no,,zendesk.com,Zendesk,,
+Zoom,external-app,no,,zoom.us,zoom_app,,
+Twilio,external-app,no,,twilio.com,TwilioSF|twilio,,
+LinkedIn,external-app,no,LinkedIn Sales Navigator,linkedin.com,LID|LinkedIn,,LinkedIn
+Outreach,external-app,no,,outreach.io,,,
+Salesloft,external-app,no,,salesloft.com,,,
+ZoomInfo,external-app,no,DiscoverOrg,zoominfo.com,zisf|DOZISF,,
+Apollo.io,external-app,no,Apollo,apollo.io,,,
+Clari,external-app,no,,clari.com,,,
+Gainsight,external-app,no,,gainsightcloud.com|gainsight.com,JBCXM,,
+Conga,external-app,no,Apttus,conga.com|congacloud.com|apttus.com,APXTConga4|Apttus,,
+PandaDoc,external-app,no,,pandadoc.com,pandadoc,,
+Adobe Acrobat Sign,external-app,no,Adobe Sign|EchoSign,echosign.com|adobesign.com,echosign_dev1,,
+Dropbox,external-app,no,,dropbox.com|dropboxapi.com,,,
+Box,external-app,no,,box.com,box,,
+Elements.cloud,external-app,no,Elements|Q9 Elements|Q9Elements,elements.cloud|q9elements.com,Q9,Q9__|elements.cloud|q9elements,
+Bureau of Labor Statistics,external-app,no,BLS,bls.gov,,,
+AWS,data-store,no,Amazon Web Services|S3,amazonaws.com,,,AWS
+Snowflake,data-store,no,,snowflakecomputing.com,,Snowflake,
+Databricks,data-store,no,,databricks.com|cloud.databricks.com,,Databricks,
+Tableau,salesforce,no,Tableau Cloud,tableau.com|online.tableau.com,,,Tableau Logo
+Quip,salesforce,no,,quip.com,Quip,,
+Pardot,salesforce,no,Account Engagement|Marketing Cloud Account Engagement,pardot.com,pi,,Marketing Logo
+Marketing Cloud,salesforce,no,Marketing Cloud Engagement|ExactTarget,exacttarget.com|marketingcloudapis.com,et4ae5,,Marketing Logo

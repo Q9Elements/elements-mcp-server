@@ -1,0 +1,6 @@
+kind,fill,border,colour,key_title,legend
+salesforce,,,White,"Salesforce, integration platform or channel",Salesforce product
+middleware,,,White,"Salesforce, integration platform or channel",Integration platform
+channel,,,White,"Salesforce, integration platform or channel",Channel people use (web; mobile; portal)
+external-app,#DDE2E8,#3E4A56,Grey,outside Salesforce,Application outside Salesforce
+data-store,#DDE2E8,#3E4A56,Grey,outside Salesforce,Data store outside Salesforce

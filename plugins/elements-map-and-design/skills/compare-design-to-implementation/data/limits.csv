@@ -1,0 +1,15 @@
+name,value,why
+note_max_words,60,"The method owner's limit for a sticky note: at most 50 to 60 words"
+assessor_wave,8,Implementation-assessor agents run at once; each wave finishes before the next starts
+matcher_rounds,2,"Search rounds when proposing links: the script's terms, then the matcher's extra terms once"
+more_terms_per_box,4,"Search words a matcher may ask for per box for the second round; the first ones are kept"
+terms_per_box,8,"Search terms the script makes from one box in round 1: the objects and systems it names, its nouns, its verbs, then pairs of words"
+hits_per_search,25,Results asked of search_metadata per search; more are a gap in the brief
+candidates_per_box,40,Candidates a matcher brief shows per box; the best by how many terms found them
+automations_per_object,40,Automations that use one object a matcher brief lists
+dependency_rows_per_component,80,Dependency rows per linked component in an assessor pack; the rest are counted and the pack says so
+change_logs_per_component,5,Newest change-log entries per component
+definition_chars_per_component,40000,Characters of one definition kept in a pack; a longer one is cut and the pack says so
+boxes_per_run,200,Boxes one run assesses; a larger scope is narrowed at kickoff
+note_gap_px,16,Pixels between a box and its sticky note
+note_size_px,150,"Width and height Elements gives a new note; used to keep notes clear of boxes"

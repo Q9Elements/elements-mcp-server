@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Solution overview prose (solution-overview-writer)",
+  "description": "Only the narrative parts of the solution overview; every table and fact is built by build_solution_overview.py from the run's files. Any text may hold several paragraphs separated by a blank line; the builder refuses a paragraph over its sentence limit.",
+  "type": "object",
+  "required": [
+    "purpose",
+    "audience",
+    "context",
+    "summary",
+    "byArea",
+    "dataModelNotes",
+    "integrationNotes",
+    "securityNotes",
+    "assumptions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1500
+    },
+    "audience": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "maxLength": 200
+      }
+    },
+    "context": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 3000
+    },
+    "summary": {
+      "description": "What the design proposes, in three to six sentences.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 3000
+    },
+    "byArea": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "activity",
+          "whatHappens",
+          "solutionDirection"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "activity": {
+            "description": "Id of a top-level activity of the model.",
+            "type": "string"
+          },
+          "whatHappens": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500,
+            "description": "What happens in the area, summing up its process level pictured above it."
+          },
+          "dataModelSummary": {
+            "description": "The data the area's steps use, summing up the area's data model picture; required when the area uses entities.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "integrationSummary": {
+            "description": "The integrations serving the area's steps, summing up its integration picture; required when integrations serve the area.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "solutionDirection": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "maxLength": 600
+            }
+          }
+        }
+      }
+    },
+    "dataModelNotes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 800
+      }
+    },
+    "integrationNotes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 800
+      }
+    },
+    "securityNotes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 800
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 800
+      }
+    }
+  }
+}
